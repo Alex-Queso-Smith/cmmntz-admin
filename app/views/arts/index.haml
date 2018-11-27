@@ -1,0 +1,13 @@
+%table
+  %thead
+    %tr
+      %th ID
+      %th URL
+      %th Last Interaction
+
+  %tbody
+    - @arts.each do |art|
+      %tr
+        %td= art.id
+        %td= art.url
+        %td= display_date art.last_interaction_at

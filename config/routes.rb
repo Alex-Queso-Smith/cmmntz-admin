@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :customers
   resources :galleries
+  resources :arts
   resources :customer_sessions, only: [:new, :create, :destroy]
   resources :signups, only: [:new, :create]
 
