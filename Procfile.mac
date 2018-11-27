@@ -1,4 +1,4 @@
 web: rails s -p 3002
-redis: redis-server
-worker: bundle exec sidekiq -c 2
+redis: redis-server --port 6380
+worker: bundle exec sidekiq -C config/sidekiq.yaml
 yarn: yarn start

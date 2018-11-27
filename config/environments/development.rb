@@ -61,3 +61,11 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+
+Sidekiq.configure_server do |config|
+  config.redis = { url: 'redis://127.0.0.1:6380' }
+end
+
+Sidekiq.configure_client do |config|
+  config.redis = { url: 'redis://127.0.0.1:6380' }
+end
