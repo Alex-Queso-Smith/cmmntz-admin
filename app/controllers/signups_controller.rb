@@ -1,4 +1,7 @@
 class SignupsController < ApplicationController
+  skip_before_action *ALL_FILTERS, only: [:new, :create]
+  before_action :require_no_customer, only: [:new, :create]
+  
   def new
     @signup = Signup.new
   end

@@ -1,4 +1,8 @@
 class CustomerSessionsController < ApplicationController
+  skip_before_action *ALL_FILTERS, only: [:new, :create]
+  before_action :require_no_customer, only: [:new, :create]
+
+
   def new
     @customer_session = CustomerSession.new
   end
