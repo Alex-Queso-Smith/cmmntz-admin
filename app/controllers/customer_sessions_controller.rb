@@ -4,7 +4,7 @@ class CustomerSessionsController < ApplicationController
   end
 
   def create
-    @user_session = CustomerSession.new(customer_session_params)
+    @customer_session = CustomerSession.new(customer_session_params)
     if @customer_session.save
       redirect_to account_url
     else

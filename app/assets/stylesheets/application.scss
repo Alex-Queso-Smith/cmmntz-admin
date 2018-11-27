@@ -1,0 +1,27 @@
+@import "bootstrap";
+@import "/\*";
+
+$breakpoint-tablet: 900px;
+$breakpoint-phone: 575px;
+
+@media (min-width: $breakpoint-phone) {
+  .center-form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: $breakpoint-phone) {
+  .center-form {
+    max-width: 100%;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.center-form {
+  text-align: center;
+}

@@ -1,0 +1,35 @@
+.jumbotron.center-form
+  %h2 Sign Up for Classifilter
+
+  %p
+  %p
+
+  .form
+    = form_for(@signup) do |f|
+      = render "/shared/error_messages", :target => @signup
+      .form-group.form-group-lg
+        = f.label :gallery_name, class: "sr-only"
+        = f.text_field :gallery_name, class: "form-control", placeholder: "Gallery Name"
+
+      .form-group.form-group-lg
+        = f.label :customer_first_name, class: "sr-only"
+        = f.text_field :customer_first_name, class: "form-control", placeholder: "Your Given Name"
+
+      .form-group.form-group-lg
+        = f.label :customer_last_name, class: "sr-only"
+        = f.text_field :customer_last_name, class: "form-control", placeholder: "Your Family Name"
+
+      .form-group.form-group-lg
+        = f.label :customer_email, class: "sr-only"
+        = f.text_field :customer_email, class: "form-control", placeholder: "email@org.com"
+
+      .form-group.form-group-lg
+        = f.label :customer_password, class: "sr-only"
+        = f.password_field :customer_password, class: "form-control", placeholder: "Your Password"
+
+      .form-group.form-group-lg
+        = f.label :customer_password_confirmation, class: "sr-only"
+        = f.password_field :customer_password_confirmation, class: "form-control", placeholder: "Your Password (again)"
+
+      .form-group.form-group-lg.actions
+        = f.submit "Create your Gallery!", class: "btn btn-primary", style: "width: 100%"

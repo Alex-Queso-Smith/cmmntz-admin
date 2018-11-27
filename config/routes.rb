@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :customers
   resources :galleries
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :signups, only: [:new, :create]
+
+  get 'signup' => "signups#new",           :as => :signup
+
+  root :to => 'customers#index'
 end
