@@ -9,5 +9,5 @@
     - @arts.each do |art|
       %tr
         %td= art.id
-        %td= art.url
+        %td= link_to art.url, art.url, target: "_blank"
         %td= display_date art.last_interaction_at

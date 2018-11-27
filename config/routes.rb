@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :customers
+  resources :customers, only: [:create, :update]
+  resources :customers, path: 'members', as: :members
   resources :galleries
   resources :arts
   resources :customer_sessions, only: [:new, :create, :destroy]
   resources :signups, only: [:new, :create]
+
 
 
   ### named routes be here

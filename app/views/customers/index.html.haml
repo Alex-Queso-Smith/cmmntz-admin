@@ -10,10 +10,10 @@
   %tbody
     - @customers.each do |customer|
       %tr
-        %td= link_to customer.email, customer
-        %td= link_to 'Edit', edit_customer_path(customer)
-        %td= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to customer.email, member_path(customer)
+        %td= link_to 'Edit', edit_member_path(customer)
+        %td= link_to 'Destroy', member_path(customer), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Customer', new_customer_path
+= link_to 'New Customer', new_member_path
