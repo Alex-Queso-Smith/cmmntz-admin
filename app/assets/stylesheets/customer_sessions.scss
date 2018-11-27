@@ -1,0 +1,28 @@
+$breakpoint-tablet: 900px;
+$breakpoint-phone: 575px;
+
+@media (min-width: $breakpoint-phone) {
+  .form-login {
+      width: 500px;
+  }
+}
+
+@media (max-width: $breakpoint-phone) {
+  .form-login {
+      width: 100%;
+  }
+}
+
+.form-login {
+    padding: 25px;
+    margin: 0 auto;
+    background-color: #EDEDED;
+    border-radius: 15px;
+}
+
+h4 {
+ border:0 solid #fff;
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}

@@ -1,7 +1,7 @@
 #error_messages
-  - if target and target.errors.any?
-    %div{:class => "alert alert-danger alert-dismissible fade in"}
-      %button.close{"data-dismiss" => "alert", :type => "button"}
+  - if target && target.errors.any?
+    %div{:class => "alert alert-warning alert-dismissible fade show", role: "alert"}
+      %button.close{"data-dismiss" => "alert", :type => "button", "aria-label" => "Close"}
         %span{"aria-hidden" => "true"} &times;
         %span.sr-only Close
       %h4= "Sorry, I am unable to complete your request due to the following:"

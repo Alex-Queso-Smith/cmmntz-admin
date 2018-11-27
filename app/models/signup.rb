@@ -42,6 +42,7 @@ class Signup < Tableless
     return unless self.errors.empty?
     gallery.save(validate: false)
     customer.gallery = gallery
+    customer.active = true
     customer.save(validate: false)
   end
 end

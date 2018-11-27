@@ -4,9 +4,9 @@ class CustomerSessionsController < ApplicationController
   end
 
   def create
-    @customer_session = CustomerSession.new(customer_session_params)
+    @customer_session = CustomerSession.new(customer_session_params.to_h)
     if @customer_session.save
-      redirect_to account_url
+      redirect_to root_path
     else
       render :action => :new
     end
