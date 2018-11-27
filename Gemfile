@@ -25,6 +25,7 @@ gem 'sprockets-rails'
 gem 'jbuilder', '~> 2.5'
 # add haml
 gem 'haml'
+gem "haml-rails"
 
 # CRUD authorization via cancancan
 gem 'cancancan'
