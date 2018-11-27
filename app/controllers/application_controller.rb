@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     @current_customer_session = CustomerSession.find
   end
 
+  def current_user
+    current_customer
+  end
+
   def current_customer
     return @current_customer if defined?(@current_customer)
     @current_customer = current_customer_session && current_customer_session.customer
