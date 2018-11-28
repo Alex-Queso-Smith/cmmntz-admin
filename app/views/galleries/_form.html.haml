@@ -10,7 +10,7 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :settings
-    = f.text_area :settings
+    = f.check_box :censor
+    = f.label :censor, 'Censor Comments by Default?'
   .actions
     = f.submit 'Save'

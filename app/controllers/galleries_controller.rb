@@ -12,29 +12,8 @@ class GalleriesController < ApplicationController
   def show
   end
 
-  # GET /galleries/new
-  def new
-    @gallery = Gallery.new
-  end
-
   # GET /galleries/1/edit
   def edit
-  end
-
-  # POST /galleries
-  # POST /galleries.json
-  def create
-    @gallery = Gallery.new(gallery_params)
-
-    respond_to do |format|
-      if @gallery.save
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
-        format.json { render :show, status: :created, location: @gallery }
-      else
-        format.html { render :new }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /galleries/1
@@ -64,6 +43,15 @@ class GalleriesController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :settings)
+      params.require(:gallery).permit(
+        :name,
+        :comments_from,
+        :votes_from,
+        :filter_list,
+        :not_filter_list,
+        :sort_dir,
+        :sort_type,
+        :censor
+      )
     end
 end
