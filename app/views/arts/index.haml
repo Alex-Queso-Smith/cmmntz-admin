@@ -1,13 +1,17 @@
-%table
+%table.table.table_stripped
   %thead
     %tr
       %th ID
       %th URL
+      %th Status
       %th Last Interaction
+      %th
 
   %tbody
     - @arts.each do |art|
       %tr
         %td= art.id
         %td= link_to "http://#{art.url}"  , "http://#{art.url}", target: "_blank"
+        %td= art.status
         %td= display_date art.last_interaction_at
+        %td= link_to "settings", edit_art_path(art)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_164914) do
+ActiveRecord::Schema.define(version: 2018_11_28_173711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 2018_11_27_164914) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "article_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "article_id"
+    t.uuid "ct_topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id", "ct_topic_id"], name: "index_article_topics_on_article_id_and_ct_topic_id"
   end
 
   create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -56,6 +64,8 @@ ActiveRecord::Schema.define(version: 2018_11_27_164914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "gallery_id"
+    t.boolean "disabled"
+    t.boolean "deactivated"
     t.index ["gallery_id"], name: "index_arts_on_gallery_id"
     t.index ["last_interaction_at"], name: "index_arts_on_last_interaction_at"
     t.index ["url"], name: "index_arts_on_url"
@@ -103,10 +113,17 @@ ActiveRecord::Schema.define(version: 2018_11_27_164914) do
     t.datetime "updated_at", null: false
     t.integer "interactions_count", default: 0
     t.uuid "parent_id"
+    t.text "censored_text"
     t.index ["art_id", "art_type"], name: "index_comments_on_art_id_and_art_type"
     t.index ["interactions_count"], name: "index_comments_on_interactions_count"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "ct_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
