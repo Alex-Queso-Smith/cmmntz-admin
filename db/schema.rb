@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_154304) do
+ActiveRecord::Schema.define(version: 2018_11_28_173711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2018_11_28_154304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "gallery_id"
+    t.boolean "disabled"
+    t.boolean "deactivated"
     t.index ["gallery_id"], name: "index_arts_on_gallery_id"
     t.index ["last_interaction_at"], name: "index_arts_on_last_interaction_at"
     t.index ["url"], name: "index_arts_on_url"
