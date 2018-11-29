@@ -8,7 +8,8 @@ class Gallery < ApplicationRecord
     sort_type: :string,
     votes_from: :string,
     censor: :bool,
-    default_art_thread_expiration_days: :integer
+    default_art_thread_expiration_days: :integer,
+    comment_approval_needed: :bool
   }
 
   has_many :arts
