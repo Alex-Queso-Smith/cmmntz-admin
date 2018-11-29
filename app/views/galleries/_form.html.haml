@@ -12,5 +12,9 @@
   .field
     = f.label :settings
     = f.text_area :settings
+
+  .field
+    = f.label :default_art_thread_expiration_days
+    = f.text_field :default_art_thread_expiration_days, class: "form-control text-field-sm"
   .actions
     = f.submit 'Save'
