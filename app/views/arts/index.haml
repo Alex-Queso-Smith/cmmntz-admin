@@ -4,6 +4,7 @@
       %th ID
       %th URL
       %th Status
+      %th Thread Started
       %th Last Interaction
       %th
 
@@ -13,5 +14,6 @@
         %td= art.id
         %td= link_to "http://#{art.url}"  , "http://#{art.url}", target: "_blank"
         %td= art.status
+        %td= display_date art.created_at
         %td= display_date art.last_interaction_at
         %td= link_to "settings", edit_art_path(art)
