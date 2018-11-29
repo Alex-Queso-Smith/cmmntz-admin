@@ -10,11 +10,12 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :settings
-    = f.text_area :settings
+    = f.check_box :censor
+    = f.label :censor, 'Censor Comments by Default?'
 
   .field
     = f.label :default_art_thread_expiration_days
     = f.text_field :default_art_thread_expiration_days, class: "form-control text-field-sm"
+
   .actions
     = f.submit 'Save'
