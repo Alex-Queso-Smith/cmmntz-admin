@@ -7,4 +7,25 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import React from 'react';
+import Redbox from 'redbox-react';
+import { render } from 'react-dom';
+
+import App from '../react/App';
+
+document.addEventListener('DOMContentLoaded', () => {
+  let reactElement = document.getElementById('cf-customer-settings');
+
+  if (reactElement) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, reactElement)
+      } catch (e) {
+        render(<RedBox error={e} />, reactElement)
+      }
+    }
+    else {
+      render(<App />, reactElement)
+    }
+  }
+})
