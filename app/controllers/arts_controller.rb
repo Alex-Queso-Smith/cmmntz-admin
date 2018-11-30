@@ -2,6 +2,7 @@ class ArtsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @arts = @arts.order(created_at: :desc)
   end
 
   def edit
