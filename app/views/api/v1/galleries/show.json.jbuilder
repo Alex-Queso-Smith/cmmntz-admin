@@ -1,6 +1,7 @@
 json.gallery do
   json.id @gallery.id
   json.name @gallery.name
+  json.comment_etiquette @gallery.comment_etiquette
   json.settings do
     json.comments_from @gallery.comments_from || ""
     json.votes_from @gallery.votes_from || ""
@@ -11,5 +12,7 @@ json.gallery do
     json.censor @gallery.censor || false
     json.thread_expiration_days @gallery.default_art_thread_expiration_days || ""
     json.comment_approval_needed @gallery.comment_approval_needed || false
+    json.notify_on_new_comment @gallery.notify_on_new_comment || false
+    json.notify_on_comment_approval_needed @gallery.notify_on_comment_approval_needed || false
   end
 end

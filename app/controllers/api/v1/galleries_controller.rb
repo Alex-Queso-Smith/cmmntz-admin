@@ -25,7 +25,11 @@ class Api::V1::GalleriesController < ApiController
         :sort_type,
         :votes_from,
         :censor,
-        :default_art_thread_expiration_days
+        :default_art_thread_expiration_days,
+        :comment_etiquette,
+        :comment_approval_needed,
+        :notify_on_comment_approval_needed,
+        :notify_on_new_comment
       )
   end
 end

@@ -1,4 +1,5 @@
 import React from 'react';
+import Textarea from 'react-expanding-textarea'
 
 import { FetchWithPush, FetchDidMount } from '../util/CoreUtil';
 import { Checkbox } from '../components/FormComponents';
@@ -17,7 +18,11 @@ class GallerySettingsContainer extends React.Component {
       votesFrom: ""
     },
     censor: false,
-    threadExpirationDays: ""
+    commentApprovalNeeded: false,
+    notifyOnNewComment: false,
+    notifyOnCommentApprovalNeeded: false,
+    threadExpirationDays: "",
+    commentEtiquette: ""
   }
 
   handleFilterByClick = this.handleFilterByClick.bind(this);
@@ -31,9 +36,12 @@ class GallerySettingsContainer extends React.Component {
     .then(galleryData => {
 
       var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days } = galleryData.gallery.settings
-      var { id, name } = galleryData.gallery;
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, notify_on_new_comment } = galleryData.gallery.settings
+      var { id, name, comment_etiquette } = galleryData.gallery;
       var censored = censor === "true" ? true : false;
+      var commentApprovalNeeded = comment_approval_needed === "true" ? true : false;
+      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" ? true : false;
+      var notifyOnNewComment = notify_on_new_comment === "true" ? true : false;
 
       opts.sortDir = sort_dir
       opts.sortType = sort_type
@@ -47,7 +55,11 @@ class GallerySettingsContainer extends React.Component {
         censor: censored,
         threadExpirationDays: thread_expiration_days,
         name: name,
-        galleryId: id
+        galleryId: id,
+        commentEtiquette: comment_etiquette,
+        commentApprovalNeeded: commentApprovalNeeded,
+        notifyOnNewComment: notifyOnNewComment,
+        notifyOnCommentApprovalNeeded: notifyOnCommentApprovalNeeded
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -60,16 +72,13 @@ class GallerySettingsContainer extends React.Component {
     var value;
     if (target.type === "checkbox") {
       value = target.checked
-
-      this.setState({
-        [name]: value
-      })
-
+      this.setState({ [name]: value })
     } else {
       if (target.getAttribute('data-value')) {
         value = target.getAttribute('data-value')
       } else {
         value = target.value
+        this.setState({ [name]: value })
       };
 
       var opts = this.state.sortOpts
@@ -123,8 +132,12 @@ class GallerySettingsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
+    const strip = (str) => {
+      return str.replace(/^\s+|\s+$/g, '');
+    }
+
     var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom } = this.state.sortOpts;
-    var { censor, threadExpirationDays } = this.state;
+    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[sort_dir]", sortDir);
@@ -135,6 +148,10 @@ class GallerySettingsContainer extends React.Component {
     gallery.append("gallery[votes_from]", votesFrom);
     gallery.append("gallery[censor]", censor);
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
+    gallery.append("gallery[comment_etiquette]", strip(commentEtiquette))
+    gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
+    gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
+    gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
 
     FetchWithPush(this, `/api/v1/galleries/${this.props.match.params.id}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -143,7 +160,7 @@ class GallerySettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor } = this.state;
+    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
@@ -156,14 +173,44 @@ class GallerySettingsContainer extends React.Component {
           handleFilterClick={this.handleFilterClick}
           handleFilterByClick={this.handleFilterByClick}
         />
-      <div className="row">
+        <div className="row">
+          <Checkbox
+            onChange={this.handleChange}
+            name={"censor"}
+            label={"Censor all comments?"}
+            checked={censor}
+          />
+        </div>
+        <div className="text-center text-medium margin-top-10px">Commenting Etiquette</div>
+        <Textarea
+          maxLength="8000"
+          className="form-control margin-top-10px textarea"
+          name="commentEtiquette"
+          placeholder="Insert your custom commenting etiquette here or leave blank to use Classibridge default etiquette!"
+          value={commentEtiquette}
+          onChange={this.handleChange}
+          rows={10}
+        />
+        <hr />
+        <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
         <Checkbox
           onChange={this.handleChange}
-          name={"censor"}
-          label={"Censor all comments?"}
-          checked={censor}
+          name={"commentApprovalNeeded"}
+          label={"Approve all comments before displaying?"}
+          checked={commentApprovalNeeded}
         />
-      </div>
+        <Checkbox
+          onChange={this.handleChange}
+          name={"notifyOnCommentApprovalNeeded"}
+          label={"Receive notification on comments needing approval?"}
+          checked={notifyOnCommentApprovalNeeded}
+        />
+        <Checkbox
+          onChange={this.handleChange}
+          name={"notifyOnNewComment"}
+          label={"Notify when new comment posted?"}
+          checked={notifyOnNewComment}
+        />
         <div className="margin-top-10px text-center">
           <button className="btn btn-med btn-primary" onClick={this.handleSubmit}>
             Submit
