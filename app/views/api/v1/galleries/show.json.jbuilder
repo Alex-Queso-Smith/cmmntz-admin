@@ -10,5 +10,6 @@ json.gallery do
     json.sort_type @gallery.sort_type || "created_at"
     json.censor @gallery.censor || false
     json.thread_expiration_days @gallery.default_art_thread_expiration_days || ""
+    json.comment_approval_needed @gallery.comment_approval_needed || false
   end
 end
