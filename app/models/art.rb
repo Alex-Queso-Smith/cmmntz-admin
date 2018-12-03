@@ -9,7 +9,7 @@ class Art < ApplicationRecord
   has_many :pending_comments, -> { where(approved: false) }, class_name: "Comment", foreign_key: "art_id"
 
   def status
-    deactivated? ? "Deavtivated" : is_disabled? ? "Disabled" : "Active"
+    deactivated? ? "Deactivated" : is_disabled? ? "Disabled" : "Active"
   end
 
   def is_disabled?
