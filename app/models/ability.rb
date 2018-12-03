@@ -34,14 +34,14 @@ class Ability
   end
 
   def super_admin_permissions
-    can :crud, Gallery, {id: customer.gallery_id}
-    can :crud, Customer, {gallery_id: customer.gallery_id}
-    can :crud, Art, {gallery_id: customer.gallery_id}
+    can :crud, Gallery, { id: customer.gallery_id }
+    can :crud, Customer, { gallery_id: customer.gallery_id }
+    can :crud, Art, { gallery_id: customer.gallery_id }
   end
 
   def artist_permissions
-    can :read, Gallery, {id: customer.gallery_id}
-    can :read, Art, {gallery_id: customer.gallery_id}
+    can :read, Gallery, { id: customer.gallery_id }
+    can :read, Art, { gallery_id: customer.gallery_id }
   end
 
 end

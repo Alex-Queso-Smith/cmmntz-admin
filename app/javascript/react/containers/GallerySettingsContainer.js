@@ -39,12 +39,8 @@ class GallerySettingsContainer extends React.Component {
       opts.sortType = sort_type
       opts.commentsFrom = comments_from
       opts.votesFrom = votes_from
-      if (filter_list.length != 0 ) {
-        opts.filterList = filter_list.split(',')
-      }
-      if (not_filter_list.length != 0) {
-        opts.notFilterList = not_filter_list.split(',')
-      }
+      if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
+      if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
 
       this.setState({
         sortOpts: opts,
