@@ -8,6 +8,7 @@
       %th Thread Started
       %th Last Interaction
       %th Topics
+      %th Pending Comments
       %th
 
   %tbody
@@ -20,4 +21,5 @@
         %td= display_date art.created_at
         %td= display_date art.last_interaction_at
         %td= art.topics_list
+        %td= art.pending_comments.size
         %td= link_to "settings", edit_art_path(art)

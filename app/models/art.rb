@@ -5,6 +5,9 @@ class Art < ApplicationRecord
   has_many :art_topics
   has_many :topics, through: :art_topics
 
+  has_many :comments
+  has_many :pending_comments, -> { where(approved: false) }, class_name: "Comment", foreign_key: "art_id"
+
   def status
     deactivated? ? "Deavtivated" : is_disabled? ? "Disabled" : "Active"
   end
