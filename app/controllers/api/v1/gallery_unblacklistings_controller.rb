@@ -3,7 +3,8 @@ class Api::V1::GalleryUnblacklistingsController < ApiController
 
   def create
     get_user
-    current_gallery.gallery_blacklistings.delete(@user)
+    current_gallery.blacklisted_users.delete(@user)
+    render json: { message: "Success" }
   end
 
   private

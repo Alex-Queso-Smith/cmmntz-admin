@@ -58,3 +58,20 @@ export const FetchWithUpdate = (object, path, method, payload) => {
    })
    .then(response => response.json())
 }
+
+export const FetchIndividual = (object, path, method) => {
+  return fetch(path, {
+    method: method,
+    credentials: 'same-origin'
+  })
+  .then(response => {
+     if(response.ok){
+       return response
+     } else {
+       let errorMessage = `${response.status} (${response.statusText})`,
+           error = new Error(errorMessage)
+       throw(error)
+     }
+   })
+   .then(response => response.json())
+}

@@ -28,6 +28,7 @@ class ManageComment extends React.Component {
       <div className="row cf-manage-comment margin-top-10px">
         <div className="cf-manage-comment-left col-sm-2">
           <h3>{userName}</h3>
+          <button className="btn btn-sm btn-danger" onClick={this.props.handleBanUser}>Ban</button>
           <br />
           <h4>{datePosted}</h4>
         </div>

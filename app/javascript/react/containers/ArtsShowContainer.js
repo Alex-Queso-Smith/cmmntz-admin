@@ -1,5 +1,5 @@
 import React from 'react';
-import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
+import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
 
 import ManageComment from '../components/ManageComment';
 import Tabs from '../components/Tabs';
@@ -15,6 +15,7 @@ class ArtsShowContainer extends React.Component {
   handleTabClick = this.handleTabClick.bind(this);
   restoreComment = this.restoreComment.bind(this);
   approveComment = this.approveComment.bind(this);
+  banUser = this.banUser.bind(this);
 
   componentDidMount(){
     this.loadComments("")
@@ -86,6 +87,19 @@ class ArtsShowContainer extends React.Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  banUser(userId){
+    var c = confirm("Do you wish to ban this user?")
+    if (c) {
+      FetchIndividual(this, `/api/v1/gallery_blacklistings.json?user_id=${userId}`, "POST")
+      .then(success => {
+        var allComments = this.state.comments;
+        var filteredComments = allComments.filter(comment => comment.user_id != userId)
+        this.setState({ comments: filteredComments })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+  }
+
   render(){
     var { comments, display } = this.state;
     var allComments;
@@ -104,6 +118,10 @@ class ArtsShowContainer extends React.Component {
           this.deleteComment(comment.id)
         }
 
+        var handleBanUser = () => {
+          this.banUser(comment.user_id)
+        }
+
         return(
           <ManageComment
             key={comment.id}
@@ -113,6 +131,7 @@ class ArtsShowContainer extends React.Component {
             handleDeleteComment={handleCommentDelete}
             handleManageComment={handleManageComment}
             manage={display}
+            handleBanUser={handleBanUser}
           />
         )
       })
