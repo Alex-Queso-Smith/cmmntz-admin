@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   resources :customer_sessions, only: [:new, :create, :destroy]
   resources :signups, only: [:new, :create]
   resources :comments, only: [:update]
+  resources :gallery_blacklistings, only: [:index]
 
   namespace :api do
     namespace :v1 do
       resources :galleries, only: [:show, :update]
       resources :arts, only: [:show]
       resources :comments, only: [:update]
-      resources :gallery_blacklistings, only: [:create]
+      resources :gallery_blacklistings, only: [:index, :create]
       resources :gallery_unblacklistings, only: [:create]
     end
   end
