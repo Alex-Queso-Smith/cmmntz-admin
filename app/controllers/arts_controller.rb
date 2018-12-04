@@ -5,6 +5,10 @@ class ArtsController < ApplicationController
     @arts = @arts.order(created_at: :desc).includes(:pending_comments)
   end
 
+  def show
+    @comments = current_art.comments
+  end
+
   def edit
   end
 

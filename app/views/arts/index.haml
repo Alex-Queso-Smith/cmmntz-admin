@@ -14,7 +14,7 @@
   %tbody
     - @arts.each do |art|
       %tr
-        %td= art.id
+        %td= link_to art.id, art_path(art.id)
         %td= link_to "http://#{art.url}"  , "http://#{art.url}", target: "_blank"
         %td= art.status
         %td= display_date art.published_at
