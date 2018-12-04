@@ -28,6 +28,10 @@ class Art < ApplicationRecord
     list.split(",").each { |t| topics << Topic.find_or_create_by(name: t.strip) }
   end
 
+  def topics_list
+    topics.map(&:name).join(", ")
+  end
+
   def comment_for_display_mode(display_mode)
     return approved_comments if display_mode.blank?
 
