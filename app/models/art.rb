@@ -33,15 +33,15 @@ class Art < ApplicationRecord
   end
 
   def comments_for_display_mode(display_mode)
-    return approved_comments if display_mode.blank?
-
+    cs = comments
     if display_mode == "pending"
-      pending_comments
+      cs = pending_comments
     elsif display_mode == "deleted"
-      deleted_comments
+      cs = deleted_comments
     else
-      approved_comments
+      cs = approved_comments
     end
+    return cs.for_non_blocked_users.order(created_at: :desc)
   end
 
 end
