@@ -27,7 +27,7 @@ class ArtsShowContainer extends React.Component {
 
     if (c) {
       var updateComment = new FormData();
-      updateComment.append("comment[deleted]", false)
+      updateComment.append("comment[deleted]", true)
 
       FetchWithUpdate(this, `/api/v1/comments/${commentId}.json?gallery_id=${galleryId}`, "DELETE", updateComment)
       .then(success => {
