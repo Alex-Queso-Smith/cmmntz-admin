@@ -1,5 +1,6 @@
 json.art do
   json.id @art.id
+  json.gallery_id @art.gallery_id
   json.comments @art.comments do |comment|
     json.id comment.id
     json.text comment.text
