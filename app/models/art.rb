@@ -32,7 +32,7 @@ class Art < ApplicationRecord
     topics.map(&:name).join(", ")
   end
 
-  def comment_for_display_mode(display_mode)
+  def comments_for_display_mode(display_mode)
     return approved_comments if display_mode.blank?
 
     if display_mode == "pending"
