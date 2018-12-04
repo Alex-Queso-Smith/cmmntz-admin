@@ -163,13 +163,9 @@ class GallerySettingsContainer extends React.Component {
   render(){
     var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
-    var redirectBannedUsers = () => {
-      window.location = '/gallery_blacklistings'
-    }
-
     return(
       <div id="gallery-edit-settings-container">
-        <button onClick={redirectBannedUsers} >View Current Banned Users</button>
+        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
         <h5 className="text-center">Choose default sort and filter settings</h5>
         <br />

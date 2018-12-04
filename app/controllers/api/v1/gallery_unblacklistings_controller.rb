@@ -1,5 +1,5 @@
 class Api::V1::GalleryUnblacklistingsController < ApiController
-  load_and_authorize_resource :gallery_blacklistings
+  load_and_authorize_resource :gallery_blacklisting
 
   def create
     get_user

@@ -42,3 +42,10 @@ $grayline: #D3D3D3;
     }
   }
 }
+
+#banned-user-link {
+  &:hover {
+    color: #000;
+    background-color: #fff;
+  }
+}
