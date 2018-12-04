@@ -2,7 +2,7 @@ class Api::V1::GalleryBlacklistingsController < ApiController
   load_and_authorize_resource
 
   def index
-    @gallery_blacklistings.includes(:user)
+    @gallery_blacklistings.includes(:user).order(created_at: :desc)
   end
 
   def create
