@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   resources :arts, only: [:index, :show, :edit, :update]
   resources :customer_sessions, only: [:new, :create, :destroy]
   resources :signups, only: [:new, :create]
+  resources :comments, only: [:destroy]
 
   namespace :api do
     namespace :v1 do
       resources :galleries, only: [:show, :update]
       resources :arts, only: [:show]
+      resources :comments, only: [:destroy]
     end
   end
 

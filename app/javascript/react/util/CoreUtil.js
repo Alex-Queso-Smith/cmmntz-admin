@@ -40,3 +40,21 @@ export const FetchDidMount = (object, path) => {
    })
    .then(response => response.json())
 }
+
+export const FetchWithUpdate = (object, path, method, payload) => {
+  return fetch(path, {
+    method: method,
+    credentials: 'same-origin',
+    body: payload
+  })
+  .then(response => {
+     if(response.ok || response.status == 422){
+       return response
+     } else {
+       let errorMessage = `${response.status} (${response.statusText})`,
+           error = new Error(errorMessage)
+       throw(error)
+     }
+   })
+   .then(response => response.json())
+}

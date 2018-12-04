@@ -14,7 +14,7 @@ class ManageComment extends React.Component {
             {this.props.text}
           </div>
           <div className="cf-manage-comment-actions">
-            <button className="btn btn-danger">
+            <button className="btn btn-danger" onClick={this.props.onClick}>
               Delete
             </button>
           </div>
