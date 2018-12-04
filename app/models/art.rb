@@ -6,7 +6,9 @@ class Art < ApplicationRecord
   has_many :topics, through: :art_topics
 
   has_many :comments
-  has_many :pending_comments, -> { where(approved: false) }, class_name: "Comment", foreign_key: "art_id"
+  has_many :pending_comments, -> { where(approved: false, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
+  has_many :deleted_comments, -> { where(deleted: true) }, class_name: "Comment", foreign_key: "art_id"
+  has_many :approved_comments, -> { where(approved: true, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
 
   def status
     deactivated? ? "Deactivated" : is_disabled? ? "Disabled" : "Active"
@@ -26,8 +28,18 @@ class Art < ApplicationRecord
     list.split(",").each { |t| topics << Topic.find_or_create_by(name: t.strip) }
   end
 
-  def topics_list
-    topics.map(&:name).join(", ")
+  def comment_for_display_mode(display_mode)
+    return approved_comments if display_mode.blank?
+
+    if display_mode == "pending"
+      pending_comments
+    elsif display_mode == "deleted"
+      deleted_comments
+    else
+      approved_comments
+    end
   end
+
+
 
 end
