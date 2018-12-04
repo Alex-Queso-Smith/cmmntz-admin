@@ -1,0 +1,31 @@
+$grayline: #D3D3D3;
+
+
+.cf-manage-comments {
+  .cf-manage-comment {
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    .cf-manage-comment-left {
+      border-right: 1px solid $grayline;
+
+      h3 {
+        font-size: 1.5em;
+      }
+      h4 {
+        font-size: 1em;
+        text-align: left;
+      }
+    }
+
+    .cf-manage-comment-right {
+      .cf-manage-comment-text {
+        border-bottom: 1px solid $grayline;
+        padding-bottom: 10px;
+      }
+      .cf-manage-comment-actions {
+        padding-top: 10px;
+      }
+    }
+  }
+}

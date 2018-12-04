@@ -6,7 +6,7 @@ class ArtsController < ApplicationController
   end
 
   def show
-    @comments = current_art.comments
+    @comments = @art.comments
   end
 
   def edit

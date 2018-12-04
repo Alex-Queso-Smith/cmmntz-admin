@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :galleries, only: [:show, :update]
+      resources :arts, only: [:show]
     end
   end
 

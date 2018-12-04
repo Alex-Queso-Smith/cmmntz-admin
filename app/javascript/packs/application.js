@@ -14,18 +14,33 @@ import { render } from 'react-dom';
 import App from '../react/App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  let reactElement = document.getElementById('cf-customer-settings');
+  let customerSettings = document.getElementById('cf-customer-settings');
 
-  if (reactElement) {
+  if (customerSettings) {
     if(window.railsEnv && window.railsEnv === 'development'){
       try {
-        render(<App />, reactElement)
+        render(<App />, customerSettings)
       } catch (e) {
-        render(<RedBox error={e} />, reactElement)
+        render(<RedBox error={e} />, customerSettings)
       }
     }
     else {
-      render(<App />, reactElement)
+      render(<App />, customerSettings)
+    }
+  }
+
+  let artShow = document.getElementById('cf-art-show');
+
+  if (artShow) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, artShow)
+      } catch (e) {
+        render(<RedBox error={e} />, artShow)
+      }
+    }
+    else {
+      render(<App />, artShow)
     }
   }
 })
