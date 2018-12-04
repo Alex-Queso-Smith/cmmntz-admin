@@ -2,21 +2,42 @@ import React from 'react';
 
 class ManageComment extends React.Component {
   render(){
+    var { manage, text, userName, datePosted } = this.props;
+    var manageButton, deleteButton;
+
+    var buttonText = "Restore"
+    if (manage === "pending") {
+      buttonText = "Approve"
+    }
+
+    if (manage != "deleted") {
+      deleteButton =
+      <button className="btn btn-danger cf-manage-button" onClick={this.props.handleDeleteComment}>
+        Delete
+      </button>
+    }
+
+    if (manage != "") {
+      manageButton =
+      <button className="btn btn-primary cf-manage-button" onClick={this.props.handleManageComment}>
+        {buttonText}
+      </button>
+    }
+
     return(
       <div className="row cf-manage-comment margin-top-10px">
         <div className="cf-manage-comment-left col-sm-2">
-          <h3>{this.props.userName}</h3>
+          <h3>{userName}</h3>
           <br />
-          <h4>{this.props.datePosted}</h4>
+          <h4>{datePosted}</h4>
         </div>
         <div className="cf-manage-comment-right col-sm-10">
           <div className="cf-manage-comment-text">
-            {this.props.text}
+            {text}
           </div>
           <div className="cf-manage-comment-actions">
-            <button className="btn btn-danger" onClick={this.props.onClick}>
-              Delete
-            </button>
+            {deleteButton}
+            {manageButton}
           </div>
         </div>
         <hr />

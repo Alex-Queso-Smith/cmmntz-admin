@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_184607) do
+ActiveRecord::Schema.define(version: 2018_12_04_200349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_184607) do
     t.uuid "parent_id"
     t.text "censored_text"
     t.boolean "approved", default: false, null: false
+    t.boolean "deleted", default: false
     t.index ["approved"], name: "index_comments_on_approved"
     t.index ["art_id", "art_type"], name: "index_comments_on_art_id_and_art_type"
     t.index ["interactions_count"], name: "index_comments_on_interactions_count"
@@ -329,6 +330,15 @@ ActiveRecord::Schema.define(version: 2018_12_03_184607) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "comment_etiquette"
+  end
+
+  create_table "gallery_blacklistings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "gallery_id"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id", "user_id"], name: "index_gallery_blacklistings_on_gallery_id_and_user_id"
+    t.index ["gallery_id"], name: "index_gallery_blacklistings_on_gallery_id"
   end
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < ApiController
-  load_and_authorize_resource 
+  load_and_authorize_resource
 
-  def destroy
+  def update
     if @comment.update(comment_params)
       render json: { message: "Destroy successfull" }
     else
@@ -9,9 +9,12 @@ class Api::V1::CommentsController < ApiController
     end
   end
 
+  private
+
   def comment_params
     params.require(:comment).permit(
-      :deleted
+      :deleted,
+      :approved
     )
   end
 

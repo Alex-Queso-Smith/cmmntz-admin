@@ -2,34 +2,55 @@ import React from 'react';
 import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
 
 import ManageComment from '../components/ManageComment';
+import Tabs from '../components/Tabs';
 
 class ArtsShowContainer extends React.Component {
   state = {
     comments: [],
-    galleryId: ""
+    display: ""
   }
 
   deleteComment = this.deleteComment.bind(this);
+  loadComments = this.loadComments.bind(this);
+  handleTabClick = this.handleTabClick.bind(this);
+  restoreComment = this.restoreComment.bind(this);
+  approveComment = this.approveComment.bind(this);
 
   componentDidMount(){
-    FetchDidMount(this, `/api/v1/arts/${this.props.match.params.id}.json`)
+    this.loadComments("")
+  }
+
+  handleTabClick(event){
+    const target = event.target;
+    const value = target.getAttribute('data-value');
+
+    this.setState({ display: value })
+    this.loadComments(value)
+  }
+
+  loadComments(type){
+    var url = `/api/v1/arts/${this.props.match.params.id}.json`;
+
+    if (type != "") {
+      url += `?display_mode=${type}`
+    }
+
+    FetchDidMount(this, url)
     .then(artData => {
       this.setState({
-        comments: artData.art.comments,
-        galleryId: artData.art.gallery_id
+        comments: artData.art.comments
       })
     })
   }
 
   deleteComment(commentId){
-    var { galleryId } = this.state;
     var c = confirm("Do you wish to delete this comment from thread?")
 
     if (c) {
       var updateComment = new FormData();
       updateComment.append("comment[deleted]", true)
 
-      FetchWithUpdate(this, `/api/v1/comments/${commentId}.json?gallery_id=${galleryId}`, "DELETE", updateComment)
+      FetchWithUpdate(this, `/api/v1/comments/${commentId}.json`, "PATCH", updateComment)
       .then(success => {
         var allComments = this.state.comments;
         var filteredComments = allComments.filter(comment => comment.id != commentId)
@@ -39,21 +60,59 @@ class ArtsShowContainer extends React.Component {
     }
   }
 
+  approveComment(commentId){
+    var updateComment = new FormData();
+    updateComment.append("comment[approved]", true)
+
+    FetchWithUpdate(this, `/api/v1/comments/${commentId}.json`, "PATCH", updateComment)
+    .then(success => {
+      var allComments = this.state.comments;
+      var filteredComments = allComments.filter(comment => comment.id != commentId)
+      this.setState({ comments: filteredComments })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  restoreComment(commentId){
+    var updateComment = new FormData();
+    updateComment.append("comment[deleted]", false)
+
+    FetchWithUpdate(this, `/api/v1/comments/${commentId}.json`, "PATCH", updateComment)
+    .then(success => {
+      var allComments = this.state.comments;
+      var filteredComments = allComments.filter(comment => comment.id != commentId)
+      this.setState({ comments: filteredComments })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render(){
-    var { comments } = this.state;
+    var { comments, display } = this.state;
     var allComments;
     if (comments) {
       allComments = comments.map(comment => {
+
+        var handleManageComment = () => {
+          if (display === "pending") {
+            this.approveComment(comment.id)
+          } else if (display === "deleted") {
+            this.restoreComment(comment.id)
+          }
+        }
+
         var handleCommentDelete = () => {
           this.deleteComment(comment.id)
         }
+
         return(
           <ManageComment
             key={comment.id}
             text={comment.text}
             userName={comment.user_name}
             datePosted={comment.date_posted}
-            onClick={handleCommentDelete}
+            handleDeleteComment={handleCommentDelete}
+            handleManageComment={handleManageComment}
+            manage={display}
           />
         )
       })
@@ -63,6 +122,10 @@ class ArtsShowContainer extends React.Component {
 
     return(
       <div className="cf-manage-comments container">
+        <Tabs
+          display={this.state.display}
+          onClick={this.handleTabClick}
+        />
         {allComments}
       </div>
     )

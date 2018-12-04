@@ -29,3 +29,16 @@ $grayline: #D3D3D3;
     }
   }
 }
+
+.cf-manage-button {
+  margin-right: 5px;
+}
+
+.nav-item {
+  a {
+    &:hover {
+      color: #000;
+      background-color: #fff;
+    }
+  }
+}
