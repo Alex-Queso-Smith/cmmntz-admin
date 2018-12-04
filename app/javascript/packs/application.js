@@ -43,4 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
       render(<App />, artShow)
     }
   }
+
+  let bannedUsers = document.getElementById('cf-banned-users-container')
+
+  if (bannedUsers) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, bannedUsers)
+      } catch (e) {
+        render(<RedBox error={e} />, bannedUsers)
+      }
+    }
+    else {
+      render(<App />, bannedUsers)
+    }
+  }
 })

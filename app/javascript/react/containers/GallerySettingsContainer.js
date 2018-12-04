@@ -164,6 +164,8 @@ class GallerySettingsContainer extends React.Component {
 
     return(
       <div id="gallery-edit-settings-container">
+        <button onClick={window.location = '/gallery_blacklistings'} >View Current Banned Users</button>
+        <hr/>
         <h5 className="text-center">Choose default sort and filter settings</h5>
         <br />
         <CommentFiltersContainer
