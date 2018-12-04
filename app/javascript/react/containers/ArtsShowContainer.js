@@ -33,7 +33,7 @@ class ArtsShowContainer extends React.Component {
       .then(success => {
         var allComments = this.state.comments;
         var filteredComments = allComments.filter(comment => comment.id != commentId)
-        this.setState({ comments: allComments })
+        this.setState({ comments: filteredComments })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
