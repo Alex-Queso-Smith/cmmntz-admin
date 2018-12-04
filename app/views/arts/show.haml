@@ -1,4 +1,4 @@
 %h2 Comments
 
-- @comments do |comment|
-  %p comment.id
+- @comments.each do |comment|
+  %p= comment.id
