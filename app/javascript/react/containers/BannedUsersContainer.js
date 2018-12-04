@@ -10,7 +10,7 @@ class BannedUsersContainer extends React.Component {
   componentDidMount(){
     FetchDidMount(this, `/api/v1/gallery_blacklistings.json`)
     .then(bannedUsers => {
-      this.setState({  })
+      this.setState({ bannedUsers: bannedUsers.blacklistings })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -18,7 +18,7 @@ class BannedUsersContainer extends React.Component {
   render(){
     var { bannedUsers } = this.state;
 
-    var bannedUsers;
+    var bannedUsersList;
     if (bannedUsers) {
       bannedUsersList = bannedUsers.map(bannedUsers => {
         return(

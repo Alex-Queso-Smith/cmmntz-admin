@@ -1,5 +1,6 @@
 import React from 'react';
-import Textarea from 'react-expanding-textarea'
+import Textarea from 'react-expanding-textarea';
+import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../util/CoreUtil';
 import { Checkbox } from '../components/FormComponents';
@@ -162,9 +163,13 @@ class GallerySettingsContainer extends React.Component {
   render(){
     var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
+    var redirectBannedUsers = () => {
+      window.location = '/gallery_blacklistings'
+    }
+
     return(
       <div id="gallery-edit-settings-container">
-        <button onClick={window.location = '/gallery_blacklistings'} >View Current Banned Users</button>
+        <button onClick={redirectBannedUsers} >View Current Banned Users</button>
         <hr/>
         <h5 className="text-center">Choose default sort and filter settings</h5>
         <br />
