@@ -123,16 +123,18 @@ class ArtsShowContainer extends React.Component {
         }
 
         return(
-          <ManageComment
-            key={comment.id}
-            text={comment.text}
-            userName={comment.user_name}
-            datePosted={comment.date_posted}
-            handleDeleteComment={handleCommentDelete}
-            handleManageComment={handleManageComment}
-            manage={display}
-            handleBanUser={handleBanUser}
-          />
+          <div className="border-1px-bot">
+            <ManageComment
+              key={comment.id}
+              text={comment.text}
+              userName={comment.user_name}
+              datePosted={comment.date_posted}
+              handleDeleteComment={handleCommentDelete}
+              handleManageComment={handleManageComment}
+              manage={display}
+              handleBanUser={handleBanUser}
+              />
+          </div>
         )
       })
     } else {
