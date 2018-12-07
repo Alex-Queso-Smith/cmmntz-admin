@@ -1,7 +1,7 @@
 module ApplicationHelper
   def nav_title(current_gallery)
     base = "ClassiAdmin"
-    if current_gallery
+    if !current_gallery.blank?
       base += ": #{current_gallery.name}"
     end
     base

@@ -32,7 +32,11 @@ class ApplicationController < ActionController::Base
 
   def current_gallery
     return @current_gallery if defined?(@current_gallery)
-    @current_gallery = Gallery.find(current_customer.gallery_id) || []
+    if current_customer
+      @current_gallery = Gallery.find(current_customer.gallery_id)
+    else
+      @current_gallery = []
+    end
   end
 
   def require_customer
