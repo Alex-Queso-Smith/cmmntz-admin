@@ -21,7 +21,7 @@ export const Checkbox = props => {
 export const Input = props => {
   return(
     <div className="form-group">
-      <label className="text-medium" htmlFor={props.name}>{props.label}</label>
+      <label htmlFor={props.name}>{props.label}</label>
       <input className={`form-control margin-top-10px ${props.addClass}`} type={props.type} name={props.name} value={props.content} onChange={props.onChange}></input>
     </div>
   );

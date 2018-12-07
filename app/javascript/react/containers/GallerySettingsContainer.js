@@ -3,7 +3,7 @@ import Textarea from 'react-expanding-textarea';
 import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../util/CoreUtil';
-import { Checkbox } from '../components/FormComponents';
+import { Checkbox, Input } from '../components/FormComponents';
 import CommentFiltersContainer from './CommentFiltersContainer';
 
 class GallerySettingsContainer extends React.Component {
@@ -161,7 +161,7 @@ class GallerySettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
+    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
@@ -213,6 +213,15 @@ class GallerySettingsContainer extends React.Component {
           name={"notifyOnNewComment"}
           label={"Notify when new comment posted?"}
           checked={notifyOnNewComment}
+        />
+
+        <Input
+          name="threadExpirationDays"
+          label="Expire threads after how many days?"
+          onChange={this.handleChange}
+          content={threadExpirationDays}
+          type="input"
+          addClass={"input-small"}
         />
         <div className="margin-top-10px text-center">
           <button className="btn btn-med btn-primary" onClick={this.handleSubmit}>

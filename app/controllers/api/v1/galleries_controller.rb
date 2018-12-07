@@ -29,7 +29,8 @@ class Api::V1::GalleriesController < ApiController
         :comment_etiquette,
         :comment_approval_needed,
         :notify_on_comment_approval_needed,
-        :notify_on_new_comment
+        :notify_on_new_comment,
+        :default_art_thread_expiration_days
       )
   end
 end
