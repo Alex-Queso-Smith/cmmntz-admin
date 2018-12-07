@@ -26,7 +26,7 @@ module ClassifilterAdmin
     config.action_mailer.deliver_later_queue_name = 'default'
 
     # add image sub dirs to pipline
-    Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
+    Dir.glob("#{Rails.root}/app/assets/images/**/*").each do |path|
       config.assets.paths << path
     end
 

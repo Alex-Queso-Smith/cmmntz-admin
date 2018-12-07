@@ -1,14 +1,12 @@
 import React from "react"
 
 import { SortDir, SortButton, FilterFromButton } from '../components/SortSelect'
-import { ImageSelector } from './VoteUtil';
+import { ImageSelector, ImageSelectorTemp } from './VoteUtil';
 
 export const OpacityHandlerIncludes = (filterList, notFilterList, type) => {
 
-  if (filterList.includes(type)) {
+  if (filterList.includes(type) || notFilterList.includes(type)) {
     return ""
-  } else if (notFilterList.includes(type)) {
-    return  "exclude-translucent"
   } else {
     return "translucent"
   }
@@ -21,7 +19,7 @@ export const SortTypes = [
   ["smart_count", "smart"],
   ["funny_count", "funny"],
   ["created_at", "created_at"],
-  ["comment_length", "length"]
+  ["comment_length", "length2"]
 ]
 
 export const SortButtons = (object) => {
@@ -64,16 +62,17 @@ export const RowOneFilterTypes = [
 export const FilterButtonsRowOne = (object) => {
   return RowOneFilterTypes.map((type) => {
     var image, visibility, blankClass;
-    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
 
     if (!type[0].includes('blank')) {
-      image = ImageSelector(type[0])
+      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0])
     }
 
     if (type[0].includes('blank')) {
       visibility = "visibility-hidden"
       blankClass = type[0]
     }
+
+    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
 
     return(
       <SortButton
@@ -106,16 +105,17 @@ export const RowTwoFilterTypes = [
 export const FilterButtonsRowTwo = (object) => {
   return RowTwoFilterTypes.map((type) => {
     var image, visibility, blankClass;
-    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
 
     if (!type[0].includes('blank')) {
-      image = ImageSelector(type[0])
+      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0])
     }
 
     if (type[0].includes('blank')){
       visibility = "visibility-hidden"
       blankClass = type[0]
     }
+
+    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
 
     return(
       <SortButton
