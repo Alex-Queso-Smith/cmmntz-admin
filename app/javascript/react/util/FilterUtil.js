@@ -3,14 +3,6 @@ import React from "react"
 import { SortDir, SortButton, FilterFromButton } from '../components/SortSelect'
 import { ImageSelector, ImageSelectorTemp } from './VoteUtil';
 
-export const OpacityHandlerIncludes = (filterList, notFilterList, type) => {
-
-  if (filterList.includes(type) || notFilterList.includes(type)) {
-    return ""
-  } else {
-    return "translucent"
-  }
-}
 
 export const SortTypes = [
   ["top_count", "top"],
@@ -72,14 +64,11 @@ export const FilterButtonsRowOne = (object) => {
       blankClass = type[0]
     }
 
-    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
-
     return(
       <SortButton
         key={`filter_${type[1]}`}
         className={`${blankClass}`}
         value={`${type[0]}_percent`}
-        opacity={opacity}
         onClick={object.props.handleFilterClick}
         image={image}
         visibility={visibility}
@@ -115,14 +104,11 @@ export const FilterButtonsRowTwo = (object) => {
       blankClass = type[0]
     }
 
-    var opacity = OpacityHandlerIncludes(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, `${type[0]}_percent`)
-
     return(
       <SortButton
         key={`filter_${type[1]}`}
         className={`${blankClass}`}
         value={`${type[0]}_percent`}
-        opacity={opacity}
         onClick={object.props.handleFilterClick}
         image={image}
         visibility={visibility}
