@@ -16,5 +16,9 @@
         = f.check_box :deactivated
         = f.label :deactivated, "Deactivate Art: Do not show a commenting section for this art"
 
+      .form-group.form-group-lg
+        = f.label :disabled_message, "Optional Disabled/Deactivated Message"
+        = f.text_area :disabled_message, class: "form-control"
+
       .form-group.form-group-lg.actions
         = f.submit "Update Settings", class: "btn btn-primary", style: "width: 100%"
