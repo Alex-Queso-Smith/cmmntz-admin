@@ -21,7 +21,7 @@ class ManageComment extends React.Component {
 
     if (manage != "") {
       manageButton =
-      <button className="btn btn-primary cf-manage-button" onClick={this.props.handleManageComment}>
+      <button className="btn btn-dark cf-manage-button" onClick={this.props.handleManageComment}>
         {buttonText}
       </button>
     }
