@@ -87,10 +87,12 @@ class ArtsShowContainer extends React.Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  banUser(userId){
+  banUser(userId, event){
     var c = confirm("Do you wish to ban this user?")
+
     if (c) {
-      FetchIndividual(this, `/api/v1/gallery_blacklistings.json?user_id=${userId}`, "POST")
+      var l = event.target.previousSibling.value
+      FetchIndividual(this, `/api/v1/gallery_blacklistings.json?user_id=${userId}&dur=${l}`, "POST")
       .then(success => {
         var allComments = this.state.comments;
         var filteredComments = allComments.filter(comment => comment.user_id != userId)
@@ -118,8 +120,8 @@ class ArtsShowContainer extends React.Component {
           this.deleteComment(comment.id)
         }
 
-        var handleBanUser = () => {
-          this.banUser(comment.user_id)
+        var handleBanUser = (event) => {
+          this.banUser(comment.user_id, event)
         }
 
         return(
