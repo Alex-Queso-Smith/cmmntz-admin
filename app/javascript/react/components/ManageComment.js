@@ -1,5 +1,7 @@
 import React from 'react';
 
+import BanUser from './modals/BanUser';
+
 class ManageComment extends React.Component {
   render(){
     var { manage, text, userName, datePosted } = this.props;
@@ -28,7 +30,7 @@ class ManageComment extends React.Component {
       <div className="row cf-manage-comment margin-top-10px">
         <div className="cf-manage-comment-left col-sm-3 col-md-2">
           <h3>{userName}</h3>
-          <button className="btn btn-sm btn-danger" onClick={this.props.handleBanUser}>Ban</button>
+          <BanUser banAction={this.props.handleBanUser} />
           <br />
           <h4>{datePosted}</h4>
         </div>
