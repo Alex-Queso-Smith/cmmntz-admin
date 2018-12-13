@@ -123,9 +123,8 @@ class ArtsShowContainer extends React.Component {
         }
 
         return(
-          <div className="border-1px-bot">
+          <div key={comment.id} className="border-1px-bot">
             <ManageComment
-              key={comment.id}
               text={comment.text}
               userName={comment.user_name}
               datePosted={comment.date_posted}
