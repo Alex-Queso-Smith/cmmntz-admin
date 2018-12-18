@@ -34,6 +34,7 @@ class ManageComment extends React.Component {
       name={this.props.id}
       onChange={this.props.handleCheck}
       label="Add to Manage"
+      checked={this.props.checked}
     />
 
     return(

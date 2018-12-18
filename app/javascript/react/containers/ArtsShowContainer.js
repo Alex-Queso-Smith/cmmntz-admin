@@ -20,9 +20,21 @@ class ArtsShowContainer extends React.Component {
   banUser = this.banUser.bind(this);
   handleCheck = this.handleCheck.bind(this);
   handleManageSelected = this.handleManageSelected.bind(this);
+  selectAllComments = this.selectAllComments.bind(this);
 
   componentDidMount(){
     this.loadComments("")
+  }
+
+  selectAllComments(event) {
+    event.preventDefault()
+    var { comments } = this.state
+    var newManageIds = []
+    comments.forEach(function(comment) {
+      newManageIds.push(comment.id)
+    })
+
+    this.setState({ manageIds: newManageIds })
   }
 
   handleManageSelected(action, event) {
@@ -183,6 +195,8 @@ class ArtsShowContainer extends React.Component {
           this.handleCheck(comment.id, event)
         }
 
+        var checked = this.state.manageIds.includes(comment.id)
+
         return(
           <div key={comment.id} className="border-1px-bot">
             <ManageComment
@@ -195,6 +209,7 @@ class ArtsShowContainer extends React.Component {
               manage={display}
               handleBanUser={handleBanUser}
               handleCheck={handleCheckbox}
+              checked={checked}
               />
           </div>
         )
@@ -235,29 +250,36 @@ class ArtsShowContainer extends React.Component {
       Restore Selected
     </button>
 
+    var selectAllButton =
+    <button className="btn btn-dark cf-manage-button" onClick={this.selectAllComments}>
+      Select All
+    </button>
+
     var manageButtons;
-    if (display == "") {
-      manageButtons =
-      <div className="margin-top-10px">
-        {deleteButton}
-      </div>
-    } else if (display == "pending") {
-      manageButtons =
-      <div className="margin-top-10px">
-        {approveButton}
-        {deleteButton}
-      </div>
-    } else if (display == "flagged") {
-      manageButtons =
-      <div className="margin-top-10px">
-        {ignoreButton}
-        {deleteButton}
-      </div>
-    } else if (display == "deleted") {
-      manageButtons =
-      <div className="margin-top-10px">
-        {restoreButton}
-      </div>
+    if (this.state.manageIds != ""){
+      if (display == "") {
+        manageButtons =
+        <div className="col-sm-10">
+          {deleteButton}
+        </div>
+      } else if (display == "pending") {
+        manageButtons =
+        <div className="col-sm-10">
+          {approveButton}
+          {deleteButton}
+        </div>
+      } else if (display == "flagged") {
+        manageButtons =
+        <div className="col-sm-10">
+          {ignoreButton}
+          {deleteButton}
+        </div>
+      } else if (display == "deleted") {
+        manageButtons =
+        <div className="col-sm-10">
+          {restoreButton}
+        </div>
+      }
     }
 
     return(
@@ -266,7 +288,12 @@ class ArtsShowContainer extends React.Component {
           display={this.state.display}
           onClick={this.handleTabClick}
         />
+      <div className="row margin-top-10px">
+        <div className="col-sm-2">
+          {selectAllButton}
+        </div>
         {manageButtons}
+      </div>
 
         {allComments}
       </div>
