@@ -1,5 +1,6 @@
 import React from 'react';
 import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
+import {Checkbox} from '../components/FormComponents';
 
 import ManageComment from '../components/ManageComment';
 import Tabs from '../components/Tabs';
@@ -8,7 +9,8 @@ class ArtsShowContainer extends React.Component {
   state = {
     comments: [],
     manageIds: [],
-    display: ""
+    display: "",
+    allSelected: false
   }
 
   deleteComment = this.deleteComment.bind(this);
@@ -27,14 +29,22 @@ class ArtsShowContainer extends React.Component {
   }
 
   selectAllComments(event) {
-    event.preventDefault()
-    var { comments } = this.state
-    var newManageIds = []
-    comments.forEach(function(comment) {
-      newManageIds.push(comment.id)
-    })
+    var { comments, manageIds } = this.state
+    if (event.target.checked){
+      var newManageIds = []
+      comments.forEach(function(comment) {
+        newManageIds.push(comment.id)
+      })
 
-    this.setState({ manageIds: newManageIds })
+      this.setState({
+        manageIds: newManageIds,
+        allSelected: true
+      })
+    } else {
+      this.setState({
+        allSelected: false
+      })
+    }
   }
 
   handleManageSelected(action, event) {
@@ -61,13 +71,18 @@ class ArtsShowContainer extends React.Component {
     var target = event.target;
     var checked = target.checked;
     var newManageIds = this.state.manageIds
+    var comments = this.state.comments
 
     if (checked) {
       newManageIds.push(commentId)
     } else {
       newManageIds = newManageIds.filter(v => v != commentId)
     }
-    this.setState({ manageIds: newManageIds })
+    var newAllSelected = (comments.length == newManageIds.length)
+    this.setState({
+      manageIds: newManageIds,
+      allSelected: newAllSelected
+    })
   }
 
   handleTabClick(event){
@@ -76,7 +91,8 @@ class ArtsShowContainer extends React.Component {
 
     this.setState({
       display: value,
-      manageIds: []
+      manageIds: [],
+      allSelected: false
      })
     this.loadComments(value)
   }
@@ -91,7 +107,8 @@ class ArtsShowContainer extends React.Component {
     FetchDidMount(this, url)
     .then(artData => {
       this.setState({
-        comments: artData.art.comments
+        comments: artData.art.comments,
+        allSelected: false
       })
     })
   }
@@ -168,7 +185,7 @@ class ArtsShowContainer extends React.Component {
   }
 
   render(){
-    var { comments, display } = this.state;
+    var { comments, display, manageIds } = this.state;
     var allComments;
     if (comments) {
       allComments = comments.map(comment => {
@@ -195,7 +212,7 @@ class ArtsShowContainer extends React.Component {
           this.handleCheck(comment.id, event)
         }
 
-        var checked = this.state.manageIds.includes(comment.id)
+        var checked = manageIds.includes(comment.id)
 
         return(
           <div key={comment.id} className="border-1px-bot">
@@ -250,11 +267,15 @@ class ArtsShowContainer extends React.Component {
       Restore Selected
     </button>
 
+    var allSelected = this.state.allSelected
     var selectAllButton =
-    <button className="btn btn-dark cf-manage-button" onClick={this.selectAllComments}>
-      Select All
-    </button>
-
+    <Checkbox
+      name="allSelected"
+      onChange={this.selectAllComments}
+      label="Select All"
+      checked={allSelected}
+    />
+  // debugger
     var manageButtons;
     if (this.state.manageIds != ""){
       if (display == "") {
