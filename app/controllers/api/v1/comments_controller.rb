@@ -3,7 +3,7 @@ class Api::V1::CommentsController < ApiController
 
   def update
     if @comment.update(comment_params)
-      render json: { message: "Destroy successfull" }
+      render json: { message: "Change successful" }
     else
       render json: { errors: @comment.errors, status: :unprocessable_entity }
     end
@@ -14,7 +14,8 @@ class Api::V1::CommentsController < ApiController
   def comment_params
     params.require(:comment).permit(
       :deleted,
-      :approved
+      :approved,
+      :ignore_flagged
     )
   end
 

@@ -15,6 +15,7 @@ const Tabs = (props) => {
   const types = [
     ["Thread Comments", ""],
     ["Pending Comments", "pending"],
+    ["Flagged Comments", "flagged"],
     ["Deleted Comments", "deleted"]
   ]
 

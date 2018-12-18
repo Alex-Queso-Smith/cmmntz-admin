@@ -15,6 +15,7 @@ class ArtsShowContainer extends React.Component {
   handleTabClick = this.handleTabClick.bind(this);
   restoreComment = this.restoreComment.bind(this);
   approveComment = this.approveComment.bind(this);
+  ignoreFlagComment = this.ignoreFlagComment.bind(this);
   banUser = this.banUser.bind(this);
 
   componentDidMount(){
@@ -74,6 +75,19 @@ class ArtsShowContainer extends React.Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  ignoreFlagComment(commentId){
+    var updateComment = new FormData();
+    updateComment.append("comment[ignore_flagged]", true)
+
+    FetchWithUpdate(this, `/api/v1/comments/${commentId}.json`, "PATCH", updateComment)
+    .then(success => {
+      var allComments = this.state.comments;
+      var filteredComments = allComments.filter(comment => comment.id != commentId)
+      this.setState({ comments: filteredComments })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   restoreComment(commentId){
     var updateComment = new FormData();
     updateComment.append("comment[deleted]", false)
@@ -113,6 +127,8 @@ class ArtsShowContainer extends React.Component {
             this.approveComment(comment.id)
           } else if (display === "deleted") {
             this.restoreComment(comment.id)
+          } else if (display === "flagged") {
+            this.ignoreFlagComment(comment.id)
           }
         }
 

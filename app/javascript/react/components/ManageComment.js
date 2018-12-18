@@ -10,6 +10,8 @@ class ManageComment extends React.Component {
     var buttonText = "Restore"
     if (manage === "pending") {
       buttonText = "Approve"
+    } else if (manage === "flagged") {
+      buttonText = "Ignore"
     }
 
     if (manage != "deleted") {
