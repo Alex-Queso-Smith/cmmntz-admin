@@ -38,7 +38,7 @@ class ArtsShowContainer extends React.Component {
       var url = `/api/v1/arts/${this.props.match.params.id}/mass_manage_comments.json`;
       FetchWithUpdate(this, url, "POST", formData)
       .then(success => {
-        setTimeout(this.loadComments(action), 10);
+        setTimeout(this.loadComments(this.state.display), 10);
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
