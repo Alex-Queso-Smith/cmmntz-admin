@@ -36,7 +36,7 @@ class Ability
   def super_admin_permissions
     can :crud, Gallery, { id: customer.gallery_id }
     can :crud, Customer, { gallery_id: customer.gallery_id }
-    can :crud, Art, { gallery_id: customer.gallery_id }
+    can [:crud, :mass_manage_comments], Art, { gallery_id: customer.gallery_id }
     can :crud, Comment, { art: { gallery_id: customer.gallery_id } }
     can :crud, GalleryBlacklisting, { gallery_id: customer.gallery_id }
   end

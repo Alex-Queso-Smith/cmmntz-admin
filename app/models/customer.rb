@@ -10,4 +10,9 @@ class Customer < ApplicationRecord
     c.validate_email_field = false
     c.validate_password_field = false
   end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+  delegate :can?, :cannot?, to: :ability # allows calling from models
 end

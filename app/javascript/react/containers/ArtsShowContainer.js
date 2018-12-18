@@ -7,6 +7,7 @@ import Tabs from '../components/Tabs';
 class ArtsShowContainer extends React.Component {
   state = {
     comments: [],
+    manageIds: [],
     display: ""
   }
 
@@ -17,16 +18,54 @@ class ArtsShowContainer extends React.Component {
   approveComment = this.approveComment.bind(this);
   ignoreFlagComment = this.ignoreFlagComment.bind(this);
   banUser = this.banUser.bind(this);
+  handleCheck = this.handleCheck.bind(this);
+  handleManageSelected = this.handleManageSelected.bind(this);
 
   componentDidMount(){
     this.loadComments("")
+  }
+
+  handleManageSelected(action, event) {
+    event.preventDefault();
+    var commentIds = this.state.manageIds
+    if (commentIds == "") {
+      alert("Please select Comments to " + action + ".")
+    } else {
+      var formData = new FormData()
+      formData.append("mass_manage_comment[action]", action)
+      formData.append("mass_manage_comment[comment_ids]", commentIds)
+
+      var url = `/api/v1/arts/${this.props.match.params.id}/mass_manage_comments.json`;
+      FetchWithUpdate(this, url, "POST", formData)
+      .then(success => {
+        setTimeout(this.loadComments(action), 10);
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+
+  }
+
+  handleCheck(commentId, event){
+    var target = event.target;
+    var checked = target.checked;
+    var newManageIds = this.state.manageIds
+
+    if (checked) {
+      newManageIds.push(commentId)
+    } else {
+      newManageIds = newManageIds.filter(v => v != commentId)
+    }
+    this.setState({ manageIds: newManageIds })
   }
 
   handleTabClick(event){
     const target = event.target;
     const value = target.getAttribute('data-value');
 
-    this.setState({ display: value })
+    this.setState({
+      display: value,
+      manageIds: []
+     })
     this.loadComments(value)
   }
 
@@ -140,9 +179,14 @@ class ArtsShowContainer extends React.Component {
           this.banUser(comment.user_id, event)
         }
 
+        var handleCheckbox = (event) => {
+          this.handleCheck(comment.id, event)
+        }
+
         return(
           <div key={comment.id} className="border-1px-bot">
             <ManageComment
+              id={comment.id}
               text={comment.text}
               userName={comment.user_name}
               datePosted={comment.date_posted}
@@ -150,6 +194,7 @@ class ArtsShowContainer extends React.Component {
               handleManageComment={handleManageComment}
               manage={display}
               handleBanUser={handleBanUser}
+              handleCheck={handleCheckbox}
               />
           </div>
         )
@@ -158,12 +203,71 @@ class ArtsShowContainer extends React.Component {
       allComments = <h3>There are no comments for this thread</h3>
     }
 
+    var deleteAction = (event) => {
+      this.handleManageSelected("delete", event)
+    }
+    var deleteButton =
+    <button className="btn btn-danger cf-manage-button" onClick={deleteAction}>
+      Delete Selected
+    </button>
+
+    var approveAction = (event) => {
+      this.handleManageSelected("approve", event)
+    }
+    var approveButton =
+    <button className="btn btn-dark cf-manage-button" onClick={approveAction}>
+      Approve Selected
+    </button>
+
+    var ignoreAction = (event) => {
+      this.handleManageSelected("ignore", event)
+    }
+    var ignoreButton =
+    <button className="btn btn-dark cf-manage-button" onClick={ignoreAction}>
+      Ignore Selected
+    </button>
+
+    var restoreAction = (event) => {
+      this.handleManageSelected("restore", event)
+    }
+    var restoreButton =
+    <button className="btn btn-dark cf-manage-button" onClick={restoreAction}>
+      Restore Selected
+    </button>
+
+    var manageButtons;
+    if (display == "") {
+      manageButtons =
+      <div className="margin-top-10px">
+        {deleteButton}
+      </div>
+    } else if (display == "pending") {
+      manageButtons =
+      <div className="margin-top-10px">
+        {approveButton}
+        {deleteButton}
+      </div>
+    } else if (display == "flagged") {
+      manageButtons =
+      <div className="margin-top-10px">
+        {ignoreButton}
+        {deleteButton}
+      </div>
+    } else if (display == "deleted") {
+      manageButtons =
+      <div className="margin-top-10px">
+        {restoreButton}
+      </div>
+    }
+
     return(
       <div className="cf-manage-comments container">
         <Tabs
           display={this.state.display}
           onClick={this.handleTabClick}
         />
+        {manageButtons}
+
         {allComments}
       </div>
     )

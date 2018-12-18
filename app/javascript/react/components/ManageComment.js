@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BanUser from './modals/BanUser';
+import {Checkbox} from './FormComponents';
 
 class ManageComment extends React.Component {
   render(){
@@ -28,6 +29,13 @@ class ManageComment extends React.Component {
       </button>
     }
 
+    var checkBox =
+    <Checkbox
+      name={this.props.id}
+      onChange={this.props.handleCheck}
+      label="Add to Manage"
+    />
+
     return(
       <div className="row cf-manage-comment margin-top-10px">
         <div className="cf-manage-comment-left col-sm-3 col-md-2">
@@ -35,6 +43,8 @@ class ManageComment extends React.Component {
           <BanUser banAction={this.props.handleBanUser} />
           <br />
           <h4>{datePosted}</h4>
+          <br />
+          {checkBox}
         </div>
         <div className="cf-manage-comment-right col-sm-9 col-md-10">
           <div className="cf-manage-comment-text">
