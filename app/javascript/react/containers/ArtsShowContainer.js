@@ -291,7 +291,7 @@ class ArtsShowContainer extends React.Component {
         </div>
       } else if (display == "flagged") {
         manageButtons =
-        <div className="col-sm-10">
+        <div className="col-sm-9 col-md-10">
           {ignoreButton}
           {deleteButton}
         </div>
@@ -310,7 +310,7 @@ class ArtsShowContainer extends React.Component {
           onClick={this.handleTabClick}
         />
       <div className="row margin-top-10px">
-        <div className="col-sm-2">
+        <div className="col-sm-3 col-md-2">
           {selectAllButton}
         </div>
         {manageButtons}
