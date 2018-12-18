@@ -20,6 +20,7 @@ class GallerySettingsContainer extends React.Component {
     },
     censor: false,
     commentApprovalNeeded: false,
+    guestApprovalNeeded: false,
     notifyOnNewComment: false,
     notifyOnCommentApprovalNeeded: false,
     threadExpirationDays: "",
@@ -37,12 +38,13 @@ class GallerySettingsContainer extends React.Component {
     .then(galleryData => {
 
       var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, notify_on_new_comment } = galleryData.gallery.settings
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment } = galleryData.gallery.settings
       var { id, name, comment_etiquette } = galleryData.gallery;
-      var censored = censor === "true" ? true : false;
-      var commentApprovalNeeded = comment_approval_needed === "true" ? true : false;
-      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" ? true : false;
-      var notifyOnNewComment = notify_on_new_comment === "true" ? true : false;
+      var censored = censor === "true" || censor === true ? true : false;
+      var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
+      var guestApprovalNeeded = guest_approval_needed === "true" || guest_approval_needed === true ? true : false;
+      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" || notify_on_comment_approval_needed === true ? true : false;
+      var notifyOnNewComment = notify_on_new_comment === "true" || notify_on_new_comment === true ? true : false;
 
       opts.sortDir = sort_dir
       opts.sortType = sort_type
@@ -59,6 +61,7 @@ class GallerySettingsContainer extends React.Component {
         galleryId: id,
         commentEtiquette: comment_etiquette,
         commentApprovalNeeded: commentApprovalNeeded,
+        guestApprovalNeeded: guestApprovalNeeded,
         notifyOnNewComment: notifyOnNewComment,
         notifyOnCommentApprovalNeeded: notifyOnCommentApprovalNeeded
       })
@@ -161,7 +164,7 @@ class GallerySettingsContainer extends React.Component {
     }
 
     var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom } = this.state.sortOpts;
-    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
+    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[sort_dir]", sortDir);
@@ -174,6 +177,7 @@ class GallerySettingsContainer extends React.Component {
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
     gallery.append("gallery[comment_etiquette]", strip(commentEtiquette))
     gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
+    gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
     gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
     gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
 
@@ -184,7 +188,7 @@ class GallerySettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
+    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
@@ -224,6 +228,12 @@ class GallerySettingsContainer extends React.Component {
           name={"commentApprovalNeeded"}
           label={"Approve all comments before displaying?"}
           checked={commentApprovalNeeded}
+        />
+        <Checkbox
+          onChange={this.handleChange}
+          name={"guestApprovalNeeded"}
+          label={"Approve Guest comments before displaying?"}
+          checked={guestApprovalNeeded}
         />
         <Checkbox
           onChange={this.handleChange}
