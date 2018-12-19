@@ -31,7 +31,7 @@ class MassManageComment < Tableless
     when "delete"
       comments.update_all(deleted: true)
     when "approve"
-      comments.update_all(approved: true)
+      comments.update_all(approved: true, approved_by: "mod")
     when "ignore"
       comments.update_all(ignore_flagged: true)
     when "restore"

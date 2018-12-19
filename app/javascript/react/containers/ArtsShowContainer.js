@@ -133,6 +133,7 @@ class ArtsShowContainer extends React.Component {
   approveComment(commentId){
     var updateComment = new FormData();
     updateComment.append("comment[approved]", true)
+    updateComment.append("comment[approved_by]", "mod")
 
     FetchWithUpdate(this, `/api/v1/comments/${commentId}.json`, "PATCH", updateComment)
     .then(success => {

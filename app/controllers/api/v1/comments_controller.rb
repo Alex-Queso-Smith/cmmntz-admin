@@ -15,6 +15,7 @@ class Api::V1::CommentsController < ApiController
     params.require(:comment).permit(
       :deleted,
       :approved,
+      :approved_by,
       :ignore_flagged
     )
   end
