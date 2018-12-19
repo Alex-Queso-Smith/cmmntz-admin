@@ -3,14 +3,18 @@
 
   %p
   %p
-
+  %h5 TODO: Reactify me!!!
   .form
     = form_for(@art) do |f|
       = render "/shared/error_messages", :target => @art
       .form-group.form-inline.form-group-lg
+        = f.check_box :ignore_warning_checker, value: true
+        = f.label :ignore_warning_checker, "Ignore the warning checker"
+
+
+      .form-group.form-inline.form-group-lg
         = f.check_box :disabled
         = f.label :disabled, "Disable Art: Do not allow new comments, replies, or votes"
-
 
       .form-group.form-inline.form-group-lg
         = f.check_box :deactivated
