@@ -3,7 +3,7 @@ module CommentBase
   BAD_WORDS = ["fuck", "wombat", "happen"]
 
   def render_anonymously?
-    anonymous? || user.guest? || user.nil?
+    anonymous? || user.nil? || user.guest? 
   end
 
 end
