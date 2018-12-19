@@ -2,6 +2,7 @@ class Customer < ApplicationRecord
   include AuthlogicValidations
 
   belongs_to :gallery
+  has_many :gallery_artists
 
   validates :first_name, :last_name, :role, presence: true
 
@@ -15,4 +16,13 @@ class Customer < ApplicationRecord
     @ability ||= Ability.new(self)
   end
   delegate :can?, :cannot?, to: :ability # allows calling from models
+
+
+  def reverse_name
+    "#{last_name}, #{first_name}"
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

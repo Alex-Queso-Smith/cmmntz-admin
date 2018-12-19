@@ -2,6 +2,8 @@ class Art < ApplicationRecord
   belongs_to :gallery
   delegate :checker_settings, :default_art_thread_expiration_days, to: :gallery
 
+  belongs_to :gallery_artist
+
   has_many :art_topics
   has_many :topics, through: :art_topics
 
