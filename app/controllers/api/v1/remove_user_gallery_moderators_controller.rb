@@ -5,12 +5,11 @@ class Api::V1::RemoveUserGalleryModeratorsController < ApiController
     user = User.find_by user_name: params[:user_name]
     if user
       current_gallery.user_gallery_moderators.delete(user)
-      message = "User has been removed from moderators"
+      render json: { message: "User has been removed from moderators" }
     else
-      message "User Does not exist"
+      render json: { errors: "User Does not exist" }
     end
 
-    render json: { message: message }
   end
 
 end
