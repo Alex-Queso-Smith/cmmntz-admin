@@ -52,7 +52,8 @@ class Ability
     can :read, Gallery, { id: customer.gallery_id }
     can :read, Art, { gallery_id: customer.gallery_id }
     can [:crud, :mass_manage_comments], Art, { gallery_artist_id: customer.gallery_artist_ids }
-    can [:crud], Comment, {art_id: customer.gallery_artists.map(&:art_ids)}
+    can [:crud], Comment, {art_id: customer.gallery_artists.map(&:art_ids).flatten}
+    can :crud, GalleryBlacklisting, { gallery_id: customer.gallery_id }
   end
 
 end
