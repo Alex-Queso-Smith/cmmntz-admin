@@ -2,6 +2,8 @@ class GalleryArtist < ApplicationRecord
   belongs_to :gallery
   belongs_to :customer
 
+  has_many :arts
+
   validates :artist_name, presence: true
 
   ### accessor methods
