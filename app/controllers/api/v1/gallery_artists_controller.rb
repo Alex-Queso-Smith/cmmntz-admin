@@ -3,7 +3,7 @@ class Api::V1::GalleryArtistsController < ApiController
 
   def show
   end
-  
+
   def update
     if @gallery_artist.update(gallery_artist_params)
       render json: { message: 'Gallery Artist Updated Succesfully!' }
