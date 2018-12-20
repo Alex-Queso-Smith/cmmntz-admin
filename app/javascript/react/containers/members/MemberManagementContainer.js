@@ -4,11 +4,12 @@ import { FetchDidMount } from '../../util/CoreUtil';
 import { MemberTabs } from '../../components/Tabs';
 import MembersContainer from './MembersContainer';
 import NewMemberContainer from './NewMemberContainer';
+import ModeratorsContainer from './ModeratorsContainer';
 
 class MemberManagementContainer extends React.Component {
   state = {
     customers: [],
-    display: ""
+    display: "mods"
   }
 
   _isMounted = false
