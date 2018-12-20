@@ -221,6 +221,8 @@ class ArtsShowContainer extends React.Component {
               id={comment.id}
               text={comment.text}
               userName={comment.user_name}
+              userIsAdmin={comment.user_is_admin}
+              userIsMod={comment.user_is_mod}
               datePosted={comment.date_posted}
               handleDeleteComment={handleCommentDelete}
               handleManageComment={handleManageComment}

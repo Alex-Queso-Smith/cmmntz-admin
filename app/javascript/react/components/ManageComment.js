@@ -36,6 +36,17 @@ class ManageComment extends React.Component {
       checked={this.props.checked}
     />
 
+  var userActions;
+  if (!this.props.userIsAdmin && !this.props.userIsMod) {
+    userActions =
+    <BanUser banAction={this.props.handleBanUser} />
+  } else {
+    if (this.props.userIsAdmin) {
+      userActions = "Admin"
+    } else {
+      userActions = "Mod"
+    }
+  }
     return(
       <div className="row cf-manage-comment margin-top-10px">
         <div className="cf-manage-comment-left col-1 col-sm-1 col-md-1">
@@ -43,7 +54,7 @@ class ManageComment extends React.Component {
         </div>
         <div className="cf-manage-comment-left col-5 col-sm-5 col-md-2">
           <h3>{userName}</h3>
-          <BanUser banAction={this.props.handleBanUser} />
+          {userActions}
           <br />
           <h4>{datePosted}</h4>
           <br />
