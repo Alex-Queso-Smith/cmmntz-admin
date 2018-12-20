@@ -19,6 +19,8 @@ class Gallery < ApplicationRecord
   has_many :gallery_blacklistings
   has_many :blacklisted_users, through: :gallery_blacklistings, source: :user
 
+  has_many :user_gallery_moderators
+
   validates :name, presence: true
   validates :default_art_thread_expiration_days, numericality: { greater_than_or_equal_to: 0 }, if: Proc.new { |g| !g.default_art_thread_expiration_days.blank? }
   validates :comment_etiquette, length: { maximum: 8000 }

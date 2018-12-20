@@ -11,9 +11,18 @@ class ModeratorsContainer extends React.Component {
 
   _isMounted = false
 
+  handleModeratorLoad = this.handleModeratorLoad.bind(this);
+
   componentDidMount(){
     this._isMounted = true;
+    this.handleModeratorLoad()
+  }
 
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
+
+  handleModeratorLoad() {
     FetchDidMount(this, `/api/v1/user_gallery_moderators.json`)
     .then(response => {
       if (this._isMounted) {
@@ -23,10 +32,6 @@ class ModeratorsContainer extends React.Component {
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
-
-  componentWillUnmount(){
-    this._isMounted = false;
   }
 
   render() {
@@ -49,18 +54,18 @@ class ModeratorsContainer extends React.Component {
     }
     return(
       <div>
-      <br/>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Added On</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allMods}
-        </tbody>
-      </table>
+        <br/>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Added On</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allMods}
+          </tbody>
+        </table>
       </div>
     )
   }
