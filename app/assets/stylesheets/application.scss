@@ -205,3 +205,7 @@ h4 {
 .border-1px-bot {
   border-bottom: 1px solid $grayline;
 }
+
+.table>thead>tr>th {
+  border-top:0;
+}
