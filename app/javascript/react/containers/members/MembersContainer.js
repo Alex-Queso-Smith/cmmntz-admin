@@ -34,7 +34,11 @@ class MembersContainer extends React.Component {
     if (members) {
       allMembers = members.map(member => {
         var { id, name, role, email } = member;
-        var editButton = <Link to={`/members/${member.id}`} >Edit</Link>
+        if (member.role === "artist") {
+          var editButton = <Link to={`/gallery_artists/${member.id}`} >Edit</Link>
+        } else {
+          var editButton = <Link to={`/members/${member.id}`} >Edit</Link>
+        }
 
         return(
           <MemberTile
