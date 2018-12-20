@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, RadioButton } from '../components/FormComponents';
+import { Input, RadioButton } from '../../components/FormComponents';
 
 class NewMemberContainer extends React.Component {
   state = {
