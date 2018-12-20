@@ -1,6 +1,6 @@
 import React from "react";
 
-import MemberTile from '../components/MemberTile';
+import MemberTile from '../../components/members/MemberTile';
 
 class MembersContainer extends React.Component {
   state = {
@@ -22,7 +22,7 @@ class MembersContainer extends React.Component {
     if (members) {
       allMembers = members.map(member => {
         var { id, name, role, email } = member;
-        
+
         return(
           <MemberTile
             key={id}
@@ -36,7 +36,18 @@ class MembersContainer extends React.Component {
 
     return(
       <div id="cf-members-container">
-        {allMembers}
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allMembers}
+          </tbody>
+        </table>
       </div>
     )
   }

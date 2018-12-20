@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { FetchDidMount } from '../util/CoreUtil';
-import { MemberTabs } from '../components/Tabs';
+import { FetchDidMount } from '../../util/CoreUtil';
+import { MemberTabs } from '../../components/Tabs';
 import MembersContainer from './MembersContainer';
 import NewMemberContainer from './NewMemberContainer';
 
@@ -59,7 +59,10 @@ class MemberManagementContainer extends React.Component {
         />
         break;
       case "mods":
+        page =
+        <ModeratorsContainer
 
+        />
         break;
       default:
 
