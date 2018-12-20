@@ -25,6 +25,7 @@ class GalleryArtistEditContainer extends React.Component {
         this.setState({ selectedMember: galleryArtist.customer_id  })
       })
     )
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   handleChange(event){

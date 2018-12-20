@@ -7,7 +7,12 @@ const ModTile = (props) => {
         {props.name}
       </td>
       <td>
-        {props.added_on}
+        {props.addedOn}
+      </td>
+      <td>
+        <button className="btn btn-dark btn-sm" onClick={props.deleteMod}>
+          Remove
+        </button>
       </td>
     </tr>
   )

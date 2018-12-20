@@ -1,14 +1,15 @@
 import React from 'react';
 
 import ModTile from '../../components/members/ModTile';
-import { FetchDidMount } from '../../util/CoreUtil';
+import { FetchDidMount, FetchWithPush, FetchIndividual } from '../../util/CoreUtil';
 import { Input } from '../../components/FormComponents';
 
 class ModeratorsContainer extends React.Component {
   state = {
     moderators: [],
     displayModInput: false,
-    newMod: ""
+    newMod: "",
+    newModErrors: {}
   }
 
   _isMounted = false
@@ -16,6 +17,7 @@ class ModeratorsContainer extends React.Component {
   handleModeratorLoad = this.handleModeratorLoad.bind(this);
   handleChange = this.handleChange.bind(this);
   handleAddMod = this.handleAddMod.bind(this);
+  deleteMod = this.deleteMod.bind(this);
 
   componentDidMount(){
     this._isMounted = true;
@@ -45,7 +47,26 @@ class ModeratorsContainer extends React.Component {
   }
 
   handleAddMod(event){
+    event.preventDefault();
 
+    var newMod = new FormData();
+
+    newMod.append("user_name", this.state.newMod)
+
+    FetchWithPush(this, `/api/v1/user_gallery_moderators.json`, '', 'POST', 'newModErrors', newMod)
+    .then(body => {
+      if (!body.errors) {
+        this.handleModeratorLoad()
+        this.setState({ newMod: "" })
+      }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  deleteMod(userName){
+    FetchIndividual(this, `/api/v1/remove_user_gallery_moderators.json?user_name=${userName}`, 'POST')
+    .then(success => { this.handleModeratorLoad() })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
@@ -61,7 +82,8 @@ class ModeratorsContainer extends React.Component {
           <ModTile
             key={id}
             name={name}
-            added_on={added_on}
+            addedOn={added_on}
+            deleteMod={() => { this.deleteMod(mod.name) }}
           />
         )
       })
@@ -79,13 +101,13 @@ class ModeratorsContainer extends React.Component {
           content={this.state.newMod}
           onChange={this.handleChange}
           />
-        <button className="btn btn-sm btn-dark">Add Moderator</button>
+        <button onClick={this.handleAddMod} className="btn btn-sm btn-dark">Add Moderator</button>
         <br />
-        <button onClick={ () => { this.setState({ displayModInput: false }) } } className="btn btn-sm btn-dark">Cancel</button>
+        <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="btn btn-sm btn-dark">Cancel</button>
       </div>
     } else {
       modInput =
-      <button onClick={ () => { this.setState({ displayModInput: true }) } } className="btn btn-sm btn-dark">Add Moderator</button>
+      <button onClick={ () => { this.setState({ displayModInput: true, newMod: "" }) } } className="btn btn-sm btn-dark">Add Moderator</button>
     }
 
     return(
@@ -98,6 +120,7 @@ class ModeratorsContainer extends React.Component {
             <tr>
               <th>Name</th>
               <th>Added On</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
