@@ -54,6 +54,8 @@ class ModeratorsContainer extends React.Component {
     }
     return(
       <div>
+        [ Fill In User Name]
+        <button className="btn btn-sm btn-dark">Add as Moderator</button>
         <br/>
         <table className="table">
           <thead>
