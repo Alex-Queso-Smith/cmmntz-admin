@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import MemberTile from '../../components/members/MemberTile';
 import { FetchDidMount } from '../../util/CoreUtil';
@@ -33,6 +34,7 @@ class MembersContainer extends React.Component {
     if (members) {
       allMembers = members.map(member => {
         var { id, name, role, email } = member;
+        var editButton = <Link to={`/members/${member.id}`} >Edit</Link>
 
         return(
           <MemberTile
@@ -40,6 +42,7 @@ class MembersContainer extends React.Component {
             name={name}
             role={role}
             email={email}
+            editButton={editButton}
           />
         )
       })
@@ -54,6 +57,7 @@ class MembersContainer extends React.Component {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>

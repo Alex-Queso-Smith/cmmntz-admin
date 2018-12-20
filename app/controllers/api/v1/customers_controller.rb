@@ -15,6 +15,13 @@ class Api::V1::CustomersController < ApiController
     end
   end
 
+  def edit
+  end
+
+  def update
+
+  end 
+
 
   def customer_params
     params.require(:customer).permit(

@@ -12,6 +12,9 @@ const MemberTile = (props) => {
       <td>
         {props.role}
       </td>
+      <td>
+        {props.editButton}
+      </td>
     </tr>
   )
 }
