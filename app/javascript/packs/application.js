@@ -58,4 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
       render(<App />, bannedUsers)
     }
   }
+
+  let memberManagement = document.getElementById('cf-member-management')
+
+  if (memberManagement) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, memberManagement)
+      } catch (e) {
+        render(<RedBox error={e} />, memberManagement)
+      }
+    }
+    else {
+      render(<App />, memberManagement)
+    }
+  }
 })

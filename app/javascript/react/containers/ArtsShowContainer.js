@@ -3,7 +3,7 @@ import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUti
 import {Checkbox} from '../components/FormComponents';
 
 import ManageComment from '../components/ManageComment';
-import Tabs from '../components/Tabs';
+import { CommentTabs }  from '../components/Tabs';
 
 class ArtsShowContainer extends React.Component {
   state = {
@@ -306,7 +306,7 @@ class ArtsShowContainer extends React.Component {
 
     return(
       <div className="cf-manage-comments container">
-        <Tabs
+        <CommentTabs
           display={this.state.display}
           onClick={this.handleTabClick}
         />

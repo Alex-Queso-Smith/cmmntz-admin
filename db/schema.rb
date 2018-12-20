@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_200349) do
+ActiveRecord::Schema.define(version: 2018_12_18_155730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.boolean "disabled"
     t.boolean "deactivated"
     t.datetime "published_at"
+    t.string "art_type"
+    t.text "disabled_message"
     t.index ["created_at"], name: "index_arts_on_created_at"
     t.index ["gallery_id"], name: "index_arts_on_gallery_id"
     t.index ["last_interaction_at"], name: "index_arts_on_last_interaction_at"
@@ -118,7 +120,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.uuid "art_id"
     t.string "art_type"
     t.text "text"
-    t.boolean "anonymous"
+    t.boolean "anonymous", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "interactions_count", default: 0
@@ -126,8 +128,11 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.text "censored_text"
     t.boolean "approved", default: false, null: false
     t.boolean "deleted", default: false
+    t.datetime "edited_at"
+    t.boolean "ignore_flagged", default: false, null: false
     t.index ["approved"], name: "index_comments_on_approved"
     t.index ["art_id", "art_type"], name: "index_comments_on_art_id_and_art_type"
+    t.index ["ignore_flagged"], name: "index_comments_on_ignore_flagged"
     t.index ["interactions_count"], name: "index_comments_on_interactions_count"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -184,7 +189,6 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.string "name"
     t.string "asset"
     t.string "fileable_type"
-    t.integer "fileable_id"
     t.integer "file_size"
     t.integer "position", default: 0
     t.string "attached_as"
@@ -193,15 +197,14 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.boolean "required", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid "fileable_id"
     t.index ["attached_as"], name: "index_fae_files_on_attached_as"
-    t.index ["fileable_type", "fileable_id"], name: "index_fae_files_on_fileable_type_and_fileable_id"
   end
 
   create_table "fae_images", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "asset"
     t.string "imageable_type"
-    t.integer "imageable_id"
     t.string "alt"
     t.string "caption"
     t.integer "position", default: 0
@@ -212,8 +215,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.boolean "required", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid "imageable_id"
     t.index ["attached_as"], name: "index_fae_images_on_attached_as"
-    t.index ["imageable_type", "imageable_id"], name: "index_fae_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "fae_options", id: :serial, force: :cascade do |t|
@@ -337,6 +340,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
     t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "expires_at"
+    t.index ["expires_at"], name: "index_gallery_blacklistings_on_expires_at"
     t.index ["gallery_id", "user_id"], name: "index_gallery_blacklistings_on_gallery_id_and_user_id"
     t.index ["gallery_id"], name: "index_gallery_blacklistings_on_gallery_id"
   end
@@ -348,7 +353,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_200349) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "user_name", null: false
+    t.string "user_name"
     t.string "crypted_password"
     t.string "password_salt"
     t.string "persistence_token"
