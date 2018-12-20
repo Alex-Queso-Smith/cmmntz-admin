@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input } from '../../components/FormComponents';
+import { Input, RadioButton } from '../components/FormComponents';
 
 class NewMemberContainer extends React.Component {
   state = {
@@ -19,11 +19,12 @@ class NewMemberContainer extends React.Component {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-
+debugger
     this.setState({ [name]: value })
   }
 
-  handleSubmit(){
+  handleSubmit(event){
+    event.preventDefault();
 
   }
 
@@ -71,25 +72,21 @@ class NewMemberContainer extends React.Component {
             content={this.state.passwordConfirmation}
             onChange={this.handleChange}
           />
-        <div className="row">
-          <h4>Role:</h4>
-          <select name="role" value={this.props.role} onChange={this.onChange}>
-            <option  value='' />
-            <option value="super_admin" className="filter-list-item">
-              Super Admin
-            </option>
-            <option value="admin" className="filter-list-item">
-              Admin
-            </option>
-            <option value="artist" className="filter-list-item">
-              Artist
-            </option>
-            <option value="moderator" className="filter-list-item">
-              Moderator
-            </option>
-          </select>
-        </div>
-        <button id="create-member-button" className="btn btn-sm btn-dark float-right">Create Member</button>
+          <div className="row">
+            <RadioButton
+              name="role"
+              label="Admin"
+              value="admin"
+              onChange={this.handleChange}
+            />
+            <RadioButton
+              name="role"
+              label="Artist"
+              value="artist"
+              onChange={this.handleChange}
+            />
+          </div>
+          <button type="Submit" id="create-member-button" className="btn btn-sm btn-dark float-right" onClick={this.handleSubmit}>Create Member</button>
         </form>
       </div>
     )
