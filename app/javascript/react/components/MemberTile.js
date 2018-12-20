@@ -2,17 +2,17 @@ import React from 'react';
 
 const MemberTile = (props) => {
   return(
-    <div className="cf-member-tile" key={props.id}>
-      <div>
+    <tr key={props.id}>
+      <td>
         {props.name}
-      </div>
-      <div>
-        {props.role}
-      </div>
-      <div>
+      </td>
+      <td>
         {props.email}
-      </div>
-    </div>
+      </td>
+      <td>
+        {props.role}
+      </td>
+    </tr>
   )
 }
 
