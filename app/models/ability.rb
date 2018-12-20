@@ -45,6 +45,7 @@ class Ability
     can :crud, Comment, { art: { gallery_id: customer.gallery_id } }
     can :crud, GalleryBlacklisting, { gallery_id: customer.gallery_id }
     can :crud, UserGalleryModerator, { gallery_id: customer.gallery_id }
+    can :crud, GalleryArtist, { gallery_id: customer.gallery_id }
   end
 
   def artist_permissions
