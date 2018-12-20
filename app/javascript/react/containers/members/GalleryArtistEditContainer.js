@@ -34,7 +34,7 @@ class GalleryArtistEditContainer extends React.Component {
     FetchWithPush(this, `/api/v1/gallery_artists/${this.props.match.params.id}.json`, '', 'PATCH', 'assignErrors', newGalleryArtist)
     .then(success => {
       if (!success.errors) {
-        window.location('/arts')
+        window.location = '/arts'
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
