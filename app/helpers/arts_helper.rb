@@ -4,7 +4,7 @@ module ArtsHelper
     if art.gallery_artist.customer
       art.gallery_artist.customer.name
     else
-      assign = link_to "Assign to member", "#assign_url"
+      assign = link_to "Assign to member", edit_gallery_artist_path(art.gallery_artist)
       "#{art.gallery_artist.artist_name}: #{assign}".html_safe
     end
   end
