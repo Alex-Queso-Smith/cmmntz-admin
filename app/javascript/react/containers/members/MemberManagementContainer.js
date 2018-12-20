@@ -7,7 +7,7 @@ import ModeratorsContainer from './ModeratorsContainer';
 
 class MemberManagementContainer extends React.Component {
   state = {
-    display: ""
+    display: "mods"
   }
 
   _isMounted = false
