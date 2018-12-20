@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :galleries, only: [:show, :update]
       resources :customers, only: [:index, :create, :edit, :update]
-      resources :gallery_artists, only: [:update]
+      resources :gallery_artists, only: [:show, :update]
       resources :arts, only: [:show] do
         resources :mass_manage_comments, only: [:create]
       end

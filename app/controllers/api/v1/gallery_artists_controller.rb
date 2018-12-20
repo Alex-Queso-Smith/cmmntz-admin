@@ -1,5 +1,8 @@
 class Api::V1::GalleryArtistsController < ApiController
   load_and_authorize_resource
+
+  def show
+  end
   
   def update
     if @gallery_artist.update(gallery_artist_params)
