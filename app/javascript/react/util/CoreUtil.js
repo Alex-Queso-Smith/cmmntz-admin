@@ -22,6 +22,8 @@ export const FetchWithPush = (object, path, push, method, errors, payload) => {
      } else {
        if (push != '') {
          object.props.history.push(push)
+       } else {
+         return body 
        }
      }
    })

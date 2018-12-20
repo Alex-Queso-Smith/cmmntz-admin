@@ -205,3 +205,12 @@ h4 {
 .border-1px-bot {
   border-bottom: 1px solid $grayline;
 }
+
+.custom-checkbox > [type="checkbox"]:checked + label:before {
+  background: #000 !important;
+  box-shadow: none;
+}
+
+.custom-checkbox > [type="checkbox"]:not(:checked) + label:before {
+  box-shadow: none;
+}

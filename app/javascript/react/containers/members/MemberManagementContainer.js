@@ -1,36 +1,16 @@
 import React from 'react';
 
-import { FetchDidMount } from '../../util/CoreUtil';
 import { MemberTabs } from '../../components/Tabs';
 import MembersContainer from './MembersContainer';
 import NewMemberContainer from './NewMemberContainer';
 
 class MemberManagementContainer extends React.Component {
   state = {
-    customers: [],
     display: ""
   }
 
   _isMounted = false
   handleTabClick = this.handleTabClick.bind(this);
-
-  componentDidMount(){
-    this._isMounted = true;
-
-    FetchDidMount(this, `/api/v1/customers.json`)
-    .then(customerData => {
-      if (this._isMounted) {
-        this.setState({
-          customers: customerData.customers
-        })
-      }
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
-
-  componentWillUnmount(){
-    this._isMounted = false;
-  }
 
   handleTabClick(event){
     const target = event.target;
