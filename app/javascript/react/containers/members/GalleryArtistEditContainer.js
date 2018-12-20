@@ -22,8 +22,7 @@ class GalleryArtistEditContainer extends React.Component {
     .then(
       FetchDidMount(this, `/api/v1/gallery_artists/${this.props.match.params.id}.json`)
       .then(galleryArtist => {
-        debugger
-        this.setState({ selectedMember: stuff  })
+        this.setState({ selectedMember: galleryArtist.customer_id  })
       })
     )
   }
