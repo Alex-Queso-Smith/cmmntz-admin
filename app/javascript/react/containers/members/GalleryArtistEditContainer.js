@@ -19,6 +19,13 @@ class GalleryArtistEditContainer extends React.Component {
         members: customerData.customers
       })
     })
+    .then(
+      FetchDidMount(this, `/api/v1/gallery_artists/${this.props.match.params.id}.json`)
+      .then(galleryArtist => {
+        debugger
+        this.setState({ selectedMember: stuff  })
+      })
+    )
   }
 
   handleChange(event){
