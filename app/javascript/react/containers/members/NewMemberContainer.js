@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Input, RadioButton } from '../../components/FormComponents';
+import { FetchWithPush } from '../../util/CoreUtil';
 
 class NewMemberContainer extends React.Component {
   state = {
@@ -9,22 +10,54 @@ class NewMemberContainer extends React.Component {
     email: "",
     password: "",
     passwordConfirmation: "",
-    role: ""
+    role: "",
+    newMemberErrors: {}
   }
 
   handleSubmit = this.handleSubmit.bind(this);
   handleChange = this.handleChange.bind(this);
+  handleClear = this.handleClear.bind(this);
 
   handleChange(event){
     const target = event.target;
     const name = target.name;
     const value = target.value;
-debugger
+
     this.setState({ [name]: value })
+  }
+
+  handleClear(){
+    this.setState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+      role: "",
+      newMemberErrors: {}
+    })
   }
 
   handleSubmit(event){
     event.preventDefault();
+
+    var newMember = new FormData();
+
+    var { firstName, lastName, email, role, password, passwordConfirmation } = this.state;
+
+    newMember.append("customer[first_name]", firstName);
+    newMember.append("customer[last_name]", lastName);
+    newMember.append("customer[email]", email);
+    newMember.append("customer[role]", role);
+    newMember.append("customer[password]", password);
+    newMember.append("customer[password_confirmation]", passwordConfirmation);
+
+    FetchWithPush(this, `/api/v1/customers.json`, '', 'POST', 'newMemberErrors', newMember)
+      .then(body => {
+        alert(`${body.message}`)
+        this.handleClear()
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 
@@ -77,16 +110,24 @@ debugger
               name="role"
               label="Admin"
               value="admin"
+              checked={ this.state.role === "admin" }
               onChange={this.handleChange}
+              className={"col-3"}
             />
             <RadioButton
               name="role"
               label="Artist"
               value="artist"
+              checked={ this.state.role ==="artist" }
               onChange={this.handleChange}
+              className={"col-3"}
             />
           </div>
-          <button type="Submit" id="create-member-button" className="btn btn-sm btn-dark float-right" onClick={this.handleSubmit}>Create Member</button>
+          <div className="row">
+            <div className="col-12">
+              <button type="Submit" id="create-member-button" className="btn btn-sm btn-dark float-right" onClick={this.handleSubmit}>Create Member</button>
+            </div>
+          </div>
         </form>
       </div>
     )

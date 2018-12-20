@@ -29,7 +29,7 @@ export const Input = props => {
 
 export const RadioButton = props => {
   return(
-    <label htmlFor={props.name} className="">
+    <label htmlFor={props.name} className={`custom-radio-button ${props.className}`}>
       <input checked={props.checked} onChange={props.onChange} type="radio" name={props.name} autoComplete="off" value={props.value} /> {props.label}
     </label>
   );
