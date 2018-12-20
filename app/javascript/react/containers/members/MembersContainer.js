@@ -47,6 +47,7 @@ class MembersContainer extends React.Component {
 
     return(
       <div id="cf-members-container">
+        <br/>
         <table className="table">
           <thead>
             <tr>

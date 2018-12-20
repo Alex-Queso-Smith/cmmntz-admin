@@ -214,3 +214,6 @@ h4 {
 .custom-checkbox > [type="checkbox"]:not(:checked) + label:before {
   box-shadow: none;
 }
+
+.table>thead>tr>th {
+  border-top:0;
