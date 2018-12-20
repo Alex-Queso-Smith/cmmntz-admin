@@ -22,7 +22,7 @@ export const Input = props => {
   return(
     <div className="form-group">
       <label htmlFor={props.name}>{props.label}</label>
-      <input className={`form-control margin-top-10px ${props.addClass}`} type={props.type} name={props.name} value={props.content} onChange={props.onChange}></input>
+      <input placeholder={props.placeholder} className={`form-control margin-top-10px ${props.addClass}`} type={props.type} name={props.name} value={props.content} onChange={props.onChange}></input>
     </div>
   );
 };

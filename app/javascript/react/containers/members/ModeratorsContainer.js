@@ -7,11 +7,15 @@ import { Input } from '../../components/FormComponents';
 class ModeratorsContainer extends React.Component {
   state = {
     moderators: [],
+    displayModInput: false,
+    newMod: ""
   }
 
   _isMounted = false
 
   handleModeratorLoad = this.handleModeratorLoad.bind(this);
+  handleChange = this.handleChange.bind(this);
+  handleAddMod = this.handleAddMod.bind(this);
 
   componentDidMount(){
     this._isMounted = true;
@@ -20,6 +24,12 @@ class ModeratorsContainer extends React.Component {
 
   componentWillUnmount(){
     this._isMounted = false;
+  }
+
+  handleChange(event){
+    event.preventDefault();
+
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   handleModeratorLoad() {
@@ -32,6 +42,10 @@ class ModeratorsContainer extends React.Component {
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleAddMod(event){
+
   }
 
   render() {
@@ -52,10 +66,32 @@ class ModeratorsContainer extends React.Component {
         )
       })
     }
+
+    var modInput;
+    if (this.state.displayModInput) {
+      modInput =
+      <div className="form-inline">
+        <Input
+          name="newMod"
+          placeholder="User Name"
+          addClass=''
+          type="text"
+          content={this.state.newMod}
+          onChange={this.handleChange}
+          />
+        <button className="btn btn-sm btn-dark">Add Moderator</button>
+        <br />
+        <button onClick={ () => { this.setState({ displayModInput: false }) } } className="btn btn-sm btn-dark">Cancel</button>
+      </div>
+    } else {
+      modInput =
+      <button onClick={ () => { this.setState({ displayModInput: true }) } } className="btn btn-sm btn-dark">Add Moderator</button>
+    }
+
     return(
       <div>
-        [ Fill In User Name]
-        <button className="btn btn-sm btn-dark">Add as Moderator</button>
+        <br />
+        {modInput}
         <br/>
         <table className="table">
           <thead>
