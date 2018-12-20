@@ -1,8 +1,9 @@
 class Api::V1::GalleryArtistsController < ApiController
-
+  load_and_authorize_resource
+  
   def update
     if @gallery_artist.update(gallery_artist_params)
-      render json: { message: 'updated succesfully' }
+      render json: { message: 'Gallery Artist Updated Succesfully!' }
     else
       render json: { errors: @gallery_artist.errors, status: :unproccessable_entity }
     end

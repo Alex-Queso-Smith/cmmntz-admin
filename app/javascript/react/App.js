@@ -16,7 +16,7 @@ class App extends React.Component {
           <Route path='/arts/:id' component={ArtsShowContainer} />
           <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
           <Route path='/members' component={MemberManagementContainer} />
-          <Route path='/gallery_artists/:id' component={GalleryArtistEditContainer} />
+          <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
         </Switch>
       </Router>
     )
