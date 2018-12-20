@@ -2,7 +2,6 @@ class Api::V1::GalleryArtistsController < ApiController
   load_and_authorize_resource
 
   def show
-    #code
   end
 
   def update
