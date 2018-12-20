@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input } from '../components/FormComponents';
+import { Input } from '../../components/FormComponents';
 
 class NewMemberContainer extends React.Component {
   state = {

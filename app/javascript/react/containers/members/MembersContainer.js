@@ -1,6 +1,6 @@
 import React from "react";
 
-import MemberTile from '../components/MemberTile';
+import MemberTile from '../../components/MemberTile';
 
 class MembersContainer extends React.Component {
   state = {
