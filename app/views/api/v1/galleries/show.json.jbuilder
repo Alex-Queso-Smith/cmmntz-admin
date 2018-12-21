@@ -15,5 +15,6 @@ json.gallery do
     json.guest_approval_needed @gallery.guest_approval_needed || false
     json.notify_on_new_comment @gallery.notify_on_new_comment || false
     json.notify_on_comment_approval_needed @gallery.notify_on_comment_approval_needed || false
+    json.hide_anon_and_guest @gallery.hide_anon_and_guest
   end
 end
