@@ -23,7 +23,7 @@ export const FetchWithPush = (object, path, push, method, errors, payload) => {
        if (push != '') {
          object.props.history.push(push)
        } else {
-         return body 
+         return body
        }
      }
    })
@@ -76,4 +76,22 @@ export const FetchIndividual = (object, path, method) => {
      }
    })
    .then(response => response.json())
+}
+
+export const CreateErrorElements = (errors, name) => {
+  if (errors) {
+    return errors.map((error) => {
+      return(
+        <p className="error-text" key={`${error}`}>{`${name} ${error}`}</p>
+      )
+    })
+  }
+}
+
+export const ErrorClassValidation = (error) => {
+  if (error) {
+    return "is-invalid"
+  } else {
+    "valid"
+  }
 }

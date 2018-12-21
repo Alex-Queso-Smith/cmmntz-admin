@@ -62,6 +62,7 @@ class NewMemberContainer extends React.Component {
   }
 
   render(){
+    
     return(
       <div id="cf-new-member-container">
         <form id="cf-new-member-form" className="form container-fluid" onSubmit={this.handleSubmit}>

@@ -61,7 +61,7 @@ class MembersContainer extends React.Component {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Edit</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
