@@ -9,6 +9,13 @@ class CommentFiltersContainer extends React.Component {
   state = {
     hideAnonAndGuest: this.props.sortOpts.hideAnonAndGuest
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if (this.props.sortOpts.hideAnonAndGuest != this.state.hideAnonAndGuest) {
+      this.setState({ hideAnonAndGuest: this.props.sortOpts.hideAnonAndGuest })
+    }
+  }
+
   render(){
 
     var sortButtons = SortButtons(this)
