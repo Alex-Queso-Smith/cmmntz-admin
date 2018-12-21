@@ -11,10 +11,11 @@ const LineItem = (props) => {
   )
 }
 
-const Tabs = (props) => {
+export const CommentTabs  = (props) => {
   const types = [
     ["Thread Comments", ""],
     ["Pending Comments", "pending"],
+    ["Flagged Comments", "flagged"],
     ["Deleted Comments", "deleted"]
   ]
 
@@ -39,5 +40,30 @@ const Tabs = (props) => {
   )
 }
 
+export const MemberTabs = (props) => {
+  const types = [
+    ["Members", ""],
+    ["Create New Member", "new"],
+    ["Moderators", "mods"]
+  ]
 
-export default Tabs;
+  var links = types.map(type => {
+    return(
+      <LineItem
+        key={type[1]}
+        value={type[1]}
+        title={type[0]}
+        display={props.display}
+        onClick={props.onClick}
+      />
+    )
+  })
+
+  return(
+    <div className="cf-manage-members-tabs">
+      <ul className="nav nav-tabs">
+        {links}
+      </ul>
+    </div>
+  )
+}

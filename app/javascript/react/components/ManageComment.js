@@ -1,5 +1,8 @@
 import React from 'react';
 
+import BanUser from './modals/BanUser';
+import {Checkbox} from './FormComponents';
+
 class ManageComment extends React.Component {
   render(){
     var { manage, text, userName, datePosted } = this.props;
@@ -8,6 +11,8 @@ class ManageComment extends React.Component {
     var buttonText = "Restore"
     if (manage === "pending") {
       buttonText = "Approve"
+    } else if (manage === "flagged") {
+      buttonText = "Ignore"
     }
 
     if (manage != "deleted") {
@@ -19,20 +24,42 @@ class ManageComment extends React.Component {
 
     if (manage != "") {
       manageButton =
-      <button className="btn btn-primary cf-manage-button" onClick={this.props.handleManageComment}>
+      <button className="btn btn-dark cf-manage-button" onClick={this.props.handleManageComment}>
         {buttonText}
       </button>
     }
 
+    var checkBox =
+    <Checkbox
+      name={this.props.id}
+      onChange={this.props.handleCheck}
+      checked={this.props.checked}
+    />
+
+  var userActions;
+  if (!this.props.userIsAdmin && !this.props.userIsMod) {
+    userActions =
+    <BanUser banAction={this.props.handleBanUser} />
+  } else {
+    if (this.props.userIsAdmin) {
+      userActions = "Admin"
+    } else {
+      userActions = "Mod"
+    }
+  }
     return(
       <div className="row cf-manage-comment margin-top-10px">
-        <div className="cf-manage-comment-left col-sm-3 col-md-2">
+        <div className="cf-manage-comment-left col-1 col-sm-1 col-md-1">
+          {checkBox}
+        </div>
+        <div className="cf-manage-comment-left col-5 col-sm-5 col-md-2">
           <h3>{userName}</h3>
-          <button className="btn btn-sm btn-danger" onClick={this.props.handleBanUser}>Ban</button>
+          {userActions}
           <br />
           <h4>{datePosted}</h4>
+          <br />
         </div>
-        <div className="cf-manage-comment-right col-sm-9 col-md-10">
+        <div className="cf-manage-comment-right col-6 col-sm-6 col-md-9">
           <div className="cf-manage-comment-text">
             {text}
           </div>

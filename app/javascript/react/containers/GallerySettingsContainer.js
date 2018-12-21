@@ -16,10 +16,12 @@ class GallerySettingsContainer extends React.Component {
       notFilterList: [],
       filterList: [],
       commentsFrom: "",
-      votesFrom: ""
+      votesFrom: "",
+      hideAnonAndGuest: false
     },
     censor: false,
     commentApprovalNeeded: false,
+    guestApprovalNeeded: false,
     notifyOnNewComment: false,
     notifyOnCommentApprovalNeeded: false,
     threadExpirationDays: "",
@@ -31,23 +33,26 @@ class GallerySettingsContainer extends React.Component {
   handleSortDirClick = this.handleSortDirClick.bind(this);
   handleChange = this.handleChange.bind(this);
   handleSubmit = this.handleSubmit.bind(this);
+  handleSortOptCheckChange = this.handleSortOptCheckChange.bind(this);
 
   componentDidMount(){
     FetchDidMount(this, `/api/v1/galleries/${this.props.match.params.id}.json`)
     .then(galleryData => {
 
       var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, notify_on_new_comment } = galleryData.gallery.settings
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
       var { id, name, comment_etiquette } = galleryData.gallery;
-      var censored = censor === "true" ? true : false;
-      var commentApprovalNeeded = comment_approval_needed === "true" ? true : false;
-      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" ? true : false;
-      var notifyOnNewComment = notify_on_new_comment === "true" ? true : false;
+      var censored = censor === "true" || censor === true ? true : false;
+      var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
+      var guestApprovalNeeded = guest_approval_needed === "true" || guest_approval_needed === true ? true : false;
+      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" || notify_on_comment_approval_needed === true ? true : false;
+      var notifyOnNewComment = notify_on_new_comment === "true" || notify_on_new_comment === true ? true : false;
 
       opts.sortDir = sort_dir
       opts.sortType = sort_type
       opts.commentsFrom = comments_from
       opts.votesFrom = votes_from
+      opts.hideAnonAndGuest = hide_anon_and_guest
       if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
       if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
 
@@ -59,11 +64,22 @@ class GallerySettingsContainer extends React.Component {
         galleryId: id,
         commentEtiquette: comment_etiquette,
         commentApprovalNeeded: commentApprovalNeeded,
+        guestApprovalNeeded: guestApprovalNeeded,
         notifyOnNewComment: notifyOnNewComment,
         notifyOnCommentApprovalNeeded: notifyOnCommentApprovalNeeded
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSortOptCheckChange(event) {
+    var target = event.target
+    var newOpts = this.state.sortOpts
+    newOpts[target.name] = target.checked
+
+    this.setState({
+      sortOpts: newOpts
+    })
   }
 
   handleChange(event){
@@ -106,15 +122,38 @@ class GallerySettingsContainer extends React.Component {
     const name = target.getAttribute('data-value');
     var opts = this.state.sortOpts
 
-    if (opts.filterList.includes(name)){
-      var newFilters = opts.filterList.filter(v => v != name)
-      opts.filterList = newFilters
-      opts.notFilterList.push(name)
-    } else if (opts.notFilterList.includes(name)) {
-      var newFilters = opts.notFilterList.filter(v => v != name)
-      opts.notFilterList = newFilters
+    const right = [
+      "dislike_percent",
+      "dislike_a_lot_percent",
+      "trash_percent",
+      "warn_percent",
+      "sad_percent",
+      "boring_percent",
+      "angry_percent"
+    ]
+
+    if (right.includes(name)) {
+      if (opts.notFilterList.includes(name)) {
+        var newFilters = opts.notFilterList.filter(v => v != name)
+        opts.notFilterList = newFilters
+        opts.filterList.push(name)
+      } else if (opts.filterList.includes(name)) {
+        var newFilters = opts.filterList.filter(v => v != name)
+        opts.filterList = newFilters
+      } else {
+        opts.notFilterList.push(name)
+      }
     } else {
-      opts.filterList.push(name)
+      if (opts.filterList.includes(name)){
+        var newFilters = opts.filterList.filter(v => v != name)
+        opts.filterList = newFilters
+        opts.notFilterList.push(name)
+      } else if (opts.notFilterList.includes(name)) {
+        var newFilters = opts.notFilterList.filter(v => v != name)
+        opts.notFilterList = newFilters
+      } else {
+        opts.filterList.push(name)
+      }
     }
 
     this.setState({ sortOpts: opts })
@@ -137,8 +176,8 @@ class GallerySettingsContainer extends React.Component {
       return str.replace(/^\s+|\s+$/g, '');
     }
 
-    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom } = this.state.sortOpts;
-    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
+    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
+    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[sort_dir]", sortDir);
@@ -151,8 +190,10 @@ class GallerySettingsContainer extends React.Component {
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
     gallery.append("gallery[comment_etiquette]", strip(commentEtiquette))
     gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
+    gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
     gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
     gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
+    gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
     FetchWithPush(this, `/api/v1/galleries/${this.props.match.params.id}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -161,7 +202,7 @@ class GallerySettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
+    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
@@ -175,6 +216,7 @@ class GallerySettingsContainer extends React.Component {
           handleSortDirClick={this.handleSortDirClick}
           handleFilterClick={this.handleFilterClick}
           handleFilterByClick={this.handleFilterByClick}
+          onChange={this.handleSortOptCheckChange}
         />
         <div className="row">
           <Checkbox
@@ -204,6 +246,12 @@ class GallerySettingsContainer extends React.Component {
         />
         <Checkbox
           onChange={this.handleChange}
+          name={"guestApprovalNeeded"}
+          label={"Approve Guest comments before displaying?"}
+          checked={guestApprovalNeeded}
+        />
+        <Checkbox
+          onChange={this.handleChange}
           name={"notifyOnCommentApprovalNeeded"}
           label={"Receive notification on comments needing approval?"}
           checked={notifyOnCommentApprovalNeeded}
@@ -224,7 +272,7 @@ class GallerySettingsContainer extends React.Component {
           addClass={"input-small"}
         />
         <div className="margin-top-10px text-center">
-          <button className="btn btn-med btn-primary" onClick={this.handleSubmit}>
+          <button className="btn btn-med btn-dark" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>

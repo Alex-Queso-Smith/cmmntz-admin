@@ -1,6 +1,13 @@
 class Art < ApplicationRecord
+
+  vstr 'settings', {
+    ignore_warning_checker: :bool
+  }
+
   belongs_to :gallery
   delegate :checker_settings, :default_art_thread_expiration_days, to: :gallery
+
+  belongs_to :gallery_artist, optional: true
 
   has_many :art_topics
   has_many :topics, through: :art_topics
@@ -9,6 +16,12 @@ class Art < ApplicationRecord
   has_many :pending_comments, -> { where(approved: false, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
   has_many :deleted_comments, -> { where(deleted: true) }, class_name: "Comment", foreign_key: "art_id"
   has_many :approved_comments, -> { where(approved: true, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
+  has_many :flagged_comments, -> {
+    joins("left join votes on votes.comment_id = comments.id AND votes.vote_type = 'warn' ")
+    .where(ignore_flagged: false, deleted: false )
+    .group("comments.id")
+    .having("COUNT(votes.id) > 0")
+  }, class_name: "Comment", foreign_key: "art_id"
 
   def status
     deactivated? ? "Deactivated" : is_disabled? ? "Disabled" : "Active"
@@ -38,6 +51,8 @@ class Art < ApplicationRecord
       cs = pending_comments
     elsif display_mode == "deleted"
       cs = deleted_comments
+    elsif display_mode == "flagged"
+      cs = flagged_comments
     else
       cs = approved_comments
     end

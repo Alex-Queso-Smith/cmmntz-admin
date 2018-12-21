@@ -16,6 +16,7 @@ class Ability
     default_permissions # applies to all logged in customers
 
     super_admin_permissions if current_customer.role == "super_admin"
+    admin_permissions if current_customer.role == "admin"
 
     artist_permissions if current_customer.role == "artist"
 
@@ -34,16 +35,25 @@ class Ability
   end
 
   def super_admin_permissions
+    admin_permissions # gets all admin permissions
+  end
+
+  def admin_permissions
     can :crud, Gallery, { id: customer.gallery_id }
     can :crud, Customer, { gallery_id: customer.gallery_id }
-    can :crud, Art, { gallery_id: customer.gallery_id }
+    can [:crud, :mass_manage_comments], Art, { gallery_id: customer.gallery_id }
     can :crud, Comment, { art: { gallery_id: customer.gallery_id } }
     can :crud, GalleryBlacklisting, { gallery_id: customer.gallery_id }
+    can :crud, UserGalleryModerator, { gallery_id: customer.gallery_id }
+    can :crud, GalleryArtist, { gallery_id: customer.gallery_id }
   end
 
   def artist_permissions
     can :read, Gallery, { id: customer.gallery_id }
     can :read, Art, { gallery_id: customer.gallery_id }
+    can [:crud, :mass_manage_comments], Art, { gallery_artist_id: customer.gallery_artist_ids }
+    can [:crud], Comment, {art_id: customer.gallery_artists.map(&:art_ids).flatten}
+    can :crud, GalleryBlacklisting, { gallery_id: customer.gallery_id }
   end
 
 end

@@ -22,15 +22,15 @@ export const Input = props => {
   return(
     <div className="form-group">
       <label htmlFor={props.name}>{props.label}</label>
-      <input className={`form-control margin-top-10px ${props.addClass}`} type={props.type} name={props.name} value={props.content} onChange={props.onChange}></input>
+      <input placeholder={props.placeholder} className={`form-control margin-top-10px ${props.addClass}`} type={props.type} name={props.name} value={props.content} onChange={props.onChange}></input>
     </div>
   );
 };
 
 export const RadioButton = props => {
   return(
-    <label htmlFor={props.id} className="">
-      <input onChange={props.onChange} type="radio" name={props.name} id={props.id} autoComplete="off" value={props.value} /> {props.label}
+    <label htmlFor={props.name} className={`custom-radio-button ${props.className}`}>
+      <input checked={props.checked} onChange={props.onChange} type="radio" name={props.name} autoComplete="off" value={props.value} /> {props.label}
     </label>
   );
 };

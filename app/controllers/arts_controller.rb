@@ -27,6 +27,6 @@ class ArtsController < ApplicationController
   private
 
   def art_params
-    params.require(:art).permit(:disabled, :deactivated)
+    params.require(:art).permit(:disabled, :deactivated, :disabled_message, :ignore_warning_checker)
   end
 end

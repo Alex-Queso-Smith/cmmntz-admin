@@ -7,14 +7,21 @@ Rails.application.routes.draw do
   resources :signups, only: [:new, :create]
   resources :comments, only: [:update]
   resources :gallery_blacklistings, only: [:index]
+  resources :gallery_artists, only: [:edit]
 
   namespace :api do
     namespace :v1 do
       resources :galleries, only: [:show, :update]
-      resources :arts, only: [:show]
+      resources :customers, only: [:index, :create, :edit, :update]
+      resources :gallery_artists, only: [:show, :update]
+      resources :arts, only: [:show] do
+        resources :mass_manage_comments, only: [:create]
+      end
       resources :comments, only: [:update]
       resources :gallery_blacklistings, only: [:index, :create]
       resources :gallery_unblacklistings, only: [:create]
+      resources :user_gallery_moderators, only: [:index, :create]
+      resources :remove_user_gallery_moderators, only: [:create]
     end
   end
 

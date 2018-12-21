@@ -7,7 +7,8 @@ class Api::V1::GalleryBlacklistingsController < ApiController
 
   def create
     get_user
-    current_gallery.blacklisted_users << @user
+    dur = params[:dur] || ""
+    current_gallery.gallery_blacklistings.create(user: @user, dur: dur)
     render json: { message: "Success" }
   end
 

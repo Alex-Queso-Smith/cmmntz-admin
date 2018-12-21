@@ -2,7 +2,9 @@
   %thead
     %tr
       %th ID
+      %th Type
       %th URL
+      %th Artist
       %th Manage Comments
       %th Status
       %th Published At
@@ -16,7 +18,9 @@
     - @arts.each do |art|
       %tr
         %td= art.id
+        %td= art.art_type
         %td= link_to "http://#{art.url}"  , "http://#{art.url}", target: "_blank"
+        %td= gallery_artist_name(art)
         %td= link_to "Comments", art_path(art.id)
         %td= art.status
         %td= display_date art.published_at

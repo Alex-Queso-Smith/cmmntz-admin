@@ -10,13 +10,18 @@ class Gallery < ApplicationRecord
     censor: :bool,
     default_art_thread_expiration_days: :integer,
     comment_approval_needed: :bool,
+    guest_approval_needed: :bool,
     notify_on_comment_approval_needed: :bool,
-    notify_on_new_comment: :bool
+    notify_on_new_comment: :bool,
+    hide_anon_and_guest: :bool
   }
 
   has_many :arts
   has_many :gallery_blacklistings
   has_many :blacklisted_users, through: :gallery_blacklistings, source: :user
+
+  has_many :user_gallery_moderators
+  has_many :gallery_moderators, through: :user_gallery_moderators, source: :user
 
   validates :name, presence: true
   validates :default_art_thread_expiration_days, numericality: { greater_than_or_equal_to: 0 }, if: Proc.new { |g| !g.default_art_thread_expiration_days.blank? }

@@ -12,7 +12,9 @@ json.gallery do
     json.censor @gallery.censor || false
     json.thread_expiration_days @gallery.default_art_thread_expiration_days || ""
     json.comment_approval_needed @gallery.comment_approval_needed || false
+    json.guest_approval_needed @gallery.guest_approval_needed || false
     json.notify_on_new_comment @gallery.notify_on_new_comment || false
     json.notify_on_comment_approval_needed @gallery.notify_on_comment_approval_needed || false
+    json.hide_anon_and_guest @gallery.hide_anon_and_guest
   end
 end
