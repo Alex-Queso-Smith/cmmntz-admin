@@ -12,7 +12,8 @@ class Gallery < ApplicationRecord
     comment_approval_needed: :bool,
     guest_approval_needed: :bool,
     notify_on_comment_approval_needed: :bool,
-    notify_on_new_comment: :bool
+    notify_on_new_comment: :bool,
+    hide_anon_and_guest: :bool
   }
 
   has_many :arts

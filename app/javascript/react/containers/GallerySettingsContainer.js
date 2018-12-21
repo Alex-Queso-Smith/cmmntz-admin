@@ -16,7 +16,8 @@ class GallerySettingsContainer extends React.Component {
       notFilterList: [],
       filterList: [],
       commentsFrom: "",
-      votesFrom: ""
+      votesFrom: "",
+      hideAnonAndGuest: false
     },
     censor: false,
     commentApprovalNeeded: false,
@@ -32,13 +33,14 @@ class GallerySettingsContainer extends React.Component {
   handleSortDirClick = this.handleSortDirClick.bind(this);
   handleChange = this.handleChange.bind(this);
   handleSubmit = this.handleSubmit.bind(this);
+  handleSortOptCheckChange = this.handleSortOptCheckChange.bind(this);
 
   componentDidMount(){
     FetchDidMount(this, `/api/v1/galleries/${this.props.match.params.id}.json`)
     .then(galleryData => {
 
       var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment } = galleryData.gallery.settings
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
       var { id, name, comment_etiquette } = galleryData.gallery;
       var censored = censor === "true" || censor === true ? true : false;
       var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
@@ -50,6 +52,7 @@ class GallerySettingsContainer extends React.Component {
       opts.sortType = sort_type
       opts.commentsFrom = comments_from
       opts.votesFrom = votes_from
+      opts.hideAnonAndGuest = hide_anon_and_guest
       if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
       if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
 
@@ -67,6 +70,16 @@ class GallerySettingsContainer extends React.Component {
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSortOptCheckChange(event) {
+    var target = event.target
+    var newOpts = this.state.sortOpts
+    newOpts[target.name] = target.checked
+
+    this.setState({
+      sortOpts: newOpts
+    })
   }
 
   handleChange(event){
@@ -163,7 +176,7 @@ class GallerySettingsContainer extends React.Component {
       return str.replace(/^\s+|\s+$/g, '');
     }
 
-    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom } = this.state.sortOpts;
+    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
     var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
@@ -180,6 +193,7 @@ class GallerySettingsContainer extends React.Component {
     gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
     gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
     gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
+    gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
     FetchWithPush(this, `/api/v1/galleries/${this.props.match.params.id}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -202,6 +216,7 @@ class GallerySettingsContainer extends React.Component {
           handleSortDirClick={this.handleSortDirClick}
           handleFilterClick={this.handleFilterClick}
           handleFilterByClick={this.handleFilterByClick}
+          onChange={this.handleSortOptCheckChange}
         />
         <div className="row">
           <Checkbox

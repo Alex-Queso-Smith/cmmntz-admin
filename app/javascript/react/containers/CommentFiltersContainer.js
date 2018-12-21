@@ -1,10 +1,14 @@
 import React from 'react'
 
+import { Checkbox } from '../components/FormComponents';
 import { SortDir, SortButton } from '../components/SortSelect'
 import { ImageSelector } from '../util/VoteUtil';
 import { SortButtons, FilterButtonsRowOne, FilterButtonsRowTwo, FilterCommentsBy, FilterVotesBy } from '../util/FilterUtil'
 
 class CommentFiltersContainer extends React.Component {
+  state = {
+    hideAnonAndGuest: this.props.sortOpts.hideAnonAndGuest
+  }
   render(){
 
     var sortButtons = SortButtons(this)
@@ -32,6 +36,16 @@ class CommentFiltersContainer extends React.Component {
           {filterButtonsRowTwo}
         </div>
         <br/>
+
+        <div className="row checkbox-row">
+          <Checkbox
+            className="col-12"
+            name={"hideAnonAndGuest"}
+            checked={this.state.hideAnonAndGuest}
+            label="Hide Anonymous and Guest Comments"
+            onChange={this.props.onChange}
+          />
+        </div>
         <div className="row">
           <h4>Show only comments from:</h4>
         </div>

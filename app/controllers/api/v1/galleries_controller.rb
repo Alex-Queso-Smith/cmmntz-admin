@@ -31,7 +31,8 @@ class Api::V1::GalleriesController < ApiController
         :guest_approval_needed,
         :notify_on_comment_approval_needed,
         :notify_on_new_comment,
-        :default_art_thread_expiration_days
+        :default_art_thread_expiration_days,
+        :hide_anon_and_guest
       )
   end
 end
