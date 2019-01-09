@@ -5,34 +5,23 @@ import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
 class CurrentUsersContainer extends React.Component {
   state = {
     users: [],
-    search: "",
-    searchOrder: "asc"
+    search: "created_at",
+    searchOrder: "desc"
   }
 
   handleChange = this.handleChange.bind(this);
   updateSearch = this.updateSearch.bind(this);
+  handleSearch = this.handleSearch.bind(this);
 
   componentDidMount(){
-
-    var search = new FormData();
-    search.append("search[sort]", 'created_at')
-    search.append("search[sort_dir]", 'desc')
-
-    FetchWithUpdate(this, `/api/v1/user_searches.json`, 'POST', search)
-    .then(userData => {
-      this.setState({
-        users: userData.users
-      })
-    })
+    this.handleSearch()
   }
 
   handleChange(event){
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  updateSearch(event){
-    this.handleChange(event);
-
+  handleSearch(){
     var search = new FormData();
 
     search.append("search[sort]", this.state.search)
@@ -44,6 +33,13 @@ class CurrentUsersContainer extends React.Component {
         users: userData.users
       })
     })
+  }
+
+  updateSearch(event){
+    this.handleChange(event);
+    setTimeout(function() { 
+       this.handleSearch();
+     }.bind(this), 20)
   }
 
   render(){
