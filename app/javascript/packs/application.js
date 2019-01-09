@@ -73,4 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
       render(<App />, memberManagement)
     }
   }
+
+  let usersContainer = document.getElementById('cf-users-container')
+
+  if (usersContainer) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, usersContainer)
+      } catch (e) {
+        render(<RedBox error={e} />, usersContainer)
+      }
+    }
+    else {
+      render(<App />, usersContainer)
+    }
+  }
+
+
 })

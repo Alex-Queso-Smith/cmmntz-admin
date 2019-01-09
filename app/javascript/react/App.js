@@ -6,6 +6,7 @@ import ArtsShowContainer from './containers/ArtsShowContainer';
 import BannedUsersContainer from './containers/BannedUsersContainer';
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
 import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
+import CurrentUsersContainer from './containers/CurrentUsersContainer';
 
 class App extends React.Component {
   render(){
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
           <Route path='/members' component={MemberManagementContainer} />
           <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
+          <Route path='/users' component={CurrentUsersContainer} />
         </Switch>
       </Router>
     )
