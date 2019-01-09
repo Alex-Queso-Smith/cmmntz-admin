@@ -11,6 +11,13 @@ class User < ApplicationRecord
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
+  def self.sort_order(search)
+    sort_dir = search[:sort_dir] ? sort_dir : "desc"
+    sort_type = search[:sort] ? sort_type : "created_at"
+
+    return order("#{sort_type} #{sort_dir}")
+  end
+
   def guest?
     user_name.blank? && email.blank?
   end
