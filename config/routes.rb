@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resources :gallery_unblacklistings, only: [:create]
       resources :user_gallery_moderators, only: [:index, :create]
       resources :remove_user_gallery_moderators, only: [:create]
-      resources :users, only: [:index]
+      resources :user_searches, only: [:create]
     end
   end
 
