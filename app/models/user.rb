@@ -7,6 +7,10 @@ class User < ApplicationRecord
   # define galleries where the user has moderator status
   has_many :user_gallery_moderators
 
+  scope :not_guest, -> {
+    where("users.user_name IS NOT NULL AND users.user_name != '' ")
+  }
+
   def guest?
     user_name.blank? && email.blank?
   end
@@ -17,6 +21,12 @@ class User < ApplicationRecord
 
   def user_gallery_moderator_for?(gallery_id)
     user_gallery_moderators.for_gallery(gallery_id).size > 0
+  end
+
+  # re geo coordinates
+  def geo_coordinates
+    return "" if latitude.blank? || longitude.blank?
+    "#{latitude}, #{longitude}"
   end
 
   ### re gender

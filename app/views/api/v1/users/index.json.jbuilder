@@ -3,7 +3,7 @@ json.users @users do |user|
   json.user_name user.user_name
   json.email user.email
   json.registered_at display_date user.created_at
-  json.geo_coordinates "#{user.latitude}, #{user.longitude}"
+  json.geo_coordinates user.geo_coordinates
   json.age_range user.age_range_display
   json.gender user.gender_display
   json.login_count user.login_count
