@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:update]
   resources :gallery_blacklistings, only: [:index]
   resources :gallery_artists, only: [:edit]
+  resources :users, only: [:index]
 
   namespace :api do
     namespace :v1 do
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
       resources :gallery_unblacklistings, only: [:create]
       resources :user_gallery_moderators, only: [:index, :create]
       resources :remove_user_gallery_moderators, only: [:create]
+      resources :users, only: [:index]
     end
   end
 
