@@ -33,7 +33,7 @@ class CurrentUsersContainer extends React.Component {
     search.append("search[sort]", this.state.search)
     search.append("search[sort_dir]", this.state.searchOrder)
 
-    FetchWithUpdate(this, `/api/v1/users.json`, 'GET', search)
+    FetchWithUpdate(this, `/api/v1/users.json`, 'POST', search)
     .then(users => {
       this.setState({
         users: userData.users
