@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FetchDidMount } from '../util/CoreUtil';
+import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
 
 class CurrentUsersContainer extends React.Component {
   state = {
