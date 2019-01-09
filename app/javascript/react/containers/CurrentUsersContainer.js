@@ -37,7 +37,7 @@ class CurrentUsersContainer extends React.Component {
 
   updateSearch(event){
     this.handleChange(event);
-    setTimeout(function() { 
+    setTimeout(function() {
        this.handleSearch();
      }.bind(this), 20)
   }
@@ -53,6 +53,8 @@ class CurrentUsersContainer extends React.Component {
             <td className="table-user-name">{user.user_name}</td>
             <td>{user.email}</td>
             <td>{user.registered_at}</td>
+            <td>{user.article_views}</td>
+            <td>{user.tutorial_opened}</td>
             <td>{user.geo_coordinates}</td>
             <td>{user.age_range}</td>
             <td>{user.gender}</td>
@@ -100,6 +102,8 @@ class CurrentUsersContainer extends React.Component {
               <th>User Name</th>
               <th>Email</th>
               <th>Registered On</th>
+              <th>Articles Viewed</th>
+              <th>Tutorial Opened</th>
               <th>Geo Coordinates</th>
               <th>Age Range</th>
               <th>Gender</th>

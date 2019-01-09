@@ -7,12 +7,15 @@ class User < ApplicationRecord
   # define galleries where the user has moderator status
   has_many :user_gallery_moderators
 
+  has_many :user_article_views
+  has_many :user_video_clicks
+
   scope :not_guest, -> {
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
   def self.search(filters)
-    scope = where({}).not_guest
+    scope = where({}).not_guest.includes(:user_article_views, :user_video_clicks)
     scope = self.sort_order(scope, filters)
     scope
   end

@@ -3,6 +3,8 @@ json.users @users do |user|
   json.user_name user.user_name
   json.email user.email
   json.registered_at display_date user.created_at
+  json.article_views user.user_article_views.size
+  json.tutorial_opened user.user_video_clicks.size > 0 ? "Y" : "N"
   json.geo_coordinates user.geo_coordinates
   json.age_range user.age_range_display
   json.gender user.gender_display
