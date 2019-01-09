@@ -1,4 +1,5 @@
 json.users @users do |user|
+  user.id user.id
   json.user_name user.user_name
   json.email user.email
   json.registered_at display_date user.created_at
