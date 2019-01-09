@@ -5,10 +5,12 @@ import { FetchDidMount } from '../util/CoreUtil';
 class CurrentUsersContainer extends React.Component {
   state = {
     users: [],
-    search: ""
+    search: "",
+    searchOrder: "asc"
   }
 
   handleChange = this.handleChange.bind(this);
+  updateSearch = this.updateSearch.bind(this);
 
   componentDidMount(){
     FetchDidMount(this, `/api/v1/users.json`)
@@ -21,6 +23,22 @@ class CurrentUsersContainer extends React.Component {
 
   handleChange(event){
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  updateSearch(event){
+    this.handleChange(event);
+
+    var search = new FormData();
+
+    search.append("search[sort]", this.state.search)
+    search.append("search[sort_dir]", this.state.searchOrder)
+
+    FetchWithUpdate(this, `/api/v1/users.json`, 'GET', search)
+    .then(users => {
+      this.setState({
+        users: userData.users
+      })
+    })
   }
 
   render(){
@@ -54,9 +72,24 @@ class CurrentUsersContainer extends React.Component {
 
         <div className="row search-options">
           <div className="col-6">
-            
+            <div className="float-right">
+              <select name="search" value={this.state.search} onChange={this.updateSearch}>
+                <option value=""></option>
+                <option value="user_name">User Name</option>
+                <option value="created_at">Registered At</option>
+                <option value="login_count">Login Count</option>
+                <option value="last_request_at">Last Action</option>
+                <option value="current_login_at">Current Login At</option>
+              </select>
+            </div>
           </div>
           <div className="col-6">
+            <div className="float-left">
+              <select name="searchOrder" value={this.state.searchOrder} onChange={this.updateSearch}>
+                <option value="asc">Asc</option>
+                <option value="desc">Desc</option>
+              </select>
+            </div>
           </div>
         </div>
 
