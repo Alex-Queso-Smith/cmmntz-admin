@@ -13,10 +13,15 @@ class CurrentUsersContainer extends React.Component {
   updateSearch = this.updateSearch.bind(this);
 
   componentDidMount(){
-    FetchDidMount(this, `/api/v1/users.json`)
-    .then(usersData => {
+
+    var search = new FormData();
+    search.append("search[sort]", 'created_at')
+    search.append("search[sort_dir]", 'desc')
+
+    FetchWithUpdate(this, `/api/v1/user_searches.json`, 'POST', search)
+    .then(userData => {
       this.setState({
-        users: usersData.users
+        users: userData.users
       })
     })
   }
@@ -33,8 +38,8 @@ class CurrentUsersContainer extends React.Component {
     search.append("search[sort]", this.state.search)
     search.append("search[sort_dir]", this.state.searchOrder)
 
-    FetchWithUpdate(this, `/api/v1/users.json`, 'GET', search)
-    .then(users => {
+    FetchWithUpdate(this, `/api/v1/user_searches.json`, 'POST', search)
+    .then(userData => {
       this.setState({
         users: userData.users
       })
