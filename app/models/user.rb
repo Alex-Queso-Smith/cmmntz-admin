@@ -30,6 +30,8 @@ class User < ApplicationRecord
   # display age_range
   def age_range_display
     return "" if age_range.nil?
+    return "13-19" if age_range == 15
+    return "75+" if age_range == 75
 
     "#{age_range}-#{age_range + 4}"
   end
