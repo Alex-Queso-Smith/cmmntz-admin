@@ -11,11 +11,17 @@ class User < ApplicationRecord
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
-  def self.sort_order(search)
-    sort_dir = search[:sort_dir] ? sort_dir : "desc"
-    sort_type = search[:sort] ? sort_type : "created_at"
+  def self.search(filters)
+    scope = where({}).not_guest
+    scope = self.sort_order(scope, filters)
+    scope
+  end
 
-    return order("#{sort_type} #{sort_dir}")
+  def self.sort_order(scope, search)
+    sort_dir = search[:sort_dir] ? search[:sort_dir] : "desc"
+    sort_type = search[:sort] ? search[:sort] : "created_at"
+    scope = scope.order("#{sort_type} #{sort_dir}")
+    scope
   end
 
   def guest?
