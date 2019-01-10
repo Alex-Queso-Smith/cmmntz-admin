@@ -50,6 +50,7 @@ class CurrentUsersContainer extends React.Component {
 
         return(
           <tr key={user.id}>
+            <td className="table-user-name">{user.id}</td>
             <td className="table-user-name">{user.user_name}</td>
             <td>{user.email}</td>
             <td>{user.registered_at}</td>
@@ -99,6 +100,7 @@ class CurrentUsersContainer extends React.Component {
         <table className="table">
           <thead>
             <tr>
+              <th>ID</th>
               <th>User Name</th>
               <th>Email</th>
               <th>Registered On</th>
