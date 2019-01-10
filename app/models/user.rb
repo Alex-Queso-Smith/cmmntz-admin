@@ -15,7 +15,8 @@ class User < ApplicationRecord
   }
 
   def self.search(filters)
-    scope = where({}).not_guest.includes(:user_article_views, :user_video_clicks)
+    scope = where({})#.not_guest
+    scope = scope.includes(:user_article_views, :user_video_clicks)
     scope = self.sort_order(scope, filters)
     scope
   end
@@ -29,6 +30,14 @@ class User < ApplicationRecord
 
   def guest?
     user_name.blank? && email.blank?
+  end
+
+  def display_user_name
+    guest? ? "guest" : user_name
+  end
+
+  def display_email
+    guest? ? "guest" : email
   end
 
   def customer_for?(gallery_id)

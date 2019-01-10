@@ -1,7 +1,7 @@
 json.users @users do |user|
   json.id user.id
-  json.user_name user.user_name
-  json.email user.email
+  json.user_name user.display_user_name
+  json.email user.display_email
   json.registered_at display_date user.created_at
   json.article_views user.user_article_views.size
   json.tutorial_opened user.user_video_clicks.size > 0 ? "Y" : "N"
