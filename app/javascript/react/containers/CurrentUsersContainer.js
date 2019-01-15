@@ -100,7 +100,6 @@ class CurrentUsersContainer extends React.Component {
                 <option value="created_at">Registered At</option>
                 <option value="login_count">Login Count</option>
                 <option value="last_request_at">Last Action</option>
-                <option value="current_login_at">Current Login At</option>
               </select>
             </div>
           </div>
