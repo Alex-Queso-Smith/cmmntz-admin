@@ -62,18 +62,18 @@ class CurrentUsersContainer extends React.Component {
             <td>{user.votes_count}</td>
             <td>
               C: {user.comments_count}
-              <br/><br/>
+              <br/>
               R: {user.repies_count}
             </td>
             <td>
               F: {user.friends_count}
-              <br/><br/>
+              <br/>
               B: {user.blocks_count}
             </td>
             <td>{user.anons_count}</td>
             <td>
               F: {user.feedbacks_count}
-              <br/><br/>
+              <br/>
               B: {user.bugs_count}
             </td>
             <td>{user.custom_settings}</td>
@@ -118,17 +118,29 @@ class CurrentUsersContainer extends React.Component {
             <tr>
               <th className="table-user-name">User Name</th>
               <th>Email</th>
-              <th># Votes</th>
-              <th># Comments | # Replies</th>
-              <th># Friends | # Blocks</th>
-              <th># Anons</th>
-              <th># Feedbacks | # Bugs</th>
+              <th>Votes</th>
+              <th>
+                Comments
+                <br/>
+                Replies
+              </th>
+              <th>
+                Friends
+                <br/>
+                Blocks
+              </th>
+              <th>Anons</th>
+              <th>
+                Feedbacks
+                <br/>
+                Bugs
+              </th>
               <th>Custom Settings?</th>
               <th>Tutorial Opened</th>
               <th>Articles Viewed</th>
               <th>Reg @</th>
               <th>Last Action At</th>
-              <th># Logins</th>
+              <th>Logins</th>
               <th>Current Login Ip</th>
             </tr>
           </thead>
