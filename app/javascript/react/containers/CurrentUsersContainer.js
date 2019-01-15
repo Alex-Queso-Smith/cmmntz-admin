@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
+import UserTile from '../components/users/UserTile';
 
 class CurrentUsersContainer extends React.Component {
   state = {
@@ -48,24 +49,40 @@ class CurrentUsersContainer extends React.Component {
     if (this.state.users) {
       allUsers = this.state.users.map(user => {
 
+        var userEmail;
+        if (user.email) {
+          userEmail =
+          <a href={`mailto:${user.email}`}>{user.email}</a>
+        }
+
         return(
           <tr key={user.id}>
-            <td className="table-user-name">{user.id}</td>
-            <td className="table-user-name">{user.user_name}</td>
-            <td>{user.email}</td>
-            <td>{user.registered_at}</td>
-            <td>{user.article_views}</td>
+            <UserTile user={user} />
+            <td>{userEmail}</td>
+            <td>{user.votes_count}</td>
+            <td>
+              C: {user.comments_count}
+              <br/><br/>
+              R: {user.repies_count}
+            </td>
+            <td>
+              F: {user.friends_count}
+              <br/><br/>
+              B: {user.blocks_count}
+            </td>
+            <td>{user.anons_count}</td>
+            <td>
+              F: {user.feedbacks_count}
+              <br/><br/>
+              B: {user.bugs_count}
+            </td>
+            <td>{user.custom_settings}</td>
             <td>{user.tutorial_opened}</td>
-            <td>{user.geo_coordinates}</td>
-            <td>{user.age_range}</td>
-            <td>{user.gender}</td>
-            <td>{user.login_count}</td>
-            <td>{user.failed_login_count}</td>
+            <td>{user.article_views}</td>
+            <td>{user.registered_at}</td>
             <td>{user.last_action_at}</td>
-            <td>{user.current_login_at}</td>
+            <td>{user.login_count}</td>
             <td>{user.current_login_ip}</td>
-            <td>{user.last_login_at}</td>
-            <td>{user.last_login_ip}</td>
           </tr>
         )
       })
@@ -100,22 +117,20 @@ class CurrentUsersContainer extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>User Name</th>
+              <th className="table-user-name">User Name</th>
               <th>Email</th>
-              <th>Registered On</th>
-              <th>Articles Viewed</th>
+              <th># Votes</th>
+              <th># Comments | # Replies</th>
+              <th># Friends | # Blocks</th>
+              <th># Anons</th>
+              <th># Feedbacks | # Bugs</th>
+              <th>Custom Settings?</th>
               <th>Tutorial Opened</th>
-              <th>Geo Coordinates</th>
-              <th>Age Range</th>
-              <th>Gender</th>
-              <th>Login Count</th>
-              <th>Failed Login Count</th>
+              <th>Articles Viewed</th>
+              <th>Reg @</th>
               <th>Last Action At</th>
-              <th>Current Login At</th>
+              <th># Logins</th>
               <th>Current Login Ip</th>
-              <th>Last Login At</th>
-              <th>Last Login Ip</th>
             </tr>
           </thead>
           <tbody>

@@ -2,6 +2,22 @@ class User < ApplicationRecord
   GENDERS = [0, 1, 2]
   DISPLAY_GENDERS = ["female", "other", "male"]
 
+  # general settings v-attrs
+  vstr 'settings', {
+    color_theme: :string,
+    font: :string,
+    comments_from: :string,
+    filter_list: :array,
+    not_filter_list: :array,
+    sort_dir: :string,
+    sort_type: :string,
+    votes_from: :string,
+    censor: :string,
+    show_censored_comments: :bool,
+    hide_anon_and_guest: :bool,
+    settings_updated: :bool
+  }
+
   has_many :gallery_blacklistings
 
   # define galleries where the user has moderator status
@@ -10,13 +26,36 @@ class User < ApplicationRecord
   has_many :user_article_views
   has_many :user_video_clicks
 
+  # define  users that the user is following
+  has_many :followings, foreign_key: "follower_id"
+  has_many :followed_users, through: :followings, source: :following
+
+  # define users that are following the users
+  has_many :followers, class_name: 'Following', foreign_key: "following_id"
+  has_many :follower_users, through: :followers, source: :follower
+
+  # define  users that the user is blocking
+  has_many :blockings, foreign_key: "blocker_id"
+  has_many :blocked_users, through: :blockings, source: :blocking
+
+  # define users that are blocking the users
+  has_many :blockers, class_name: 'Blocking', foreign_key: "blocking_id"
+  has_many :blocker_users, through: :blockers, source: :blocker
+
+  has_many :user_feedbacks
+
+  has_many :votes
+  has_many :comments
+
+
+
   scope :not_guest, -> {
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
   def self.search(filters)
-    scope = where({})#.not_guest
-    scope = scope.includes(:user_article_views, :user_video_clicks)
+    scope = where({}).not_guest
+    scope = scope.includes(:user_article_views, :user_video_clicks, :followings, :blockings, :user_feedbacks, :votes, :comments )
     scope = self.sort_order(scope, filters)
     scope
   end
