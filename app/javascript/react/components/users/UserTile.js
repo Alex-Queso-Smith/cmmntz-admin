@@ -49,7 +49,7 @@ class UserTile extends React.Component {
         {idLink}
         <br/>
         {idTile}
-        <br/><br/>
+        <br/>
         {demLink}
         <br/>
         {demTile}
