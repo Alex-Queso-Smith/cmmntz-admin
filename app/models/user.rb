@@ -15,7 +15,9 @@ class User < ApplicationRecord
     censor: :string,
     show_censored_comments: :bool,
     hide_anon_and_guest: :bool,
-    settings_updated: :bool
+    settings_updated: :bool,
+    gender_search: :string,
+    age_range_search: :string
   }
 
   has_many :gallery_blacklistings

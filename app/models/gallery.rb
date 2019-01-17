@@ -13,7 +13,9 @@ class Gallery < ApplicationRecord
     guest_approval_needed: :bool,
     notify_on_comment_approval_needed: :bool,
     notify_on_new_comment: :bool,
-    hide_anon_and_guest: :bool
+    hide_anon_and_guest: :bool,
+    gender_search: :string,
+    age_range_search: :string
   }
 
   has_many :arts
