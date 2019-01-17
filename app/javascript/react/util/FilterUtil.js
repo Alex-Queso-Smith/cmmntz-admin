@@ -5,11 +5,11 @@ import { ImageSelector, ImageSelectorTemp } from './VoteUtil';
 
 
 export const SortTypes = [
-  ["top_count", "top"],
-  ["love_count", "love"],
+  ["top_percent", "top"],
+  ["love_percent", "love"],
   ["like_score", "like"],
-  ["smart_count", "smart"],
-  ["funny_count", "funny"],
+  ["smart_percent", "smart"],
+  ["funny_percent", "funny"],
   ["created_at", "created_at"],
   ["comment_length", "length2"]
 ]
