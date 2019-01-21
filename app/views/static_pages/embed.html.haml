@@ -1,57 +1,58 @@
 .container
 
-  %h3 Classifilter widget installation Instructions
+  %h3 Classifilter Widget Universal Installation Instructions
 
-  %ol
+  %p Classifilter can be installed on most websites via the universal JavaScript installation code below.
+  %p Please note that these instructions do require some technical knowledge and are intended for use by developers.
+
+  %h5 Getting Started
+  %ul
     %li If you have not already, go to #{link_to request.base_url + '/signup', request.base_url + '/signup'} and sign up for a gallery account.
-    %li Please locate the template for your article layout.
-    %li Copy the script (Fig. 1 – Script Template) into the template where you would like the widget to appear on your page.
-    %li Replace the topics, publishDate, artistName, and type with the values that would be placed on your page.
-    %li This will typically be done with some dynamic code references.
-    %li See Fig. 2 – Dynamic Template for an example using Ruby on Rails haml.
+    %li You will need access to the HTML of the pages that you intend to add Classifilter to.
 
-    %li That’s it, make your changes live and the widget will have been installed.
-    %li When rendered to a user, the code will appear something similar to the Rendered Template (Fig. 3).
 
-  Fig. 1 – Script Template
+  %h5 Script Template
+  %p This is the base script that you will need. Copy and paste it to the section of the page that you will want to have Classifilter display on.
+
   %pre
     &lt;script src="http://localhost:3000/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript"&gt;
     Classifilter.init({
-    galleryId: '7762cc3f-2994-436a-b912-25e915c8d475',
+    galleryId: 'your gallery ID',
     topics: 'Your topics here',
     publishDate: 'Your publish date here',
     artistName: 'Your author name',
     type: "Article or whatever type of page"
     });
     &lt;/script&gt;
+    &lt;noscript&gt;
+    Please enable JavaScript to see comments powered by Classifilter.
+    &lt;/noscript&gt;
 
-  Fig. 2 – Dynamic Template
-  %pre
-    &lt;script src="http://localhost:3000/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript"&gt;
-    Classifilter.init({
-    galleryId: '7762cc3f-2994-436a-b912-25e915c8d475',
-    topics: '\#{@article.topics}',
-    %br/
-    publishDate: '\#{@article.publish_date}',
-    %br/
-    artistName: '\#{@article.author.name}',
-    %br/
-    type: "\#{@article.type}"
-    %br/
-    });
-    &lt;/script&gt;
+  %p Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to you page where you want the widget to appear.
 
-  Fig.3 – Rendered Template
-  %pre
-    &lt;script src="http://localhost:3000/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript"&gt;
-    Classifilter.init({
-    galleryId: '7762cc3f-2994-436a-b912-25e915c8d475',
-    topics: 'words, language, fake articles, demo',
-    publishDate: 'Jan 04, 2019',
-    artistName: 'Douglas Adams',
-    type: "article",
-    });
-    &lt;/script&gt;
+  %h5 Configuration Variables
+  %p The following configuration variables are required and must be passed into the Script
+  %ul
+    %li
+      %strong galleryId:
+      this is your id that was assigned to your organization on sign up
+    %li
+      %strong topics:
+      a list of topics that relate to the content of your page. These should be passed in separated by comas.
+    %li
+      %strong publishDate
+      the date of publication. This should be in the format of YYYY-MM-DD
+    %li
+      %strong artistName:
+      the name of the author of the article. Example: "Jane Smith"
+    %li
+      %strong type:
+      the type of content on the page. this can be any value you choose
+
+  %h5 Optional Variables
+  %p These are variable that can be added to the configuration section of the script.
+
+  %li
+    %strong urlOverride:
+    the classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content
