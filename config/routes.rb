@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get 'login' => "customer_sessions#new",      as: :login
   get 'logout' => "customer_sessions#destroy", as: :logout
   get 'signup' => "signups#new",           :as => :signup
+  get 'embed' => 'static_pages#embed'
+  get 'faq' => 'static_pages#faq'
 
   root :to => 'customers#index'
 end
