@@ -7,7 +7,7 @@
 
   %h5 Getting Started
   %ul
-    %li If you have not already, go to #{link_to request.base_url + '/signup', request.base_url + '/signup'} and sign up for a gallery account.
+    %li If you have not already, go to #{link_to 'https://admin.classifilter.com/signup', 'https://admin.classifilter.com/signup'} and sign up for a gallery account.
     %li You will need access to the HTML of the pages that you intend to add Classifilter to.
 
 
@@ -15,7 +15,7 @@
   %p This is the base script that you will need. Copy and paste it to the section of the page that you will want to have Classifilter display on.
 
   %pre
-    &lt;script src="http://localhost:3000/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
+    &lt;script src="https://api.classifilter.com/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript"&gt;
     Classifilter.init({
     galleryId: 'your gallery ID',
@@ -52,7 +52,7 @@
 
   %h5 Optional Variables
   %p These are variable that can be added to the configuration section of the script.
-
-  %li
-    %strong urlOverride:
-    the classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content
+  %ul
+    %li
+      %strong urlOverride:
+      the classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content
