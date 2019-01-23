@@ -1,0 +1,12 @@
+<script src="http://localhost:3000/javascripts/classifilter-init.js"></script>
+<script type="text/javascript">
+Classifilter.init({
+galleryId: '7762cc3f-2994-436a-b912-25e915c8d475',
+topics: '<?php foreach((get_the_category()) as $category) { echo $category->cat_name . ','; } ?>',
+publishDate: '<?php the_date('Y-m-d h:i:s'); ?>',
+artistName: '<?php the_author(); ?>',
+urlOverride: '<?php echo get_permalink($post); ?>',
+type: "article",
+mode: "development"
+});
+</script>
