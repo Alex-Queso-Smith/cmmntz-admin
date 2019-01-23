@@ -7,7 +7,10 @@
 
   %h5 Getting Started
   %ul
-    %li If you have not already, go to #{link_to 'https://admin.classifilter.com/signup', 'https://admin.classifilter.com/signup'} and sign up for a gallery account.
+    - if current_gallery.blank?
+      %li If you have not already, go to #{link_to 'https://admin.classifilter.com/signup', 'https://admin.classifilter.com/signup'} and sign up for a gallery account.
+    - else
+      %li You are logged in as '#{current_gallery.name}'. Your gallery ID is '#{current_gallery.id}'.
     %li You will need access to the HTML of the pages that you intend to add Classifilter to.
 
 
@@ -18,7 +21,10 @@
     &lt;script src="https://api.classifilter.com/javascripts/classifilter-init.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript"&gt;
     Classifilter.init({
-    galleryId: 'your gallery ID',
+    - if current_gallery.blank?
+      galleryId: 'your gallery ID',
+    - else
+      galleryId: '#{current_gallery.id}', <br/>
     topics: 'Your topics here',
     publishDate: 'Your publish date here',
     artistName: 'Your author name',
