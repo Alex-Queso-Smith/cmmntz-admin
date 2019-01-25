@@ -23,6 +23,8 @@ class Art < ApplicationRecord
     .having("COUNT(votes.id) > 0")
   }, class_name: "Comment", foreign_key: "art_id"
 
+  validates :art_type, presence: true
+
   def status
     deactivated? ? "Deactivated" : is_disabled? ? "Disabled" : "Active"
   end

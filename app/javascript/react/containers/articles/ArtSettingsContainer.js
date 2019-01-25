@@ -1,7 +1,7 @@
 import React from 'react';
 import Textarea from 'react-expanding-textarea';
 
-import { FetchDidMount, FetchWithPush, FetchWithUpdate } from '../../util/CoreUtil';
+import { FetchDidMount, FetchWithUpdate } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
 
 class ArtsSettingsContainer extends React.Component {
@@ -59,14 +59,21 @@ class ArtsSettingsContainer extends React.Component {
 
     var art = new FormData();
     art.append("art[art_type]", type)
-    art.append("art[topics]", topics)
+    art.append("art[topics_list]", topics)
     art.append("art[ignore_warning_checker]", ignoreWarningChecker)
     art.append("art[disabled]", disabled)
     art.append("art[deactivated]", deactivated)
     art.append("art[disabled_message]", strip(disabledMessage))
 
-    FetchWithPush(this, `/api/v1/arts/${this.props.artId}.json`, '/', 'PATCH', 'saveErrors', art)
-    .then(redirect => this.props.updateDisplay(''))
+    FetchWithUpdate(this, `/api/v1/arts/${this.props.artId}.json`, 'PATCH', art)
+    .then(data => {
+        if (data.errors) {
+          alert("there are errors")
+        } else {
+          this.props.updateDisplay('')
+        }
+      }
+    )
     .catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
