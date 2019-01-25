@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FetchDidMount, FetchIndividual } from '../util/CoreUtil';
+import { FetchDidMount, FetchIndividual } from '../../util/CoreUtil';
 
 class BannedUsersContainer extends React.Component {
   state = {

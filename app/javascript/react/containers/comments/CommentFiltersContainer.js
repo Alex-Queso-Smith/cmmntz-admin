@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Checkbox } from '../components/FormComponents';
-import { SortDir, SortButton } from '../components/SortSelect'
-import { ImageSelector } from '../util/VoteUtil';
-import { SortButtons, FilterButtonsRowOne, FilterButtonsRowTwo, FilterCommentsBy, FilterVotesBy } from '../util/FilterUtil'
+import { Checkbox } from '../../components/FormComponents';
+import { SortDir, SortButton } from '../../components/SortSelect'
+import { ImageSelector } from '../../util/VoteUtil';
+import { SortButtons, FilterButtonsRowOne, FilterButtonsRowTwo, FilterCommentsBy, FilterVotesBy } from '../../util/FilterUtil'
 
 class CommentFiltersContainer extends React.Component {
   state = {

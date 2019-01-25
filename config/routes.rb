@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :customers, only: [:index, :create, :edit, :update]
       resources :gallery_artists, only: [:show, :update]
       resources :arts, only: [:show] do
+        resources :comments, only: [:index]
         resources :mass_manage_comments, only: [:create]
       end
       resources :comments, only: [:update]

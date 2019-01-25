@@ -2,9 +2,9 @@ import React from 'react';
 import Textarea from 'react-expanding-textarea';
 import { Link } from 'react-router-dom';
 
-import { FetchWithPush, FetchDidMount } from '../util/CoreUtil';
-import { Checkbox, Input } from '../components/FormComponents';
-import CommentFiltersContainer from './CommentFiltersContainer';
+import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
+import { Checkbox, Input } from '../../components/FormComponents';
+import CommentFiltersContainer from '../comments/CommentFiltersContainer';
 
 class GallerySettingsContainer extends React.Component {
   state = {

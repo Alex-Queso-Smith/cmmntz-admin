@@ -67,3 +67,31 @@ export const MemberTabs = (props) => {
     </div>
   )
 }
+
+export const ArtTabs = (props) => {
+  const types = [
+    ["Info", ""],
+    ["Comments", "comments"],
+    ["Settings", "settings"]
+  ]
+
+  var links = types.map(type => {
+    return(
+      <LineItem
+        key={type[1]}
+        value={type[1]}
+        title={type[0]}
+        display={props.display}
+        onClick={props.onClick}
+      />
+    )
+  })
+
+  return(
+    <div className="cf-art-tabs">
+      <ul className="nav nav-tabs">
+        {links}
+      </ul>
+    </div>
+  )
+}

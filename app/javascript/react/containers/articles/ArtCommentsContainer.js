@@ -1,11 +1,11 @@
 import React from 'react';
-import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
-import {Checkbox} from '../components/FormComponents';
+import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../../util/CoreUtil';
+import {Checkbox} from '../../components/FormComponents';
 
-import ManageComment from '../components/ManageComment';
-import { CommentTabs }  from '../components/Tabs';
+import ManageComment from '../../components/ManageComment';
+import { CommentTabs }  from '../../components/Tabs';
 
-class ArtsShowContainer extends React.Component {
+class ArtCommentsContainer extends React.Component {
   state = {
     comments: [],
     manageIds: [],
@@ -57,7 +57,7 @@ class ArtsShowContainer extends React.Component {
       formData.append("mass_manage_comment[action]", action)
       formData.append("mass_manage_comment[comment_ids]", commentIds)
 
-      var url = `/api/v1/arts/${this.props.match.params.id}/mass_manage_comments.json`;
+      var url = `/api/v1/arts/${this.props.artId}/mass_manage_comments.json`;
       FetchWithUpdate(this, url, "POST", formData)
       .then(success => {
         setTimeout(this.loadComments(this.state.display), 10);
@@ -98,16 +98,16 @@ class ArtsShowContainer extends React.Component {
   }
 
   loadComments(type){
-    var url = `/api/v1/arts/${this.props.match.params.id}.json`;
+    var url = `/api/v1/arts/${this.props.artId}/comments.json`;
 
     if (type != "") {
       url += `?display_mode=${type}`
     }
 
     FetchDidMount(this, url)
-    .then(artData => {
+    .then(commentData => {
       this.setState({
-        comments: artData.art.comments,
+        comments: commentData.comments,
         allSelected: false
       })
     })
@@ -312,12 +312,12 @@ class ArtsShowContainer extends React.Component {
           display={this.state.display}
           onClick={this.handleTabClick}
         />
-      <div className="row margin-top-10px">
-        <div className="col-sm-3 col-md-2">
-          {selectAllButton}
+        <div className="row margin-top-10px">
+          <div className="col-sm-3 col-md-2">
+            {selectAllButton}
+          </div>
+          {manageButtons}
         </div>
-        {manageButtons}
-      </div>
 
         {allComments}
       </div>
@@ -326,4 +326,4 @@ class ArtsShowContainer extends React.Component {
 }
 
 
-export default ArtsShowContainer;
+export default ArtCommentsContainer;
