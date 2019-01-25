@@ -9,10 +9,15 @@ import { ArtTabs }  from '../../components/Tabs';
 
 class ArtsShowContainer extends React.Component {
   state = {
-    display: ""
+    display: "settings"
   }
 
   handleTabClick = this.handleTabClick.bind(this);
+  updateDisplay = this.updateDisplay.bind(this);
+
+  updateDisplay(page){
+    this.setState({ display: page })
+  }
 
   handleTabClick(event){
     const target = event.target;
@@ -33,18 +38,21 @@ class ArtsShowContainer extends React.Component {
         page =
           <ArtInfoContainer
             artId={artId}
+            updateDisplay={this.updateDisplay}
           />
         break;
       case "settings":
         page =
           <ArtSettingsContainer
             artId={artId}
+            updateDisplay={this.updateDisplay}
           />
         break;
       case "comments":
         page =
           <ArtCommentsContainer
             artId={artId}
+            updateDisplay={this.updateDisplay}
           />
         break;
       default:

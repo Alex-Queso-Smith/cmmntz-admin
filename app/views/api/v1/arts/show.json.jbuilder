@@ -1,12 +1,22 @@
 json.art do
   json.id @art.id
-  json.comments @comments do |comment|
-    json.id comment.id
-    json.text comment.text
-    json.user_name comment_user_user_name(comment)
-    json.user_id comment_user_user_id(comment)
-    json.date_posted display_date(comment.created_at)
-    json.user_is_mod comment_user_mod(comment)
-    json.user_is_admin comment_user_admin(comment)
+  json.type @art.art_type
+  json.topics @art.topics_list
+
+if !params[:display]
+    json.url @art.url
+    json.artist gallery_artist_name(@art)
+    json.status @art.status
+    json.publishedAt display_date @art.published_at
+    json.threadStarted display_date @art.created_at
+    json.lastInteraction display_date @art.last_interaction_at
+    json.pendingComments @art.pending_comments.size
+  end
+
+  if params[:display] && params[:display] == "settings"
+    json.ignore_warning_checker @art.ignore_warning_checker?
+    json.disabled @art.disabled?
+    json.deactivated @art.deactivated?
+    json.disabled_message @art.disabled_message || ""
   end
 end
