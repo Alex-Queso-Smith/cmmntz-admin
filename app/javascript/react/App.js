@@ -13,7 +13,7 @@ class App extends React.Component {
     return(
       <Router>
         <Switch>
-          <Route path='/galleries/:id/edit' component={GallerySettingsContainer} />
+          <Route path='/galleries/:id' component={GalleryShowContainer} />
           <Route path='/arts/:id' component={ArtsShowContainer} />
           <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
           <Route path='/members' component={MemberManagementContainer} />
