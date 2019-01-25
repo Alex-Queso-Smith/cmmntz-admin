@@ -9,7 +9,7 @@ import { ArtTabs }  from '../../components/Tabs';
 
 class ArtsShowContainer extends React.Component {
   state = {
-    display: "settings"
+    display: ""
   }
 
   handleTabClick = this.handleTabClick.bind(this);
