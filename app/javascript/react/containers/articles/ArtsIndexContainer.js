@@ -12,14 +12,16 @@ class ArtsIndexContainer extends React.Component {
       this.setState({
         artsData: artsData.arts
       })
+      debugger
     })
   }
 
 
   render(){
     var formattedArts =
-    this.state.artsData.map((art) => {
-
+    this.state.artsData.map((row) => {
+      var art = row.art
+      // debugger
       return(
         <div key={`art_${art.id}`} >
           <h3>{art.type}: <a href={art.url} target="_blank">{art.url}</a></h3>
@@ -37,6 +39,7 @@ class ArtsIndexContainer extends React.Component {
 
     return(
       <div>
+        Arts
         {formattedArts}
       </div>
     )
