@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :user_gallery_moderators, only: [:index, :create]
       resources :remove_user_gallery_moderators, only: [:create]
       resources :user_searches, only: [:create]
+      resources :signups, only: [:create]
     end
   end
 
