@@ -5,7 +5,7 @@ class Api::V1::CustomerSessionsController < ApiController
   def create
     @customer_session = CustomerSession.new(customer_session_params.to_h)
     if @customer_session.save
-      render json: { id: @customer_session.customer.id, name: @customer_session.customer.name }
+      render json: { id: @customer_session.customer.id, name: @customer_session.customer.name, gallery: @customer_session.customer.gallery.name }
     else
       render json: { errors: @customer_session.errors, status: :unprocessable_entity }
     end

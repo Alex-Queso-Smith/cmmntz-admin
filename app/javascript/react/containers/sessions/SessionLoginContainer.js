@@ -44,8 +44,9 @@ class SessionLoginContainer extends React.Component {
         var element = document.getElementById('ca-app');
         element.setAttribute('data-customer-id', body.id);
         element.setAttribute('data-customer-name', body.name);
-        this.props.updateAppData(body.id, body.name)
-        
+        element.setAttribute('data-customer-gallery', body.gallery);
+        this.props.updateAppData(body.id, body.name, body.gallery)
+
         this.props.history.push('/');
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));

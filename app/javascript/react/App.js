@@ -16,24 +16,26 @@ import NavBar from './containers/navigation/NavBar';
 class App extends React.Component {
   state = {
     customerId: document.getElementById('ca-app').getAttribute('data-customer-id'),
-    customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
+    customerName: document.getElementById('ca-app').getAttribute('data-customer-name'),
+    gallery: document.getElementById('ca-app').getAttribute('data-customer-gallery')
   }
 
   updateAppData = this.updateAppData.bind(this);
 
-  updateAppData(id, name){
+  updateAppData(id, name, gallery){
     this.setState({
       customerId: id,
-      customerName: name
+      customerName: name,
+      gallery: gallery
     })
   }
 
   render(){
-    var { customerId, customerName } = this.state;
+    var { customerId, customerName, gallery } = this.state;
 
     return(
       <Router>
-          <NavBar customerId={customerId} customerName={customerName}>
+          <NavBar customerId={customerId} customerName={customerName} gallery={gallery}>
             <Switch>
               <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
               <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
