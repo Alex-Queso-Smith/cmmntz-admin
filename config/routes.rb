@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :customer_sessions, only: [:create]
       resources :galleries, only: [:show, :update]
       resources :customers, only: [:index, :create, :edit, :update]
       resources :gallery_artists, only: [:show, :update]

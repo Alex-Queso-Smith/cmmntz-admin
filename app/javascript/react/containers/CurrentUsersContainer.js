@@ -63,7 +63,7 @@ class CurrentUsersContainer extends React.Component {
             <td>
               C: {user.comments_count}
               <br/>
-              R: {user.repies_count}
+              R: {user.replies_count}
             </td>
             <td>
               F: {user.friends_count}
