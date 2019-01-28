@@ -5,6 +5,8 @@ class Api::V1::CustomersController < ApiController
     @customers = @customers.order(role: :desc)
   end
 
+  def show; end
+
   def create
     @customer = Customer.new(customer_params.merge(gallery: current_gallery))
 
@@ -15,12 +17,13 @@ class Api::V1::CustomersController < ApiController
     end
   end
 
-  def edit
-  end
-
   def update
-
-  end 
+    if @customer.save
+      render json: { message: "Member Updated!" }
+    else
+      render json: { errors: @customer.errors, status: :unprocessable_entity }
+    end
+  end
 
 
   def customer_params
