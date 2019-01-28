@@ -11,24 +11,31 @@ import GalleryArtistEditContainer from './containers/members/GalleryArtistEditCo
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
 import SignupContainer from './containers/SignupContainer';
 import DashboardContainer from './containers/DashboardContainer';
+import NavBar from './containers/navigation/NavBar';
 
 class App extends React.Component {
+  state = {
+    customerId: document.getElementById('ca-app').getAttribute('data-customer'),
+    customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
+  }
+
   render(){
     return(
       <Router>
-        <Switch>
-          <Route path='/customer_sessions' component={SessionLoginContainer} />
-          <Route path='/galleries/:id' component={GalleryShowContainer} />
-          <Route path='/arts/:id' component={ArtsShowContainer} />
-          <Route path='/arts' component={ArtsIndexContainer} />
-          <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
-          <Route path='/members' component={MemberManagementContainer} />
-          <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
-          <Route path='/users' component={CurrentUsersContainer} />
-          <Route path='/signup' component={SignupContainer} />
-
-          <Route path='/' component={DashboardContainer} />
-        </Switch>
+          <NavBar>
+            <Switch>
+              <Route path='/customer_sessions' component={SessionLoginContainer} />
+              <Route path='/galleries/:id' component={GalleryShowContainer} />
+              <Route path='/arts/:id' component={ArtsShowContainer} />
+              <Route path='/arts' component={ArtsIndexContainer} />
+              <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
+              <Route path='/members' component={MemberManagementContainer} />
+              <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
+              <Route path='/users' component={CurrentUsersContainer} />
+              <Route path='/signup' component={SignupContainer} />
+              <Route path='/' component={DashboardContainer} />
+            </Switch>
+          </NavBar>
       </Router>
     )
   }
