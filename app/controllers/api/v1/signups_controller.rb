@@ -7,7 +7,7 @@ class Api::V1::SignupsController < ApiController
     if @signup.valid?
       render json: { message: "Gallery created!" }
     else
-      render json: @signup.errors, status: :unprocessable_entity
+      render json:{ errors: @signup.errors, status: :unprocessable_entity}
     end
   end
 

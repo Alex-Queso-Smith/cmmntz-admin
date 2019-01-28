@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Input } from '../components/FormComponents';
+import { FetchWithUpdate } from '../util/CoreUtil';
 
 class SignupContainer extends React.Component {
   state = {
@@ -9,8 +10,8 @@ class SignupContainer extends React.Component {
     customerLastName: '',
     customerEmail: '',
     customerPassword: '',
-    customerPasswordConfirmation: ''
-
+    customerPasswordConfirmation: '',
+    signupErrors: {}
   }
 
   handleChange = this.handleChange.bind(this);
@@ -27,14 +28,37 @@ class SignupContainer extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("click")
+    event.preventDefault();
+
+    var newSignup = new FormData();
+
+    var { galleryName, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+
+    newSignup.append("signup[gallery_name]", galleryName);
+    newSignup.append("signup[customer_first_name]", customerFirstName);
+    newSignup.append("signup[customer_last_name]", customerLastName);
+    newSignup.append("signup[customer_email]", customerEmail);
+    newSignup.append("signup[customer_password]", customerPassword);
+    newSignup.append("signup[customer_password_confirmation]", customerPasswordConfirmation);
+
+    FetchWithUpdate(this, `/api/v1/signups.json`, 'POST', newSignup)
+    .then(data => {
+        if (data.errors) {
+          this.setState({signupErrors: data.errors})
+        } else {
+          // go to embed
+        }
+      }
+    )
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render(){
-    var { galleryName, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
-
+    var { galleryName, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
+    
     return(
       <div className="jumbotron center-form">
+
         <h2>Sign Up for Classifilter</h2>
         <Input
           name="galleryName"
