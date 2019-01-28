@@ -1,4 +1,5 @@
 class Art < ApplicationRecord
+  self.per_page = 10 # results per page default
 
   vstr 'settings', {
     ignore_warning_checker: :bool
@@ -59,6 +60,12 @@ class Art < ApplicationRecord
       cs = approved_comments
     end
     return cs.for_non_blocked_users.order(created_at: :desc)
+  end
+
+  def self.search(filters, page)
+    scope = self.where({})
+    scope = scope.page(page)
+    scope
   end
 
 end

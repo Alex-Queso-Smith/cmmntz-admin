@@ -89,5 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  let artsIndex = document.getElementById('cf-arts-index')
+
+  if (artsIndex) {
+    if(window.railsEnv && window.railsEnv === 'development'){
+      try {
+        render(<App />, artsIndex)
+      } catch (e) {
+        render(<RedBox error={e} />, artsIndex)
+      }
+    }
+    else {
+      render(<App />, artsIndex)
+    }
+  }
+
 
 })

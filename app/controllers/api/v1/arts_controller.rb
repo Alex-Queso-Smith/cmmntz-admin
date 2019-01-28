@@ -1,5 +1,10 @@
 class Api::V1::ArtsController < ApiController
-load_and_authorize_resource
+  load_and_authorize_resource
+  def index
+      page = params[:page] || 1
+    @arts = @arts.search(params[:filters], page)
+  end
+
   def show
     @art = Art.find(params[:id])
   end

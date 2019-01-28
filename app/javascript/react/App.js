@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
+import ArtsIndexContainer from './containers/articles/ArtsIndexContainer';
 import ArtsShowContainer from './containers/articles/ArtsShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
@@ -14,6 +15,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path='/galleries/:id' component={GalleryShowContainer} />
+          <Route path='/arts' component={ArtsIndexContainer} />
           <Route path='/arts/:id' component={ArtsShowContainer} />
           <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
           <Route path='/members' component={MemberManagementContainer} />
