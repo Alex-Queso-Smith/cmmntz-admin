@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { FetchDidMount } from '../../util/CoreUtil';
 
 class ArtsIndexContainer extends React.Component {
@@ -22,7 +23,7 @@ class ArtsIndexContainer extends React.Component {
       var art = row.art
       return(
         <div key={`art_${art.id}`} >
-          <h3>{art.type}: <a href={art.url} target="_blank">{art.url}</a></h3>
+          <h4>{art.type}: <Link to={`/arts/${art.id}`} >{art.url}</Link></h4>
           <p>Artist: {art.artist}</p>
           <p>Status: {art.status}</p>
           <p>Publication Date: {art.publishedAt}</p>
@@ -37,7 +38,12 @@ class ArtsIndexContainer extends React.Component {
 
     return(
       <div>
-        Arts
+        <h3>Arts</h3>
+        <h5>[Filtering] [+/-]</h5>
+        <hr />
+        <div>
+          [Page 1][Page 2][...][Page x]
+        </div>
         {formattedArts}
       </div>
     )
