@@ -36,7 +36,7 @@ class GallerySettingsContainer extends React.Component {
   handleSortOptCheckChange = this.handleSortOptCheckChange.bind(this);
 
   componentDidMount(){
-    FetchDidMount(this, `/api/v1/galleries/${this.props.match.params.id}.json`)
+    FetchDidMount(this, `/api/v1/galleries/${this.props.galleryId}.json`)
     .then(galleryData => {
 
       var opts = this.state.sortOpts

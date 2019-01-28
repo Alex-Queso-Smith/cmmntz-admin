@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import GallerySettingsContainer from './containers/gallery/GallerySettingsContainer';
+import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
 import ArtsShowContainer from './containers/articles/ArtsShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
