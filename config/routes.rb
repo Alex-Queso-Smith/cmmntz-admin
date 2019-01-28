@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :customer_sessions, only: [:create]
       resources :galleries, only: [:show, :update]
-      resources :customers, only: [:index, :create, :edit, :update]
+      resources :customers, only: [:index, :show, :create, :update]
       resources :gallery_artists, only: [:show, :update]
       resources :arts, only: [:index, :show, :update] do
         resources :comments, only: [:index]
