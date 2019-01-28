@@ -6,8 +6,6 @@ import ArtsIndexContainer from './containers/articles/ArtsIndexContainer';
 import ArtsShowContainer from './containers/articles/ArtsShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
-import EditMemberContainer from './containers/members/EditMemberContainer';
-
 import SessionLoginContainer from './containers/sessions/SessionLoginContainer';
 import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
@@ -16,22 +14,33 @@ import DashboardContainer from './containers/DashboardContainer';
 import NavBar from './containers/navigation/NavBar';
 
 class App extends React.Component {
-  state = {}
+  state = {
+    customerId: document.getElementById('ca-app').getAttribute('data-customer-id'),
+    customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
+  }
+
+  updateAppData = this.updateAppData.bind(this);
+
+  updateAppData(id, name){
+    this.setState({
+      customerId: id,
+      customerName: name
+    })
+  }
 
   render(){
     var { customerId, customerName } = this.state;
 
     return(
       <Router>
-          <NavBar>
+          <NavBar customerId={customerId} customerName={customerName}>
             <Switch>
-              <Route path='/customer_sessions' component={SessionLoginContainer} />
-              <Route path='/login' component={SessionLoginContainer} />
+              <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
+              <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
               <Route path='/galleries/:id' component={GalleryShowContainer} />
               <Route path='/arts/:id' component={ArtsShowContainer} />
               <Route path='/arts' component={ArtsIndexContainer} />
               <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
-              <Route path='/members/:id/edit' component={EditMemberContainer} />
               <Route path='/members' component={MemberManagementContainer} />
               <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
               <Route path='/users' component={CurrentUsersContainer} />

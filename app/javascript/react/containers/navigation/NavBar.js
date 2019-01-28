@@ -2,21 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
-  state = {
-    customerId: document.getElementById('ca-app').getAttribute('data-customer'),
-    customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
-  }
+  state = {}
 
   render(){
 
-    var { customerId, customerName } = this.state;
+    var { customerId, customerName } = this.props;
 
     var titleStyle = {
       color: "#ffffff"
     }
 
     var buttonOne, buttonTwo;
-    if (customerId == "") {
+    if (!customerId) {
       buttonOne =
         <Link className="nav-link ml-auto" to={`/customer_sessions`}>Login</Link>
       buttonTwo =
