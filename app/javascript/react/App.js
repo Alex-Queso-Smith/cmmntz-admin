@@ -14,12 +14,11 @@ import DashboardContainer from './containers/DashboardContainer';
 import NavBar from './containers/navigation/NavBar';
 
 class App extends React.Component {
-  state = {
-    customerId: document.getElementById('ca-app').getAttribute('data-customer'),
-    customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
-  }
+  state = {}
 
   render(){
+    var { customerId, customerName } = this.state;
+
     return(
       <Router>
           <NavBar>

@@ -7,9 +7,6 @@ class NavBar extends React.Component {
     customerName: document.getElementById('ca-app').getAttribute('data-customer-name')
   }
 
-  componentDidMount(){
-  }
-
   render(){
 
     var { customerId, customerName } = this.state;

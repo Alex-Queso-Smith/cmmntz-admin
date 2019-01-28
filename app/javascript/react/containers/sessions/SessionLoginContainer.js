@@ -39,7 +39,13 @@ class SessionLoginContainer extends React.Component {
       login.append("customer_session[password]", password);
       login.append("customer_session[remember_me]", rememberMe);
 
-      FetchWithPush(this, `/api/v1/customer_sessions.json`, '/', 'POST', 'loginErrors', login)
+      FetchWithPush(this, `/api/v1/customer_sessions.json`, '', 'POST', 'loginErrors', login)
+      .then(body => {
+        var element = document.getElementById('ca-app');
+        element.setAttribute('data-customer-id', body.id);
+        element.setAttribute('data-customer-name', body.customer_name);
+        this.props.history.push('/');
+      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
   }
