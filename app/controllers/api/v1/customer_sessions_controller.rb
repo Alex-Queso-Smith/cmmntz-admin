@@ -1,4 +1,4 @@
-class Api::V1::CustomerSessionsController < ApplicationController
+class Api::V1::CustomerSessionsController < ApiController
   skip_before_action *ALL_FILTERS, only: [:new, :create]
   before_action :require_no_customer, only: [:new, :create]
 
