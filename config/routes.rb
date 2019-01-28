@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :gallery_blacklistings, only: [:index]
   resources :gallery_artists, only: [:edit]
   resources :users, only: [:index]
+  resources :dashboard, only: [:index]
 
   namespace :api do
     namespace :v1 do
@@ -37,5 +38,5 @@ Rails.application.routes.draw do
   get 'embed' => 'static_pages#embed'
   get 'faq' => 'static_pages#faq'
 
-  root :to => 'customers#index'
+  root :to => 'dashboard#index'
 end
