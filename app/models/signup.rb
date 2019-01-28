@@ -1,5 +1,6 @@
 class Signup < Tableless
   attribute :gallery_name, :string
+  attribute :gallery_url, :string
   attribute :customer_first_name, :string
   attribute :customer_last_name, :string
   attribute :customer_password, :string
@@ -11,7 +12,7 @@ class Signup < Tableless
   after_validation :create_gallery_and_customer!
 
   def gallery
-    @gallery ||= Gallery.new(name: gallery_name)
+    @gallery ||= Gallery.new(name: gallery_name, site_url: gallery_url)
   end
 
   def customer

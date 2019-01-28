@@ -6,6 +6,7 @@ import { FetchWithUpdate } from '../util/CoreUtil';
 class SignupContainer extends React.Component {
   state = {
     galleryName: '',
+    galleryUrl: '',
     customerFirstName: '',
     customerLastName: '',
     customerEmail: '',
@@ -32,9 +33,10 @@ class SignupContainer extends React.Component {
 
     var newSignup = new FormData();
 
-    var { galleryName, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+    var { galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
 
     newSignup.append("signup[gallery_name]", galleryName);
+    newSignup.append("signup[gallery_url]", galleryUrl);
     newSignup.append("signup[customer_first_name]", customerFirstName);
     newSignup.append("signup[customer_last_name]", customerLastName);
     newSignup.append("signup[customer_email]", customerEmail);
@@ -54,17 +56,24 @@ class SignupContainer extends React.Component {
   }
 
   render(){
-    var { galleryName, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
-    
+    var { galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
+
     return(
       <div className="jumbotron center-form">
 
         <h2>Sign Up for Classifilter</h2>
         <Input
           name="galleryName"
-          placeholder="Gallery Name"
+          placeholder="Site Name"
           onChange={this.handleChange}
           content={galleryName}
+          type="input"
+        />
+        <Input
+          name="galleryUrl"
+          placeholder="Site Url"
+          onChange={this.handleChange}
+          content={galleryUrl}
           type="input"
         />
         <Input
