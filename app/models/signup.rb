@@ -23,19 +23,21 @@ class Signup < Tableless
 
   def customer_valid?
     if !gallery.valid?
-      gallery.errors.full_messages.each do |msg|
-        # you can customize the error message here:
-        errors[:base] << "Gallery: #{msg}"
-      end
+      errors[:gallery] << gallery.errors
+      # gallery.errors.each do |k, v|
+      #   # you can customize the error message here:
+      #   errors[:gallery][k.to_sym] = v
+      # end
     end
   end
 
   def gallery_valid?
     if !customer.valid?
-      customer.errors.full_messages.each do |msg|
-        # you can customize the error message here:
-        errors[:base] << "Customer: #{msg}"
-      end
+      errors[:customer] << customer.errors
+      # customer.errors.each do |k, v|
+      #   # you can customize the error message here:
+      #   errors[:customer][k.to_sym] = v
+      # end
     end
   end
 

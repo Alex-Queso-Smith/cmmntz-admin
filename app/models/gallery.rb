@@ -26,7 +26,7 @@ class Gallery < ApplicationRecord
   has_many :gallery_moderators, through: :user_gallery_moderators, source: :user
 
   validates :name, :site_url, presence: true
-  validates :site_url, uniquness: { case_sensitive: false }
+  validates :site_url, uniqueness: { case_sensitive: false }
   validates :default_art_thread_expiration_days, numericality: { greater_than_or_equal_to: 0 }, if: Proc.new { |g| !g.default_art_thread_expiration_days.blank? }
   validates :comment_etiquette, length: { maximum: 8000 }
 
