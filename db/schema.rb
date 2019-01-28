@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_155730) do
+ActiveRecord::Schema.define(version: 2019_01_28_193348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "body_2"
+    t.text "body_3"
+    t.string "youtube_url"
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["publish_date"], name: "index_articles_on_publish_date"
@@ -77,7 +80,10 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.datetime "published_at"
     t.string "art_type"
     t.text "disabled_message"
+    t.uuid "gallery_artist_id"
+    t.text "settings"
     t.index ["created_at"], name: "index_arts_on_created_at"
+    t.index ["gallery_artist_id"], name: "index_arts_on_gallery_artist_id"
     t.index ["gallery_id"], name: "index_arts_on_gallery_id"
     t.index ["last_interaction_at"], name: "index_arts_on_last_interaction_at"
     t.index ["url"], name: "index_arts_on_url"
@@ -130,8 +136,11 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.boolean "deleted", default: false
     t.datetime "edited_at"
     t.boolean "ignore_flagged", default: false, null: false
+    t.string "approved_by"
+    t.boolean "guest", default: false, null: false
     t.index ["approved"], name: "index_comments_on_approved"
     t.index ["art_id", "art_type"], name: "index_comments_on_art_id_and_art_type"
+    t.index ["guest"], name: "index_comments_on_guest"
     t.index ["ignore_flagged"], name: "index_comments_on_ignore_flagged"
     t.index ["interactions_count"], name: "index_comments_on_interactions_count"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
@@ -333,6 +342,19 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "comment_etiquette"
+    t.string "site_url"
+    t.index ["site_url"], name: "index_galleries_on_site_url"
+  end
+
+  create_table "gallery_artists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "artist_name"
+    t.uuid "gallery_id"
+    t.uuid "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_name"], name: "index_gallery_artists_on_artist_name"
+    t.index ["customer_id"], name: "index_gallery_artists_on_customer_id"
+    t.index ["gallery_id"], name: "index_gallery_artists_on_gallery_id"
   end
 
   create_table "gallery_blacklistings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -352,6 +374,51 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_article_views", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "article_id"
+    t.datetime "created_at"
+    t.index ["user_id", "article_id"], name: "index_user_article_views_on_user_id_and_article_id", unique: true
+    t.index ["user_id"], name: "index_user_article_views_on_user_id"
+  end
+
+  create_table "user_feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.string "type"
+    t.string "category"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "browser"
+    t.string "browser_version"
+    t.string "platform"
+    t.string "os"
+    t.string "ip"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.index ["user_id"], name: "index_user_feedbacks_on_user_id"
+  end
+
+  create_table "user_gallery_moderators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "gallery_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id"], name: "index_user_gallery_moderators_on_gallery_id"
+    t.index ["user_id"], name: "index_user_gallery_moderators_on_user_id"
+  end
+
+  create_table "user_video_clicks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.string "video_title"
+    t.datetime "created_at"
+    t.index ["created_at"], name: "index_user_video_clicks_on_created_at"
+    t.index ["user_id", "video_title"], name: "index_user_video_clicks_on_user_id_and_video_title", unique: true
+    t.index ["user_id"], name: "index_user_video_clicks_on_user_id"
+    t.index ["video_title"], name: "index_user_video_clicks_on_video_title"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "user_name"
     t.string "crypted_password"
@@ -366,9 +433,20 @@ ActiveRecord::Schema.define(version: 2018_12_18_155730) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.text "settings"
+    t.integer "login_count", default: 0, null: false
+    t.integer "failed_login_count", default: 0, null: false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string "current_login_ip"
+    t.string "last_login_ip"
     t.index ["age_range"], name: "index_users_on_age_range"
+    t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["gender"], name: "index_users_on_gender"
+    t.index ["last_login_at"], name: "index_users_on_last_login_at"
+    t.index ["last_request_at"], name: "index_users_on_last_request_at"
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
+    t.index ["login_count"], name: "index_users_on_login_count"
     t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 

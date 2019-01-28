@@ -1,5 +1,6 @@
 class Signup < Tableless
   attribute :gallery_name, :string
+  attribute :gallery_url, :string
   attribute :customer_first_name, :string
   attribute :customer_last_name, :string
   attribute :customer_password, :string
@@ -11,7 +12,7 @@ class Signup < Tableless
   after_validation :create_gallery_and_customer!
 
   def gallery
-    @gallery ||= Gallery.new(name: gallery_name)
+    @gallery ||= Gallery.new(name: gallery_name, site_url: gallery_url)
   end
 
   def customer
@@ -22,19 +23,21 @@ class Signup < Tableless
 
   def customer_valid?
     if !gallery.valid?
-      gallery.errors.full_messages.each do |msg|
-        # you can customize the error message here:
-        errors[:base] << "Gallery: #{msg}"
-      end
+      errors[:gallery] << gallery.errors
+      # gallery.errors.each do |k, v|
+      #   # you can customize the error message here:
+      #   errors[:gallery][k.to_sym] = v
+      # end
     end
   end
 
   def gallery_valid?
     if !customer.valid?
-      customer.errors.full_messages.each do |msg|
-        # you can customize the error message here:
-        errors[:base] << "Customer: #{msg}"
-      end
+      errors[:customer] << customer.errors
+      # customer.errors.each do |k, v|
+      #   # you can customize the error message here:
+      #   errors[:customer][k.to_sym] = v
+      # end
     end
   end
 

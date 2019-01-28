@@ -14,6 +14,6 @@ class Api::V1::SignupsController < ApiController
   private
 
   def signup_params
-    params.require(:signup).permit(:gallery_name, :customer_first_name, :customer_last_name, :customer_password, :customer_password_confirmation, :customer_email)
+    params.require(:signup).permit(:gallery_name, :gallery_url, :customer_first_name, :customer_last_name, :customer_password, :customer_password_confirmation, :customer_email)
   end
 end
