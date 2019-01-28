@@ -14,95 +14,18 @@ import { render } from 'react-dom';
 import App from '../react/App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  let customerSettings = document.getElementById('cf-customer-settings');
+  let app = document.getElementById('ca-app');
 
-  if (customerSettings) {
+  if (app) {
     if(window.railsEnv && window.railsEnv === 'development'){
       try {
-        render(<App />, customerSettings)
+        render(<App />, app)
       } catch (e) {
-        render(<RedBox error={e} />, customerSettings)
+        render(<RedBox error={e} />, app)
       }
     }
     else {
-      render(<App />, customerSettings)
+      render(<App />, app)
     }
   }
-
-  let artShow = document.getElementById('cf-art-show');
-
-  if (artShow) {
-    if(window.railsEnv && window.railsEnv === 'development'){
-      try {
-        render(<App />, artShow)
-      } catch (e) {
-        render(<RedBox error={e} />, artShow)
-      }
-    }
-    else {
-      render(<App />, artShow)
-    }
-  }
-
-  let bannedUsers = document.getElementById('cf-banned-users-container')
-
-  if (bannedUsers) {
-    if(window.railsEnv && window.railsEnv === 'development'){
-      try {
-        render(<App />, bannedUsers)
-      } catch (e) {
-        render(<RedBox error={e} />, bannedUsers)
-      }
-    }
-    else {
-      render(<App />, bannedUsers)
-    }
-  }
-
-  let memberManagement = document.getElementById('cf-member-management')
-
-  if (memberManagement) {
-    if(window.railsEnv && window.railsEnv === 'development'){
-      try {
-        render(<App />, memberManagement)
-      } catch (e) {
-        render(<RedBox error={e} />, memberManagement)
-      }
-    }
-    else {
-      render(<App />, memberManagement)
-    }
-  }
-
-  let usersContainer = document.getElementById('cf-users-container')
-
-  if (usersContainer) {
-    if(window.railsEnv && window.railsEnv === 'development'){
-      try {
-        render(<App />, usersContainer)
-      } catch (e) {
-        render(<RedBox error={e} />, usersContainer)
-      }
-    }
-    else {
-      render(<App />, usersContainer)
-    }
-  }
-
-  let artsIndex = document.getElementById('cf-arts-index')
-
-  if (artsIndex) {
-    if(window.railsEnv && window.railsEnv === 'development'){
-      try {
-        render(<App />, artsIndex)
-      } catch (e) {
-        render(<RedBox error={e} />, artsIndex)
-      }
-    }
-    else {
-      render(<App />, artsIndex)
-    }
-  }
-
-
 })

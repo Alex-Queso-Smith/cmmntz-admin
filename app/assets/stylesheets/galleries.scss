@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $breakpoint-phone: 575px;
 
-#gallery-edit-settings-container, #cf-member-management-container, #cf-member-edit-container {
+#gallery-edit-settings-container, #ca-member-management-container, #cf-member-edit-container {
   margin: 60px auto;
   border: 1px solid grey;
   padding: 30px;
@@ -19,7 +19,7 @@ $breakpoint-phone: 575px;
 }
 
 @media (max-width: $breakpoint-phone) {
-  #gallery-edit-settings-container, #cf-member-management-container, #cf-member-edit-container {
+  #gallery-edit-settings-container, #ca-member-management-container, #cf-member-edit-container {
     width: 100%;
     margin-left: 0px;
   }
@@ -37,7 +37,7 @@ $breakpoint-phone: 575px;
 }
 
 @media (max-width: $breakpoint-phone) {
-  #cf-member-management-container {
+  #ca-member-management-container {
     width: 100%;
     margin-left: 0px;
   }
