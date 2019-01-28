@@ -1,12 +1,1 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @gallery.name
-%p
-  %b Settings:
-  = @gallery.settings
-
-= (link_to 'Edit', edit_gallery_path(@gallery)) if can?(:edit, @gallery)
-\|
-= link_to 'Back', galleries_path
+#cf-customer-settings
