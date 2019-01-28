@@ -95,3 +95,15 @@ export const ErrorClassValidation = (error) => {
     "valid"
   }
 }
+
+export const CheckInputValidation = (object, state) => {
+  var invalid = false;
+
+  state.forEach((item) => {
+    if (item.length === 0) {
+      invalid = true
+    }
+  })
+
+  object.setState({ formInvalid: invalid })
+}

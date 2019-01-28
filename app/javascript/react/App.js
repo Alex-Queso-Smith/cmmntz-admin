@@ -6,6 +6,7 @@ import ArtsIndexContainer from './containers/articles/ArtsIndexContainer';
 import ArtsShowContainer from './containers/articles/ArtsShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
+import SessionLoginContainer from './containers/sessions/SessionLoginContainer';
 import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
 import SignupContainer from './containers/SignupContainer';
@@ -16,6 +17,7 @@ class App extends React.Component {
     return(
       <Router>
         <Switch>
+          <Route path='/customer_sessions' component={SessionLoginContainer} />
           <Route path='/galleries/:id' component={GalleryShowContainer} />
           <Route path='/arts/:id' component={ArtsShowContainer} />
           <Route path='/arts' component={ArtsIndexContainer} />
