@@ -35,9 +35,9 @@ class SessionLoginContainer extends React.Component {
 
       var login = new FormData();
 
-      login.append("user_session[email]", email);
-      login.append("user_session[password]", password);
-      login.append("user_session[remember_me]", rememberMe);
+      login.append("customer_session[email]", email);
+      login.append("customer_session[password]", password);
+      login.append("customer_session[remember_me]", rememberMe);
 
       FetchWithPush(this, `/api/v1/customer_sessions.json`, '/', 'POST', 'loginErrors', login)
       .catch(error => console.error(`Error in fetch: ${error.message}`));
