@@ -43,8 +43,7 @@ export const CommentTabs  = (props) => {
 export const MemberTabs = (props) => {
   const types = [
     ["Members", ""],
-    ["Create New Member", "new"],
-    ["Moderators", "mods"]
+    ["Create New Member", "new"]
   ]
 
   var links = types.map(type => {
