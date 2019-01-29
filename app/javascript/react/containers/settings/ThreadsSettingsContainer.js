@@ -6,7 +6,7 @@ import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
 import CommentFiltersContainer from '../comments/CommentFiltersContainer';
 
-class SiteSettingsContainer extends React.Component {
+class ThreadsSettingsContainer extends React.Component {
   state = {
     galleryId: "",
     name: "",
@@ -206,7 +206,7 @@ class SiteSettingsContainer extends React.Component {
 
     return(
       <div id="gallery-edit-settings-container">
-        Site Settings Here
+        Thread Settings Here
         <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
         <h5 className="text-center">Choose default sort and filter settings</h5>
@@ -283,4 +283,4 @@ class SiteSettingsContainer extends React.Component {
 }
 
 
-export default SiteSettingsContainer;
+export default ThreadsSettingsContainer;

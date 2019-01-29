@@ -16,6 +16,8 @@ import ModerationCommentsContainer from './containers/moderation/ModerationComme
 // Settings
 import SettingsBaseContainer from './containers/settings/SettingsBaseContainer'
 import SiteSettingsContainer from './containers/settings/SiteSettingsContainer'
+import ThreadsSettingsContainer from './containers/settings/ThreadsSettingsContainer'
+import ModerationSettingsContainer from './containers/settings/ModerationSettingsContainer'
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
 
 import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
@@ -80,8 +82,8 @@ class App extends React.Component {
               // Settings
               <Route path='/settings/site' component={SiteSettingsContainer} />
               <Route path='/settings/members' component={MemberManagementContainer} />
-              <Route path='/settings/threads' component={SiteSettingsContainer} />
-              <Route path='/settings/moderation' component={SiteSettingsContainer} />
+              <Route path='/settings/threads' component={ThreadsSettingsContainer} />
+              <Route path='/settings/moderation' component={ModerationSettingsContainer} />
               <Route path='/settings' component={SettingsBaseContainer} />
 
               // Help
