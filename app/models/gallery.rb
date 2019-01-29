@@ -40,4 +40,19 @@ class Gallery < ApplicationRecord
       }
     }
   end
+
+  def users_for_timeframe(timeframe = "")
+    since_date =
+    case timeframe
+    when "today"
+      Date.today.beginning_of_day
+    when "week"
+      Date.today.beginning_of_week
+    when "month"
+      Date.today.beginning_of_month
+    else
+      ""
+    end
+    ArtInteraction.users_for_gallery(self.id, since_date)
+  end
 end
