@@ -1,5 +1,4 @@
 import React from 'react';
-import Textarea from 'react-expanding-textarea';
 import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
@@ -19,7 +18,6 @@ class ThreadsSettingsContainer extends React.Component {
       votesFrom: "",
       hideAnonAndGuest: false
     },
-    censor: false,
     threadExpirationDays: "",
   }
 
@@ -35,9 +33,8 @@ class ThreadsSettingsContainer extends React.Component {
     .then(galleryData => {
 
       var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, hide_anon_and_guest } = galleryData.gallery.settings
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, thread_expiration_days, hide_anon_and_guest } = galleryData.gallery.settings
       var { id } = galleryData.gallery;
-      var censored = censor === "true" || censor === true ? true : false;
 
       opts.sortDir = sort_dir
       opts.sortType = sort_type
@@ -49,7 +46,6 @@ class ThreadsSettingsContainer extends React.Component {
 
       this.setState({
         sortOpts: opts,
-        censor: censored,
         threadExpirationDays: thread_expiration_days,
         galleryId: id
       })
@@ -157,12 +153,8 @@ class ThreadsSettingsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
-    const strip = (str) => {
-      return str.replace(/^\s+|\s+$/g, '');
-    }
-
     var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
-    var { censor, threadExpirationDays } = this.state;
+    var { threadExpirationDays } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[sort_dir]", sortDir);
@@ -171,7 +163,6 @@ class ThreadsSettingsContainer extends React.Component {
     gallery.append("gallery[filter_list]", filterList);
     gallery.append("gallery[comments_from]", commentsFrom);
     gallery.append("gallery[votes_from]", votesFrom);
-    gallery.append("gallery[censor]", censor);
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
     gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
