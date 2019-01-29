@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Input } from '../components/FormComponents';
-import { FetchWithPush, CreateErrorElements, CheckInputValidation, ErrorClassValidation } from '../util/CoreUtil';
+import { Input } from '../../components/FormComponents';
+import { FetchWithPush, CreateErrorElements, CheckInputValidation, ErrorClassValidation } from '../../util/CoreUtil';
 
 class SignupContainer extends React.Component {
   state = {
