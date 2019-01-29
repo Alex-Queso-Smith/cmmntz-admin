@@ -75,11 +75,29 @@ class DashboardContainer extends React.Component {
         </div>
         <div className="row justify-content-center">
 
-          <div className="col-4 ca-dashboard-tile">
+          <div className="col-4 ca-dashboard-tile ca-thread-tile">
+            <div className="row justify-content-center">
+              <div className="ca-thread-title">
+                Top Thread
+              </div>
+            </div>
           </div>
 
           <div className="col-4 ca-dashboard-tile ca-installation-help-tile">
-
+            <div className="row justify-content-center ca-installation-button">
+              <Link to={`/help/embed`}>
+                <button className="ca-tile-button btn">
+                  Installation
+                </button>
+              </Link>
+            </div>
+            <div className="row justify-content-center">
+              <Link to={`/help/embed`}>
+                <button className="ca-tile-button btn">
+                  Help / FAQ
+                </button>
+              </Link>
+            </div>
           </div>
 
           <div className="col-4 ca-dashboard-tile ca-users-tile">
