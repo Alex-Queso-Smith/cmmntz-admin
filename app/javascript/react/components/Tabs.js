@@ -122,3 +122,31 @@ export const GalleryTabs = (props) => {
     </div>
   )
 }
+
+export const ModerationSettingsTabs = (props) => {
+  const types = [
+    ["Rules", "rules"],
+    ["Users", "users"],
+    ["Email Notifications", "emails"]
+  ]
+
+  var links = types.map(type => {
+    return(
+      <LineItem
+        key={type[1]}
+        value={type[1]}
+        title={type[0]}
+        display={props.display}
+        onClick={props.onClick}
+      />
+    )
+  })
+
+  return(
+    <div className="cf-art-tabs">
+      <ul className="nav nav-tabs">
+        {links}
+      </ul>
+    </div>
+  )
+}
