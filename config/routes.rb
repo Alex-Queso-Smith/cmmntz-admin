@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :gallery_blacklistings, only: [:index]
   resources :gallery_artists, only: [:edit]
   resources :users, only: [:index]
-  resources :dashboard, only: [:index]
+  resources :dashboard, :moderation, only: [:index]
 
   namespace :api do
     namespace :v1 do

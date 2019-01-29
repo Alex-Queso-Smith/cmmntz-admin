@@ -9,7 +9,7 @@ class ArtCommentsContainer extends React.Component {
   state = {
     comments: [],
     manageIds: [],
-    display: "",
+    display: "pending",
     allSelected: false
   }
 

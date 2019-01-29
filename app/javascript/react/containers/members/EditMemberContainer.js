@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Input, RadioButton } from '../../components/FormComponents';
-import { FetchDidMount, FetchWithPush, CreateErrorElements, CheckInputValidation, ErrorClassValidation } from '../../util/CoreUtil';
+import { FetchDidMount, FetchWithPush, CreateErrorElements, ErrorClassValidation } from '../../util/CoreUtil';
 
 class EditMemberContainer extends React.Component {
   state = {
@@ -73,6 +73,7 @@ class EditMemberContainer extends React.Component {
   }
 
   render(){
+    var { memberErrors }
 
     return(
       <div id="cf-new-member-container" className="jumbotron center-form">
@@ -84,7 +85,9 @@ class EditMemberContainer extends React.Component {
             type='text'
             content={this.state.firstName}
             onChange={this.handleChange}
+            addClass={firstNameClass}
           />
+          {firstNameErrors}
           <Input
             name="lastName"
             label="Last Name"

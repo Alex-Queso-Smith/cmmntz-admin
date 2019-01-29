@@ -12,6 +12,7 @@ import CurrentUsersContainer from './containers/CurrentUsersContainer';
 import SignupContainer from './containers/SignupContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import NavBar from './containers/navigation/NavBar';
+import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
 
 class App extends React.Component {
   state = {
@@ -37,16 +38,29 @@ class App extends React.Component {
       <Router>
           <NavBar customerId={customerId} customerName={customerName} gallery={gallery}>
             <Switch>
-              <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
-              <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
+
+              // settings
               <Route path='/galleries/:id' component={GalleryShowContainer} />
-              <Route path='/arts/:id' component={ArtsShowContainer} />
-              <Route path='/arts' component={ArtsIndexContainer} />
               <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
               <Route path='/members' component={MemberManagementContainer} />
               <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
+
+              // Threads
+              <Route path='/arts/:id' component={ArtsShowContainer} />
+              <Route path='/arts' component={ArtsIndexContainer} />
+
+              // Users
               <Route path='/users' component={CurrentUsersContainer} />
+
+              // moderation
+              <Route path='/moderation' component={ModerationCommentsContainer} />
+
+              // special routes
               <Route path='/signup' component={SignupContainer} />
+              <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
+              <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
+              
+              // root
               <Route path='/' component={DashboardContainer} />
             </Switch>
           </NavBar>
