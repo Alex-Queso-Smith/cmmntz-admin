@@ -1,18 +1,32 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
+
+// Threads
 import ArtsIndexContainer from './containers/articles/ArtsIndexContainer';
 import ArtsShowContainer from './containers/articles/ArtsShowContainer';
-import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
-import MemberManagementContainer from './containers/members/MemberManagementContainer';
-import SessionLoginContainer from './containers/sessions/SessionLoginContainer';
-import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
+
+// Users
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
+
+// Moderation
+import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
+
+// Settings
+import MemberManagementContainer from './containers/members/MemberManagementContainer';
+import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
+import SettingsBaseContainer from './containers/settings/SettingsBaseContainer'
+import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
+import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
+
+// Help
+import HelpBaseContainer from './containers/help/HelpBaseContainer';
+
+// specials
+import NavBar from './containers/navigation/NavBar';
 import SignupContainer from './containers/SignupContainer';
 import DashboardContainer from './containers/DashboardContainer';
-import NavBar from './containers/navigation/NavBar';
-import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
+import SessionLoginContainer from './containers/sessions/SessionLoginContainer';
 
 class App extends React.Component {
   state = {
@@ -55,11 +69,17 @@ class App extends React.Component {
               // moderation
               <Route path='/moderation' component={ModerationCommentsContainer} />
 
+              // Settings
+              <Route path='/settings' component={SettingsBaseContainer} />
+
+              // Help
+              <Route path='/help' component={HelpBaseContainer} />
+
               // special routes
               <Route path='/signup' component={SignupContainer} />
               <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
               <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
-              
+
               // root
               <Route path='/' component={DashboardContainer} />
             </Switch>

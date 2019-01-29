@@ -35,11 +35,11 @@ class NavBar extends React.Component {
 
       links =
       <ul className="navbar-nav mr-auto">
-        <Link to={"/"} className="nav-link">Threads</Link>
-        <Link to={"/"} className="nav-link">Users</Link>
+        <Link to={"/threads"} className="nav-link">Threads</Link>
+        <Link to={"/users"} className="nav-link">Users</Link>
         <Link to={"/moderation"} className="nav-link">Moderation</Link>
-        <Link to={"/"} className="nav-link">Settings</Link>
-        <Link to={"/"} className="nav-link">Help</Link>
+        <Link to={"/settings"} className="nav-link">Settings</Link>
+        <Link to={"/help"} className="nav-link">Help</Link>
       </ul>
 
       galleryName = gallery
