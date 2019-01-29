@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
@@ -178,7 +177,6 @@ class ThreadsSettingsContainer extends React.Component {
     return(
       <div id="gallery-edit-settings-container">
         Thread Settings Here
-        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
         <h5 className="text-center">Choose default sort and filter settings</h5>
         <br />

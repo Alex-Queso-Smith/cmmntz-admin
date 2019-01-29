@@ -82,7 +82,6 @@ class RulesContainer extends React.Component {
     return(
       <div id="gallery-edit-settings-container">
         Moderation Settings Here
-        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
         <hr/>
         <Checkbox

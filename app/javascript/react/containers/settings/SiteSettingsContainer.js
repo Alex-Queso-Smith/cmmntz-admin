@@ -1,6 +1,5 @@
 import React from 'react';
 import Textarea from 'react-expanding-textarea';
-import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
@@ -76,7 +75,6 @@ class SiteSettingsContainer extends React.Component {
     return(
       <div id="gallery-edit-settings-container">
         Site Settings Here
-        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
         <Input
           name="name"
