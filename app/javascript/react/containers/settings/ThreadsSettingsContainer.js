@@ -173,7 +173,7 @@ class ThreadsSettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
+    var { sortOpts, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
@@ -190,14 +190,6 @@ class ThreadsSettingsContainer extends React.Component {
           handleFilterByClick={this.handleFilterByClick}
           onChange={this.handleSortOptCheckChange}
         />
-        <div className="row">
-          <Checkbox
-            onChange={this.handleChange}
-            name={"censor"}
-            label={"Censor all comments?"}
-            checked={censor}
-          />
-        </div>
         <hr />
 
         <Input
