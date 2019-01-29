@@ -4,28 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
-import CommentFiltersContainer from '../comments/CommentFiltersContainer';
 
 class ThreadsSettingsContainer extends React.Component {
   state = {
     galleryId: "",
-    name: "",
-    sortOpts: {
-      sortDir: 'desc',
-      sortType: 'created_at',
-      notFilterList: [],
-      filterList: [],
-      commentsFrom: "",
-      votesFrom: "",
-      hideAnonAndGuest: false
-    },
-    censor: false,
     commentApprovalNeeded: false,
     guestApprovalNeeded: false,
     notifyOnNewComment: false,
     notifyOnCommentApprovalNeeded: false,
-    threadExpirationDays: "",
-    commentEtiquette: ""
+    threadExpirationDays: ""
   }
 
   handleFilterByClick = this.handleFilterByClick.bind(this);
@@ -39,30 +26,17 @@ class ThreadsSettingsContainer extends React.Component {
     FetchDidMount(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`)
     .then(galleryData => {
 
-      var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
-      var { id, name, comment_etiquette } = galleryData.gallery;
+      var {  thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
+      var { id } = galleryData.gallery;
       var censored = censor === "true" || censor === true ? true : false;
       var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
       var guestApprovalNeeded = guest_approval_needed === "true" || guest_approval_needed === true ? true : false;
       var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" || notify_on_comment_approval_needed === true ? true : false;
       var notifyOnNewComment = notify_on_new_comment === "true" || notify_on_new_comment === true ? true : false;
 
-      opts.sortDir = sort_dir
-      opts.sortType = sort_type
-      opts.commentsFrom = comments_from
-      opts.votesFrom = votes_from
-      opts.hideAnonAndGuest = hide_anon_and_guest
-      if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
-      if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
-
       this.setState({
-        sortOpts: opts,
-        censor: censored,
         threadExpirationDays: thread_expiration_days,
-        name: name,
         galleryId: id,
-        commentEtiquette: comment_etiquette,
         commentApprovalNeeded: commentApprovalNeeded,
         guestApprovalNeeded: guestApprovalNeeded,
         notifyOnNewComment: notifyOnNewComment,
@@ -172,23 +146,11 @@ class ThreadsSettingsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
-    const strip = (str) => {
-      return str.replace(/^\s+|\s+$/g, '');
-    }
-
     var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
     var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
-    gallery.append("gallery[sort_dir]", sortDir);
-    gallery.append("gallery[sort_type]", sortType);
-    gallery.append("gallery[not_filter_list]", notFilterList);
-    gallery.append("gallery[filter_list]", filterList);
-    gallery.append("gallery[comments_from]", commentsFrom);
-    gallery.append("gallery[votes_from]", votesFrom);
-    gallery.append("gallery[censor]", censor);
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
-    gallery.append("gallery[comment_etiquette]", strip(commentEtiquette))
     gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
     gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
     gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
@@ -209,35 +171,6 @@ class ThreadsSettingsContainer extends React.Component {
         Thread Settings Here
         <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
-        <h5 className="text-center">Choose default sort and filter settings</h5>
-        <br />
-        <CommentFiltersContainer
-          sortOpts={sortOpts}
-          handleFilterSubmit={this.handleChange}
-          handleSortDirClick={this.handleSortDirClick}
-          handleFilterClick={this.handleFilterClick}
-          handleFilterByClick={this.handleFilterByClick}
-          onChange={this.handleSortOptCheckChange}
-        />
-        <div className="row">
-          <Checkbox
-            onChange={this.handleChange}
-            name={"censor"}
-            label={"Censor all comments?"}
-            checked={censor}
-          />
-        </div>
-        <div className="text-center text-medium margin-top-10px">Commenting Etiquette</div>
-        <Textarea
-          maxLength="8000"
-          className="form-control margin-top-10px textarea"
-          name="commentEtiquette"
-          placeholder="Insert your custom commenting etiquette here or leave blank to use Classibridge default etiquette!"
-          value={commentEtiquette}
-          onChange={this.handleChange}
-          rows={10}
-        />
-        <hr />
         <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
         <Checkbox
           onChange={this.handleChange}

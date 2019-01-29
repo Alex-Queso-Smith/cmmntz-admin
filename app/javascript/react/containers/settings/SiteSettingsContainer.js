@@ -4,27 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
-import CommentFiltersContainer from '../comments/CommentFiltersContainer';
 
 class SiteSettingsContainer extends React.Component {
   state = {
     galleryId: "",
     name: "",
-    sortOpts: {
-      sortDir: 'desc',
-      sortType: 'created_at',
-      notFilterList: [],
-      filterList: [],
-      commentsFrom: "",
-      votesFrom: "",
-      hideAnonAndGuest: false
-    },
-    censor: false,
-    commentApprovalNeeded: false,
-    guestApprovalNeeded: false,
-    notifyOnNewComment: false,
-    notifyOnCommentApprovalNeeded: false,
-    threadExpirationDays: "",
     commentEtiquette: ""
   }
 
@@ -39,26 +23,14 @@ class SiteSettingsContainer extends React.Component {
     FetchDidMount(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`)
     .then(galleryData => {
 
-      var opts = this.state.sortOpts
-      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, censor, thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
+      var { thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
       var { id, name, comment_etiquette } = galleryData.gallery;
-      var censored = censor === "true" || censor === true ? true : false;
       var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
       var guestApprovalNeeded = guest_approval_needed === "true" || guest_approval_needed === true ? true : false;
       var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" || notify_on_comment_approval_needed === true ? true : false;
       var notifyOnNewComment = notify_on_new_comment === "true" || notify_on_new_comment === true ? true : false;
 
-      opts.sortDir = sort_dir
-      opts.sortType = sort_type
-      opts.commentsFrom = comments_from
-      opts.votesFrom = votes_from
-      opts.hideAnonAndGuest = hide_anon_and_guest
-      if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
-      if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
-
       this.setState({
-        sortOpts: opts,
-        censor: censored,
         threadExpirationDays: thread_expiration_days,
         name: name,
         galleryId: id,
@@ -180,20 +152,7 @@ class SiteSettingsContainer extends React.Component {
     var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
 
     var gallery = new FormData();
-    gallery.append("gallery[sort_dir]", sortDir);
-    gallery.append("gallery[sort_type]", sortType);
-    gallery.append("gallery[not_filter_list]", notFilterList);
-    gallery.append("gallery[filter_list]", filterList);
-    gallery.append("gallery[comments_from]", commentsFrom);
-    gallery.append("gallery[votes_from]", votesFrom);
-    gallery.append("gallery[censor]", censor);
-    gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
     gallery.append("gallery[comment_etiquette]", strip(commentEtiquette))
-    gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
-    gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
-    gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
-    gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
-    gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
     FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -202,31 +161,13 @@ class SiteSettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
+    var { commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
         Site Settings Here
         <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
-        <h5 className="text-center">Choose default sort and filter settings</h5>
-        <br />
-        <CommentFiltersContainer
-          sortOpts={sortOpts}
-          handleFilterSubmit={this.handleChange}
-          handleSortDirClick={this.handleSortDirClick}
-          handleFilterClick={this.handleFilterClick}
-          handleFilterByClick={this.handleFilterByClick}
-          onChange={this.handleSortOptCheckChange}
-        />
-        <div className="row">
-          <Checkbox
-            onChange={this.handleChange}
-            name={"censor"}
-            label={"Censor all comments?"}
-            checked={censor}
-          />
-        </div>
         <div className="text-center text-medium margin-top-10px">Commenting Etiquette</div>
         <Textarea
           maxLength="8000"
@@ -236,41 +177,6 @@ class SiteSettingsContainer extends React.Component {
           value={commentEtiquette}
           onChange={this.handleChange}
           rows={10}
-        />
-        <hr />
-        <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
-        <Checkbox
-          onChange={this.handleChange}
-          name={"commentApprovalNeeded"}
-          label={"Approve all comments before displaying?"}
-          checked={commentApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"guestApprovalNeeded"}
-          label={"Approve Guest comments before displaying?"}
-          checked={guestApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"notifyOnCommentApprovalNeeded"}
-          label={"Receive notification on comments needing approval?"}
-          checked={notifyOnCommentApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"notifyOnNewComment"}
-          label={"Notify when new comment posted?"}
-          checked={notifyOnNewComment}
-        />
-
-        <Input
-          name="threadExpirationDays"
-          label="Expire threads after how many days?"
-          onChange={this.handleChange}
-          content={threadExpirationDays}
-          type="input"
-          addClass={"input-small"}
         />
         <div className="margin-top-10px text-center">
           <button className="btn btn-med btn-dark" onClick={this.handleSubmit}>
