@@ -9,7 +9,12 @@ class NavBar extends React.Component {
     var { customerId, customerName, gallery } = this.props;
 
     var titleStyle = {
-      color: "#ffffff"
+      color: "#ffffff",
+      margin: "0px"
+    }
+
+    var firstLinkStyle = {
+      marginLeft: "10px"
     }
 
     var galleryName = "ClassiAdmin";
@@ -35,7 +40,7 @@ class NavBar extends React.Component {
 
       links =
       <ul className="navbar-nav mr-auto">
-        <Link to={"/threads"} className="nav-link">Threads</Link>
+        <Link style={firstLinkStyle} to={"/threads"} className="nav-link">Threads</Link>
         <Link to={"/users"} className="nav-link">Users</Link>
         <li className="nav-item dropdown mr-auto">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,7 +86,7 @@ class NavBar extends React.Component {
     return(
       <div className="ca-navbar">
       <nav id="cf-navbar" className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <h2 style={titleStyle}>{galleryName}</h2>
+        <h3 style={titleStyle}>{galleryName}</h3>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {links}
