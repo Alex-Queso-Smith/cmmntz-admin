@@ -162,7 +162,7 @@ class ThreadsSettingsContainer extends React.Component {
     }
 
     var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
-    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
+    var { censor, threadExpirationDays } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[sort_dir]", sortDir);
@@ -207,16 +207,6 @@ class ThreadsSettingsContainer extends React.Component {
             checked={censor}
           />
         </div>
-        <div className="text-center text-medium margin-top-10px">Commenting Etiquette</div>
-        <Textarea
-          maxLength="8000"
-          className="form-control margin-top-10px textarea"
-          name="commentEtiquette"
-          placeholder="Insert your custom commenting etiquette here or leave blank to use Classibridge default etiquette!"
-          value={commentEtiquette}
-          onChange={this.handleChange}
-          rows={10}
-        />
         <hr />
 
         <Input
