@@ -36,7 +36,7 @@ class SiteSettingsContainer extends React.Component {
   handleSortOptCheckChange = this.handleSortOptCheckChange.bind(this);
 
   componentDidMount(){
-    FetchDidMount(this, `/api/v1/galleries/${this.props.galleryId}.json`)
+    FetchDidMount(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`)
     .then(galleryData => {
 
       var opts = this.state.sortOpts
@@ -195,7 +195,7 @@ class SiteSettingsContainer extends React.Component {
     gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
     gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
-    FetchWithPush(this, `/api/v1/galleries/${this.props.match.params.id}.json`, '/', 'PATCH', 'saveErrors', gallery)
+    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
     .then(redirect => { alert('Settings updated!') })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
