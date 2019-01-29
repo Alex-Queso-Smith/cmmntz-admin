@@ -31,9 +31,11 @@ import EmbedContainer from './containers/help/EmbedContainer';
 import ModerationHelpContainer from './containers/help/ModerationHelpContainer';
 import FaqContainer from './containers/help/FaqContainer';
 
+// signup
+import SignupContainer from './containers/signup/SignupContainer';
+
 // specials
 import NavBar from './containers/navigation/NavBar';
-import SignupContainer from './containers/SignupContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import SessionLoginContainer from './containers/sessions/SessionLoginContainer';
 
