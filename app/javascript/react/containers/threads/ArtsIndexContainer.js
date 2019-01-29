@@ -23,7 +23,7 @@ class ArtsIndexContainer extends React.Component {
       var art = row.art
       return(
         <div key={`art_${art.id}`} >
-          <h4>{art.type}: <Link to={`/arts/${art.id}`} >{art.url}</Link></h4>
+          <h4>{art.type}: <Link to={`/threads/${art.id}`} >{art.url}</Link></h4>
           <p>Artist: {art.artist}</p>
           <p>Status: {art.status}</p>
           <p>Publication Date: {art.publishedAt}</p>

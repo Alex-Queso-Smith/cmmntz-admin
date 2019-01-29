@@ -35,11 +35,44 @@ class NavBar extends React.Component {
 
       links =
       <ul className="navbar-nav mr-auto">
-        <Link to={"/"} className="nav-link">Threads</Link>
-        <Link to={"/"} className="nav-link">Users</Link>
-        <Link to={"/"} className="nav-link">Moderation</Link>
-        <Link to={"/"} className="nav-link">Settings</Link>
-        <Link to={"/"} className="nav-link">Help</Link>
+        <Link to={"/threads"} className="nav-link">Threads</Link>
+        <Link to={"/users"} className="nav-link">Users</Link>
+        <li className="nav-item dropdown mr-auto">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Moderation
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <Link to="/moderation" className="dropdown-item" >Moderation</Link>
+            <div className="dropdown-divider"/>
+            <Link to="/moderation/comments" className="dropdown-item" >Comments</Link>
+            <Link to="/moderation/moderators" className="dropdown-item" >Moderators</Link>
+          </div>
+        </li>
+        <li className="nav-item dropdown mr-auto">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Settings
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <Link to="/settings" className="dropdown-item" >Settings</Link>
+            <div className="dropdown-divider"/>
+            <Link to="/settings/site" className="dropdown-item" >Site</Link>
+            <Link to="/settings/moderation" className="dropdown-item" >Moderation</Link>
+            <Link to="/settings/threads" className="dropdown-item" >Threads</Link>
+            <Link to="/settings/members" className="dropdown-item" >Members</Link>
+          </div>
+        </li>
+        <li className="nav-item dropdown mr-auto">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Help
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <Link to="/help" className="dropdown-item" >Help</Link>
+            <div className="dropdown-divider"/>
+            <Link to="/help/embed" className="dropdown-item" >Embed</Link>
+            <Link to="/help/moderation" className="dropdown-item" >Moderation</Link>
+            <Link to="/help/faq" className="dropdown-item" >FAQ</Link>
+          </div>
+        </li>
       </ul>
 
       galleryName = gallery

@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class Settings::ModerationController < ApplicationController
   def index
     render '/shared/react_blank_page.haml'
   end

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Input, RadioButton } from '../../components/FormComponents';
-import { FetchDidMount, FetchWithPush } from '../../util/CoreUtil';
+import { FetchDidMount, FetchWithPush, CreateErrorElements, ErrorClassValidation } from '../../util/CoreUtil';
 
 class EditMemberContainer extends React.Component {
   state = {
@@ -58,19 +58,22 @@ class EditMemberContainer extends React.Component {
     member.append("customer[first_name]", firstName);
     member.append("customer[last_name]", lastName);
     member.append("customer[email]", email);
-    member.append("customer[password]", password);
-    member.append("customer[password_confirmation]", passwordConfirmation);
+    if (password) {
+      member.append("customer[password]", password);
+      member.append("customer[password_confirmation]", passwordConfirmation);
+    }
 
     FetchWithPush(this, `/api/v1/customers/${this.props.match.params.id}.json`, '/', 'PATCH', 'memberErrors', member)
       .then(body => {
         alert(`${body.message}`)
-        this.handleClear()
+        // this.handleClear()
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 
   render(){
+    var { memberErrors }
 
     return(
       <div id="cf-new-member-container" className="jumbotron center-form">
@@ -82,7 +85,9 @@ class EditMemberContainer extends React.Component {
             type='text'
             content={this.state.firstName}
             onChange={this.handleChange}
+            addClass={firstNameClass}
           />
+          {firstNameErrors}
           <Input
             name="lastName"
             label="Last Name"
