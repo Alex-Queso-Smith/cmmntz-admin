@@ -214,9 +214,44 @@
 
 .ca-installation-help-tile {
   .ca-installation-button {
-
+    margin-bottom: 20px;
   }
 
-  .ca-help-button { 
+  .ca-help-button {
+
+  }
+  a {
+    width: 60%;
+    &:hover {
+      color: none;
+      text-decoration: none;
+      border-radius: .25rem;
+
+    }
+  }
+  .ca-tile-button {
+    width: 100%;
+    color: #800080;
+    border: 2px solid #800080;
+    background-color: #ffffff;
+
+    &:focus {
+      box-shadow: 0 0 0 0;
+    }
+
+    &:hover{
+      color: #ffffff;
+      background: #800080;
+      border: 2px solid #800080;
+    }
+  }
+}
+
+.ca-thread-tile {
+  .ca-thread-title{
+    font-size: 1.75em;
+    font-style: italic;
+    font-weight: bold;
+    color: #7A7A7A;
   }
 }
