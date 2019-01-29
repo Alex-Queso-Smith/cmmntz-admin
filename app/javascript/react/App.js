@@ -10,6 +10,7 @@ import ArtsShowContainer from './containers/threads/ArtsShowContainer';
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
 
 // Moderation
+import ModerationBaseContainer from './containers/moderation/ModerationBaseContainer';
 import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
 
 // Settings
@@ -70,7 +71,8 @@ class App extends React.Component {
               <Route path='/users' component={CurrentUsersContainer} />
 
               // moderation
-              <Route path='/moderation' component={ModerationCommentsContainer} />
+              <Route path='/moderation/comments' component={ModerationCommentsContainer} />
+              <Route path='/moderation' component={ModerationBaseContainer} />
 
               // Settings
               <Route path='/settings' component={SettingsBaseContainer} />

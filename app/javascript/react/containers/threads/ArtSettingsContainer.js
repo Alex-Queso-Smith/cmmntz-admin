@@ -7,7 +7,7 @@ import { Checkbox, Input } from '../../components/FormComponents';
 class ArtsSettingsContainer extends React.Component {
   state = {
     id: '',
-    type: '',
+    arttType: '',
     topics: '',
     ignoreWarningChecker: false,
     disabled: false,
@@ -24,7 +24,7 @@ class ArtsSettingsContainer extends React.Component {
       var art = artData.art
       this.setState({
         id: art.id,
-        type: art.type,
+        artType: art.art_type,
         topics: art.topics,
         ignoreWarningChecker: art.ignore_warning_checker,
         disabled: art.disabled,
@@ -55,10 +55,10 @@ class ArtsSettingsContainer extends React.Component {
       return str.replace(/^\s+|\s+$/g, '');
     }
 
-    var { id, type, topics, ignoreWarningChecker, disabled, deactivated, disabledMessage } = this.state
+    var { id, artType, topics, ignoreWarningChecker, disabled, deactivated, disabledMessage } = this.state
 
     var art = new FormData();
-    art.append("art[art_type]", type)
+    art.append("art[art_type]", artType)
     art.append("art[topics_list]", topics)
     art.append("art[ignore_warning_checker]", ignoreWarningChecker)
     art.append("art[disabled]", disabled)
@@ -80,15 +80,15 @@ class ArtsSettingsContainer extends React.Component {
 
 
   render(){
-    var { type, topics, ignoreWarningChecker, disabled, deactivated, disabledMessage } = this.state
+    var { artType, topics, ignoreWarningChecker, disabled, deactivated, disabledMessage } = this.state
 
     return(
       <div id="art-edit-settings-container">
         <Input
-          name="type"
+          name="artType"
           label="What Type Of Article is this?"
           onChange={this.handleChange}
-          content={type}
+          content={artType}
           type="input"
           addClass={"input-medium"}
         />

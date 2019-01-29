@@ -1,4 +1,4 @@
-class ThreadsController < ApplicationController
+class Moderation::CommentsController < ApplicationController
   def index
     render '/shared/react_blank_page.haml'
   end

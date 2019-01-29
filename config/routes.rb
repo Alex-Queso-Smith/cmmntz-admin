@@ -3,28 +3,25 @@ Rails.application.routes.draw do
   resources :customers, path: 'members', as: :members
   resources :galleries
   resources :arts, only: [:index, :show, :edit, :update]
+  resources :arts, only: [:index, :show, :edit, :update], path: 'threads', as: :threads
   resources :customer_sessions, only: [:new, :create, :destroy]
   resources :signups, only: [:new, :create]
   resources :comments, only: [:update]
   resources :gallery_blacklistings, only: [:index]
   resources :gallery_artists, only: [:edit]
   resources :users, only: [:index]
-  resources :dashboard, :moderation, :settings, :help, :threads, only: [:index]
+  resources :dashboard, :moderation, :settings, :help, only: [:index]
 
   namespace :help do
     resources :embed, :moderation, :faq, only: [:index]
   end
 
   namespace :settings do
-
+    resources :site, :moderation, :threads, :members, only: [:index]
   end
 
   namespace :moderation do
-
-  end
-
-  namespace :threads do
-
+    resources :comments, :moderators, only: [:index]
   end
 
   namespace :api do
