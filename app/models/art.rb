@@ -1,5 +1,5 @@
 class Art < ApplicationRecord
-  self.per_page = 10 # results per page default
+  self.per_page = 10000 # results per page default
 
   vstr 'settings', {
     ignore_warning_checker: :bool
@@ -65,7 +65,7 @@ class Art < ApplicationRecord
   end
 
   def self.search(filters, page)
-    scope = self.where({})
+    scope = self.where({}).includes(:pending_comments, :deleted_comments, :approved_comments, :flagged_comments)
     scope = scope.page(page)
     scope
   end
