@@ -8,10 +8,6 @@ import { Checkbox, Input } from '../../components/FormComponents';
 class ThreadsSettingsContainer extends React.Component {
   state = {
     galleryId: "",
-    commentApprovalNeeded: false,
-    guestApprovalNeeded: false,
-    notifyOnNewComment: false,
-    notifyOnCommentApprovalNeeded: false,
     threadExpirationDays: ""
   }
 
@@ -26,21 +22,12 @@ class ThreadsSettingsContainer extends React.Component {
     FetchDidMount(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`)
     .then(galleryData => {
 
-      var {  thread_expiration_days, comment_approval_needed, notify_on_comment_approval_needed, guest_approval_needed, notify_on_new_comment, hide_anon_and_guest } = galleryData.gallery.settings
+      var { thread_expiration_days } = galleryData.gallery.settings
       var { id } = galleryData.gallery;
-      var censored = censor === "true" || censor === true ? true : false;
-      var commentApprovalNeeded = comment_approval_needed === "true" || comment_approval_needed === true ? true : false;
-      var guestApprovalNeeded = guest_approval_needed === "true" || guest_approval_needed === true ? true : false;
-      var notifyOnCommentApprovalNeeded = notify_on_comment_approval_needed === "true" || notify_on_comment_approval_needed === true ? true : false;
-      var notifyOnNewComment = notify_on_new_comment === "true" || notify_on_new_comment === true ? true : false;
 
       this.setState({
         threadExpirationDays: thread_expiration_days,
-        galleryId: id,
-        commentApprovalNeeded: commentApprovalNeeded,
-        guestApprovalNeeded: guestApprovalNeeded,
-        notifyOnNewComment: notifyOnNewComment,
-        notifyOnCommentApprovalNeeded: notifyOnCommentApprovalNeeded
+        galleryId: id
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -146,16 +133,10 @@ class ThreadsSettingsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
-    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
-    var { censor, threadExpirationDays, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment } = this.state;
+    var { threadExpirationDays } = this.state;
 
     var gallery = new FormData();
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
-    gallery.append("gallery[comment_approval_needed]", commentApprovalNeeded)
-    gallery.append("gallery[guest_approval_needed]", guestApprovalNeeded)
-    gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
-    gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
-    gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
     FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -172,31 +153,6 @@ class ThreadsSettingsContainer extends React.Component {
         <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
         <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
-        <Checkbox
-          onChange={this.handleChange}
-          name={"commentApprovalNeeded"}
-          label={"Approve all comments before displaying?"}
-          checked={commentApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"guestApprovalNeeded"}
-          label={"Approve Guest comments before displaying?"}
-          checked={guestApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"notifyOnCommentApprovalNeeded"}
-          label={"Receive notification on comments needing approval?"}
-          checked={notifyOnCommentApprovalNeeded}
-        />
-        <Checkbox
-          onChange={this.handleChange}
-          name={"notifyOnNewComment"}
-          label={"Notify when new comment posted?"}
-          checked={notifyOnNewComment}
-        />
-
         <Input
           name="threadExpirationDays"
           label="Expire threads after how many days?"
