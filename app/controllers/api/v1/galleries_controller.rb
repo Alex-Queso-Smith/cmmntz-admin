@@ -17,6 +17,7 @@ class Api::V1::GalleriesController < ApiController
   def gallery_params
     params.require(:gallery).permit(
         :name,
+        :site_url,
         :comments_from,
         :votes_from,
         :filter_list,

@@ -48,20 +48,14 @@ class ModerationSettingsContainer extends React.Component {
     var value;
     if (target.type === "checkbox") {
       value = target.checked
-      this.setState({ [name]: value })
     } else {
       if (target.getAttribute('data-value')) {
         value = target.getAttribute('data-value')
       } else {
         value = target.value
-        this.setState({ [name]: value })
-      };
-
-      var opts = this.state.sortOpts
-      opts[name] = value
-
-      this.setState({ sortOpts: opts })
+      }
     }
+    this.setState({ [name]: value })
   };
 
   handleSubmit(event){

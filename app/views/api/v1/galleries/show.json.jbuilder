@@ -1,6 +1,7 @@
 json.gallery do
   json.id @gallery.id
   json.name @gallery.name
+  json.site_url @gallery.site_url
   json.comment_etiquette @gallery.comment_etiquette || ""
   json.settings do
     json.comments_from @gallery.comments_from || ""
