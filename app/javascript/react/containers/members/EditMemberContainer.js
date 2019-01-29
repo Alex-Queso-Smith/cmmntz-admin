@@ -60,8 +60,6 @@ class EditMemberContainer extends React.Component {
     member.append("customer[email]", email);
     if (password) {
       member.append("customer[password]", password);
-    }
-    if (passwordConfirmation) {
       member.append("customer[password_confirmation]", passwordConfirmation);
     }
 
