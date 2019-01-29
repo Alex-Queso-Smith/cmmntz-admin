@@ -21,6 +21,9 @@ import GalleryArtistEditContainer from './containers/members/GalleryArtistEditCo
 
 // Help
 import HelpBaseContainer from './containers/help/HelpBaseContainer';
+import EmbedContainer from './containers/help/EmbedContainer';
+import ModerationHelpContainer from './containers/help/ModerationHelpContainer';
+import FaqContainer from './containers/help/FaqContainer';
 
 // specials
 import NavBar from './containers/navigation/NavBar';
@@ -73,6 +76,9 @@ class App extends React.Component {
               <Route path='/settings' component={SettingsBaseContainer} />
 
               // Help
+              <Route path='/help/embed' component={EmbedContainer} />
+              <Route path='/help/moderation' component={ModerationHelpContainer} />
+              <Route path='/help/faq' component={FaqContainer} />
               <Route path='/help' component={HelpBaseContainer} />
 
               // special routes

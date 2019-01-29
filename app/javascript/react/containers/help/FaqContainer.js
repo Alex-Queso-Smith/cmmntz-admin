@@ -1,15 +1,15 @@
 import React from 'react'
 
-class HelpBaseContainer extends React.Component {
+class FaqContainer extends React.Component {
   state = {
   }
 
   render() {
     return(
       <div className="cf-settings-base container">
-        help base page
+        FAQ page
       </div>
     )
   }
 }
-export default HelpBaseContainer;
+export default FaqContainer;

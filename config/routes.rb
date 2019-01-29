@@ -11,6 +11,22 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
   resources :dashboard, :moderation, :settings, :help, :threads, only: [:index]
 
+  namespace :help do
+    resources :embed, :moderation, :faq, only: [:index]
+  end
+
+  namespace :settings do
+
+  end
+
+  namespace :moderation do
+
+  end
+
+  namespace :threads do
+
+  end
+
   namespace :api do
     namespace :v1 do
       resources :customer_sessions, only: [:create]
