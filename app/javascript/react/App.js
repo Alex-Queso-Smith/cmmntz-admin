@@ -62,7 +62,6 @@ class App extends React.Component {
               // settings
               <Route path='/galleries/:id' component={GalleryShowContainer} />
               <Route path='/gallery_blacklistings' component={BannedUsersContainer} />
-              <Route path='/members' component={MemberManagementContainer} />
               <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
 
               // Threads
