@@ -13,7 +13,11 @@ class ArtsInfoContainer extends React.Component {
       threadStarted: '',
       lastInteraction: '',
       topics: '',
-      pendingComments: ''
+      pendingComments: 0,
+      flaggedComments: 0,
+      approvedComments: 0,
+      deletedComments: 0,
+      interactions: 0
     }
   }
 
@@ -28,7 +32,7 @@ class ArtsInfoContainer extends React.Component {
 
 
   render(){
-    var {id, type, url, artist, status, publishedAt, threadStarted, lastInteraction, topics, pendingComments } = this.state.artData
+    var {id, type, url, artist, status, publishedAt, threadStarted, lastInteraction, topics, pendingComments, flaggedComments, approvedComments, deletedComments, interactions } = this.state.artData
 
     return(
       <div>
@@ -40,6 +44,10 @@ class ArtsInfoContainer extends React.Component {
         <p>Last User Interaction: {lastInteraction}</p>
         <p>Topics: {topics}</p>
         <p>Pending Comments: {pendingComments}</p>
+        <p>Flagged Comments: {flaggedComments}</p>
+        <p>Approved Comments: {approvedComments}</p>
+        <p>Deleted Comments: {deletedComments}</p>
+        <p>Users: {interactions}</p>
 
       </div>
     )

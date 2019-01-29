@@ -34,6 +34,7 @@ class ArtsIndexContainer extends React.Component {
           <p>Flagged Comments: {art.flaggedComments}</p>
           <p>Approved Comments: {art.approvedComments}</p>
           <p>Deleted Comments: {art.deletedComments}</p>
+          <p>Users: {art.interactions}</p>
           <hr/>
         </div>
       )
