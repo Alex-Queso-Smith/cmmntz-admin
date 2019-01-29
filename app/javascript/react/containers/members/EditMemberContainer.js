@@ -58,13 +58,17 @@ class EditMemberContainer extends React.Component {
     member.append("customer[first_name]", firstName);
     member.append("customer[last_name]", lastName);
     member.append("customer[email]", email);
-    member.append("customer[password]", password);
-    member.append("customer[password_confirmation]", passwordConfirmation);
+    if (password) {
+      member.append("customer[password]", password);
+    }
+    if (passwordConfirmation) {
+      member.append("customer[password_confirmation]", passwordConfirmation);
+    }
 
     FetchWithPush(this, `/api/v1/customers/${this.props.match.params.id}.json`, '/', 'PATCH', 'memberErrors', member)
       .then(body => {
         alert(`${body.message}`)
-        this.handleClear()
+        // this.handleClear()
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
 
