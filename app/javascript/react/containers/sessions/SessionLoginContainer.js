@@ -45,7 +45,8 @@ class SessionLoginContainer extends React.Component {
         element.setAttribute('data-customer-id', body.id);
         element.setAttribute('data-customer-name', body.name);
         element.setAttribute('data-customer-gallery', body.gallery);
-        this.props.updateAppData(body.id, body.name, body.gallery)
+        element.setAttribute('data-gallery-id', body.galleryId);
+        this.props.updateAppData(body.id, body.name, body.gallery, body.galleryId)
 
         this.props.history.push('/');
       })

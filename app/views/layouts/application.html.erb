@@ -13,7 +13,7 @@
 
   <body id="body">
     <div id="body-container" class="container-fluid">
-      <div id="ca-app" data-customer-id="<%= current_customer.id if current_customer %>" data-customer-name="<%= current_customer.name if current_customer %>" data-customer-gallery="<%= current_customer.gallery.name if current_customer %>"/>
+      <div id="ca-app" data-customer-id="<%= current_customer.id if current_customer %>" data-customer-name="<%= current_customer.name if current_customer %>" data-customer-gallery="<%= current_customer.gallery.name if current_customer %>" data-gallery-id="<%= current_customer.gallery_id if current_customer %>" />
       <%= yield %>
     </div>
 

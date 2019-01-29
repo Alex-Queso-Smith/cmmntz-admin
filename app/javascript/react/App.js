@@ -38,16 +38,18 @@ class App extends React.Component {
   state = {
     customerId: document.getElementById('ca-app').getAttribute('data-customer-id'),
     customerName: document.getElementById('ca-app').getAttribute('data-customer-name'),
-    gallery: document.getElementById('ca-app').getAttribute('data-customer-gallery')
+    gallery: document.getElementById('ca-app').getAttribute('data-customer-gallery'),
+    galleryId: document.getElementById('ca-app').getAttribute('data-gallery-id')
   }
 
   updateAppData = this.updateAppData.bind(this);
 
-  updateAppData(id, name, gallery){
+  updateAppData(id, name, gallery, galleryId){
     this.setState({
       customerId: id,
       customerName: name,
-      gallery: gallery
+      gallery: gallery,
+      galleryId: galleryId
     })
   }
 
