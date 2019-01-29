@@ -14,9 +14,11 @@ import ModerationBaseContainer from './containers/moderation/ModerationBaseConta
 import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
 
 // Settings
-import MemberManagementContainer from './containers/members/MemberManagementContainer';
-import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
 import SettingsBaseContainer from './containers/settings/SettingsBaseContainer'
+import SiteSettingsContainer from './containers/settings/SiteSettingsContainer'
+import MemberManagementContainer from './containers/members/MemberManagementContainer';
+
+import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
 import GalleryArtistEditContainer from './containers/members/GalleryArtistEditContainer';
 
@@ -75,6 +77,10 @@ class App extends React.Component {
               <Route path='/moderation' component={ModerationBaseContainer} />
 
               // Settings
+              <Route path='/settings/site' component={SiteSettingsContainer} />
+              <Route path='/settings/members' component={MemberManagementContainer} />
+              <Route path='/settings/threads' component={SiteSettingsContainer} />
+              <Route path='/settings/moderation' component={SiteSettingsContainer} />
               <Route path='/settings' component={SettingsBaseContainer} />
 
               // Help
