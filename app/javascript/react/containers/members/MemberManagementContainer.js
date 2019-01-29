@@ -3,7 +3,6 @@ import React from 'react';
 import { MemberTabs } from '../../components/Tabs';
 import MembersContainer from './MembersContainer';
 import NewMemberContainer from './NewMemberContainer';
-import ModeratorsContainer from './ModeratorsContainer';
 
 class MemberManagementContainer extends React.Component {
   state = {
@@ -36,12 +35,6 @@ class MemberManagementContainer extends React.Component {
       case "new":
         page =
         <NewMemberContainer
-
-        />
-        break;
-      case "mods":
-        page =
-        <ModeratorsContainer
 
         />
         break;

@@ -1,14 +1,23 @@
 import React from 'react';
-import Textarea from 'react-expanding-textarea';
-import { Link } from 'react-router-dom';
 
 import { FetchWithPush, FetchDidMount } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
+import CommentFiltersContainer from '../comments/CommentFiltersContainer';
 
 class ThreadsSettingsContainer extends React.Component {
   state = {
     galleryId: "",
-    threadExpirationDays: ""
+    name: "",
+    sortOpts: {
+      sortDir: 'desc',
+      sortType: 'created_at',
+      notFilterList: [],
+      filterList: [],
+      commentsFrom: "",
+      votesFrom: "",
+      hideAnonAndGuest: false
+    },
+    threadExpirationDays: "",
   }
 
   handleFilterByClick = this.handleFilterByClick.bind(this);
@@ -22,10 +31,20 @@ class ThreadsSettingsContainer extends React.Component {
     FetchDidMount(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`)
     .then(galleryData => {
 
-      var { thread_expiration_days } = galleryData.gallery.settings
+      var opts = this.state.sortOpts
+      var { sort_dir, sort_type, comments_from, votes_from, filter_list, not_filter_list, thread_expiration_days, hide_anon_and_guest } = galleryData.gallery.settings
       var { id } = galleryData.gallery;
 
+      opts.sortDir = sort_dir
+      opts.sortType = sort_type
+      opts.commentsFrom = comments_from
+      opts.votesFrom = votes_from
+      opts.hideAnonAndGuest = hide_anon_and_guest
+      if (filter_list.length != 0 ) { opts.filterList = filter_list.split(',') }
+      if (not_filter_list.length != 0) { opts.notFilterList = not_filter_list.split(',') }
+
       this.setState({
+        sortOpts: opts,
         threadExpirationDays: thread_expiration_days,
         galleryId: id
       })
@@ -133,10 +152,18 @@ class ThreadsSettingsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
+    var { sortDir, sortType, notFilterList, filterList, commentsFrom, votesFrom, hideAnonAndGuest } = this.state.sortOpts;
     var { threadExpirationDays } = this.state;
 
     var gallery = new FormData();
+    gallery.append("gallery[sort_dir]", sortDir);
+    gallery.append("gallery[sort_type]", sortType);
+    gallery.append("gallery[not_filter_list]", notFilterList);
+    gallery.append("gallery[filter_list]", filterList);
+    gallery.append("gallery[comments_from]", commentsFrom);
+    gallery.append("gallery[votes_from]", votesFrom);
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
+    gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
     FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
     .then(redirect => window.location = '/galleries')
@@ -145,14 +172,24 @@ class ThreadsSettingsContainer extends React.Component {
   }
 
   render(){
-    var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
+    var { sortOpts, threadExpirationDays } = this.state;
 
     return(
       <div id="gallery-edit-settings-container">
         Thread Settings Here
-        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <hr/>
-        <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
+        <h5 className="text-center">Choose default sort and filter settings</h5>
+        <br />
+        <CommentFiltersContainer
+          sortOpts={sortOpts}
+          handleFilterSubmit={this.handleChange}
+          handleSortDirClick={this.handleSortDirClick}
+          handleFilterClick={this.handleFilterClick}
+          handleFilterByClick={this.handleFilterByClick}
+          onChange={this.handleSortOptCheckChange}
+        />
+        <hr />
+
         <Input
           name="threadExpirationDays"
           label="Expire threads after how many days?"

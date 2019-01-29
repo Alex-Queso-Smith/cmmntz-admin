@@ -43,8 +43,7 @@ export const CommentTabs  = (props) => {
 export const MemberTabs = (props) => {
   const types = [
     ["Members", ""],
-    ["Create New Member", "new"],
-    ["Moderators", "mods"]
+    ["Create New Member", "new"]
   ]
 
   var links = types.map(type => {
@@ -100,6 +99,34 @@ export const GalleryTabs = (props) => {
   const types = [
     ["Info", ""],
     ["Settings", "settings"]
+  ]
+
+  var links = types.map(type => {
+    return(
+      <LineItem
+        key={type[1]}
+        value={type[1]}
+        title={type[0]}
+        display={props.display}
+        onClick={props.onClick}
+      />
+    )
+  })
+
+  return(
+    <div className="cf-art-tabs">
+      <ul className="nav nav-tabs">
+        {links}
+      </ul>
+    </div>
+  )
+}
+
+export const ModerationSettingsTabs = (props) => {
+  const types = [
+    ["Rules", "rules"],
+    ["Users", "users"],
+    ["Email Notifications", "emails"]
   ]
 
   var links = types.map(type => {

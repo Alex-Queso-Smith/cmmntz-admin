@@ -12,6 +12,7 @@ import CurrentUsersContainer from './containers/CurrentUsersContainer';
 // Moderation
 import ModerationBaseContainer from './containers/moderation/ModerationBaseContainer';
 import ModerationCommentsContainer from './containers/moderation/ModerationCommentsContainer';
+import ModeratorsContainer from './containers/moderation/ModeratorsContainer';
 
 // Settings
 import SettingsBaseContainer from './containers/settings/SettingsBaseContainer'
@@ -76,6 +77,7 @@ class App extends React.Component {
               <Route path='/users' component={CurrentUsersContainer} />
 
               // moderation
+              <Route path='/moderation/moderators' component={ModeratorsContainer} />
               <Route path='/moderation/comments' component={ModerationCommentsContainer} />
               <Route path='/moderation' component={ModerationBaseContainer} />
 
