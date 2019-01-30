@@ -1,6 +1,6 @@
 import React from 'react'
 
-class EmbedContainer extends React.Component {
+class WordPressUniversalContainer extends React.Component {
   state = {}
 
   render() {
@@ -121,4 +121,4 @@ class EmbedContainer extends React.Component {
     )
   }
 }
-export default EmbedContainer;
+export default WordPressUniversalContainer;
