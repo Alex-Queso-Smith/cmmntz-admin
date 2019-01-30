@@ -1,4 +1,4 @@
-class Help::EmbedController < ApplicationController
+class Help::EmbedwpController < ApplicationController
   def index
     render '/shared/react_blank_page.haml'
   end
