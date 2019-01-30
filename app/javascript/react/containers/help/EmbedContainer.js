@@ -27,11 +27,12 @@ class EmbedContainer extends React.Component {
 
     return(
       <div className="cf-settings-base container">
-        <h3>Classifilter Widget Universal Installation Instructions</h3>
+        <h3 className="text-center">Classifilter Widget Universal Installation Instructions</h3>
 
         <br />
-        <p>Classifilter can be installed on most websites via the universal JavaScript installation code below.</p>
-        <p>Please note that these instructions do require some technical knowledge and are intended for use by developers.</p>
+        <p className="text-center">Classifilter can be installed on most websites via the universal JavaScript installation code below.</p>
+        <p className="text-center">Please note that these instructions do require some technical knowledge and are intended for use by developers.</p>
+        <hr />
 
         <br />
         <h5>Getting Started</h5>
