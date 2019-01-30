@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :dashboard, :moderation, :settings, :help, only: [:index]
 
   namespace :help do
-    resources :embed, :moderation, :faq, only: [:index]
+    resources :embed, :embedwp, :moderation, :faq, only: [:index]
   end
 
   namespace :settings do
