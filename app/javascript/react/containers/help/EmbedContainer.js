@@ -67,7 +67,7 @@ class EmbedContainer extends React.Component {
 
         <br />
         <h5>Configuration Variables</h5>
-        <p style={indentStyle}>The following configuration variables are required and must be passed into the Script</p>
+        <p style={indentStyle}>The following configuration variables are required and must be passed into the script.</p>
         <ul>
           <li className="row">
             <strong className="col-2">galleryId: </strong>
@@ -100,7 +100,7 @@ class EmbedContainer extends React.Component {
           <li className="row">
             <strong className="col-2">type: </strong>
             <div className="col-10">
-              The type of content on the page. this can be any value you choose
+              The type of content on the page. This can be any value you choose.
             </div>
           </li>
         </ul>
