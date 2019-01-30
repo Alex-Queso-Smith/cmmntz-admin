@@ -52,10 +52,11 @@ class WordPressUniversalContainer extends React.Component {
           <br/>
           Classifilter.init({`{`}<br/>
           {galleryIdDisplay},<br/>
-          topics: 'Your topics here',<br/>
-          publishDate: 'Your publish date here',<br/>
-          artistName: 'Your author name',<br/>
-          type: "Article or whatever type of page"<br/>
+          topics: '{`<`}?php foreach((get_the_category()) as $category) {`{`} echo $category->cat_name . ','; {`}`} ?{`>`}',<br/>
+          publishDate: '{`<`}?php the_date('Y-m-d h:i:s'); ?{`>`}',<br/>
+          artistName: '{`<`}?php the_author(); ?{`>`}',<br/>
+          type: "article"<br/>,
+          urlOverride: '{`<`}?php echo get_permalink($post); ?{`>`}'<br/>,
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
