@@ -19,6 +19,7 @@ class Gallery < ApplicationRecord
   }
 
   has_many :arts
+  has_many :comments
   has_many :gallery_blacklistings
   has_many :blacklisted_users, through: :gallery_blacklistings, source: :user
 
