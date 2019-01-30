@@ -19,6 +19,7 @@ class Gallery < ApplicationRecord
   }
 
   has_many :arts
+  has_many :comments
   has_many :gallery_blacklistings
   has_many :blacklisted_users, through: :gallery_blacklistings, source: :user
 
@@ -39,5 +40,20 @@ class Gallery < ApplicationRecord
         dislike_a_lot: 1
       }
     }
+  end
+
+  def users_for_timeframe(timeframe = "")
+    since_date =
+    case timeframe
+    when "today"
+      Date.today.beginning_of_day
+    when "week"
+      Date.today.beginning_of_week
+    when "month"
+      Date.today.beginning_of_month
+    else
+      ""
+    end
+    ArtInteraction.users_for_gallery(self.id, since_date)
   end
 end
