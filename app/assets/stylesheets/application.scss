@@ -12,7 +12,7 @@ $dark-grayline: #D3D3D3;
 $bootstrap-blue: #0069D9;
 
 body {
-  background-color: #e8e8e8;
+  background-color: #F3F5F7;
 }
 
 nav {
@@ -226,4 +226,16 @@ h4 {
 
 .table>thead>tr>th {
   border-top:0;
+}
+
+.ca-side-bar {
+  height: 100%;
+ width: 160px;
+ position: fixed;
+ z-index: 1;
+ top: 0;
+ left: 0;
+ background-color: #111;
+ overflow-x: hidden;
+ padding-top: 20px;
 }
