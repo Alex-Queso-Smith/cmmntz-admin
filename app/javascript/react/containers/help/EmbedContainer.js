@@ -27,7 +27,7 @@ class EmbedContainer extends React.Component {
 
     return(
       <div className="cf-settings-base container">
-        <h3 className="text-center">Classifilter Widget Universal Installation Instructions</h3>
+        <h2 className="text-center">Classifilter Widget Universal Installation Instructions</h2>
 
         <br />
         <p className="text-center">Classifilter can be installed on most websites via the universal JavaScript installation code below.</p>
@@ -35,14 +35,14 @@ class EmbedContainer extends React.Component {
         <hr />
 
         <br />
-        <h5>Getting Started</h5>
+        <h3>Getting Started</h3>
         <ul>
           <li>{galleryInstructionDisplay}</li>
           <li>You will need access to the HTML of the pages that you intend to add Classifilter to.</li>
         </ul>
 
         <br />
-        <h5>Script Template</h5>
+        <h3>Script Template</h3>
         <p style={indentStyle}>This is the base script that you will need. Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have Classifilter display on.</p>
 
         <pre>
@@ -66,7 +66,7 @@ class EmbedContainer extends React.Component {
         <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.</p>
 
         <br />
-        <h5>Configuration Variables</h5>
+        <h3>Configuration Variables</h3>
         <p style={indentStyle}>The following configuration variables are required and must be passed into the script.</p>
         <ul>
           <li className="row">
@@ -106,7 +106,7 @@ class EmbedContainer extends React.Component {
         </ul>
 
         <br />
-        <h5>Optional Variables</h5>
+        <h3>Optional Variables</h3>
         <p style={indentStyle}>These are variable that can be added to the configuration section of the script.</p>
         <ul>
           <li className="row">
