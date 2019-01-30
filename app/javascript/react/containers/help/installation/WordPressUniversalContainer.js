@@ -42,8 +42,9 @@ class WordPressUniversalContainer extends React.Component {
         </ul>
 
         <br />
-        <h3>Script Template</h3>
-        <p style={indentStyle}>This is the base script that you will need. Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have Classifilter display on.</p>
+        <h3>Script</h3>
+        <p style={indentStyle}>This is the script that you will need. You can paste this into your theme's comment.php file.</p>
+
 
         <pre>
           &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
@@ -64,8 +65,32 @@ class WordPressUniversalContainer extends React.Component {
           &lt;/noscript&gt;
         </pre>
 
-        <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.</p>
-
+        <p style={indentStyle}>You can find your comments.php file via the following steps</p>
+        <ol>
+          <li>
+            Access your Word Press File System.
+          </li>
+          <li>
+            Navigate your your theme's comments.php. This could be:
+            <ol>
+              <li>
+                wp-content
+              </li>
+              <li>
+                themes
+              </li>
+              <li>
+                your theme's name
+              </li>
+            </ol>
+          </li>
+          <li>
+            make a backup of your original comments.php
+          </li>
+          <li>
+            open the comments.php file and replace it's content with the script
+          </li>
+        </ol>
         <br />
         <h3>Configuration Variables</h3>
         <p style={indentStyle}>The following configuration variables are required and must be passed into the script.</p>
