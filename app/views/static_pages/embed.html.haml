@@ -1,26 +1,26 @@
 .container
 
-  %h3 Classifilter Widget Universal Installation Instructions
+  %h3 CMMNTZ Widget Universal Installation Instructions
 
-  %p Classifilter can be installed on most websites via the universal JavaScript installation code below.
+  %p CMMNTZ can be installed on most websites via the universal JavaScript installation code below.
   %p Please note that these instructions do require some technical knowledge and are intended for use by developers.
 
   %h5 Getting Started
   %ul
     - if current_gallery.blank?
-      %li If you have not already, go to #{link_to 'https://admin.classifilter.com/signup', 'https://admin.classifilter.com/signup'} and sign up for a gallery account.
+      %li If you have not already, go to #{link_to 'https://admin.cmmntz.com/signup', 'https://admin.cmmntz.com/signup'} and sign up for a gallery account.
     - else
       %li You are logged in as '#{current_gallery.name}'. Your gallery ID is '#{current_gallery.id}'.
-    %li You will need access to the HTML of the pages that you intend to add Classifilter to.
+    %li You will need access to the HTML of the pages that you intend to add CMMNTZ to.
 
 
   %h5 Script Template
-  %p This is the base script that you will need. Copy and paste it to the section of the page that you will want to have Classifilter display on.
+  %p This is the base script that you will need. Copy and paste it to the section of the page that you will want to have CMMNTZ display on.
 
   %pre
-    &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+    &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript"&gt;
-    Classifilter.init({
+    Cmmntz.init({
     - if current_gallery.blank?
       galleryId: 'your gallery ID',
     - else
@@ -32,10 +32,10 @@
     });
     &lt;/script&gt;
     &lt;noscript&gt;
-    Please enable JavaScript to see comments powered by Classifilter.
+    Please enable JavaScript to see comments powered by CMMNTZ.
     &lt;/noscript&gt;
 
-  %p Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.
+  %p Alternatively, you can add the above script to the head section of your template and add a div with id: "cmmntz-dropin" to your page where you want the widget to appear.
 
   %h5 Configuration Variables
   %p The following configuration variables are required and must be passed into the Script
@@ -61,4 +61,4 @@
   %ul
     %li
       %strong urlOverride:
-      the classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content
+      the CMMNTZ widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content

@@ -9,7 +9,7 @@ class WordPressUniversalContainer extends React.Component {
 
     var galleryInstructionDisplay;
     if (!gallery) {
-      galleryInstructionDisplay = "If you have not already, go to https://admin.classifilter.com/signup and sign up for a gallery account."
+      galleryInstructionDisplay = "If you have not already, go to https://admin.cmmntz.com/signup and sign up for a gallery account."
     } else {
       galleryInstructionDisplay = `You are logged in as '${gallery}'. Your gallery ID is '${galleryId}'.`
     }
@@ -31,10 +31,10 @@ class WordPressUniversalContainer extends React.Component {
 
     return(
       <div className="cf-settings-base container">
-        <h2 className="text-center">Classifilter Widget WordPress Installation Instructions</h2>
+        <h2 className="text-center">CMMNTZ Widget WordPress Installation Instructions</h2>
 
         <br />
-        <p className="text-center">Classifilter can be installed on most websites via the WordPress JavaScript installation code below.</p>
+        <p className="text-center">CMMNTZ can be installed on most websites via the WordPress JavaScript installation code below.</p>
         <p className="text-center">Please note that these instructions do require some technical knowledge and are intended for use by developers.</p>
         <hr />
 
@@ -43,7 +43,7 @@ class WordPressUniversalContainer extends React.Component {
         <ul>
           <li>{galleryInstructionDisplay}</li>
           <br />
-          <li>You will need access to the HTML of the pages that you intend to add Classifilter to. Please follow the instructions below to find the HTML and insert the appropriate code.</li>
+          <li>You will need access to the HTML of the pages that you intend to add CMMNTZ to. Please follow the instructions below to find the HTML and insert the appropriate code.</li>
         </ul>
 
         <br />
@@ -78,11 +78,11 @@ class WordPressUniversalContainer extends React.Component {
 
         <h5 className="text-center">DO NOT EDIT OR CHANGE THIS SCRIPT</h5>
         <pre>
-        &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+        &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
         <br/>
         &lt;script type="text/javascript"&gt;
         <br/>
-        Classifilter.init({`{`}<br/>
+        Cmmntz.init({`{`}<br/>
           {galleryIdDisplay},<br/>
           topics: '&lt;?php foreach((get_the_category()) as $category) {`{`} echo $category->cat_name . ','; {`}`} ?&gt;',<br/>
           publishDate: '&lt;?php the_date('Y-m-d h:i:s'); ?&gt;',<br/>
@@ -92,7 +92,7 @@ class WordPressUniversalContainer extends React.Component {
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
-          Please enable JavaScript to see comments powered by Classifilter.<br/>
+        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
           &lt;/noscript&gt;
           </pre>
         <br />

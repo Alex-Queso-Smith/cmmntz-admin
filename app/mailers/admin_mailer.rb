@@ -1,5 +1,5 @@
 class AdminMailer < ApplicationMailer
-  default :from => "do_not_reply@classifilter.com"
+  default :from => "do_not_reply@cmmntz.com"
 
   def send_mail(to, subject, content)
     @content = content
@@ -9,6 +9,6 @@ class AdminMailer < ApplicationMailer
   def send_thread_activity_warning(email, thread, reasons)
     @reasons = reasons
     @thread = thread
-    mail( to: email, subject: "Classifilter: Activity exceeding thresholds for thread: #{@thread.url}")
+    mail( to: email, subject: "CMMNTZ: Activity exceeding thresholds for thread: #{@thread.url}")
   end
 end

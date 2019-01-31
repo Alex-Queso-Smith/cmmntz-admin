@@ -9,7 +9,7 @@ class EmbedUniversalContainer extends React.Component {
 
     var galleryInstructionDisplay;
     if (!gallery) {
-      galleryInstructionDisplay = "If you have not already, go to https://admin.classifilter.com/signup and sign up for a gallery account."
+      galleryInstructionDisplay = "If you have not already, go to https://admin.cmmntz.com/signup and sign up for a gallery account."
     } else {
       galleryInstructionDisplay = `You are logged in as '${gallery}'. Your gallery ID is '${galleryId}'.`
     }
@@ -40,10 +40,10 @@ class EmbedUniversalContainer extends React.Component {
 
     return(
       <div className="cf-settings-base container">
-        <h2 className="text-center">Classifilter Widget Universal Installation Instructions</h2>
+        <h2 className="text-center">CMMNTZ Widget Universal Installation Instructions</h2>
 
         <br />
-        <p className="text-center">Classifilter can be installed on most websites via the universal JavaScript installation code below.</p>
+        <p className="text-center">CMMNTZ can be installed on most websites via the universal JavaScript installation code below.</p>
         <p className="text-center">Please note that these instructions do require some technical knowledge and are intended for use by developers.</p>
         <hr />
 
@@ -52,7 +52,7 @@ class EmbedUniversalContainer extends React.Component {
         <ul>
           <li>{galleryInstructionDisplay}</li>
           <br />
-          <li>You will need access to the HTML of the pages that you intend to add Classifilter to.</li>
+          <li>You will need access to the HTML of the pages that you intend to add CMMNTZ to.</li>
         </ul>
 
         <br />
@@ -62,7 +62,7 @@ class EmbedUniversalContainer extends React.Component {
            If you are using a CMS system such you must replace the Configuration Variable inputs with the appropriate variables for that CMS system.
         </p>
         <p style={indentStyle}>
-          Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have Classifilter display on.
+          Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have CMMNTZ display on.
         </p>
         <p style={indentStyle}>
           Please review the finished examples below the script template for reference.
@@ -70,11 +70,11 @@ class EmbedUniversalContainer extends React.Component {
         <br />
         <h5 className="text-center">Script Template</h5>
         <pre style={preStyle}>
-          &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+          &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
           <br/>
           &lt;script type="text/javascript"&gt;
           <br/>
-          Classifilter.init({`{`}<br/>
+          Cmmntz.init({`{`}<br/>
           {galleryIdDisplay},<br/>
           topics: 'Your topics here',<br/>
           publishDate: 'Your publish date here',<br/>
@@ -84,20 +84,20 @@ class EmbedUniversalContainer extends React.Component {
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
-          Please enable JavaScript to see comments powered by Classifilter.<br/>
+        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
           &lt;/noscript&gt;
         </pre>
         <br />
-        <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.</p>
+        <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "cmmntz-dropin" to your page where you want the widget to appear.</p>
 
         <br />
         <h5 className="text-center">Ruby Template Example</h5>
         <pre style={preStyle}>
-          &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+          &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
           <br/>
           &lt;script type="text/javascript"&gt;
           <br/>
-          Classifilter.init({`{`}<br/>
+          Cmmntz.init({`{`}<br/>
           {galleryIdDisplay},<br/>
           topics: '&lt;%= @article.topics %&gt;;',<br/>
           publishDate: '&lt;%= @article.published_at %&gt;',<br/>
@@ -107,18 +107,18 @@ class EmbedUniversalContainer extends React.Component {
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
-          Please enable JavaScript to see comments powered by Classifilter.<br/>
+        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
           &lt;/noscript&gt;
         </pre>
 
         <br />
         <h5 className="text-center">PHP Template Example</h5>
         <pre style={preStyle}>
-          &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+          &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
           <br/>
           &lt;script type="text/javascript"&gt;
           <br/>
-          Classifilter.init({`{`}<br/>
+          Cmmntz.init({`{`}<br/>
           {galleryIdDisplay},<br/>
           topics: '&lt;?php $article->topics ?&gt;;',<br/>
           publishDate: '&lt;?php $article->published_at ?&gt;',<br/>
@@ -128,7 +128,7 @@ class EmbedUniversalContainer extends React.Component {
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
-          Please enable JavaScript to see comments powered by Classifilter.<br/>
+        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
           &lt;/noscript&gt;
         </pre>
         <table>
@@ -146,7 +146,7 @@ class EmbedUniversalContainer extends React.Component {
               </td>
               <td>
                 This is your id that was assigned to your organization on sign up and should be auto-populated in the script above. If it is not, please go to
-                <a href={`https://www.classifilter.com`}> Classifilter Signup </a>
+                <a href={`https://www.cmmntz.com`}> CMMNTZ Signup </a>
                  and signup.
               </td>
             </tr>
@@ -192,7 +192,7 @@ class EmbedUniversalContainer extends React.Component {
                 urlOverride
               </td>
               <td>
-                The classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content.              </td>
+                The CMMNtZ widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content.              </td>
             </tr>
 
           </tbody>
