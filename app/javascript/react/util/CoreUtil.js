@@ -19,6 +19,7 @@ export const FetchWithPush = (object, path, push, method, errors, payload) => {
    .then(body => {
      if (body.errors) {
        object.setState({ [errors]: body.errors})
+       return body
      } else {
        if (push != '') {
          object.props.history.push(push)
