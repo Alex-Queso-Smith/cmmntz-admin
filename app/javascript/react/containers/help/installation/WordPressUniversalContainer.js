@@ -84,11 +84,11 @@ class WordPressUniversalContainer extends React.Component {
         <br/>
         Classifilter.init({`{`}<br/>
           {galleryIdDisplay},<br/>
-          topics: '{`<`}?php foreach((get_the_category()) as $category) {`{`} echo $category->cat_name . ','; {`}`} ?{`>`}',<br/>
-          publishDate: '{`<`}?php the_date('Y-m-d h:i:s'); ?{`>`}',<br/>
-          artistName: '{`<`}?php the_author(); ?{`>`}',<br/>
+          topics: '&lt;?php foreach((get_the_category()) as $category) {`{`} echo $category->cat_name . ','; {`}`} ?&gt;',<br/>
+          publishDate: '&lt;?php the_date('Y-m-d h:i:s'); ?&gt;',<br/>
+          artistName: '&lt;?php the_author(); ?&gt;',<br/>
           type: "article"<br/>,
-          urlOverride: '{`<`}?php echo get_permalink($post); ?{`>`}'<br/>,
+          urlOverride: '&lt;?php echo get_permalink($post); ?&gt;'<br/>,
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>

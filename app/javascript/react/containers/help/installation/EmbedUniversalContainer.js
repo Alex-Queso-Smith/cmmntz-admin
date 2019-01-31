@@ -98,10 +98,10 @@ class EmbedUniversalContainer extends React.Component {
           <br/>
           Classifilter.init({`{`}<br/>
           {galleryIdDisplay},<br/>
-          topics: 'Your topics here',<br/>
-          publishDate: 'Your publish date here',<br/>
-          artistName: 'Your author name',<br/>
-          type: "Article or whatever type of page"<br/>
+          topics: '&lt;%= @article.topics %&gt;;',<br/>
+          publishDate: '&lt;%= @article.published_at %&gt;',<br/>
+          artistName: '&lt;%= @article.author_name %&gt;',<br/>
+          type: "&lt;%= @article.type %&gt;"<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
@@ -118,10 +118,10 @@ class EmbedUniversalContainer extends React.Component {
           <br/>
           Classifilter.init({`{`}<br/>
           {galleryIdDisplay},<br/>
-          topics: 'Your topics here',<br/>
-          publishDate: 'Your publish date here',<br/>
-          artistName: 'Your author name',<br/>
-          type: "Article or whatever type of page"<br/>
+          topics: '&lt;?php $article->topics ?&gt;;',<br/>
+          publishDate: '&lt;?php $article->published_at ?&gt;',<br/>
+          artistName: '&lt;?php $article->author_name ?&gt;',<br/>
+          type: "&lt;?php $article->type ?&gt;"<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
