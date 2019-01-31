@@ -25,6 +25,19 @@ class EmbedUniversalContainer extends React.Component {
       marginLeft: "20px"
     }
 
+    var preStyle = {
+      width: "55%",
+      margin: "auto"
+    }
+
+    var boldStyle = {
+      fontWeight: "bold"
+    }
+
+    var width75 = {
+      width: "75%"
+    }
+
     return(
       <div className="cf-settings-base container">
         <h2 className="text-center">Classifilter Widget Universal Installation Instructions</h2>
@@ -38,14 +51,47 @@ class EmbedUniversalContainer extends React.Component {
         <h3>Getting Started</h3>
         <ul>
           <li>{galleryInstructionDisplay}</li>
+          <br />
           <li>You will need access to the HTML of the pages that you intend to add Classifilter to.</li>
         </ul>
 
         <br />
         <h3>Script Template</h3>
-        <p style={indentStyle}>This is the base script that you will need. Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have Classifilter display on.</p>
+        <p style={indentStyle}>This is the base script that you will need.</p>
+        <p style={indentStyle}>
+           If you are using a CMS system such you must replace the Configuration Variable inputs with the appropriate variables for that CMS system.
+        </p>
+        <p style={indentStyle}>
+          Once you have entered the required configuration variables listed below into the script, copy and paste it to the section of the page that you will want to have Classifilter display on.
+        </p>
+        <p style={indentStyle}>
+          Please review the finished examples below the script template for reference.
+        </p>
+        <br />
+        <h5 className="text-center">Script Template</h5>
+        <pre style={preStyle}>
+          &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+          <br/>
+          &lt;script type="text/javascript"&gt;
+          <br/>
+          Classifilter.init({`{`}<br/>
+          {galleryIdDisplay},<br/>
+          topics: 'Your topics here',<br/>
+          publishDate: 'Your publish date here',<br/>
+          artistName: 'Your author name',<br/>
+          type: "Article or whatever type of page"<br/>
+          {`}`});<br/>
+          &lt;/script&gt;<br/>
+          &lt;noscript&gt;<br/>
+          Please enable JavaScript to see comments powered by Classifilter.<br/>
+          &lt;/noscript&gt;
+        </pre>
+        <br />
+        <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.</p>
 
-        <pre>
+        <br />
+        <h5 className="text-center">Ruby Template Example</h5>
+        <pre style={preStyle}>
           &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
           <br/>
           &lt;script type="text/javascript"&gt;
@@ -63,60 +109,97 @@ class EmbedUniversalContainer extends React.Component {
           &lt;/noscript&gt;
         </pre>
 
-        <p style={indentStyle}>Alternatively, you can add the above script to the head section of your template and add a div with id: "classifilter-dropin" to your page where you want the widget to appear.</p>
-
         <br />
-        <h3>Configuration Variables</h3>
-        <p style={indentStyle}>The following configuration variables are required and must be passed into the script.</p>
-        <ul>
-          <li className="row">
-            <strong className="col-2">galleryId: </strong>
-            <div className="col-10">
-              This is your id that was assigned to your organization on sign up and should be auto-populated in the script above. If it is not, please go to `https://admin.classifilter.com/signup` and signup.
-            </div>
-          </li>
-          <br />
-          <li className="row">
-            <strong className="col-2">topics: </strong>
-            <div className="col-10">
-              A list of topics that relate to the content of your page. These should be passed in separated by commas.
-            </div>
-          </li>
-          <br />
-          <li className="row">
-            <strong className="col-2">publishDate: </strong>
-            <div className="col-10">
-              The date of publication. This should be in the format of YYYY-MM-DD
-            </div>
-          </li>
-          <br />
-          <li className="row">
-            <strong className="col-2">artistName: </strong>
-            <div className="col-10">
-              The name of the author of the article. Example: "Jane Smith"
-            </div>
-          </li>
-          <br />
-          <li className="row">
-            <strong className="col-2">type: </strong>
-            <div className="col-10">
-              The type of content on the page. This can be any value you choose.
-            </div>
-          </li>
-        </ul>
+        <h5 className="text-center">PHP Template Example</h5>
+        <pre style={preStyle}>
+          &lt;script src="https://api.classifilter.com/javascripts/classifilter-embed.js"&gt;&lt;/script&gt;
+          <br/>
+          &lt;script type="text/javascript"&gt;
+          <br/>
+          Classifilter.init({`{`}<br/>
+          {galleryIdDisplay},<br/>
+          topics: 'Your topics here',<br/>
+          publishDate: 'Your publish date here',<br/>
+          artistName: 'Your author name',<br/>
+          type: "Article or whatever type of page"<br/>
+          {`}`});<br/>
+          &lt;/script&gt;<br/>
+          &lt;noscript&gt;<br/>
+          Please enable JavaScript to see comments powered by Classifilter.<br/>
+          &lt;/noscript&gt;
+        </pre>
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th style={width75}>Description</th>
+            </tr>
+          </thead>
+          <tbody>
 
+            <tr>
+              <td>
+                galleryId
+              </td>
+              <td>
+                This is your id that was assigned to your organization on sign up and should be auto-populated in the script above. If it is not, please go to
+                <a href={`https://www.classifilter.com`}> Classifilter Signup </a>
+                 and signup.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                topics
+              </td>
+              <td>
+                A list of topics that relate to the content of your page. These should be passed in separated by commas.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                publishDate
+              </td>
+              <td>
+                The date of publication. This should be in the format of YYYY-MM-DD.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                artistName
+              </td>
+              <td>
+                The name of the author of the article.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                type
+              </td>
+              <td>
+                The type of content on the page.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                urlOverride
+              </td>
+              <td>
+                The classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content.              </td>
+            </tr>
+
+          </tbody>
+        </table>
         <br />
-        <h3>Optional Variables</h3>
-        <p style={indentStyle}>These are variable that can be added to the configuration section of the script.</p>
-        <ul>
-          <li className="row">
-            <strong className="col-2">urlOverride:</strong>
-            <div className="col-10">
-              The classifilter widget automatically creates a thread for the url of a page that it is added to. However it will also allow you to override the url of the page and use a different url instead. This will allow you to share the same thread on the same article on different versions of your site or if you have multiple url formats for your content.
-            </div>
-          </li>
-        </ul>
 
+        <h3 className="text-center">After Installation</h3>
+          <p style={indentStyle}>
+            Adjust the settings for the widget via the navbar above to customize the experience for your users as well as set default settings for the widget on your site. Please visit the FAQ page for any additional help.
+          </p>
       </div>
     )
   }

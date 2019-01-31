@@ -10,4 +10,40 @@
     font-weight: bold;
     margin-bottom: 15px;
   }
+
+  table {
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    thead {
+      th, tr {
+        font-size: 1.25em;
+        padding: 10px 13px;
+        border: 1px solid #D3D3D3;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 10px 13px;
+        border: 1px solid #D3D3D3;
+      }
+    }
+  }
+
+  a {
+    color: #800080;
+    &:hover{
+      text-decoration: underline;
+      color: #800080;
+      background-color: #ffffff;
+    }
+    &:visited{
+      text-decoration: underline;
+      color: #800080;
+      background-color: #ffffff;
+    }
+  }
 }

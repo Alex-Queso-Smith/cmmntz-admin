@@ -97,7 +97,7 @@ class WordPressUniversalContainer extends React.Component {
           </pre>
         <br />
 
-        <h3>After Installation</h3>
+        <h3 className="text-center">After Installation</h3>
           <p style={indentStyle}>
             Adjust the settings for the widget via the navbar above to customize the experience for your users as well as set default settings for the widget on your site. Please visit the FAQ page for any additional help.
           </p>
