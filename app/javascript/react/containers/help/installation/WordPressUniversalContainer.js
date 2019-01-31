@@ -87,8 +87,8 @@ class WordPressUniversalContainer extends React.Component {
           topics: '&lt;?php foreach((get_the_category()) as $category) {`{`} echo $category->cat_name . ','; {`}`} ?&gt;',<br/>
           publishDate: '&lt;?php the_date('Y-m-d h:i:s'); ?&gt;',<br/>
           artistName: '&lt;?php the_author(); ?&gt;',<br/>
-          type: "article"<br/>,
-          urlOverride: '&lt;?php echo get_permalink($post); ?&gt;'<br/>,
+          type: "article",<br/>
+          urlOverride: '&lt;?php echo get_permalink($post); ?&gt;'<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>

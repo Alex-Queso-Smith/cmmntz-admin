@@ -79,7 +79,8 @@ class EmbedUniversalContainer extends React.Component {
           topics: 'Your topics here',<br/>
           publishDate: 'Your publish date here',<br/>
           artistName: 'Your author name',<br/>
-          type: "Article or whatever type of page"<br/>
+          type: 'Article or whatever type of page',<br/>
+        urlOverride: 'Your Article URL'<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
@@ -101,7 +102,8 @@ class EmbedUniversalContainer extends React.Component {
           topics: '&lt;%= @article.topics %&gt;;',<br/>
           publishDate: '&lt;%= @article.published_at %&gt;',<br/>
           artistName: '&lt;%= @article.author_name %&gt;',<br/>
-          type: "&lt;%= @article.type %&gt;"<br/>
+          type: "&lt;%= @article.type %&gt;",<br/>
+          urlOverride: '&lt;%= @article.url %&gt;'<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
@@ -121,7 +123,8 @@ class EmbedUniversalContainer extends React.Component {
           topics: '&lt;?php $article->topics ?&gt;;',<br/>
           publishDate: '&lt;?php $article->published_at ?&gt;',<br/>
           artistName: '&lt;?php $article->author_name ?&gt;',<br/>
-          type: "&lt;?php $article->type ?&gt;"<br/>
+          type: "&lt;?php $article->type ?&gt;",<br/>
+          urlOverride: '&lt;?php $artice->url; ?&gt;'<br/>
           {`}`});<br/>
           &lt;/script&gt;<br/>
           &lt;noscript&gt;<br/>
