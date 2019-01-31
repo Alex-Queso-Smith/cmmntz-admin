@@ -43,7 +43,18 @@ class SignupContainer extends React.Component {
     newSignup.append("signup[customer_password]", customerPassword);
     newSignup.append("signup[customer_password_confirmation]", customerPasswordConfirmation);
 
-    FetchWithPush(this, `/api/v1/signups.json`, '/help/embed', 'POST', 'signupErrors', newSignup)
+    FetchWithPush(this, `/api/v1/signups.json`, '', 'POST', 'signupErrors', newSignup)
+    .then(body => {
+      
+      var element = document.getElementById('ca-app');
+      element.setAttribute('data-customer-id', body.id);
+      element.setAttribute('data-customer-name', body.name);
+      element.setAttribute('data-customer-gallery', body.gallery);
+      element.setAttribute('data-gallery-id', body.galleryId);
+      this.props.updateAppData(body.id, body.name, body.gallery, body.galleryId);
+
+      this.props.history.push('/help');
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 

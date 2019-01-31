@@ -99,7 +99,7 @@ class App extends React.Component {
               <Route path='/help' component={HelpBaseContainer} />
 
               // special routes
-              <Route path='/signup' component={SignupContainer} />
+              <Route path='/signup' render={ (props) => <SignupContainer {...props} updateAppData={this.updateAppData} /> } />
               <Route path='/login' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} /> }  />
               <Route path='/customer_sessions' render={ (props) => <SessionLoginContainer {...props} updateAppData={this.updateAppData} />} />
 
