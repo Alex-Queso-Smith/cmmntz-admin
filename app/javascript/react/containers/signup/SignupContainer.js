@@ -31,7 +31,7 @@ class SignupContainer extends React.Component {
     var tier = (parsedQuery["t"]) ? parsedQuery["t"] : 1
     this.setState({ galleryTier: parseInt(tier)})
   }
-  
+
   componentDidUpdate(prevProps, prevState){
     if (
       prevState.galleryName != this.state.galleryName ||
@@ -122,7 +122,7 @@ class SignupContainer extends React.Component {
     return(
       <div className="jumbotron center-form">
 
-        <h2>Sign Up for Classifilter</h2>
+        <h2>Sign Up for CMMNTZ</h2>
         <Input
           name="galleryName"
           placeholder="Site Name"

@@ -1,1 +1,1 @@
-ClassifilterAdmin::Application.config.session_store :cookie_store, key: '_classifilter_admin_session'
+CmmntzAdmin::Application.config.session_store :cookie_store, key: '_cmmntz_admin_session'
