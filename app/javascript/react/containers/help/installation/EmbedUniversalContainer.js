@@ -92,45 +92,19 @@ class EmbedUniversalContainer extends React.Component {
 
         <br />
         <h5 className="text-center">Ruby Template Example</h5>
-        <pre style={preStyle}>
-          &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
-          <br/>
-          &lt;script type="text/javascript"&gt;
-          <br/>
-          Cmmntz.init({`{`}<br/>
-          {galleryIdDisplay},<br/>
-          topics: '&lt;%= @article.topics %&gt;;',<br/>
-          publishDate: '&lt;%= @article.published_at %&gt;',<br/>
-          artistName: '&lt;%= @article.author_name %&gt;',<br/>
-          type: "&lt;%= @article.type %&gt;",<br/>
-          urlOverride: '&lt;%= @article.url %&gt;'<br/>
-          {`}`});<br/>
-          &lt;/script&gt;<br/>
-          &lt;noscript&gt;<br/>
-        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
-          &lt;/noscript&gt;
-        </pre>
+          <div className="row justify-content-center">
+            <div className="example-image">
+              <img src="/images/universal_example_ruby.png" className="img-fluid"/>
+            </div>
+          </div>
 
         <br />
         <h5 className="text-center">PHP Template Example</h5>
-        <pre style={preStyle}>
-          &lt;script src="https://api.cmmntz.com/javascripts/cmmntz-embed.js"&gt;&lt;/script&gt;
-          <br/>
-          &lt;script type="text/javascript"&gt;
-          <br/>
-          Cmmntz.init({`{`}<br/>
-          {galleryIdDisplay},<br/>
-          topics: '&lt;?php $article->topics ?&gt;;',<br/>
-          publishDate: '&lt;?php $article->published_at ?&gt;',<br/>
-          artistName: '&lt;?php $article->author_name ?&gt;',<br/>
-          type: "&lt;?php $article->type ?&gt;",<br/>
-          urlOverride: '&lt;?php $artice->url; ?&gt;'<br/>
-          {`}`});<br/>
-          &lt;/script&gt;<br/>
-          &lt;noscript&gt;<br/>
-        Please enable JavaScript to see comments powered by CMMNTZ.<br/>
-          &lt;/noscript&gt;
-        </pre>
+        <div className="row justify-content-center">
+          <div className="example-image">
+            <img src="/images/universal_example_php.png" className="img-fluid"/>
+          </div>
+        </div>
         <table>
           <thead>
             <tr>
