@@ -63,7 +63,7 @@ class SignupContainer extends React.Component {
 
     var newSignup = new FormData();
 
-    var { galleryName, galleryUrl, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+    var { galleryName, galleryUrl, galleryTier, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
 
     newSignup.append("signup[gallery_name]", galleryName);
     newSignup.append("signup[gallery_url]", galleryUrl);
@@ -92,7 +92,7 @@ class SignupContainer extends React.Component {
   }
 
   render(){
-    var { galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
+    var { galleryName, galleryUrl, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
 
     var { signupErrors } = this.state;
     if (signupErrors.gallery) {
@@ -119,10 +119,27 @@ class SignupContainer extends React.Component {
       var customerPasswordConfirmationClass = ErrorClassValidation(customerPasswordConfirmationError)
     }
 
+    var tierName;
+    switch (galleryTier) {
+      case 1:
+        tierName = "Build Tier"
+        break;
+      case 2:
+        tierName = "Engage Tier"
+        break;
+      case 3:
+        tierName = "Curate Tier"
+        break;
+      default:
+        tierName  = "Build Tier"
+    }
+
     return(
       <div className="jumbotron center-form">
-
-        <h2>Sign Up for CMMNTZ</h2>
+        <div className="row justify-content-center">
+          <h2>Sign Up for CMMNTZ</h2>
+          <h3>{tierName}</h3>
+        </div>
         <Input
           name="galleryName"
           placeholder="Site Name"
