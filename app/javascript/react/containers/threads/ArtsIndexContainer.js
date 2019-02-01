@@ -22,7 +22,7 @@ class ArtsIndexContainer extends React.Component {
     this.state.artsData.map((row) => {
       var art = row.art
       return(
-        <div key={`art_${art.id}`} >
+        <div key={`art_${art.id}`} className="thread-listing" >
           <h4>{art.type}: <Link to={`/threads/${art.id}`} >{art.url}</Link></h4>
           <p>Artist: {art.artist}</p>
           <p>Status: {art.status}</p>

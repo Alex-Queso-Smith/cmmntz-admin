@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Input } from '../../components/FormComponents';
+import { Input, Checkbox } from '../../components/FormComponents';
 import { FetchWithPush, CreateErrorElements, CheckInputValidation, ErrorClassValidation } from '../../util/CoreUtil';
 
 class SignupContainer extends React.Component {
@@ -13,6 +13,7 @@ class SignupContainer extends React.Component {
     customerEmail: '',
     customerPassword: '',
     customerPasswordConfirmation: '',
+    customerSubscribeNewsletter: false,
     formInvalid: true,
     signupErrors: {}
   }
@@ -51,7 +52,7 @@ class SignupContainer extends React.Component {
   handleChange(event) {
     const target = event.target
     const name = target.name
-    const value = target.value
+    var value = target.type === "checkbox" ? target.checked : target.value;
 
     this.setState({
       [name]: value
@@ -63,7 +64,7 @@ class SignupContainer extends React.Component {
 
     var newSignup = new FormData();
 
-    var { galleryName, galleryUrl, galleryTier, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+    var { galleryName, galleryUrl, galleryTier, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, customerSubscribeNewsletter } = this.state
 
     newSignup.append("signup[gallery_name]", galleryName);
     newSignup.append("signup[gallery_url]", galleryUrl);
@@ -73,6 +74,7 @@ class SignupContainer extends React.Component {
     newSignup.append("signup[customer_email]", customerEmail);
     newSignup.append("signup[customer_password]", customerPassword);
     newSignup.append("signup[customer_password_confirmation]", customerPasswordConfirmation);
+    newSignup.append("signup[customer_subscribe_newsletter]", customerSubscribeNewsletter);
 
     FetchWithPush(this, `/api/v1/signups.json`, '', 'POST', 'signupErrors', newSignup)
     .then(body => {
@@ -92,7 +94,7 @@ class SignupContainer extends React.Component {
   }
 
   render(){
-    var { galleryName, galleryUrl, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, signupErrors } = this.state
+    var { galleryName, galleryUrl, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation, customerSubscribeNewsletter, signupErrors } = this.state
 
     var { signupErrors } = this.state;
     if (signupErrors.gallery) {
@@ -203,6 +205,13 @@ class SignupContainer extends React.Component {
           addClass={customerPasswordConfirmationClass}
         />
         {customerPasswordConfirmationError}
+        <Checkbox
+          name="customerSubscribeNewsletter"
+          onChange={this.handleChange}
+          label="Subscribe to Newsletter"
+          checked={customerSubscribeNewsletter}
+          className={"cf-privacy-policy-checkbox"}
+          />
         <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="float-right btn btn-dark">
           Create your Account
         </button>

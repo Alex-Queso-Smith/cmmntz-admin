@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_144616) do
+ActiveRecord::Schema.define(version: 2019_02_01_211620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -187,10 +187,12 @@ ActiveRecord::Schema.define(version: 2019_02_01_144616) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_account_id"
+    t.boolean "subscribe_newsletter", default: false, null: false
     t.index ["gallery_id"], name: "index_customers_on_gallery_id"
     t.index ["perishable_token"], name: "index_customers_on_perishable_token", unique: true
     t.index ["persistence_token"], name: "index_customers_on_persistence_token", unique: true
     t.index ["single_access_token"], name: "index_customers_on_single_access_token", unique: true
+    t.index ["subscribe_newsletter"], name: "index_customers_on_subscribe_newsletter"
   end
 
   create_table "fae_changes", id: :serial, force: :cascade do |t|

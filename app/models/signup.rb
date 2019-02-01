@@ -6,6 +6,7 @@ class Signup < Tableless
   attribute :customer_password, :string
   attribute :customer_password_confirmation, :string
   attribute :customer_email, :string
+  attribute :customer_subscribe_newsletter, :boolean
   attribute :gallery_tier, :integer
 
   validate :customer_valid?, :gallery_valid?
@@ -17,7 +18,7 @@ class Signup < Tableless
   end
 
   def customer
-    @customer ||= Customer.new(first_name: customer_first_name, last_name: customer_last_name, password: customer_password, password_confirmation: customer_password_confirmation, email: customer_email, role: "super_admin", gallery: @gallery)
+    @customer ||= Customer.new(first_name: customer_first_name, last_name: customer_last_name, password: customer_password, password_confirmation: customer_password_confirmation, email: customer_email, role: "super_admin", gallery: @gallery, subscribe_newsletter: customer_subscribe_newsletter)
   end
 
   private
