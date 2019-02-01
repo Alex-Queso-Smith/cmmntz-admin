@@ -6,6 +6,7 @@
   background-color: #ffffff;
   padding: 15px;
   font-family: 'Open Sans', sans-serif;
+
   h2, h3, h5 {
     font-weight: bold;
     margin-bottom: 15px;
@@ -44,6 +45,25 @@
       text-decoration: underline;
       color: #800080;
       background-color: #ffffff;
+    }
+  }
+
+  .cf-install-tile {
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    margin: 15px;
+    padding: 15px 15px 15px 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 3px 3px 10px #800080;
+
+    h3 {
+      margin-top: 40px;
+      color: #A9A9A9;
     }
   }
 }

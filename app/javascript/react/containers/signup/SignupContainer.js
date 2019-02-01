@@ -13,6 +13,7 @@ class SignupContainer extends React.Component {
     customerEmail: '',
     customerPassword: '',
     customerPasswordConfirmation: '',
+    formInvalid: true,
     signupErrors: {}
   }
 
@@ -29,6 +30,22 @@ class SignupContainer extends React.Component {
     }
     var tier = (parsedQuery["t"]) ? parsedQuery["t"] : 1
     this.setState({ galleryTier: parseInt(tier)})
+  }
+  
+  componentDidUpdate(prevProps, prevState){
+    if (
+      prevState.galleryName != this.state.galleryName ||
+      prevState.galleryUrl != this.state.galleryUrl ||
+      prevState.customerFirstName != this.state.customerFirstName ||
+      prevState.customerLastName != this.state.customerLastName ||
+      prevState.customerEmail != this.state.customerEmail ||
+      prevState.customerPassword != this.state.customerPassword ||
+      prevState.customerPasswordConfirmation != this.state.customerPasswordConfirmation
+    ) {
+      var { galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+
+      CheckInputValidation(this, [galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation])
+    }
   }
 
   handleChange(event) {
@@ -57,7 +74,20 @@ class SignupContainer extends React.Component {
     newSignup.append("signup[customer_password]", customerPassword);
     newSignup.append("signup[customer_password_confirmation]", customerPasswordConfirmation);
 
-    FetchWithPush(this, `/api/v1/signups.json`, '/help/embed', 'POST', 'signupErrors', newSignup)
+    FetchWithPush(this, `/api/v1/signups.json`, '', 'POST', 'signupErrors', newSignup)
+    .then(body => {
+      if (!body.errors) {
+
+        var element = document.getElementById('ca-app');
+        element.setAttribute('data-customer-id', body.id);
+        element.setAttribute('data-customer-name', body.name);
+        element.setAttribute('data-customer-gallery', body.gallery);
+        element.setAttribute('data-gallery-id', body.galleryId);
+        this.props.updateAppData(body.id, body.name, body.gallery, body.galleryId);
+
+        this.props.history.push('/help');
+      }
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -77,7 +107,7 @@ class SignupContainer extends React.Component {
     if (signupErrors.customer) {
       var customerFirstNameError, customerLastNameError, customerEmailError, customerPasswordError, customerPasswordConfirmationError;
       customerFirstNameError = CreateErrorElements(signupErrors.customer[0].first_name, "First Name")
-      customerLastNameError = CreateErrorElements(signupErrors.customer[0].lasy_name, "Last Name")
+      customerLastNameError = CreateErrorElements(signupErrors.customer[0].last_name, "Last Name")
       customerEmailError = CreateErrorElements(signupErrors.customer[0].email, "Email")
       customerPasswordError = CreateErrorElements(signupErrors.customer[0].password, "Password")
       customerPasswordConfirmationError = CreateErrorElements(signupErrors.customer[0].password_confirmation, "Password Confimation")
@@ -156,7 +186,7 @@ class SignupContainer extends React.Component {
           addClass={customerPasswordConfirmationClass}
         />
         {customerPasswordConfirmationError}
-        <button onClick={this.handleSubmit} className="float-right btn btn-dark">
+        <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="float-right btn btn-dark">
           Create your Account
         </button>
 

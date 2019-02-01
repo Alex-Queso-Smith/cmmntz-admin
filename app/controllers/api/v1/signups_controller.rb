@@ -5,7 +5,7 @@ class Api::V1::SignupsController < ApiController
   def create
     @signup = Signup.new(signup_params)
     if @signup.valid?
-      render json: { message: "Gallery created!" }
+      render json: { id: @signup.customer.id, name: @signup.customer.name, gallery: @signup.gallery.name, galleryId: @signup.gallery.id }
     else
       render json:{ errors: @signup.errors, status: :unprocessable_entity}
     end
