@@ -1,0 +1,18 @@
+.thread-listing {
+  width: 90%;
+  max-height: 275px;
+  min-width: 375px;
+  min-height: 275px;
+  margin: 15px;
+  padding: 15px 15px 15px 15px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 3px 3px 10px #800080;
+
+  h3 {
+    font-size: 1.5em;
+    text-decoration: underline;
+  }
+}

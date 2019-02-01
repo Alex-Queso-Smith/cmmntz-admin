@@ -5,9 +5,9 @@ json.art do
 
 if !params[:display]
     json.url art.url
-    json.artist gallery_artist_name(art)
+    json.artist art.gallery_artist.artist_name
     json.status art.status
-    json.publishedAt display_date art.published_at
+    json.publishedAt art.published_at.strftime("%B %d, %Y")
     json.threadStarted display_date art.created_at
     json.lastInteraction display_date art.last_interaction_at
     json.pendingComments art.pending_comments.size

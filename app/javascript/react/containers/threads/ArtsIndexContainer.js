@@ -23,19 +23,52 @@ class ArtsIndexContainer extends React.Component {
       var art = row.art
       return(
         <div key={`art_${art.id}`} className="thread-listing" >
-          <h4>{art.type}: <Link to={`/threads/${art.id}`} >{art.url}</Link></h4>
-          <p>Artist: {art.artist}</p>
-          <p>Status: {art.status}</p>
-          <p>Publication Date: {art.publishedAt}</p>
-          <p>Thread Started On: {art.threadStarted}</p>
-          <p>Last User Interaction: {art.lastInteraction}</p>
-          <p>Topics: {art.topics}</p>
-          <p>Pending Comments: {art.pendingComments}</p>
-          <p>Flagged Comments: {art.flaggedComments}</p>
-          <p>Approved Comments: {art.approvedComments}</p>
-          <p>Deleted Comments: {art.deletedComments}</p>
-          <p>Users: {art.interactions}</p>
-          <hr/>
+          <div className="row">
+            <div className="col-sm-7">
+              <h3><Link to={`/threads/${art.id}`}>{art.type}: {art.url}</Link></h3>
+            </div>
+            <div className="col">
+              <h4>Creator: {art.artist}</h4>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-2">
+              Status: {art.status}
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-2">
+              Comments:
+            </div>
+            <div className="col">
+              <p>Approved: {art.approvedComments}</p>
+            </div>
+            <div className="col">
+              <p>Pending: {art.pendingComments}</p>
+            </div>
+            <div className="col">
+              <p>Flagged: {art.flaggedComments}</p>
+            </div>
+            <div className="col">
+              <p>Deleted: {art.deletedComments}</p>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-1">
+              Votes:
+            </div>
+            <div className="col-1">
+              #
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              Date: {art.publishedAt}
+            </div>
+          </div>
         </div>
       )
     })
