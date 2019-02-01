@@ -7,6 +7,7 @@ class SignupContainer extends React.Component {
   state = {
     galleryName: '',
     galleryUrl: '',
+    galleryTier: '',
     customerFirstName: '',
     customerLastName: '',
     customerEmail: '',
@@ -17,6 +18,18 @@ class SignupContainer extends React.Component {
 
   handleChange = this.handleChange.bind(this);
   handleSubmit = this.handleSubmit.bind(this);
+
+  componentDidMount() {
+    var query = this.props.location.search.replace('?','').split('&')
+    var parsedQuery = {};
+
+    for (var i = 0; i < query.length; i++) {
+      var [k,v] = query[i].split("=")
+      parsedQuery[k] = v
+    }
+    var tier = (parsedQuery["t"]) ? parsedQuery["t"] : 1
+    this.setState({ galleryTier: parseInt(tier)})
+  }
 
   handleChange(event) {
     const target = event.target
@@ -33,10 +46,11 @@ class SignupContainer extends React.Component {
 
     var newSignup = new FormData();
 
-    var { galleryName, galleryUrl, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
+    var { galleryName, galleryUrl, galleryTier, customerFirstName, customerLastName, customerEmail, customerPassword, customerPasswordConfirmation } = this.state
 
     newSignup.append("signup[gallery_name]", galleryName);
     newSignup.append("signup[gallery_url]", galleryUrl);
+    newSignup.append("signup[gallery_tier]", galleryTier);
     newSignup.append("signup[customer_first_name]", customerFirstName);
     newSignup.append("signup[customer_last_name]", customerLastName);
     newSignup.append("signup[customer_email]", customerEmail);

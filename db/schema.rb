@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_183035) do
+ActiveRecord::Schema.define(version: 2019_02_01_144616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -355,7 +355,9 @@ ActiveRecord::Schema.define(version: 2019_01_31_183035) do
     t.datetime "updated_at", null: false
     t.text "comment_etiquette"
     t.string "site_url"
+    t.integer "tier", limit: 2
     t.index ["site_url"], name: "index_galleries_on_site_url"
+    t.index ["tier"], name: "index_galleries_on_tier"
   end
 
   create_table "gallery_artists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

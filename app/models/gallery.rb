@@ -56,4 +56,19 @@ class Gallery < ApplicationRecord
     end
     ArtInteraction.users_for_gallery(self.id, since_date)
   end
+
+  def comments_for_timeframe(timeframe = "")
+    since_date =
+    case timeframe
+    when "today"
+      Date.today.beginning_of_day
+    when "week"
+      Date.today.beginning_of_week
+    when "month"
+      Date.today.beginning_of_month
+    else
+      ""
+    end
+    Comment.comments_for_gallery(self.id, since_date)
+  end
 end

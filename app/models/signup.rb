@@ -6,13 +6,14 @@ class Signup < Tableless
   attribute :customer_password, :string
   attribute :customer_password_confirmation, :string
   attribute :customer_email, :string
+  attribute :gallery_tier, :integer
 
   validate :customer_valid?, :gallery_valid?
 
   after_validation :create_gallery_and_customer!
 
   def gallery
-    @gallery ||= Gallery.new(name: gallery_name, site_url: gallery_url)
+    @gallery ||= Gallery.new(name: gallery_name, site_url: gallery_url, tier: gallery_tier)
   end
 
   def customer
