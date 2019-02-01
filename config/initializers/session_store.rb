@@ -1,1 +1,1 @@
-CmmntzAdmin::Application.config.session_store :cookie_store, key: '_cmmntz_admin_session'
+CmmntzAdmin::Application.config.session_store :cookie_store, key: '_cmmntz_admin_session', secure: Rails.env.production?
