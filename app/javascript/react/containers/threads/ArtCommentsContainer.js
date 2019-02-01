@@ -25,7 +25,7 @@ class ArtCommentsContainer extends React.Component {
   selectAllComments = this.selectAllComments.bind(this);
 
   componentDidMount(){
-    this.loadComments("")
+    this.loadComments(this.state.display)
   }
 
   selectAllComments(event) {
