@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
     .where("gallery_blacklistings.id IS NULL")
   }
 
-  def comments_for_gallery(gallery_id, since_date)
+  def self.comments_for_gallery(gallery_id, since_date)
     scope = for_gallery(gallery_id)
     unless since_date.blank?
       scope = scope.created_since(since_date)

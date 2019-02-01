@@ -26,6 +26,8 @@ class Gallery < ApplicationRecord
   has_many :user_gallery_moderators
   has_many :gallery_moderators, through: :user_gallery_moderators, source: :user
 
+  has_many :pending_comments, -> { where(approved: false, deleted: false) }, class_name: "Comment", foreign_key: "gallery_id"
+
   validates :name, :site_url, presence: true
   validates :site_url, uniqueness: { case_sensitive: false }
   validates :default_art_thread_expiration_days, numericality: { greater_than_or_equal_to: 0 }, if: Proc.new { |g| !g.default_art_thread_expiration_days.blank? }
@@ -43,22 +45,18 @@ class Gallery < ApplicationRecord
   end
 
   def users_for_timeframe(timeframe = "")
-    since_date =
-    case timeframe
-    when "today"
-      Date.today.beginning_of_day
-    when "week"
-      Date.today.beginning_of_week
-    when "month"
-      Date.today.beginning_of_month
-    else
-      ""
-    end
-    ArtInteraction.users_for_gallery(self.id, since_date)
+    ArtInteraction.users_for_gallery(self.id, resolve_time_frame(timeframe))
   end
 
   def comments_for_timeframe(timeframe = "")
-    since_date =
+    Comment.comments_for_gallery(self.id, resolve_time_frame(timeframe))
+  end
+
+  def votes_for_timeframe(timeframe = "")
+    Vote.votes_for_gallery(self.id, resolve_time_frame(timeframe))
+  end
+
+  def resolve_time_frame(timeframe = "")
     case timeframe
     when "today"
       Date.today.beginning_of_day
@@ -69,6 +67,5 @@ class Gallery < ApplicationRecord
     else
       ""
     end
-    Comment.comments_for_gallery(self.id, since_date)
   end
 end

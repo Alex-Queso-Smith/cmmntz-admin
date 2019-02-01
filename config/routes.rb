@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resources :remove_user_gallery_moderators, only: [:create]
       resources :user_searches, only: [:create]
       resources :signups, only: [:create]
+      resources :dashboards, only: [:index]
     end
   end
 
