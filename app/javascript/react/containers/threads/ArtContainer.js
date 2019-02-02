@@ -1,22 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { FetchDidMount } from '../../util/CoreUtil';
 
 import ArtSettingsContainer from './ArtSettingsContainer'
 
 class ArtContainer extends React.Component {
   state = {
+    art: this.props.art,
     settingsOpen: false
   }
 
+  updateArt = this.updateArt.bind(this)
+
+  updateArt() {
+    FetchDidMount(this, `/api/v1/arts/${this.state.art.id}.json`)
+    .then(artData => {
+      var art = artData.art
+      this.setState({
+        art: art
+      })
+    })
+  }
+
+
   render() {
 
-    var art = this.props.art
+    var art = this.state.art
 
     var settingsContainer;
     if (this.state.settingsOpen){
       settingsContainer =
       <ArtSettingsContainer
         artId={art.id}
+        updateArt={this.updateArt}
       />
     }
 
@@ -24,7 +40,7 @@ class ArtContainer extends React.Component {
       <div className="thread-listing" >
         <div className="row">
           <div className="col-sm-7">
-            <h3><Link to={`/threads/${art.id}`}>{art.type}: {art.url}</Link></h3>
+            <h3><Link to={`/threads/${art.id}`}>{art.artType}: {art.url}</Link></h3>
           </div>
           <div className="col">
             <h4>Creator: {art.artist}</h4>
@@ -38,19 +54,19 @@ class ArtContainer extends React.Component {
         </div>
 
         <div className="row">
-          <div className="col-2">
+          <div className="col-sm-2">
             Comments:
           </div>
-          <div className="col">
+          <div className="col-sm-2">
             <p>Approved: {art.approvedComments}</p>
           </div>
-          <div className="col">
+          <div className="col-sm-2">
             <p>Pending: {art.pendingComments}</p>
           </div>
-          <div className="col">
+          <div className="col-sm-2">
             <p>Flagged: {art.flaggedComments}</p>
           </div>
-          <div className="col">
+          <div className="col-sm-2">
             <p>Deleted: {art.deletedComments}</p>
           </div>
         </div>
@@ -71,7 +87,7 @@ class ArtContainer extends React.Component {
         <div className="row">
           <div className="col">
             <div className="art-settings-link float-right" onClick={() => this.setState({settingsOpen: !this.state.settingsOpen})}>
-              <img className="thread-settings-btn" src="https://classifilterstore.blob.core.windows.net/graphics/images/icons-v2/gear.png" height />
+              <img className="thread-settings-btn" src="https://classifilterstore.blob.core.windows.net/graphics/images/icons-v2/gear.png" />
             </div>
           </div>
         </div>

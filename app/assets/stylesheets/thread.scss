@@ -13,6 +13,7 @@ $breakpoint-phone: 575px;
   h3 {
     font-size: 1.5em;
     text-decoration: underline;
+    word-wrap: break-word;
   }
 
   .art-settings-link {
@@ -23,6 +24,7 @@ $breakpoint-phone: 575px;
       height: 30px;
       width: 30px;
       display: block;
+      cursor: pointer;
 
       @media (max-width: $breakpoint-phone) {
         height: 25px;
@@ -30,4 +32,9 @@ $breakpoint-phone: 575px;
       }
     }
   }
+}
+
+.art-edit-settings-container {
+  margin: 0 auto;
+  max-width: 575px;
 }

@@ -1,6 +1,6 @@
 json.art do
   json.id art.id
-  json.type art.art_type
+  json.artType art.art_type
   json.topics art.topics_list
 
 if !params[:display]

@@ -24,7 +24,7 @@ class ArtSettingsContainer extends React.Component {
       var art = artData.art
       this.setState({
         id: art.id,
-        artType: art.art_type,
+        artType: art.artType,
         topics: art.topics,
         ignoreWarningChecker: art.ignore_warning_checker,
         disabled: art.disabled,
@@ -70,7 +70,7 @@ class ArtSettingsContainer extends React.Component {
         if (data.errors) {
           alert("there are errors")
         } else {
-          alert("Changes Saved.")
+          this.props.updateArt()
         }
       }
     )
@@ -83,7 +83,7 @@ class ArtSettingsContainer extends React.Component {
     var { artType, topics, ignoreWarningChecker, disabled, deactivated, disabledMessage } = this.state
 
     return(
-      <div id="art-edit-settings-container">
+      <div className="art-edit-settings-container">
         <Input
           name="artType"
           label="What Type Of Article is this?"

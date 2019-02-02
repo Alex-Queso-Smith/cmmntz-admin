@@ -34,12 +34,6 @@ class ArtsIndexContainer extends React.Component {
 
     return(
       <div>
-        <h3>Arts</h3>
-        <h5>[Filtering] [+/-]</h5>
-        <hr />
-        <div>
-          [Page 1][Page 2][...][Page x]
-        </div>
         {formattedArts}
       </div>
     )
