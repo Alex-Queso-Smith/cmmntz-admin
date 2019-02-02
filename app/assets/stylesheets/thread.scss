@@ -2,18 +2,33 @@ $breakpoint-phone: 575px;
 
 .thread-listing {
   width: 90%;
-  margin: 15px;
-  padding: 15px 15px 15px 15px;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  box-shadow: 3px 3px 10px #800080;
+  font-size: 1.2em;
 
   h3 {
     font-size: 1.5em;
     text-decoration: underline;
     word-wrap: break-word;
+  }
+
+  h4 {
+    font-size: 1.25em;
+  }
+
+  .art-status {
+    font-size: 1.2;
+  }
+
+  .art-status-badge {
+    color: green;
+    padding: 3px 5px;
+  }
+
+  .art-disabled {
+    color: grey;
+  }
+
+  .art-deactivated {
+    color: red;
   }
 
   .art-settings-link {
@@ -31,6 +46,31 @@ $breakpoint-phone: 575px;
         width: 25px;
       }
     }
+  }
+
+  .art-comments-header {
+    color: black
+  }
+  .art-comments-approved {
+    color: green;
+  }
+  .art-comments-pending {
+    color: orange;
+  }
+  .art-comments-flagged {
+    color: red;
+  }
+  .art-comments-deleted {
+    color: grey;
+  }
+
+  .art-interactions {
+  }
+  .art-item-count {
+    margin-left: 10px;
+  }
+
+  .art-publish-date {
   }
 }
 

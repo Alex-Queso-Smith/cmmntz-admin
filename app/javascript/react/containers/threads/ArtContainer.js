@@ -37,53 +37,61 @@ class ArtContainer extends React.Component {
     }
 
     return(
-      <div className="thread-listing" >
+      <div className="thread-listing commntz-container" >
         <div className="row">
-          <div className="col-sm-7">
+          <div className="col-9">
             <h3><Link to={`/threads/${art.id}`}>{art.artType}: {art.url}</Link></h3>
           </div>
           <div className="col">
-            <h4>Creator: {art.artist}</h4>
+            <h4 className="float-right">Creator: {art.artist}</h4>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-2">
-            Status: {art.status}
+        <div className="row mt-2">
+          <div className="col">
+            <span className="art-status">Status:</span> <span className={`art-status-badge art-${art.status.toLowerCase()}`}>{art.status}</span>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-sm-2">
+        <div className="row art-comments-counts mt-2">
+          <div className="col-sm-2 art-comments-header">
             Comments:
           </div>
-          <div className="col-sm-2">
-            <p>Approved: {art.approvedComments}</p>
+          <div className="col-sm-2 art-comments art-comments-approved">
+            Approved: {art.approvedComments}
           </div>
-          <div className="col-sm-2">
-            <p>Pending: {art.pendingComments}</p>
+          <div className="col-sm-2 art-comments art-comments-pending">
+            Pending: {art.pendingComments}
           </div>
-          <div className="col-sm-2">
-            <p>Flagged: {art.flaggedComments}</p>
+          <div className="col-sm-2 art-comments art-comments-flagged">
+            Flagged: {art.flaggedComments}
           </div>
-          <div className="col-sm-2">
-            <p>Deleted: {art.deletedComments}</p>
+          <div className="col-sm-2 art-comments art-comments-deleted">
+            Deleted: {art.deletedComments}
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-1">
+        <div className="row art-interactions mt-2">
+          <div className="col-3">
             Votes:
+            <span className="art-item-count">
+            {art.votesCount}
+            </span>
           </div>
-          <div className="col-1">
-            #
+          <div className="col-3">
+            Interactions:
+            <span className="art-item-count">
+            {art.interactions}
+            </span>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
+
+        <div className="row mt-2">
+          <div className="col art-publish-date">
             Date: {art.publishedAt}
           </div>
         </div>
+
         <div className="row">
           <div className="col">
             <div className="art-settings-link float-right" onClick={() => this.setState({settingsOpen: !this.state.settingsOpen})}>

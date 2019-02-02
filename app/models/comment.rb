@@ -5,6 +5,9 @@ class Comment < ApplicationRecord
   belongs_to :art
   belongs_to :gallery
   belongs_to :user
+
+  has_many :votes
+
   scope :pending_approval, -> {where(approved: false)}
   scope :not_deleted, -> {where(deleted: false)}
   scope :deleted, -> {where(deleted: true)}

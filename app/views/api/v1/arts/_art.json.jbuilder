@@ -15,6 +15,7 @@ if !params[:display]
     json.approvedComments art.approved_comments.size
     json.flaggedComments art.flagged_comments.size
     json.interactions art.art_interactions.size
+    json.votesCount art.votes.size
   end
 
   if (params[:display] && params[:display] == "settings") || params[:index]

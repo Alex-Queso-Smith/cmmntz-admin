@@ -3,7 +3,6 @@ import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../../util/Core
 
 import ArtInfoContainer from './ArtInfoContainer'
 import ArtCommentsContainer from './ArtCommentsContainer'
-import ArtSettingsContainer from './ArtSettingsContainer'
 
 import { ArtTabs }  from '../../components/Tabs';
 
@@ -37,13 +36,6 @@ class ArtsShowContainer extends React.Component {
       case "":
         page =
           <ArtInfoContainer
-            artId={artId}
-            updateDisplay={this.updateDisplay}
-          />
-        break;
-      case "settings":
-        page =
-          <ArtSettingsContainer
             artId={artId}
             updateDisplay={this.updateDisplay}
           />

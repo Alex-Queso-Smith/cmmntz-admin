@@ -14,6 +14,7 @@ class Art < ApplicationRecord
   has_many :topics, through: :art_topics
 
   has_many :comments
+  has_many :votes, through: :comments
   has_many :pending_comments, -> { where(approved: false, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
   has_many :deleted_comments, -> { where(deleted: true) }, class_name: "Comment", foreign_key: "art_id"
   has_many :approved_comments, -> { where(approved: true, deleted: false) }, class_name: "Comment", foreign_key: "art_id"
@@ -65,7 +66,7 @@ class Art < ApplicationRecord
   end
 
   def self.search(filters, page)
-    scope = self.where({}).includes(:pending_comments, :deleted_comments, :approved_comments, :flagged_comments)
+    scope = self.where({}).includes(:pending_comments, :deleted_comments, :approved_comments, :flagged_comments, comments: [:votes])
     scope = scope.page(page)
     scope
   end

@@ -27,6 +27,18 @@ nav {
 $breakpoint-tablet: 900px;
 $breakpoint-phone: 575px;
 
+
+.commntz-container {
+  margin: 15px;
+  padding: 15px 15px 15px 15px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 3px 3px 10px #800080;
+}
+
+
 @media (min-width: $breakpoint-phone) {
   .center-form {
     max-width: 500px;

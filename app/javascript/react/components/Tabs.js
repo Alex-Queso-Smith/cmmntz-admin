@@ -70,8 +70,7 @@ export const MemberTabs = (props) => {
 export const ArtTabs = (props) => {
   const types = [
     ["Info", ""],
-    ["Comments", "comments"],
-    ["Settings", "settings"]
+    ["Comments", "comments"]
   ]
 
   var links = types.map(type => {
