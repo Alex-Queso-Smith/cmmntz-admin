@@ -37,7 +37,7 @@ class ArtContainer extends React.Component {
     }
 
     return(
-      <div className="thread-listing commntz-container" >
+      <div className="thread-listing cmmntz-container" >
         <div className="row">
           <div className="col-9">
             <h3><Link to={`/threads/${art.id}`}>{art.artType}: {art.url}</Link></h3>
@@ -48,14 +48,17 @@ class ArtContainer extends React.Component {
         </div>
 
         <div className="row mt-2">
-          <div className="col">
+          <div className="col-2">
             <span className="art-status">Status:</span> <span className={`art-status-badge art-${art.status.toLowerCase()}`}>{art.status}</span>
+          </div>
+          <div className="col">
+            Topics: <span className="pl-2">{art.topics}</span>
           </div>
         </div>
 
         <div className="row art-comments-counts mt-2">
           <div className="col-sm-2 art-comments-header">
-            Comments:
+            <Link to={`/threads/${art.id}`}>Comments</Link>
           </div>
           <div className="col-sm-2 art-comments art-comments-approved">
             Approved: {art.approvedComments}
@@ -74,14 +77,23 @@ class ArtContainer extends React.Component {
         <div className="row art-interactions mt-2">
           <div className="col-3">
             Votes:
-            <span className="art-item-count">
+            <span className="pl-2">
             {art.votesCount}
             </span>
           </div>
-          <div className="col-3">
+        </div>
+
+        <div className="row art-interactions mt-2">
+          <div className="col-sm-4">
             Interactions:
-            <span className="art-item-count">
+            <span className="pl-2">
             {art.interactions}
+            </span>
+          </div>
+          <div className="col-sm-4">
+            Last Interaction:
+            <span className="pl-2">
+            {art.lastInteraction}
             </span>
           </div>
         </div>

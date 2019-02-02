@@ -13,10 +13,10 @@ const LineItem = (props) => {
 
 export const CommentTabs  = (props) => {
   const types = [
+    ["Thread Comments", ""],
     ["Pending Comments", "pending"],
     ["Flagged Comments", "flagged"],
-    ["Deleted Comments", "deleted"],
-    ["Thread Comments", ""]
+    ["Deleted Comments", "deleted"]
   ]
 
   var links = types.map(type => {
@@ -69,7 +69,6 @@ export const MemberTabs = (props) => {
 
 export const ArtTabs = (props) => {
   const types = [
-    ["Info", ""],
     ["Comments", "comments"]
   ]
 

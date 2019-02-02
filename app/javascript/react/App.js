@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // Threads
 import ArtsIndexContainer from './containers/threads/ArtsIndexContainer';
-import ArtsShowContainer from './containers/threads/ArtsShowContainer';
+import ArtCommentsContainer from './containers/threads/ArtCommentsContainer';
 
 // Users
 import CurrentUsersContainer from './containers/CurrentUsersContainer';
@@ -73,7 +73,7 @@ class App extends React.Component {
               <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
 
               // Threads
-              <Route path='/threads/:id' component={ArtsShowContainer} />
+              <Route path='/threads/:id' component={ArtCommentsContainer} />
               <Route path='/threads' component={ArtsIndexContainer} />
 
               // Users

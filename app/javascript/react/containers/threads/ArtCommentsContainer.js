@@ -9,7 +9,7 @@ class ArtCommentsContainer extends React.Component {
   state = {
     comments: [],
     manageIds: [],
-    display: "pending",
+    display: "",
     allSelected: false
   }
 
@@ -57,7 +57,7 @@ class ArtCommentsContainer extends React.Component {
       formData.append("mass_manage_comment[action]", action)
       formData.append("mass_manage_comment[comment_ids]", commentIds)
 
-      var url = `/api/v1/arts/${this.props.artId}/mass_manage_comments.json`;
+      var url = `/api/v1/arts/${this.props.match.params.id}/mass_manage_comments.json`;
       FetchWithUpdate(this, url, "POST", formData)
       .then(success => {
         setTimeout(this.loadComments(this.state.display), 10);
@@ -90,6 +90,7 @@ class ArtCommentsContainer extends React.Component {
     const value = target.getAttribute('data-value');
 
     this.setState({
+      comments: [],
       display: value,
       manageIds: [],
       allSelected: false
@@ -98,7 +99,7 @@ class ArtCommentsContainer extends React.Component {
   }
 
   loadComments(type){
-    var url = `/api/v1/arts/${this.props.artId}/comments.json`;
+    var url = `/api/v1/arts/${this.props.match.params.id}/comments.json`;
 
     if (type != "") {
       url += `?display_mode=${type}`
@@ -307,7 +308,7 @@ class ArtCommentsContainer extends React.Component {
     }
 
     return(
-      <div className="cf-manage-comments container">
+      <div className="cf-manage-comments container cmmntz-container">
         <CommentTabs
           display={this.state.display}
           onClick={this.handleTabClick}
