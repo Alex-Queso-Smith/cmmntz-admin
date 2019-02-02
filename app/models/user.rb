@@ -56,12 +56,20 @@ class User < ApplicationRecord
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
+  scope :not_blacklisted, -> (gallery_id) {
+    joins("left join gallery_blacklistings on gallery_blacklistings.user_id = users.id AND gallery_blacklistings.gallery_id = '#{gallery_id}' AND gallery_blacklistings.expires_at >= NOW()")
+    .where("gallery_blacklistings.id IS NULL")
+  }
+
   # scope :with_interactions_for_gallery,
 
   def self.search(filters, gallery)
     scope = where({}).not_guest
     scope = scope.includes(:user_article_views, :user_video_clicks, :followings, :blockings, :user_feedbacks, :votes, :comments )
     scope = self.sort_order(scope, filters)
+    unless filters[:show_banned]
+      scope = scope.not_blacklisted(gallery.id)
+    end
     # scope = scope.with_interactions_for_gallery(gallery.id)
     scope
   end
