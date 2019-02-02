@@ -90,7 +90,6 @@ class CurrentUsersContainer extends React.Component {
                 Email: {userEmail}
                 <hr />
                 <BanUser banAction={handleBanUser} />
-                [Trust][Mod]
               </div>
             </div>
           </div>
