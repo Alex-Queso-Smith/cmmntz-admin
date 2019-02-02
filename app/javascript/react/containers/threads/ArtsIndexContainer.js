@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+
+import ArtContainer from './ArtContainer'
+
 import { FetchDidMount } from '../../util/CoreUtil';
 
 class ArtsIndexContainer extends React.Component {
@@ -22,54 +25,10 @@ class ArtsIndexContainer extends React.Component {
     this.state.artsData.map((row) => {
       var art = row.art
       return(
-        <div key={`art_${art.id}`} className="thread-listing" >
-          <div className="row">
-            <div className="col-sm-7">
-              <h3><Link to={`/threads/${art.id}`}>{art.type}: {art.url}</Link></h3>
-            </div>
-            <div className="col">
-              <h4>Creator: {art.artist}</h4>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-2">
-              Status: {art.status}
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-2">
-              Comments:
-            </div>
-            <div className="col">
-              <p>Approved: {art.approvedComments}</p>
-            </div>
-            <div className="col">
-              <p>Pending: {art.pendingComments}</p>
-            </div>
-            <div className="col">
-              <p>Flagged: {art.flaggedComments}</p>
-            </div>
-            <div className="col">
-              <p>Deleted: {art.deletedComments}</p>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-1">
-              Votes:
-            </div>
-            <div className="col-1">
-              #
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              Date: {art.publishedAt}
-            </div>
-          </div>
-        </div>
+        <ArtContainer
+          key={`art_${art.id}`}
+          art={art}
+        />
       )
     })
 

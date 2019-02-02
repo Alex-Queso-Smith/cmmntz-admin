@@ -4,7 +4,7 @@ import Textarea from 'react-expanding-textarea';
 import { FetchDidMount, FetchWithUpdate } from '../../util/CoreUtil';
 import { Checkbox, Input } from '../../components/FormComponents';
 
-class ArtsSettingsContainer extends React.Component {
+class ArtSettingsContainer extends React.Component {
   state = {
     id: '',
     arttType: '',
@@ -70,7 +70,7 @@ class ArtsSettingsContainer extends React.Component {
         if (data.errors) {
           alert("there are errors")
         } else {
-          this.props.updateDisplay('')
+          alert("Changes Saved.")
         }
       }
     )
@@ -128,7 +128,7 @@ class ArtsSettingsContainer extends React.Component {
           rows={3}
         />
 
-      <div className="margin-top-10px text-right">
+        <div className="margin-top-10px text-right">
           <button className="btn btn-med btn-dark" onClick={this.handleSubmit}>
             Submit
           </button>
@@ -139,4 +139,4 @@ class ArtsSettingsContainer extends React.Component {
 }
 
 
-export default ArtsSettingsContainer;
+export default ArtSettingsContainer;
