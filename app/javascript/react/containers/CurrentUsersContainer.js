@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
 
@@ -99,7 +100,7 @@ class CurrentUsersContainer extends React.Component {
 
     return(
       <div className="current-users-container">
-
+        <Link id="banned-user-link" to="/gallery_blacklistings">View Current Banned Users</Link>
         <div className="row search-options">
           <div className="col-6">
             <div className="float-right">

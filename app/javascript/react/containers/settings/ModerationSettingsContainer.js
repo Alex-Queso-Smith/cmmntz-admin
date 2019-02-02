@@ -54,13 +54,14 @@ class ModerationSettingsContainer extends React.Component {
           updateDisplay={this.updateDisplay}
           />
     }
-    return(
-      <div className="cf-settings-base container">
-        <ModerationSettingsTabs
-          display={this.state.display}
-          onClick={this.handleTabClick}
-        />
 
+    var tabs =
+    <ModerationSettingsTabs
+      display={this.state.display}
+      onClick={this.handleTabClick}
+    />
+    return(
+      <div  id="gallery-edit-settings-container" className="cmmntz-container">
         {page}
       </div>
     )

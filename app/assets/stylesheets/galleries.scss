@@ -3,15 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $breakpoint-phone: 575px;
 
-#gallery-edit-settings-container, #ca-member-management-container, #cf-member-edit-container {
-  margin: 60px auto;
-  border: 1px solid grey;
-  padding: 30px;
-  border-radius: 20px;
+#settings-container, #gallery-edit-settings-container, #ca-member-management-container, #cf-member-edit-container {
   width: 500px;
   height: auto;
-  background: rgba(255, 255, 255, .9 );
-  color: #000000;
+  margin: 0 auto;
 }
 
 .filter-btn {

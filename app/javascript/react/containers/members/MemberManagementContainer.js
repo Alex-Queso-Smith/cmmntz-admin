@@ -43,7 +43,7 @@ class MemberManagementContainer extends React.Component {
     }
 
     return(
-      <div id="ca-member-management-container">
+      <div id="ca-member-management-container" className="cmmntz-container">
         <MemberTabs
           display={this.state.display}
           onClick={this.handleTabClick}

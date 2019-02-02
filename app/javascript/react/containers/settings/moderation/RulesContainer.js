@@ -81,8 +81,7 @@ class RulesContainer extends React.Component {
 
     return(
       <div id="gallery-edit-settings-container">
-        Moderation Settings Here
-        <div className="text-center text-medium margin-top-10px">Default Thread Settings</div>
+        <div className="text-center text-medium margin-top-10px">Moderation Settings</div>
         <hr/>
         <Checkbox
           onChange={this.handleChange}

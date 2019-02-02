@@ -53,7 +53,7 @@ class BannedUsersContainer extends React.Component {
 
 
     return(
-      <div className="ca-banned-users-container container">
+      <div className="ca-banned-users-container container cmmntz-container">
         <table className="table">
           <thead>
             <tr>
