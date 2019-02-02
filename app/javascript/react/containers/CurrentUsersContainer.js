@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { FetchDidMount, FetchWithUpdate } from '../util/CoreUtil';
-import UserTile from '../components/users/UserTile';
+import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
+
+import BanUser from '../components/modals/BanUser';
 
 class CurrentUsersContainer extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class CurrentUsersContainer extends React.Component {
   handleChange = this.handleChange.bind(this);
   updateSearch = this.updateSearch.bind(this);
   handleSearch = this.handleSearch.bind(this);
+  banUser = this.banUser.bind(this);
 
   componentDidMount(){
     this.handleSearch()
@@ -43,6 +45,21 @@ class CurrentUsersContainer extends React.Component {
      }.bind(this), 20)
   }
 
+  banUser(userId, event){
+    var c = confirm("Do you wish to ban this user?")
+
+    if (c) {
+      var l = event.target.previousSibling.value
+      FetchIndividual(this, `/api/v1/gallery_blacklistings.json?user_id=${userId}&dur=${l}`, "POST")
+      .then(success => {
+        var allUsers = this.state.users;
+        var filteredUsers = allUsers.filter(user => user.id != userId)
+        this.setState({ users: filteredUsers })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+  }
+
   render(){
     var allUsers;
 
@@ -55,35 +72,28 @@ class CurrentUsersContainer extends React.Component {
           <a href={`mailto:${user.email}`}>{user.email}</a>
         }
 
+        var handleBanUser = (event) => {
+          this.banUser(user.id, event)
+        }
+
         return(
-          <tr key={user.id}>
-            <UserTile user={user} />
-            <td>{userEmail}</td>
-            <td>{user.votes_count}</td>
-            <td>
-              C: {user.comments_count}
-              <br/>
-              R: {user.replies_count}
-            </td>
-            <td>
-              F: {user.friends_count}
-              <br/>
-              B: {user.blocks_count}
-            </td>
-            <td>{user.anons_count}</td>
-            <td>
-              F: {user.feedbacks_count}
-              <br/>
-              B: {user.bugs_count}
-            </td>
-            <td>{user.custom_settings}</td>
-            <td>{user.tutorial_opened}</td>
-            <td>{user.article_views}</td>
-            <td>{user.registered_at}</td>
-            <td>{user.last_action_at}</td>
-            <td>{user.login_count}</td>
-            <td>{user.current_login_ip}</td>
-          </tr>
+          <div key={user.id} className="user-container cmmntz-container">
+            <div className="row">
+              <div className="col-6">
+                {user.user_name}
+                <hr />
+                Comments: {user.comments_count}<br />
+                Votes: {user.votes_count}
+              </div>
+              <div className="col-6">
+                Reg @: {user.registered_at}<br />
+                Email: {userEmail}
+                <hr />
+                <BanUser banAction={handleBanUser} />
+                [Trust][Mod]
+              </div>
+            </div>
+          </div>
         )
       })
     }
@@ -112,42 +122,8 @@ class CurrentUsersContainer extends React.Component {
             </div>
           </div>
         </div>
-
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="table-user-name">User Name</th>
-              <th>Email</th>
-              <th>Votes</th>
-              <th>
-                Comments
-                <br/>
-                Replies
-              </th>
-              <th>
-                Friends
-                <br/>
-                Blocks
-              </th>
-              <th>Anons</th>
-              <th>
-                Feedbacks
-                <br/>
-                Bugs
-              </th>
-              <th>Custom Settings?</th>
-              <th>Tutorial Opened</th>
-              <th>Articles Viewed</th>
-              <th>Reg @</th>
-              <th>Last Action At</th>
-              <th>Logins</th>
-              <th>Current Login Ip</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUsers}
-          </tbody>
-        </table>
+        <hr />
+        {allUsers}
       </div>
     )
   }

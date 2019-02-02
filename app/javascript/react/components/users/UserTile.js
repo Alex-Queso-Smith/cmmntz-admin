@@ -2,7 +2,6 @@ import React from 'react';
 
 class UserTile extends React.Component {
   state = {
-    showId: false,
     showDemData: false
   }
 
@@ -19,15 +18,7 @@ class UserTile extends React.Component {
       }
     }
 
-    var idLink = <a href="" onClick={(e) => {e.preventDefault(); this.setState({ showId: true })}}>Show ID</a>
-    var idTile;
-    if (this.state.showId) {
-      idLink = <a href="" onClick={(e) => {e.preventDefault(); this.setState({ showId: false })}}>Hide ID</a>
-      idTile=
-      <div className="user-id">
-        {id}
-      </div>
-    }
+
     var demLink = <a href="" onClick={(e) => {e.preventDefault(); this.setState({ showDemData: true })}}>Show Dem</a>
     var demTile;
     if (this.state.showDemData) {
@@ -43,17 +34,13 @@ class UserTile extends React.Component {
     }
 
     return(
-      <td className="table-user-name">
+      <div className="table-user-name">
         {user_name}
-        <br/><br/>
-        {idLink}
-        <br/>
-        {idTile}
         <br/>
         {demLink}
         <br/>
         {demTile}
-      </td>
+      </div>
     )
   }
 }

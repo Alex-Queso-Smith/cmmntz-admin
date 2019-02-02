@@ -3,7 +3,7 @@ import BasicModal from './BasicModal';
 
 export const BanUser = props => {
   var style = {
-    marginLeft: "10px;"
+    marginLeft: "10px"
   }
 
   return (
@@ -20,7 +20,7 @@ export const BanUser = props => {
       <option value="month">For 1 Month</option>
       <option value="year">For 1 Year</option>
     </select>
-    
+
     <button style={style} className="btn btn-sm btn-danger margin-all-5px" onClick={props.banAction}>
       Ban User
     </button>
