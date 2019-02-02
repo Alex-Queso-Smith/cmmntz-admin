@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :blocker_users, through: :blockers, source: :blocker
 
   has_many :user_feedbacks
+  has_many :art_interactions
 
   has_many :votes
   has_many :comments
@@ -55,10 +56,13 @@ class User < ApplicationRecord
     where("users.user_name IS NOT NULL AND users.user_name != '' ")
   }
 
-  def self.search(filters)
+  # scope :with_interactions_for_gallery,
+
+  def self.search(filters, gallery)
     scope = where({}).not_guest
     scope = scope.includes(:user_article_views, :user_video_clicks, :followings, :blockings, :user_feedbacks, :votes, :comments )
     scope = self.sort_order(scope, filters)
+    # scope = scope.with_interactions_for_gallery(gallery.id)
     scope
   end
 
