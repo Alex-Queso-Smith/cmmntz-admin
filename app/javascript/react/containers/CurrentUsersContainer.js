@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../util/CoreUtil';
+import { Paginator } from '../components/Paginator'
 
 import BanUser from '../components/modals/BanUser';
 
@@ -9,12 +10,16 @@ class CurrentUsersContainer extends React.Component {
   state = {
     users: [],
     search: "created_at",
-    searchOrder: "desc"
+    searchOrder: "desc",
+    page: 1,
+    totalResults: 0,
+    rowsPerPage: 0
   }
 
   handleChange = this.handleChange.bind(this);
   updateSearch = this.updateSearch.bind(this);
   handleSearch = this.handleSearch.bind(this);
+  getPage = this.getPage.bind(this);
   banUser = this.banUser.bind(this);
 
   componentDidMount(){
@@ -22,7 +27,10 @@ class CurrentUsersContainer extends React.Component {
   }
 
   handleChange(event){
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({
+      [event.target.name]: event.target.value,
+      page: 1
+     })
   }
 
   handleSearch(){
@@ -30,14 +38,24 @@ class CurrentUsersContainer extends React.Component {
 
     search.append("search[sort]", this.state.search)
     search.append("search[sort_dir]", this.state.searchOrder)
+    search.append("page", this.state.page)
 
     FetchWithUpdate(this, `/api/v1/user_searches.json`, 'POST', search)
     .then(userData => {
       this.setState({
-        users: userData.users
+        users: userData.users,
+        totalResults: userData.total_results,
+        rowsPerPage: userData.per_page
       })
     })
   }
+
+  getPage(page) {
+   this.setState({page: page});
+   let self = this;
+   setTimeout(function(){ self.handleSearch() ; }, 500);
+  }
+
 
   updateSearch(event){
     this.handleChange(event);
@@ -98,6 +116,13 @@ class CurrentUsersContainer extends React.Component {
       })
     }
 
+    var pagination =
+      <Paginator
+        totalRows={this.state.totalResults}
+        rowsPerPage={this.state.rowsPerPage}
+        page={this.state.page}
+        getPage={this.getPage}
+      />
     return(
       <div className="current-users-container">
         <div className="row search-options">
@@ -123,6 +148,9 @@ class CurrentUsersContainer extends React.Component {
         </div>
         <hr />
         {allUsers}
+
+        {pagination}
+
       </div>
     )
   }

@@ -1,3 +1,5 @@
+json.per_page User.per_page
+json.total_results @users.total_entries
 json.users @users do |user|
   json.id user.id
   json.user_name user.display_user_name
