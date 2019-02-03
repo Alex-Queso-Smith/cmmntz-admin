@@ -61,7 +61,10 @@ class User < ApplicationRecord
     .where("gallery_blacklistings.id IS NULL")
   }
 
-  # scope :with_interactions_for_gallery,
+  scope :with_interactions_for_gallery, -> (gallery_id) {
+    where(ArtInteraction.joins(:art).joins(art: :gallery)
+      .where(galleries: {id: gallery_id}).where("art_interactions.user_id = users.id").exists)
+  }
 
   def self.search(filters, gallery)
     scope = where({}).not_guest
@@ -70,7 +73,7 @@ class User < ApplicationRecord
     unless filters[:show_banned]
       scope = scope.not_blacklisted(gallery.id)
     end
-    # scope = scope.with_interactions_for_gallery(gallery.id)
+    scope = scope.with_interactions_for_gallery(gallery.id)
     scope
   end
 
