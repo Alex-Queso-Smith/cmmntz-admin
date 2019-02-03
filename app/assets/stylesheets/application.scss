@@ -251,3 +251,20 @@ h4 {
  overflow-x: hidden;
  padding-top: 20px;
 }
+
+.ca-tile-button {
+  width: 100%;
+  color: #800080;
+  border: 2px solid #800080;
+  background-color: #ffffff;
+
+  &:focus {
+    box-shadow: 0 0 0 0;
+  }
+
+  &:hover{
+    color: #ffffff;
+    background: #800080;
+    border: 2px solid #800080;
+  }
+}
