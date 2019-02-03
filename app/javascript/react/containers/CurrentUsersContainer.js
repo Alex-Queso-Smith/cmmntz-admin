@@ -54,7 +54,7 @@ class CurrentUsersContainer extends React.Component {
   getPage(page) {
    this.setState({page: page});
    let self = this;
-   setTimeout(function(){ self.handleSearch() ; }, 500);
+   setTimeout(function(){ self.handleSearch() ; }, 250);
   }
 
 
