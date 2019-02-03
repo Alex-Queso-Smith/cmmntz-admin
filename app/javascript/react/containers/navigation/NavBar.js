@@ -48,8 +48,6 @@ class NavBar extends React.Component {
             Moderation
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link to="/moderation" className="dropdown-item" >Moderation</Link>
-            <div className="dropdown-divider"/>
             <Link to="/moderation/comments" className="dropdown-item" >Comments</Link>
             <Link to="/moderation/moderators" className="dropdown-item" >Moderators</Link>
           </div>
@@ -59,8 +57,6 @@ class NavBar extends React.Component {
             Settings
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link to="/settings" className="dropdown-item" >Settings</Link>
-            <div className="dropdown-divider"/>
             <Link to="/settings/site" className="dropdown-item" >Site</Link>
             <Link to="/settings/moderation" className="dropdown-item" >Moderation</Link>
             <Link to="/settings/threads" className="dropdown-item" >Threads</Link>

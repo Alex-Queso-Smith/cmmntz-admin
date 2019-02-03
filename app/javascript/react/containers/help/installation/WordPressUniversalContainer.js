@@ -30,7 +30,7 @@ class WordPressUniversalContainer extends React.Component {
     }
 
     return(
-      <div className="cf-settings-base container">
+      <div className="cf-settings-base container cmmntz-container">
         <h2 className="text-center">CMMNTZ Widget WordPress Installation Instructions</h2>
 
         <br />
