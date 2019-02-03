@@ -6,7 +6,7 @@ class SettingsBaseContainer extends React.Component {
 
   render() {
     return(
-      <div id="settings-container" className="container cmmntz-container">
+      <div className="container cmmntz-container center-form">
         settings base page
       </div>
     )

@@ -73,7 +73,7 @@ class SiteSettingsContainer extends React.Component {
     var { name, siteUrl, commentEtiquette } = this.state;
 
     return(
-      <div id="gallery-edit-settings-container" className="cmmntz-container">
+      <div className="container cmmntz-container center-form">
         <Input
           name="name"
           label="Site Name"

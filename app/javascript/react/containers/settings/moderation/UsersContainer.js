@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 class UsersContainer extends React.Component {
   render(){
     return(
-      <div id="gallery-edit-settings-container">
-        
+      <div className="container cmmntz-container center-form">
+
 
       </div>
     )

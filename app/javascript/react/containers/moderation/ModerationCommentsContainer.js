@@ -26,7 +26,7 @@ class ModerationCommentsContainer extends React.Component {
 
   render() {
     return(
-      <div className="cf-manage-comments container">
+      <div className="container cmmntz-container">
         <CommentTabs
           display={this.state.display}
           onClick={this.handleTabClick}

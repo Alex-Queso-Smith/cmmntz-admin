@@ -80,7 +80,7 @@ class RulesContainer extends React.Component {
     var { sortOpts, censor, commentEtiquette, commentApprovalNeeded, guestApprovalNeeded, notifyOnCommentApprovalNeeded, notifyOnNewComment, threadExpirationDays } = this.state;
 
     return(
-      <div id="gallery-edit-settings-container">
+      <div>
         <div className="text-center text-medium margin-top-10px">Moderation Settings</div>
         <hr/>
         <Checkbox

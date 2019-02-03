@@ -101,9 +101,9 @@ class ModeratorsContainer extends React.Component {
           content={this.state.newMod}
           onChange={this.handleChange}
           />
-        <button onClick={this.handleAddMod} className="btn btn-sm btn-dark">Add Moderator</button>
+        <button onClick={this.handleAddMod} className="btn btn-sm btn-dark ml-2">Add Moderator</button>
         <br />
-        <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="btn btn-sm btn-dark">Cancel</button>
+        <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="btn btn-sm btn-dark ml-2">Cancel</button>
       </div>
     } else {
       modInput =
@@ -111,7 +111,7 @@ class ModeratorsContainer extends React.Component {
     }
 
     return(
-      <div>
+      <div className="container cmmntz-container center-form">
         <br />
         {modInput}
         <br/>

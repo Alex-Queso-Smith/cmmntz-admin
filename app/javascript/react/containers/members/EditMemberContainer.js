@@ -63,20 +63,46 @@ class EditMemberContainer extends React.Component {
       member.append("customer[password_confirmation]", passwordConfirmation);
     }
 
-    FetchWithPush(this, `/api/v1/customers/${this.props.match.params.id}.json`, '/', 'PATCH', 'memberErrors', member)
+    FetchWithPush(this, `/api/v1/customers/${this.props.match.params.id}.json`, '', 'PATCH', 'memberErrors', member)
       .then(body => {
-        alert(`${body.message}`)
-        // this.handleClear()
+        if (!body.errors) {
+          if (body.member.isCurrentUser){
+            var element = document.getElementById('ca-app');
+            element.setAttribute('data-customer-id', body.member.id);
+            element.setAttribute('data-customer-name', body.member.name);
+            element.setAttribute('data-customer-gallery', body.member.gallery);
+            element.setAttribute('data-gallery-id', body.member.galleryId);
+            this.props.updateAppData(body.member.id, body.member.name, body.member.gallery, body.member.galleryId);
+
+            this.props.history.push('/');
+          } else {
+            this.props.history.push('/settings/members');
+          }
+        }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 
   render(){
-    var { memberErrors }
+    var { memberErrors } = this.state
+    var firstNameError, lastNameError, emailError, passwordError, passwordConfirmationError
+
+    firstNameError = CreateErrorElements(memberErrors.first_name, "First Name")
+    lastNameError = CreateErrorElements(memberErrors.last_name, "Last Name")
+    emailError = CreateErrorElements(memberErrors.email, "Email")
+    passwordError = CreateErrorElements(memberErrors.password, "Password")
+    passwordConfirmationError = CreateErrorElements(memberErrors.password_confirmation, "Password Confirmation")
+
+    var firstNameClass = ErrorClassValidation(firstNameError)
+    var lastNameClass = ErrorClassValidation(lastNameError)
+    var emailClass = ErrorClassValidation(emailError)
+    var passwordClass = ErrorClassValidation(passwordError)
+    var passwordConfirmationClass = ErrorClassValidation(passwordConfirmationError)
+
 
     return(
-      <div id="cf-new-member-container" className="jumbotron center-form">
+      <div className="container cmmntz-container center-form">
         <form id="cf-new-member-form" className="form container-fluid" onSubmit={this.handleSubmit}>
           <Input
             name="firstName"
@@ -87,39 +113,43 @@ class EditMemberContainer extends React.Component {
             onChange={this.handleChange}
             addClass={firstNameClass}
           />
-          {firstNameErrors}
+          {firstNameError}
           <Input
             name="lastName"
             label="Last Name"
-            addClass={''}
             type='text'
             content={this.state.lastName}
             onChange={this.handleChange}
+            addClass={lastNameClass}
           />
+        {lastNameError}
           <Input
             name="email"
             label="Email"
-            addClass={''}
             type='text'
             content={this.state.email}
             onChange={this.handleChange}
+            addClass={emailClass}
           />
+        {emailError}
           <Input
             name="password"
             label="Password"
-            addClass={''}
             type='password'
             content={this.state.password}
             onChange={this.handleChange}
+            addClass={passwordClass}
           />
+        {passwordError}
           <Input
             name="passwordConfirmation"
             label="Password Confirmation"
-            addClass={''}
             type='password'
             content={this.state.passwordConfirmation}
             onChange={this.handleChange}
+            addClass={passwordConfirmationClass}
           />
+        {passwordConfirmationError}
           <div className="row">
             <div className="col-12">
               <button type="Submit" id="create-member-button" className="btn btn-sm btn-dark float-right" onClick={this.handleSubmit}>Save Changes</button>

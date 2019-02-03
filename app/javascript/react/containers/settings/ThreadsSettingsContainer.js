@@ -175,7 +175,7 @@ class ThreadsSettingsContainer extends React.Component {
     var { sortOpts, threadExpirationDays } = this.state;
 
     return(
-      <div id="gallery-edit-settings-container" className="cmmntz-container">
+      <div className="container cmmntz-container center-form">
         <h5 className="text-center">Choose default sort and filter settings</h5>
         <br />
         <CommentFiltersContainer

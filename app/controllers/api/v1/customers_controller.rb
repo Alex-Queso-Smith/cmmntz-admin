@@ -8,7 +8,7 @@ class Api::V1::CustomersController < ApiController
   def show; end
 
   def create
-    @customer = Customer.new(customer_params.merge(gallery: current_gallery))
+    @customer = Customer.new(customer_params.merge(gallery: current_gallery, active: true))
 
     if @customer.save
       render json: { message: "Member created!" }
@@ -18,8 +18,8 @@ class Api::V1::CustomersController < ApiController
   end
 
   def update
-    if @customer.save
-      render json: { message: "Member Updated!" }
+    if @customer.update(customer_params)
+      render "update"
     else
       render json: { errors: @customer.errors, status: :unprocessable_entity }
     end

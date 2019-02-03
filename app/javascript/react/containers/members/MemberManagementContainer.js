@@ -11,6 +11,7 @@ class MemberManagementContainer extends React.Component {
 
   _isMounted = false
   handleTabClick = this.handleTabClick.bind(this);
+  updateDisplay = this.updateDisplay.bind(this);
 
   handleTabClick(event){
     const target = event.target;
@@ -18,6 +19,12 @@ class MemberManagementContainer extends React.Component {
 
     this.setState({
       display: value
+    })
+  }
+
+  updateDisplay(page){
+    this.setState({
+      display: page
     })
   }
 
@@ -35,7 +42,7 @@ class MemberManagementContainer extends React.Component {
       case "new":
         page =
         <NewMemberContainer
-
+          updateDisplay={this.updateDisplay}
         />
         break;
       default:
@@ -43,7 +50,7 @@ class MemberManagementContainer extends React.Component {
     }
 
     return(
-      <div id="ca-member-management-container" className="cmmntz-container">
+      <div className="container cmmntz-container center-form">
         <MemberTabs
           display={this.state.display}
           onClick={this.handleTabClick}

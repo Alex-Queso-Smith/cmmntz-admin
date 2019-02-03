@@ -19,7 +19,10 @@ import SettingsBaseContainer from './containers/settings/SettingsBaseContainer'
 import SiteSettingsContainer from './containers/settings/SiteSettingsContainer'
 import ThreadsSettingsContainer from './containers/settings/ThreadsSettingsContainer'
 import ModerationSettingsContainer from './containers/settings/ModerationSettingsContainer'
+
+// Members
 import MemberManagementContainer from './containers/members/MemberManagementContainer';
+import EditMemberContainer from './containers/members/EditMemberContainer';
 
 import GalleryShowContainer from './containers/gallery/GalleryShowContainer';
 import BannedUsersContainer from './containers/gallery/BannedUsersContainer';
@@ -87,6 +90,8 @@ class App extends React.Component {
               // Settings
               <Route path='/settings/site' component={SiteSettingsContainer} />
               <Route path='/settings/members' component={MemberManagementContainer} />
+              <Route path='/members/:id/edit' render={ (props) => <EditMemberContainer {...props} updateAppData={this.updateAppData} /> } />
+
               <Route path='/settings/threads' component={ThreadsSettingsContainer} />
               <Route path='/settings/moderation' component={ModerationSettingsContainer} />
               <Route path='/settings' component={SettingsBaseContainer} />
