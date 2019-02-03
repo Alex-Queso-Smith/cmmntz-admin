@@ -47,6 +47,7 @@ class CurrentUsersContainer extends React.Component {
         totalResults: userData.total_results,
         rowsPerPage: userData.per_page
       })
+      window.scrollTo(0, 0)
     })
   }
 
