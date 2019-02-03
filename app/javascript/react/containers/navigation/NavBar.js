@@ -42,7 +42,16 @@ class NavBar extends React.Component {
       <ul className="navbar-nav mr-auto">
         <Link style={firstLinkStyle} to={"/"} className="nav-link">Dashboard</Link>
         <Link to={"/threads"} className="nav-link">Threads</Link>
-        <Link to={"/users"} className="nav-link">Users</Link>
+        <li className="nav-item dropdown mr-auto">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Users
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <Link to="/users" className="dropdown-item">Users</Link>
+            <Link to="/gallery_blacklistings" className="dropdown-item">Banned Users</Link>
+          </div>
+        </li>
+
         <li className="nav-item dropdown mr-auto">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Moderation
