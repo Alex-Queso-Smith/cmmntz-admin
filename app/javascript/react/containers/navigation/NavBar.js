@@ -77,8 +77,6 @@ class NavBar extends React.Component {
             Help
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link to="/help" className="dropdown-item" >Help</Link>
-            <div className="dropdown-divider"/>
             <Link to="/help/embed" className="dropdown-item" >Embed</Link>
             <Link to="/help/moderation" className="dropdown-item" >Moderation</Link>
             <Link to="/help/faq" className="dropdown-item" >FAQ</Link>
