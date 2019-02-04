@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CommentTabs }  from '../../components/Tabs';
+import { ModerationCommentTabs }  from '../../components/Tabs';
 
 class ModerationCommentsContainer extends React.Component {
   state = {
@@ -27,7 +27,7 @@ class ModerationCommentsContainer extends React.Component {
   render() {
     return(
       <div className="container cmmntz-container">
-        <CommentTabs
+        <ModerationCommentTabs
           display={this.state.display}
           onClick={this.handleTabClick}
         />

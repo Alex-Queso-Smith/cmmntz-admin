@@ -40,6 +40,35 @@ export const CommentTabs  = (props) => {
   )
 }
 
+export const ModerationCommentTabs  = (props) => {
+  const types = [
+    ["Pending Comments", "pending"],
+    ["Flagged Comments", "flagged"],
+    ["Deleted Comments", "deleted"],
+    ["Thread Comments", ""]
+  ]
+
+  var links = types.map(type => {
+    return(
+      <LineItem
+        key={type[1]}
+        value={type[1]}
+        title={type[0]}
+        display={props.display}
+        onClick={props.onClick}
+      />
+    )
+  })
+
+  return(
+    <div className="cf-manage-comments-tabs">
+      <ul className="nav nav-tabs">
+        {links}
+      </ul>
+    </div>
+  )
+}
+
 export const MemberTabs = (props) => {
   const types = [
     ["Members", ""],
