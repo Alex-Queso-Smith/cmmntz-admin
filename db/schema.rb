@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_211620) do
+ActiveRecord::Schema.define(version: 2019_02_01_211949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -456,6 +456,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_211620) do
     t.datetime "last_login_at"
     t.string "current_login_ip"
     t.string "last_login_ip"
+    t.boolean "subscribe_newsletter", default: false, null: false
     t.index ["age_range"], name: "index_users_on_age_range"
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["gender"], name: "index_users_on_gender"
@@ -463,6 +464,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_211620) do
     t.index ["last_request_at"], name: "index_users_on_last_request_at"
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["login_count"], name: "index_users_on_login_count"
+    t.index ["subscribe_newsletter"], name: "index_users_on_subscribe_newsletter"
     t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 

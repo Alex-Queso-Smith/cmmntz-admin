@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../../util/CoreUtil';
 import { Paginator } from '../../components/Paginator'
-import {Checkbox} from '../../components/FormComponents';
-import { ModerationCommentTabs }  from '../../components/Tabs';
+import { Checkbox } from '../../components/FormComponents';
+import { ModerationCommentTabs } from '../../components/Tabs';
 import ManageComment from '../../components/ManageComment';
 
 class ModerationCommentsContainer extends React.Component {
@@ -18,13 +18,14 @@ class ModerationCommentsContainer extends React.Component {
   }
 
   handleTabClick = this.handleTabClick.bind(this);
-  loadComments = this.loadComments.bind(this);restoreComment = this.restoreComment.bind(this);
+  loadComments = this.loadComments.bind(this);
+  restoreComment = this.restoreComment.bind(this);
   approveComment = this.approveComment.bind(this);
   ignoreFlagComment = this.ignoreFlagComment.bind(this);
   banUser = this.banUser.bind(this);
   handleCheck = this.handleCheck.bind(this);
   selectAllComments = this.selectAllComments.bind(this);
-  getPage= this.getPage.bind(this);
+  getPage = this.getPage.bind(this);
 
   componentDidMount(){
     this.loadComments(this.state.display)
@@ -183,6 +184,7 @@ class ModerationCommentsContainer extends React.Component {
 
   render() {
     var { comments, display, manageIds } = this.state;
+
     var allComments;
     if (comments) {
       allComments = comments.map(comment => {

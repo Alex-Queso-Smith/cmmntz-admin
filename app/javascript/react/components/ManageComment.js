@@ -1,14 +1,16 @@
 import React from 'react';
 
 import BanUser from './modals/BanUser';
-import {Checkbox} from './FormComponents';
+import { Checkbox } from './FormComponents';
 
 class ManageComment extends React.Component {
+
   render(){
     var { manage, text, userName, datePosted } = this.props;
     var manageButton, deleteButton;
 
-    var buttonText = "Restore"
+    var buttonText = "Restore";
+    
     if (manage === "pending") {
       buttonText = "Approve"
     } else if (manage === "flagged") {
