@@ -87,7 +87,7 @@ class SignupContainer extends React.Component {
         element.setAttribute('data-gallery-id', body.galleryId);
         this.props.updateAppData(body.id, body.name, body.gallery, body.galleryId);
 
-        this.props.history.push('/embed');
+        this.props.history.push('/help/embed');
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
