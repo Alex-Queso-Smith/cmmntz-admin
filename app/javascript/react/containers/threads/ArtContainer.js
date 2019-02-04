@@ -10,7 +10,14 @@ class ArtContainer extends React.Component {
     settingsOpen: false
   }
 
-  updateArt = this.updateArt.bind(this)
+  updateArt = this.updateArt.bind(this);
+  toggleSettings = this.toggleSettings.bind(this);
+  scrollTop = this.scrollTop.bind(this);
+
+  scrollTop() {
+    var elem = document.getElementById(`thread-${this.state.id}`)
+    elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   updateArt() {
     FetchDidMount(this, `/api/v1/arts/${this.state.art.id}.json`)
@@ -20,6 +27,11 @@ class ArtContainer extends React.Component {
         art: art
       })
     })
+  }
+
+
+  toggleSettings(){
+    this.setState({settingsOpen: !this.state.settingsOpen})
   }
 
 
@@ -33,11 +45,13 @@ class ArtContainer extends React.Component {
       <ArtSettingsContainer
         artId={art.id}
         updateArt={this.updateArt}
+        toggleSettings={this.toggleSettings}
+        scrollTop={this.scrollTop}
       />
     }
 
     return(
-      <div className="thread-listing cmmntz-container" >
+      <div className="thread-listing cmmntz-container"  id={`thread-${this.state.id}`} >
         <div className="row">
           <div className="col-9">
             <h3><Link to={`/threads/${art.id}`}>{art.artType}: {art.url}</Link></h3>
@@ -106,7 +120,7 @@ class ArtContainer extends React.Component {
 
         <div className="row">
           <div className="col">
-            <div className="art-settings-link float-right" onClick={() => this.setState({settingsOpen: !this.state.settingsOpen})}>
+            <div className="art-settings-link float-right" onClick={this.toggleSettings}>
               <img className="thread-settings-btn" src="https://classifilterstore.blob.core.windows.net/graphics/images/icons-v2/gear.png" />
             </div>
           </div>

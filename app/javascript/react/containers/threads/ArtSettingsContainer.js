@@ -17,6 +17,7 @@ class ArtSettingsContainer extends React.Component {
 
   handleChange = this.handleChange.bind(this);
   handleSubmit = this.handleSubmit.bind(this);
+  handleClose = this.handleClose.bind(this);
 
   componentDidMount(){
     FetchDidMount(this, `/api/v1/arts/${this.props.artId}.json?display=settings`)
@@ -70,12 +71,18 @@ class ArtSettingsContainer extends React.Component {
         if (data.errors) {
           alert("there are errors")
         } else {
-          this.props.updateArt()
+          this.props.updateArt();
+          this.handleClose();
         }
       }
     )
     .catch(error => console.error(`Error in fetch: ${error.message}`));
 
+  }
+
+  handleClose(){
+    this.props.toggleSettings();
+    this.props.scrollTop();
   }
 
 
@@ -127,12 +134,15 @@ class ArtSettingsContainer extends React.Component {
           onChange={this.handleChange}
           rows={3}
         />
-
-        <div className="margin-top-10px text-right">
-          <button className="btn btn-med btn-dark" onClick={this.handleSubmit}>
+        <div className="margin-top-10px">
+          <button className="btn btn-med btn-dark float-left" onClick={this.handleClose}>
+            Close
+          </button>
+          <button className="btn btn-med btn-dark float-right" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>
+        <div className="clearfix" />
       </div>
     )
   }
