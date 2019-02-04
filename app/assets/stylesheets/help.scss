@@ -1,3 +1,5 @@
+$breakpoint-phone: 575px;
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .cf-settings-base {
@@ -67,6 +69,10 @@
       color: #BEBEBE;
       display: inline-block;
       vertical-align: middle;
+    }
+    @media (max-width: $breakpoint-phone) {
+      margin: 0 auto;
+      margin-bottom: 20px;
     }
   }
 }
