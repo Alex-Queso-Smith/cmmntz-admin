@@ -16,7 +16,7 @@ class ArtContainer extends React.Component {
 
   scrollTop() {
     var elem = document.getElementById(`thread-${this.state.id}`)
-    elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    elem.scrollIntoView(true);
   }
 
   updateArt() {
@@ -125,7 +125,9 @@ class ArtContainer extends React.Component {
             </div>
           </div>
         </div>
+        <div id={`thread-${this.state.id}`} />
         {settingsContainer}
+
       </div>
     )
   }
