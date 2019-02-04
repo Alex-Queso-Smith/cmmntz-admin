@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
 
   belongs_to :art
   belongs_to :gallery
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_many :votes
 
