@@ -7,11 +7,26 @@ class DashboardContainer extends React.Component {
   state = {
     pendingComments: 0,
     commentsDisplay: 'today',
-    commentsData: [],
+    commentsData: {
+      all: 0,
+      month: 0,
+      week: 0,
+      today: 0
+    },
     votesDisplay: 'today',
-    votesData: [],
+    votesData: {
+      all: 0,
+      month: 0,
+      week: 0,
+      today: 0
+    },
     usersDisplay: 'all',
-    usersData: []
+    usersData: {
+      all: 0,
+      month: 0,
+      week: 0,
+      today: 0
+    }
   }
 
   handleButtonClick = this.handleButtonClick.bind(this);
