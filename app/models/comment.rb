@@ -24,6 +24,11 @@ class Comment < ApplicationRecord
   scope :for_gallery, -> (gallery_id) {
     where(gallery_id: gallery_id)
   }
+
+  scope :for_art, -> (art_id) {
+    where(art_id: art_id)
+  }
+
   scope :created_since, -> (datetime) {
     where(arel_table[:created_at].gteq(datetime))
   }
@@ -42,13 +47,23 @@ class Comment < ApplicationRecord
     scope.length
   end
 
-  def self.gallery_comments_for_display_mode(gallery_id, display_mode, filters, page)
-    scope = where({}).for_gallery(gallery_id)
+  def self.art_comments_for_display_mode(art_id, display_mode, filters, page)
+    scope = where({}).for_art(art_id).for_non_blocked_users
     if display_mode != ''
       scope = scope.send(display_mode)
     else
       scope = scope.approved
     end
-    scope.page(page)
+    scope.order(created_at: :desc).page(page)
+  end
+
+  def self.gallery_comments_for_display_mode(gallery_id, display_mode, filters, page)
+    scope = where({}).for_gallery(gallery_id).for_non_blocked_users
+    if display_mode != ''
+      scope = scope.send(display_mode)
+    else
+      scope = scope.approved
+    end
+    scope.order(created_at: :desc).page(page)
   end
 end

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FetchDidMount, FetchWithUpdate, FetchIndividual } from '../../util/CoreUtil';
 import {Checkbox} from '../../components/FormComponents';
-
+import { Paginator } from '../../components/Paginator'
 import ManageComment from '../../components/ManageComment';
 import { CommentTabs }  from '../../components/Tabs';
 
@@ -10,7 +10,10 @@ class ArtCommentsContainer extends React.Component {
     comments: [],
     manageIds: [],
     display: "",
-    allSelected: false
+    allSelected: false,
+    page: 1,
+    totalResults: 0,
+    rowsPerPage: 0
   }
 
   deleteComment = this.deleteComment.bind(this);
@@ -23,9 +26,16 @@ class ArtCommentsContainer extends React.Component {
   handleCheck = this.handleCheck.bind(this);
   handleManageSelected = this.handleManageSelected.bind(this);
   selectAllComments = this.selectAllComments.bind(this);
+  getPage = this.getPage.bind(this);
 
   componentDidMount(){
     this.loadComments(this.state.display)
+  }
+
+  getPage(page) {
+   this.setState({page: page});
+   let self = this;
+   setTimeout(function(){ self.loadComments(self.state.display) ; }, 250);
   }
 
   selectAllComments(event) {
@@ -93,22 +103,27 @@ class ArtCommentsContainer extends React.Component {
       comments: [],
       display: value,
       manageIds: [],
-      allSelected: false
+      allSelected: false,
+      page: 1,
+      totalResults: 0,
+      rowsPerPage: 0
      })
     this.loadComments(value)
   }
 
   loadComments(type){
-    var url = `/api/v1/arts/${this.props.match.params.id}/comments.json`;
+    var url = `/api/v1/arts/${this.props.match.params.id}/comments.json?page=${this.state.page}`;
 
     if (type != "") {
-      url += `?display_mode=${type}`
+      url += `&display_mode=${type}`
     }
 
     FetchDidMount(this, url)
     .then(commentData => {
       this.setState({
         comments: commentData.comments,
+        totalResults: commentData.totalResults,
+        rowsPerPage: commentData.rowsPerPage,
         allSelected: false
       })
     })
@@ -188,8 +203,16 @@ class ArtCommentsContainer extends React.Component {
 
   render(){
     var { comments, display, manageIds } = this.state;
-    var allComments;
+    var allComments, pagination;
     if (comments) {
+      pagination =
+        <Paginator
+          totalRows={this.state.totalResults}
+          rowsPerPage={this.state.rowsPerPage}
+          page={this.state.page}
+          getPage={this.getPage}
+        />
+
       allComments = comments.map(comment => {
 
         var handleManageComment = () => {
@@ -321,6 +344,8 @@ class ArtCommentsContainer extends React.Component {
         </div>
 
         {allComments}
+
+        {pagination}
       </div>
     )
   }

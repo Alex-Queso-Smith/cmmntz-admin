@@ -3,12 +3,12 @@ class Api::V1::CommentsController < ApiController
 
   def index
     display_mode = params[:display_mode] || ""
+    page = params[:page] || 1
+    filters = params[:search] || []
     if params[:art_id]
       @art = Art.find(params[:art_id])
-      @comments = @art.comments_for_display_mode(display_mode)
+      @comments = Comment.art_comments_for_display_mode(@art.id, display_mode, filters, page)
     else
-      page = params[:page] || 1
-      filters = params[:search] || []
       @comments = Comment.gallery_comments_for_display_mode(current_gallery, display_mode, filters, page)
     end
   end
