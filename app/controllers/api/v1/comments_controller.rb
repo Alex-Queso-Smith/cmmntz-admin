@@ -2,9 +2,15 @@ class Api::V1::CommentsController < ApiController
   load_and_authorize_resource
 
   def index
-    @art = Art.find(params[:art_id])
     display_mode = params[:display_mode] || ""
-    @comments = @art.comments_for_display_mode(display_mode)
+    if params[:art_id]
+      @art = Art.find(params[:art_id])
+      @comments = @art.comments_for_display_mode(display_mode)
+    else
+      page = params[:page] || 1
+      filters = params[:search] || []
+      @comments = Comment.gallery_comments_for_display_mode(current_gallery, display_mode, filters, page)
+    end
   end
 
   def update

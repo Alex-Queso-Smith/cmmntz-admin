@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :galleries, only: [:show, :update]
       resources :customers, only: [:index, :show, :create, :update]
       resources :gallery_artists, only: [:show, :update]
+      resources :comments, only: [:index]
       resources :arts, only: [:index, :show, :update] do
         resources :comments, only: [:index]
         resources :mass_manage_comments, only: [:create]

@@ -1,5 +1,6 @@
 include ActionView::Helpers::SanitizeHelper
 class Comment < ApplicationRecord
+  self.per_page = 10
   include CommentBase
 
   belongs_to :art
@@ -10,7 +11,10 @@ class Comment < ApplicationRecord
 
   scope :pending_approval, -> {where(approved: false)}
   scope :not_deleted, -> {where(deleted: false)}
+  scope :pending, -> { pending_approval }
   scope :deleted, -> {where(deleted: true)}
+  scope :approved, -> { where(approved: true, deleted: false) }
+  scope :flagged, -> { where(approved: true, deleted: false) }
 
   scope :for_gallery, -> (gallery_id) {
     where(gallery_id: gallery_id)
@@ -31,5 +35,15 @@ class Comment < ApplicationRecord
       scope = scope.created_since(since_date)
     end
     scope.length
+  end
+
+  def self.gallery_comments_for_display_mode(gallery_id, display_mode, filters, page)
+    scope = where({}).for_gallery(gallery_id)
+    if display_mode != ''
+      scope = scope.send(display_mode)
+    else
+      scope = scope.approved
+    end
+    scope.page(page)
   end
 end

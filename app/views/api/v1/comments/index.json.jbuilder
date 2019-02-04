@@ -1,3 +1,8 @@
+if @comments.respond_to?('total_entries')
+  json.totalResults  @comments.total_entries
+  json.rowsPerPage Comment.per_page
+end
+
 json.comments @comments do |comment|
   json.id comment.id
   json.text comment.text
