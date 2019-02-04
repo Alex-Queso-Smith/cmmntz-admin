@@ -183,8 +183,15 @@ class ModerationCommentsContainer extends React.Component {
 
   render() {
     var { comments, display, manageIds } = this.state;
-    var allComments;
+    var allComments, pagination;
     if (comments) {
+      pagination =
+        <Paginator
+          totalRows={this.state.totalResults}
+          rowsPerPage={this.state.rowsPerPage}
+          page={this.state.page}
+          getPage={this.getPage}
+        />
       allComments = comments.map(comment => {
 
         var handleManageComment = () => {
@@ -302,13 +309,7 @@ class ModerationCommentsContainer extends React.Component {
       }
     }
 
-    var pagination =
-      <Paginator
-        totalRows={this.state.totalResults}
-        rowsPerPage={this.state.rowsPerPage}
-        page={this.state.page}
-        getPage={this.getPage}
-      />
+
     return(
       <div className="container cmmntz-container">
         <ModerationCommentTabs
