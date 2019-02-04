@@ -1,3 +1,5 @@
+$breakpoint-phone: 575px;
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .cf-settings-base {
@@ -54,16 +56,49 @@
     min-width: 200px;
     min-height: 200px;
     margin: 15px;
-    padding: 15px 15px 15px 15px;
     border: 2px solid black;
     border-radius: 10px;
     background-color: #fff;
     font-family: 'Open Sans', sans-serif;
     box-shadow: 3px 3px 10px #800080;
 
+    line-height: 200px;
+    text-align: center;
+
     h3 {
-      margin-top: 40px;
-      color: #A9A9A9;
+      color: #BEBEBE;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @media (max-width: $breakpoint-phone) {
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.coming-soon {
+  h3 {
+    color: #BEBEBE;
+  }
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+
+    line-height: 200px;
+    text-align: center;
+
+    h3 {
+      color: #800080;
+      display: inline-block;
+      vertical-align: middle;
+      -ms-transform: rotate(-45deg); /* IE 9 */
+      -webkit-transform: rotate(-45deg); /* Safari 3-8 */
+      transform: rotate(-45deg);
+      text-shadow: 3px 3px 10px;
     }
   }
 }

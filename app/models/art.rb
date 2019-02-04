@@ -51,20 +51,6 @@ class Art < ApplicationRecord
     topics.map(&:name).join(", ")
   end
 
-  def comments_for_display_mode(display_mode)
-    cs = comments
-    if display_mode == "pending"
-      cs = pending_comments
-    elsif display_mode == "deleted"
-      cs = deleted_comments
-    elsif display_mode == "flagged"
-      cs = flagged_comments
-    else
-      cs = approved_comments
-    end
-    return cs.for_non_blocked_users.order(created_at: :desc)
-  end
-
   def self.search(filters, page)
     scope = self.where({}).includes(:pending_comments, :deleted_comments, :approved_comments, :flagged_comments, comments: [:votes])
     scope = scope.page(page)
