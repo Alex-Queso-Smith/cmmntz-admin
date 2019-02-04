@@ -7,7 +7,7 @@ import { Checkbox, Input } from '../../components/FormComponents';
 class ArtSettingsContainer extends React.Component {
   state = {
     id: '',
-    arttType: '',
+    artType: '',
     topics: '',
     ignoreWarningChecker: false,
     disabled: false,
