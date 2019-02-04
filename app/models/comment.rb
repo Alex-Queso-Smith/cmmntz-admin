@@ -14,7 +14,12 @@ class Comment < ApplicationRecord
   scope :pending, -> { pending_approval }
   scope :deleted, -> {where(deleted: true)}
   scope :approved, -> { where(approved: true, deleted: false) }
-  scope :flagged, -> { where(approved: true, deleted: false) }
+  scope :flagged, -> {
+    joins("left join votes on votes.comment_id = comments.id AND votes.vote_type = 'warn' ")
+    .where(ignore_flagged: false, deleted: false )
+    .group("comments.id")
+    .having("COUNT(votes.id) > 0")
+  }
 
   scope :for_gallery, -> (gallery_id) {
     where(gallery_id: gallery_id)

@@ -24,10 +24,16 @@ class ModerationCommentsContainer extends React.Component {
   banUser = this.banUser.bind(this);
   handleCheck = this.handleCheck.bind(this);
   selectAllComments = this.selectAllComments.bind(this);
-
+  getPage= this.getPage.bind(this);
 
   componentDidMount(){
     this.loadComments(this.state.display)
+  }
+
+  getPage(page) {
+   this.setState({page: page});
+   let self = this;
+   setTimeout(function(){ self.loadComments(self.state.display) ; }, 250);
   }
 
   selectAllComments(event) {
@@ -65,6 +71,7 @@ class ModerationCommentsContainer extends React.Component {
         allSelected: false
       })
     })
+    window.scrollTo(0, 0)
   }
 
   handleTabClick(event){
@@ -72,11 +79,16 @@ class ModerationCommentsContainer extends React.Component {
     const value = target.getAttribute('data-value');
 
     this.setState({
+      comments: [],
       display: value,
       manageIds: [],
-      allSelected: false
+      allSelected: false,
+      page: 1,
+      totalResults: 0,
+      rowsPerPage: 0
      })
-    this.loadComments(value)
+    let self = this;
+    setTimeout(function(){ self.loadComments(value) ; }, 250);
   }
 
   handleCheck(commentId, event){
