@@ -70,8 +70,8 @@ class RulesContainer extends React.Component {
     gallery.append("gallery[notify_on_comment_approval_needed]", notifyOnCommentApprovalNeeded)
     gallery.append("gallery[notify_on_new_comment]", notifyOnNewComment)
 
-    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
-    .then(redirect => window.location = '/galleries')
+    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '', 'PATCH', 'saveErrors', gallery)
+    // .then(redirect => window.location = '/galleries')
     .then(redirect => { alert('Settings updated!') })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }

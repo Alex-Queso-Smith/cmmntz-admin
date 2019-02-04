@@ -63,7 +63,7 @@ class SiteSettingsContainer extends React.Component {
     gallery.append("gallery[name]", name)
     gallery.append("gallery[site_url]", siteUrl)
 
-    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
+    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '', 'PATCH', 'saveErrors', gallery)
     // .then(redirect => window.location = '/galleries')
     .then(redirect => { alert('Settings updated!') })
     .catch(error => console.error(`Error in fetch: ${error.message}`));

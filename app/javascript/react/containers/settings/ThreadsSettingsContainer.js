@@ -165,8 +165,8 @@ class ThreadsSettingsContainer extends React.Component {
     gallery.append("gallery[default_art_thread_expiration_days]", threadExpirationDays)
     gallery.append("gallery[hide_anon_and_guest]", hideAnonAndGuest)
 
-    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '/', 'PATCH', 'saveErrors', gallery)
-    .then(redirect => window.location = '/galleries')
+    FetchWithPush(this, `/api/v1/galleries/${document.getElementById('ca-app').getAttribute('data-gallery-id')}.json`, '', 'PATCH', 'saveErrors', gallery)
+    // .then(redirect => window.location = '/galleries')
     .then(redirect => { alert('Settings updated!') })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
