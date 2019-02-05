@@ -33,13 +33,15 @@ namespace :basic_metrics do
   desc "New Users since 24 hours ago"
   task :users_last_24_hours => :environment do
     users = User.created_since(24.hours.ago)
-    puts "New Users (past 24 hours): #{users.size}"
+    non_guest_users = users.select{ |u| !u.user_name.blank? }
+    puts "New Users (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
 
   desc "Users with Attendence since 24 hours ago"
   task :user_attendence_last_24_hours => :environment do
     users = User.last_action_since(24.hours.ago)
-    puts "Users with Attendence (past 24 hours): #{users.size}"
+    non_guest_users = users.select{ |u| !u.user_name.blank? }
+    puts "Users with Attendence (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
 
   desc "Active Users since 24 hours ago"
