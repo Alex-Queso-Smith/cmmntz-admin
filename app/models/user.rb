@@ -71,6 +71,10 @@ class User < ApplicationRecord
     where(arel_table[:created_at].gteq(datetime))
   }
 
+  scope :last_action_since, -> (datetime) {
+    where(arel_table[:last_request_at].gteq(datetime))
+  }
+
   def self.search(filters, gallery, page = 1)
     scope = where({}).not_guest
     scope = scope.includes(:user_article_views, :user_video_clicks, :followings, :blockings, :user_feedbacks, :votes, :comments )

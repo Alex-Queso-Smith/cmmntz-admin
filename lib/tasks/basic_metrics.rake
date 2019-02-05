@@ -4,6 +4,7 @@ namespace :basic_metrics do
     Rake::Task['basic_metrics:customers_last_24_hours'].invoke
     Rake::Task['basic_metrics:customers_with_activity_last_24_hours'].invoke
     Rake::Task['basic_metrics:users_last_24_hours'].invoke
+    Rake::Task['basic_metrics:user_attendence_last_24_hours'].invoke
     Rake::Task['basic_metrics:active_users_last_24_hours'].invoke
     Rake::Task['basic_metrics:comments_last_24_hours'].invoke
     Rake::Task['basic_metrics:votes_last_24_hours'].invoke
@@ -17,7 +18,6 @@ namespace :basic_metrics do
 
   desc "customers with activity"
   task :customers_with_activity_last_24_hours => :environment do
-
     datetime = 24.hours.ago
     interaction_gallery_ids =  ArtInteraction.created_since(datetime).joins(:art).select("DISTINCT(arts.gallery_id)").map(&:gallery_id)
     comment_gallery_ids = Comment.created_since(datetime).select("DISTINCT(gallery_id)").map(&:gallery_id)
@@ -30,15 +30,26 @@ namespace :basic_metrics do
   end
 
 
-  desc "New Users not guest since 24 hours ago"
+  desc "New Users since 24 hours ago"
   task :users_last_24_hours => :environment do
     users = User.created_since(24.hours.ago)
     puts "New Users (past 24 hours): #{users.size}"
   end
 
+  desc "Users with Attendence since 24 hours ago"
+  task :user_attendence_last_24_hours => :environment do
+    users = User.last_action_since(24.hours.ago)
+    puts "Users with Attendence (past 24 hours): #{users.size}"
+  end
+
   desc "Active Users since 24 hours ago"
   task :active_users_last_24_hours => :environment do
-    puts "Users with Activity (past 24 hours): coming soon!"
+    datetime = 24.hours.ago
+    comment_user_ids = Comment.created_since(datetime).map(&:user_id)
+    vote_user_ids = Vote.created_since(datetime).map(&:user_id)
+    all_users = comment_user_ids + vote_user_ids
+    all_users = all_users.uniq.size
+    puts "Users with Activity (past 24 hours): #{all_users}"
   end
 
   desc "Comments since 24 hours ago"
