@@ -19,15 +19,14 @@ namespace :basic_metrics do
   task :customers_with_activity_last_24_hours => :environment do
 
     datetime = 24.hours.ago
-    interactions =  ArtInteraction.created_since(datetime).includes(art: :gallery)
-    interaction_galleries = interactions.map(&:art).flatten.map(&:gallery)
+    interaction_gallery_ids =  ArtInteraction.created_since(datetime).joins(:art).select("DISTINCT(arts.gallery_id)").map(&:gallery_id)
+    comment_gallery_ids = Comment.created_since(datetime).select("DISTINCT(gallery_id)").map(&:gallery_id)
+    vote_gallery_ids = Vote.created_since(datetime).joins(:comment).select("DISTINCT(comments.gallery_id)").map(&:gallery_id)
+    all_gallery_ids = interaction_gallery_ids + comment_gallery_ids + vote_gallery_ids
 
-    comment_galleries = Gallery.where(id: Comment.created_since(datetime).select("DISTINCT(gallery_id)").map(&:gallery_id))
+    all_gallery_ids = all_gallery_ids.uniq.size
 
-    vote_galleries = Vote.created_since(datetime).joins(:comment).select("DISTINCT(comments.gallery_id)").to_sql
-
-    puts vote_galleries
-    # puts "New Customrs with Activity (past 24 hours): coming soon!"
+    puts "New Customrs with Activity (past 24 hours): #{all_gallery_ids}"
   end
 
 
