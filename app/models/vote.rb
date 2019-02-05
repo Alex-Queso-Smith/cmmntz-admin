@@ -1,5 +1,6 @@
 class Vote < ApplicationRecord
   belongs_to :comment
+  belongs_to :user
 
   scope :for_gallery, -> (gallery_id) {
     joins(:comment)

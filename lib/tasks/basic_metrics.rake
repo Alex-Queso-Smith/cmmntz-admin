@@ -4,7 +4,7 @@ namespace :basic_metrics do
     Rake::Task['basic_metrics:customers_last_24_hours'].invoke
     Rake::Task['basic_metrics:customers_with_activity_last_24_hours'].invoke
     Rake::Task['basic_metrics:users_last_24_hours'].invoke
-    Rake::Task['basic_metrics:user_attendence_last_24_hours'].invoke
+    Rake::Task['basic_metrics:user_attendance_last_24_hours'].invoke
     Rake::Task['basic_metrics:active_users_last_24_hours'].invoke
     Rake::Task['basic_metrics:comments_last_24_hours'].invoke
     Rake::Task['basic_metrics:votes_last_24_hours'].invoke
@@ -33,15 +33,17 @@ namespace :basic_metrics do
   desc "New Users since 24 hours ago"
   task :users_last_24_hours => :environment do
     users = User.created_since(24.hours.ago)
+    users = users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
     non_guest_users = users.select{ |u| !u.user_name.blank? }
     puts "New Users (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
 
-  desc "Users with Attendence since 24 hours ago"
-  task :user_attendence_last_24_hours => :environment do
+  desc "Users with Attendance since 24 hours ago"
+  task :user_attendance_last_24_hours => :environment do
     users = User.last_action_since(24.hours.ago)
+    users = users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
     non_guest_users = users.select{ |u| !u.user_name.blank? }
-    puts "Users with Attendence (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
+    puts "Users with Attendance (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
 
   desc "Active Users since 24 hours ago"
@@ -50,19 +52,25 @@ namespace :basic_metrics do
     comment_user_ids = Comment.created_since(datetime).map(&:user_id)
     vote_user_ids = Vote.created_since(datetime).map(&:user_id)
     all_users = comment_user_ids + vote_user_ids
-    all_users = all_users.uniq.size
-    puts "Users with Activity (past 24 hours): #{all_users}"
+    all_users = User.where(id: all_users.uniq)
+
+    all_users = all_users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
+    puts "Users with Activity (past 24 hours): #{all_users.size}"
   end
 
   desc "Comments since 24 hours ago"
   task :comments_last_24_hours => :environment do
-    comments = Comment.created_since(24.hours.ago)
+    comments = Comment.created_since(24.hours.ago).joins(:user)
+    comments = comments.where.not(users: {current_login_ip: '96.227.61.123'})
+    comments = comments.where.not(users: {last_login_ip: '96.227.61.123'})
     puts "New Comments (past 24 hours): #{comments.size}"
   end
 
   desc "Votes since 24 hours ago"
   task :votes_last_24_hours => :environment do
-    votes = Vote.created_since(24.hours.ago)
+    votes = Vote.created_since(24.hours.ago).joins(:user)
+    votes = votes.where.not(users: {current_login_ip: '96.227.61.123'})
+    votes = votes.where.not(users: {last_login_ip: '96.227.61.123'})
     puts "New Votes (past 24 hours): #{votes.size}"
   end
 end
