@@ -26,7 +26,7 @@ namespace :basic_metrics do
 
     all_gallery_ids = all_gallery_ids.uniq.size
 
-    puts "New Customrs with Activity (past 24 hours): #{all_gallery_ids}"
+    puts "New Customers with Activity (past 24 hours): #{all_gallery_ids}"
   end
 
 
