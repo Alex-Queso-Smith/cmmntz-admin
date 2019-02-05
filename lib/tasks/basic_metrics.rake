@@ -14,6 +14,7 @@ namespace :basic_metrics do
   task :customers_last_24_hours => :environment do
     galleries = Gallery.created_since(24.hours.ago)
     puts "New Customers (past 24 hours): #{galleries.size}"
+
   end
 
   desc "customers with activity"

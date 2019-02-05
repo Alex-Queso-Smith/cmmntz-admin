@@ -18,6 +18,7 @@ class Gallery < ApplicationRecord
     age_range_search: :string
   }
 
+  has_many :customers
   has_many :arts
   has_many :comments
   has_many :gallery_blacklistings
