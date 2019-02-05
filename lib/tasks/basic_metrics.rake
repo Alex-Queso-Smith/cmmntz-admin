@@ -34,7 +34,8 @@ namespace :basic_metrics do
   desc "New Users since 24 hours ago"
   task :users_last_24_hours => :environment do
     users = User.created_since(24.hours.ago)
-    users = users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
+    users = users.where.not(current_login_ip: '96.227.61.123')
+    users = users.where.not(last_login_ip: '96.227.61.123')
     non_guest_users = users.select{ |u| !u.user_name.blank? }
     puts "New Users (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
@@ -42,7 +43,8 @@ namespace :basic_metrics do
   desc "Users with Attendance since 24 hours ago"
   task :user_attendance_last_24_hours => :environment do
     users = User.last_action_since(24.hours.ago)
-    users = users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
+    users = users.where.not(current_login_ip: '96.227.61.123')
+    users = users.where.not(last_login_ip: '96.227.61.123')
     non_guest_users = users.select{ |u| !u.user_name.blank? }
     puts "Users with Attendance (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
   end
@@ -50,12 +52,14 @@ namespace :basic_metrics do
   desc "Active Users since 24 hours ago"
   task :active_users_last_24_hours => :environment do
     datetime = 24.hours.ago
-    comment_user_ids = Comment.created_since(datetime).map(&:user_id)
-    vote_user_ids = Vote.created_since(datetime).map(&:user_id)
-    all_users = comment_user_ids + vote_user_ids
-    all_users = User.where(id: all_users.uniq)
+    comment_user_ids = Comment.created_since(datetime).joins(:user)
+    comment_user_ids = comment_user_ids.where.not(users: {current_login_ip: '96.227.61.123'})
+    comment_user_ids = comment_user_ids.where.not(users: {last_login_ip: '96.227.61.123'}).map(&:user_id)
+    vote_user_ids = Vote.created_since(datetime).joins(:user)
+    vote_user_ids = vote_user_ids.where.not(users: {current_login_ip: '96.227.61.123'})
+    vote_user_ids = vote_user_ids.where.not(users: {last_login_ip: '96.227.61.123'}).map(&:user_id)
+    all_users = (comment_user_ids + vote_user_ids).uniq
 
-    all_users = all_users.reject {|u| u.current_login_ip == '96.227.61.123' || u.last_login_ip == '96.227.61.123'}
     puts "Users with Activity (past 24 hours): #{all_users.size}"
   end
 
