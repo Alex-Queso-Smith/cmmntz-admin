@@ -27,7 +27,7 @@ namespace :basic_metrics do
 
     all_gallery_ids = all_gallery_ids.uniq.size
 
-    puts "New Customers with Activity (past 24 hours): #{all_gallery_ids}"
+    puts "Customers with Activity (past 24 hours): #{all_gallery_ids}"
   end
 
 
@@ -37,7 +37,8 @@ namespace :basic_metrics do
     users = users.where.not(current_login_ip: '96.227.61.123')
     users = users.where.not(last_login_ip: '96.227.61.123')
     non_guest_users = users.select{ |u| !u.user_name.blank? }
-    puts "New Users (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
+    puts "New Users (past 24 hours): #{users.size} total"
+    puts "New Users (past 24 hours): #{non_guest_users.size} registered"
   end
 
   desc "Users with Attendance since 24 hours ago"
@@ -46,7 +47,8 @@ namespace :basic_metrics do
     users = users.where.not(current_login_ip: '96.227.61.123')
     users = users.where.not(last_login_ip: '96.227.61.123')
     non_guest_users = users.select{ |u| !u.user_name.blank? }
-    puts "Users with Attendance (past 24 hours): #{users.size} total; #{non_guest_users.size} registered"
+    puts "Users with Attendance (past 24 hours): #{users.size} total"
+    puts "Users with Attendance (past 24 hours): #{non_guest_users.size} registered"
   end
 
   desc "Active Users since 24 hours ago"
