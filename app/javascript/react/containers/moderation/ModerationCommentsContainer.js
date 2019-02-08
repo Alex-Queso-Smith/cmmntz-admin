@@ -10,11 +10,12 @@ class ModerationCommentsContainer extends React.Component {
   state = {
     comments: [],
     manageIds: [],
-    display: "",
+    display: "pending",
     allSelected: false,
     page: 1,
     totalResults: 0,
-    rowsPerPage: 0
+    rowsPerPage: 0,
+    buttonsInactive: true
   }
 
   handleTabClick = this.handleTabClick.bind(this);
@@ -38,7 +39,8 @@ class ModerationCommentsContainer extends React.Component {
   }
 
   selectAllComments(event) {
-    var { comments, manageIds } = this.state
+    var { comments, manageIds } = this.state;
+
     if (event.target.checked){
       var newManageIds = []
       comments.forEach(function(comment) {
@@ -47,11 +49,14 @@ class ModerationCommentsContainer extends React.Component {
 
       this.setState({
         manageIds: newManageIds,
-        allSelected: true
+        allSelected: true,
+        buttonsInactive: false
       })
     } else {
       this.setState({
-        allSelected: false
+        allSelected: false,
+        manageIds: [],
+        buttonsInactive: true
       })
     }
   }
@@ -62,7 +67,6 @@ class ModerationCommentsContainer extends React.Component {
     if (type != "") {
       url += `&display_mode=${type}`
     }
-
     FetchDidMount(this, url)
     .then(commentData => {
       this.setState({
@@ -95,18 +99,25 @@ class ModerationCommentsContainer extends React.Component {
   handleCheck(commentId, event){
     var target = event.target;
     var checked = target.checked;
-    var newManageIds = this.state.manageIds
-    var comments = this.state.comments
+    var newManageIds = this.state.manageIds;
+    var comments = this.state.comments;
+    var invalid = this.state.buttonsInactive;
 
     if (checked) {
-      newManageIds.push(commentId)
+      newManageIds.push(commentId);
+      invalid = false;
     } else {
-      newManageIds = newManageIds.filter(v => v != commentId)
+      newManageIds = newManageIds.filter(v => v != commentId);
+      if (newManageIds.length == 0) {
+        invalid = true;
+      }
     }
+
     var newAllSelected = (comments.length == newManageIds.length)
     this.setState({
       manageIds: newManageIds,
-      allSelected: newAllSelected
+      allSelected: newAllSelected,
+      buttonsInactive: invalid
     })
   }
 
@@ -184,8 +195,10 @@ class ModerationCommentsContainer extends React.Component {
 
   render() {
     var { comments, display, manageIds } = this.state;
+
     var allComments, pagination;
     if (comments) {
+
       pagination =
         <Paginator
           totalRows={this.state.totalResults}
@@ -193,6 +206,7 @@ class ModerationCommentsContainer extends React.Component {
           page={this.state.page}
           getPage={this.getPage}
         />
+
       allComments = comments.map(comment => {
 
         var handleManageComment = () => {
@@ -217,7 +231,7 @@ class ModerationCommentsContainer extends React.Component {
           this.handleCheck(comment.id, event)
         }
 
-        var checked = manageIds.includes(comment.id)
+        var checked = manageIds.includes(comment.id);
 
         return(
           <div key={comment.id} className="border-1px-bot">
@@ -234,6 +248,11 @@ class ModerationCommentsContainer extends React.Component {
               handleBanUser={handleBanUser}
               handleCheck={handleCheckbox}
               checked={checked}
+              baseImage={comment.avatar_base_image}
+              votes={comment.vote_counts}
+              votePercents={comment.vote_percents}
+              totalInteractions={comment.total_interactions}
+              globalSettings={this.props.globalSettings}
               />
           </div>
         )
@@ -246,7 +265,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("delete", event)
     }
     var deleteButton =
-    <button className="btn btn-danger cf-manage-button" onClick={deleteAction}>
+    <button disabled={this.state.buttonsInactive} className="btn black-button cf-manage-button" onClick={deleteAction}>
       Delete Selected
     </button>
 
@@ -254,7 +273,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("approve", event)
     }
     var approveButton =
-    <button className="btn btn-dark cf-manage-button" onClick={approveAction}>
+    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={approveAction}>
       Approve Selected
     </button>
 
@@ -262,7 +281,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("ignore", event)
     }
     var ignoreButton =
-    <button className="btn btn-dark cf-manage-button" onClick={ignoreAction}>
+    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={ignoreAction}>
       Ignore Selected
     </button>
 
@@ -270,49 +289,48 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("restore", event)
     }
     var restoreButton =
-    <button className="btn btn-dark cf-manage-button" onClick={restoreAction}>
+    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={restoreAction}>
       Restore Selected
     </button>
 
-    var allSelected = this.state.allSelected
+    var allSelected = this.state.allSelected;
     var selectAllButton =
     <Checkbox
       name="allSelected"
       onChange={this.selectAllComments}
       label="Select All"
       checked={allSelected}
+      className="cf-manage-comments-select-all"
     />
-  // debugger
+
     var manageButtons;
-    if (this.state.manageIds != ""){
-      if (display == "") {
-        manageButtons =
-        <div className="col-sm-10">
-          {deleteButton}
-        </div>
-      } else if (display == "pending") {
-        manageButtons =
-        <div className="col-sm-10">
-          {approveButton}
-          {deleteButton}
-        </div>
-      } else if (display == "flagged") {
-        manageButtons =
-        <div className="col-sm-9 col-md-10">
-          {ignoreButton}
-          {deleteButton}
-        </div>
-      } else if (display == "deleted") {
-        manageButtons =
-        <div className="col-sm-10">
-          {restoreButton}
-        </div>
-      }
+
+    if (display == "") {
+      manageButtons =
+      <div className="col-sm-10">
+        {deleteButton}
+      </div>
+    } else if (display == "pending") {
+      manageButtons =
+      <div className="col-sm-10">
+        {approveButton}
+        {deleteButton}
+      </div>
+    } else if (display == "flagged") {
+      manageButtons =
+      <div className="col-sm-9 col-md-10">
+        {ignoreButton}
+        {deleteButton}
+      </div>
+    } else if (display == "deleted") {
+      manageButtons =
+      <div className="col-sm-10">
+        {restoreButton}
+      </div>
     }
 
-
     return(
-      <div className="container cmmntz-container">
+      <div className="container cmmntz-container cf-comments-container">
         <ModerationCommentTabs
           display={this.state.display}
           onClick={this.handleTabClick}
@@ -324,6 +342,7 @@ class ModerationCommentsContainer extends React.Component {
           </div>
           {manageButtons}
         </div>
+        <hr />
 
         {allComments}
 

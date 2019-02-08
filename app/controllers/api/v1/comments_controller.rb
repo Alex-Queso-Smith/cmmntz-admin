@@ -5,6 +5,7 @@ class Api::V1::CommentsController < ApiController
     display_mode = params[:display_mode] || ""
     page = params[:page] || 1
     filters = params[:search] || []
+    
     if params[:art_id]
       @art = Art.find(params[:art_id])
       @comments = Comment.art_comments_for_display_mode(@art.id, display_mode, filters, page)

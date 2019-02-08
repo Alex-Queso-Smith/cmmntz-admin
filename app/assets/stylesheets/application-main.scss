@@ -8,12 +8,39 @@ $dark: #7A7A7A;
 $dark-grayline: #D3D3D3;
 $bootstrap-blue: #0069D9;
 
+$classi-purple: #544382;
+$classi-purple-dark: #2a2241;
+$black: #202430;
+$dark-grey: #606060;
+
 body {
-  background-color: #F3F5F7;
+  background-image: linear-gradient( $classi-purple, $classi-purple-dark) !important;
+  min-height: 800px;
 }
 
 nav {
   margin-bottom: 20px;
+}
+
+#cf-navbar {
+  background-color: #fff !important;
+  width: 95%;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 5px 5px;
+  box-shadow: 0px 3px 10px #000;
+
+  h1, h2, h3, h4, h5 {
+    color: #202430;
+  }
+  a {
+    color: #606060;
+    &:hover {
+      color: $classi-purple !important;
+      background-color: #fff !important;
+      font-size: 1rem;
+    }
+  }
 }
 
 .nav-link:hover {
@@ -32,7 +59,7 @@ $breakpoint-phone: 575px;
   border-radius: 10px;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;
-  box-shadow: 3px 3px 10px #800080;
+  box-shadow: 0px 3px 10px #000;
 }
 
 
@@ -142,12 +169,24 @@ $breakpoint-phone: 575px;
   margin-right: 10px;
 }
 
+.margin-all-5px {
+  margin: 5px;
+}
+
+.width-90 {
+  width: 90px;
+}
+
 .hidden {
   display: none;
 }
 
 .error-text {
   color: #FF0001;
+}
+
+.as-flex-end {
+  align-self: flex-end;
 }
 
 a, .cursor-pointer {
@@ -251,17 +290,49 @@ h4 {
 
 .ca-tile-button {
   width: 100%;
-  color: #800080;
-  border: 2px solid #800080;
-  background-color: #ffffff;
+  color: $classi-purple;
+  border: 2px solid $classi-purple;
+  background-color: #fff;
 
   &:focus {
-    box-shadow: 0 0 0 0;
+    box-shadow: 0px 0px 10px $classi-purple;
   }
 
   &:hover{
     color: #ffffff;
-    background: #800080;
-    border: 2px solid #800080;
+    background: $classi-purple;
+    border: 2px solid $classi-purple;
+  }
+}
+
+.ca-tile-button-width20 {
+  width: 17%;
+  color: $classi-purple;
+  border: 2px solid $classi-purple;
+  background-color: #fff;
+
+  &:focus {
+    box-shadow: 0px 0px 10px $classi-purple;
+  }
+
+  &:hover{
+    color: #ffffff;
+    background: $classi-purple;
+    border: 2px solid $classi-purple;
+  }
+}
+
+.black-button {
+  border: 2px $black solid;
+  color: $black;
+
+  &:hover{
+    color: #fff;
+    background-color: $black;
+    border: 2px $black solid;
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px $black;
   }
 }

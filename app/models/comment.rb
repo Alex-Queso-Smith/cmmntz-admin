@@ -48,7 +48,7 @@ class Comment < ApplicationRecord
   end
 
   def self.art_comments_for_display_mode(art_id, display_mode, filters, page)
-    scope = where({}).for_art(art_id).for_non_blocked_users
+    scope = where({}).for_art(art_id).for_non_blocked_users.includes(:votes)
     if display_mode != ''
       scope = scope.send(display_mode)
     else
@@ -58,7 +58,7 @@ class Comment < ApplicationRecord
   end
 
   def self.gallery_comments_for_display_mode(gallery_id, display_mode, filters, page)
-    scope = where({}).for_gallery(gallery_id).for_non_blocked_users
+    scope = where({}).for_gallery(gallery_id).for_non_blocked_users.includes(:votes)
     if display_mode != ''
       scope = scope.send(display_mode)
     else

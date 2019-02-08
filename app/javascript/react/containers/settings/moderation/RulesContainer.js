@@ -114,7 +114,7 @@ class RulesContainer extends React.Component {
           checked={notifyOnNewComment}
         />
         <div className="margin-top-10px text-center">
-          <button className="btn btn-med btn-dark" onClick={this.handleSubmit}>
+          <button className="btn btn-med cf-dark-button" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>

@@ -50,7 +50,10 @@ class App extends React.Component {
     customerId: document.getElementById('ca-app').getAttribute('data-customer-id'),
     customerName: document.getElementById('ca-app').getAttribute('data-customer-name'),
     gallery: document.getElementById('ca-app').getAttribute('data-customer-gallery'),
-    galleryId: document.getElementById('ca-app').getAttribute('data-gallery-id')
+    galleryId: document.getElementById('ca-app').getAttribute('data-gallery-id'),
+    globalSettings: {
+      baseImageUrl: "https://classifilterstore.blob.core.windows.net/graphics"
+    }
   }
 
   updateAppData = this.updateAppData.bind(this);
@@ -86,7 +89,7 @@ class App extends React.Component {
 
               // moderation
               <Route path='/moderation/moderators' component={ModeratorsContainer} />
-              <Route path='/moderation/comments' component={ModerationCommentsContainer} />
+              <Route path='/moderation/comments' render={ (props) => <ModerationCommentsContainer {...props} globalSettings={this.state.globalSettings} /> } />
               <Route path='/moderation' component={ModerationBaseContainer} />
 
               // Settings

@@ -8,11 +8,6 @@ class NavBar extends React.Component {
 
     var { customerId, customerName, gallery } = this.props;
 
-    var titleStyle = {
-      color: "#ffffff",
-      margin: "0px"
-    }
-
     var firstLinkStyle = {
       marginLeft: "10px"
     }
@@ -90,7 +85,7 @@ class NavBar extends React.Component {
     return(
       <div className="ca-navbar">
       <nav id="cf-navbar" className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <h3 style={titleStyle}>{galleryName}</h3>
+        <h3>{galleryName}</h3>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

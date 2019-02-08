@@ -1,4 +1,6 @@
 class Vote < ApplicationRecord
+  TYPES = ['top', 'love', 'trash', 'warn', 'smart', 'funny', 'happy', 'shocked', 'sad', 'boring', 'angry', 'like_a_lot', 'like', 'indifferent', 'dislike', 'dislike_a_lot']
+
   belongs_to :comment
 
   scope :for_gallery, -> (gallery_id) {

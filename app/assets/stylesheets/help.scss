@@ -35,15 +35,15 @@ $breakpoint-phone: 575px;
   }
 
   a {
-    color: #800080;
+    color: #544382;
     &:hover{
       text-decoration: underline;
-      color: #800080;
+      color: #544382;
       background-color: #ffffff;
     }
     &:visited{
       text-decoration: underline;
-      color: #800080;
+      color: #544382;
       background-color: #ffffff;
     }
   }
@@ -58,7 +58,7 @@ $breakpoint-phone: 575px;
     border-radius: 10px;
     background-color: #fff;
     font-family: 'Open Sans', sans-serif;
-    box-shadow: 3px 3px 10px #800080;
+    box-shadow: 3px 3px 10px #544382;
 
     line-height: 200px;
     text-align: center;
@@ -90,7 +90,7 @@ $breakpoint-phone: 575px;
     text-align: center;
 
     h3 {
-      color: #800080;
+      color: #544382;
       display: inline-block;
       vertical-align: middle;
       -ms-transform: rotate(-45deg); /* IE 9 */

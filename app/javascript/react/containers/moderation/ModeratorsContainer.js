@@ -89,9 +89,11 @@ class ModeratorsContainer extends React.Component {
       })
     }
 
-    var modInput;
-    if (this.state.displayModInput) {
-      modInput =
+    var width25 = {
+      width: "25%"
+    }
+
+    var modInput =
       <div className="form-inline">
         <Input
           name="newMod"
@@ -101,14 +103,10 @@ class ModeratorsContainer extends React.Component {
           content={this.state.newMod}
           onChange={this.handleChange}
           />
-        <button onClick={this.handleAddMod} className="btn btn-sm btn-dark ml-2">Add Moderator</button>
+        <button style={width25} onClick={this.handleAddMod} className="as-flex-end btn btn-sm ca-tile-button ml-2">Add Moderator</button>
         <br />
-        <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="btn btn-sm btn-dark ml-2">Cancel</button>
+        <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="as-flex-end btn btn-sm black-button ml-2">Cancel</button>
       </div>
-    } else {
-      modInput =
-      <button onClick={ () => { this.setState({ displayModInput: true, newMod: "" }) } } className="btn btn-sm btn-dark">Add Moderator</button>
-    }
 
     return(
       <div className="container cmmntz-container center-form">

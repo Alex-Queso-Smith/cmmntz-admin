@@ -135,10 +135,10 @@ class ArtSettingsContainer extends React.Component {
           rows={3}
         />
         <div className="margin-top-10px">
-          <button className="btn btn-med btn-dark float-left" onClick={this.handleClose}>
+          <button className="btn btn-med cf-dark-button float-left" onClick={this.handleClose}>
             Close
           </button>
-          <button className="btn btn-med btn-dark float-right" onClick={this.handleSubmit}>
+          <button className="btn btn-med cf-dark-button float-right" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>

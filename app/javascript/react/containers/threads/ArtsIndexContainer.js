@@ -61,7 +61,7 @@ class ArtsIndexContainer extends React.Component {
       />
 
     return(
-      <div>
+      <div className="cf-threads-container">
         {formattedArts}
 
         {pagination}

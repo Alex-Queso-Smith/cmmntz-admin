@@ -3,6 +3,13 @@ class User < ApplicationRecord
   GENDERS = [0, 1, 2]
   DISPLAY_GENDERS = ["female", "other", "male"]
 
+  # avatar settings v-attrs
+  vstr 'avatar', {
+    base_image: :string,
+    fg_color: :string,
+    bg_color: :string
+  }
+
   # general settings v-attrs
   vstr 'settings', {
     color_theme: :string,

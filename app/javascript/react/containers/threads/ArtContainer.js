@@ -51,7 +51,7 @@ class ArtContainer extends React.Component {
     }
 
     return(
-      <div className="thread-listing cmmntz-container"  id={`thread-${this.state.id}`} >
+      <div className="thread-listing"  id={`thread-${this.state.id}`} >
         <div className="row">
           <div className="col-9">
             <h3><Link to={`/threads/${art.id}`}>{art.artType}: {art.url}</Link></h3>
@@ -127,7 +127,7 @@ class ArtContainer extends React.Component {
         </div>
         <div id={`thread-${this.state.id}`} />
         {settingsContainer}
-
+        <hr />
       </div>
     )
   }

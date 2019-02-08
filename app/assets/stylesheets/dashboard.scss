@@ -15,7 +15,7 @@
   border-radius: 10px;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;
-  box-shadow: 3px 3px 10px #800080;
+  box-shadow: 0px 3px 10px #000;
 }
 
 .cf-fade-button {
@@ -46,10 +46,10 @@
 }
 
 .cf-fade-button-purple {
-  color: #800080;
+  color: #544382;
   &:hover {
-    color: #800080;
-    border-color: #800080;
+    color: #544382;
+    border-color: #544382;
   }
 }
 
@@ -62,7 +62,6 @@
   }
   .ca-comments-text {
     font-size: 1.75em;
-    font-style: italic;
     font-weight: bold;
     color: #7A7A7A;
     margin-bottom: 10px;
@@ -78,7 +77,7 @@
     text-decoration: none;
     border-radius: .25rem;
   }
-  
+
 }
 
 .ca-comments-tile {
@@ -90,7 +89,6 @@
   }
   .ca-comments-text {
     font-size: 1.75em;
-    font-style: italic;
     font-weight: bold;
     color: #7A7A7A;
     margin-bottom: 57px;
@@ -105,8 +103,8 @@
   }
   .ca-tile-button {
     width: auto;
-    color: #800080;
-    border: 2px solid #800080;
+    color: #544382;
+    border: 2px solid #544382;
     background-color: #ffffff;
 
     &:focus {
@@ -115,8 +113,8 @@
 
     &:hover{
       color: #ffffff;
-      background: #800080;
-      border: 2px solid #800080;
+      background: #544382;
+      border: 2px solid #544382;
     }
   }
 }
@@ -130,7 +128,6 @@
   }
   .ca-votes-text {
     font-size: 1.75em;
-    font-style: italic;
     font-weight: bold;
     color: #7A7A7A;
     margin-bottom: 57px;
@@ -145,8 +142,8 @@
   }
   .ca-tile-button {
     width: auto;
-    color: #800080;
-    border: 2px solid #800080;
+    color: #544382;
+    border: 2px solid #544382;
     background-color: #ffffff;
 
     &:focus {
@@ -155,8 +152,8 @@
 
     &:hover{
       color: #ffffff;
-      background: #800080;
-      border: 2px solid #800080;
+      background: #544382;
+      border: 2px solid #544382;
     }
   }
 }
@@ -170,7 +167,6 @@
   }
   .ca-users-text {
     font-size: 1.75em;
-    font-style: italic;
     font-weight: bold;
     color: #7A7A7A;
     margin-bottom: 57px;
@@ -180,7 +176,7 @@
     text-decoration: none;
     border-radius: .25rem;
   }
-  
+
 }
 
 .ca-installation-help-tile {
@@ -200,13 +196,12 @@
 
     }
   }
-  
+
 }
 
 .ca-thread-tile {
   .ca-thread-title{
     font-size: 1.75em;
-    font-style: italic;
     font-weight: bold;
     color: #7A7A7A;
   }
@@ -214,8 +209,8 @@
 
 .ca-tile-button-selected {
     color: #ffffff;
-    background: #800080;
-    border: 2px solid #800080;
+    background: #544382;
+    border: 2px solid #544382;
 
     &:focus {
       box-shadow: 0 0 0 0;

@@ -5,13 +5,13 @@ export const Checkbox = props => {
     <div className={`custom-control custom-checkbox margin-top-10px ${props.className}`}>
       <input
       type="checkbox"
-      className="custom-control-input cf-checkbox"
+      className={`custom-control-input cf-checkbox`}
       name={props.name}
       id={props.name}
       onClick={props.onChange}
       autoComplete="off"
       checked={props.checked}
-      onChange={() => {}}
+      onChange={ () => {} }
       />
       <label className="custom-control-label" htmlFor={props.name}>{props.label}</label>
     </div>

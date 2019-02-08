@@ -212,7 +212,7 @@ class SignupContainer extends React.Component {
           checked={customerSubscribeNewsletter}
           className={"cf-privacy-policy-checkbox"}
           />
-        <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="float-right btn btn-dark">
+        <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="float-right btn cf-dark-button">
           Create your Account
         </button>
 
