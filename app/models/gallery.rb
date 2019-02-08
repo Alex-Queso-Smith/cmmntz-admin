@@ -18,6 +18,7 @@ class Gallery < ApplicationRecord
     age_range_search: :string
   }
 
+  has_many :customers
   has_many :arts
   has_many :comments
   has_many :gallery_blacklistings
@@ -32,6 +33,10 @@ class Gallery < ApplicationRecord
   validates :site_url, uniqueness: { case_sensitive: false }
   validates :default_art_thread_expiration_days, numericality: { greater_than_or_equal_to: 0 }, if: Proc.new { |g| !g.default_art_thread_expiration_days.blank? }
   validates :comment_etiquette, length: { maximum: 8000 }
+
+  scope :created_since, -> (datetime) {
+    where(arel_table[:created_at].gteq(datetime))
+  }
 
   def checker_settings
     {

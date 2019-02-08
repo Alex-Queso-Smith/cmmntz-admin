@@ -86,31 +86,31 @@ class RulesContainer extends React.Component {
         <Checkbox
           onChange={this.handleChange}
           name={"censor"}
-          label={"Censor all comments?"}
+          label={"Apply Vulgarity Filters to comments"}
           checked={censor}
         />
         <Checkbox
           onChange={this.handleChange}
           name={"commentApprovalNeeded"}
-          label={"Approve all comments before displaying?"}
+          label={"Require approval for all comments before displaying"}
           checked={commentApprovalNeeded}
         />
         <Checkbox
           onChange={this.handleChange}
           name={"guestApprovalNeeded"}
-          label={"Approve Guest comments before displaying?"}
+          label={"Require approval for Guest comments before displaying"}
           checked={guestApprovalNeeded}
         />
         <Checkbox
           onChange={this.handleChange}
           name={"notifyOnCommentApprovalNeeded"}
-          label={"Receive notification on comments needing approval?"}
+          label={"Notify us when comments needing approval are submitted"}
           checked={notifyOnCommentApprovalNeeded}
         />
         <Checkbox
           onChange={this.handleChange}
           name={"notifyOnNewComment"}
-          label={"Notify when new comment posted?"}
+          label={"Notify us when a new comment is submitted"}
           checked={notifyOnNewComment}
         />
         <div className="margin-top-10px text-center">
