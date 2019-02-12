@@ -14,12 +14,14 @@ $black: #202430;
 $dark-grey: #606060;
 
 html {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   background-image: linear-gradient( $classi-purple, $classi-purple-dark) !important;
-  height: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
 }
 
 nav {

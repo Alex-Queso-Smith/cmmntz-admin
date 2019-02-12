@@ -254,6 +254,11 @@ class ArtCommentsContainer extends React.Component {
               handleBanUser={handleBanUser}
               handleCheck={handleCheckbox}
               checked={checked}
+              baseImage={comment.avatar_base_image}
+              votes={comment.vote_counts}
+              votePercents={comment.vote_percents}
+              totalInteractions={comment.total_interactions}
+              globalSettings={this.props.globalSettings}
               />
           </div>
         )

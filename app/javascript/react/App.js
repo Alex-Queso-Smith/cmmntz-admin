@@ -81,7 +81,7 @@ class App extends React.Component {
               <Route path='/gallery_artists/:id/edit' component={GalleryArtistEditContainer} />
 
               // Threads
-              <Route path='/threads/:id' component={ArtCommentsContainer} />
+              <Route path='/threads/:id' render={ (props) => <ArtCommentsContainer {...props} globalSettings={this.state.globalSettings} /> } />
               <Route path='/threads' component={ArtsIndexContainer} />
 
               // Users
