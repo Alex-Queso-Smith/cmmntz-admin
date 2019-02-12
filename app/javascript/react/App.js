@@ -30,6 +30,7 @@ import GalleryArtistEditContainer from './containers/members/GalleryArtistEditCo
 
 // Help
 import HelpBaseContainer from './containers/help/HelpBaseContainer';
+import WordPressContainer from './containers/help/installation/WordPressContainer';
 import WordPressUniversalContainer from './containers/help/installation/WordPressUniversalContainer';
 import ModerationHelpContainer from './containers/help/ModerationHelpContainer';
 import FaqContainer from './containers/help/FaqContainer';
@@ -104,6 +105,7 @@ class App extends React.Component {
               // Help
               <Route path='/help/embed/universal' component={EmbedUniversalContainer} />
               <Route path='/help/embed/wordpress' component={WordPressUniversalContainer} />
+              <Route path='/help/embed/wordpressmanual' component={WordPressContainer} />
               <Route path='/help/embed' component={EmbedBaseContainer} />
               <Route path='/help/moderation' component={ModerationHelpContainer} />
               <Route path='/help/faq' component={FaqContainer} />
