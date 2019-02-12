@@ -137,7 +137,7 @@ class SignupContainer extends React.Component {
     }
 
     return(
-      <div className="jumbotron center-form">
+      <div className="container cmmntz-container center-form">
         <div className="row justify-content-center">
           <h2>Sign Up for CMMNTZ</h2>
           <h3>{tierName}</h3>
@@ -212,7 +212,7 @@ class SignupContainer extends React.Component {
           checked={customerSubscribeNewsletter}
           className={"cf-privacy-policy-checkbox"}
           />
-        <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="float-right btn cf-dark-button">
+        <button disabled={this.state.formInvalid} onClick={this.handleSubmit} className="btn btn-block cf-dark-button">
           Create your Account
         </button>
 
