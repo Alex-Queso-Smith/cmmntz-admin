@@ -103,29 +103,32 @@ class DashboardContainer extends React.Component {
       )
     })
 
-    var topThreadContent;
+    var topThreadContent =
+    <div className="justify-content-center">
+      <div className="row ca-thread-title">
+        Top Thread
+      </div>
+      <div className="row text-center">
+        There has been no activity on threads created in the past 7 days.
+      </div>
+    </div>
+
     if (topThread.id != '') {
       topThreadContent =
-      <div className="row">
-        <div className="col-12">
-          <Link to={`/threads/${topThread.id}`}>{topThread.url}</Link>
-          <br/>
-          <br/>
-          Comments: {topThread.commentsCount}
-          <br/>
-          <br/>
-          Votes: {topThread.votesCount}
+      <div className="justify-content-center">
+        <div className="row ca-thread-title justify-content-center">
+          <Link to={`/threads/${topThread.id}`}>Top Thread</Link>
         </div>
-      </div>
-    } else {
-      topThreadContent =
-      <div className="row">
-        <div className="col-12">
-          There has been no activity on threads created in the past 7 days.
+        <div className="d-flex justify-content-around ca-thread-content">
+          <div className="">
+            <span className="ca-thread-count-title">Comments:  </span><span className="ca-thread-count">{topThread.commentsCount}</span>
+          </div>
+          <div className="">
+            <span className="ca-thread-count-title">Votes: </span><span className="ca-thread-count">{topThread.votesCount}</span>
+          </div>
         </div>
       </div>
     }
-
 
     return(
       <div className="ca-dashboard-container container-fluid">
@@ -192,12 +195,7 @@ class DashboardContainer extends React.Component {
         <div className="row justify-content-center">
 
           <div className="col-4 ca-dashboard-tile ca-thread-tile">
-            <div className="row justify-content-center">
-              <div className="ca-thread-title">
-                Top Thread
-              </div>
-              {topThreadContent}
-            </div>
+            {topThreadContent}
           </div>
 
           <div className="col-4 ca-dashboard-tile ca-installation-help-tile">

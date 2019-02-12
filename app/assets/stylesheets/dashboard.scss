@@ -200,10 +200,32 @@
 }
 
 .ca-thread-tile {
-  .ca-thread-title{
-    font-size: 1.75em;
+
+  .ca-thread-title {
+    a {
+      font-size: 2em;
+      font-weight: bold;
+      color: $black;
+
+      &:hover {
+        color: $classi-purple;
+        background-color: #fff;
+      }
+    }
+  }
+  .ca-thread-content {
+    margin-top: 75px;
+    font-size: 1.5em;
+  }
+
+  .ca-thread-count-title {
+    color: $dark;
     font-weight: bold;
-    color: #7A7A7A;
+  }
+
+  .ca-thread-count {
+    color: $classi-purple;
+    font-weight: bold;
   }
 }
 
