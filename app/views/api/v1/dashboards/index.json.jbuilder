@@ -18,4 +18,16 @@ json.dashboard do
     json.week @dashboard.users_by_timeframes["week"]
     json.month @dashboard.users_by_timeframes["month"]
   end
+
+  json.top_thread do
+    if !@dashboard.top_thread.blank?
+      json.url @dashboard.top_thread.url
+      json.comments_count @dashboard.top_thread.approved_comments.size
+      json.votes_count @dashboard.top_thread.votes.size
+    else
+      json.url ""
+      json.comments_count ""
+      json.votes_count ""
+    end
+  end
 end

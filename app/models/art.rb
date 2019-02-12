@@ -29,6 +29,20 @@ class Art < ApplicationRecord
 
   validates :art_type, presence: true
 
+  scope :for_gallery, -> (gallery_id) {
+    where(gallery_id: gallery_id)
+  }
+
+  scope :created_since, -> (datetime) {
+    where(arel_table[:created_at].gteq(datetime))
+  }
+
+  def self.for_gallery_since(gallery_id, datetime)
+    scope = where({}).for_gallery(gallery_id).created_since(datetime)
+    scope = scope.includes(:approved_comments, :votes)
+    scope
+  end
+
   def status
     deactivated? ? "Deactivated" : is_disabled? ? "Disabled" : "Active"
   end

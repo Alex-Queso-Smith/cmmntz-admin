@@ -12,26 +12,43 @@ TIMEFRAMES = ['', 'today', 'week', 'month']
   end
 
   def users_by_timeframes
-    data = Hash.new
+    return @users_by_timeframes if defined?(@users_by_timeframes)
+    @users_by_timeframes = Hash.new
     TIMEFRAMES.each do |frame|
-      data[frame.blank? ? 'all' : frame] = gallery.users_for_timeframe(frame)
+      @users_by_timeframes[frame.blank? ? 'all' : frame] = gallery.users_for_timeframe(frame)
     end
-    return data
+    return @users_by_timeframes
   end
 
   def comments_by_timeframes
-    data = Hash.new
+    return @comments_by_timeframes if defined?(@comments_by_timeframes)
+    @comments_by_timeframes = Hash.new
     TIMEFRAMES.each do |frame|
-      data[frame.blank? ? 'all' : frame] = gallery.comments_for_timeframe(frame)
+      @comments_by_timeframes[frame.blank? ? 'all' : frame] = gallery.comments_for_timeframe(frame)
     end
-    return data
+    return @comments_by_timeframes
   end
 
   def votes_by_timeframes
-    data = Hash.new
+    return @votes_by_timeframes if defined?(@votes_by_timeframes)
+    @votes_by_timeframes = Hash.new
     TIMEFRAMES.each do |frame|
-      data[frame.blank? ? 'all' : frame] = gallery.votes_for_timeframe(frame)
+      @votes_by_timeframes[frame.blank? ? 'all' : frame] = gallery.votes_for_timeframe(frame)
     end
-    return data
+    return @votes_by_timeframes
+  end
+
+  def top_thread
+    return @top_art if defined?(@top_art)
+    arts = Art.for_gallery_since(gallery.id, 7.days.ago.beginning_of_day)
+    @top_art = []
+    top_engagement = 0
+    arts.each do |art|
+      total_engagement = art.votes.size + art.approved_comments.size
+      if total_engagement > top_engagement
+        @top_art = art
+      end
+    end
+    return @top_art
   end
 end
