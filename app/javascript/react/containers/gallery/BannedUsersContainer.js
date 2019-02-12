@@ -45,7 +45,7 @@ class BannedUsersContainer extends React.Component {
             <td>{user.user_name}</td>
             <td>{user.created_at}</td>
             <td>{user.expires_at}</td>
-            <td style={{width: "30px"}}><button onClick={handleUnban} className="btn btn-sm ca-tile-button">Unban</button></td>
+            <td style={{width: "30px"}}><button onClick={handleUnban} className="btn btn-sm purple-button">Unban</button></td>
           </tr>
         )
       })

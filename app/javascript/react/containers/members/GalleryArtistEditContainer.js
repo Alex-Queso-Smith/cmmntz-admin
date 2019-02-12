@@ -69,7 +69,7 @@ class GalleryArtistEditContainer extends React.Component {
             {memberOptions}
           </select>
 
-          <button onClick={this.handleAssign} className="btn btn-sm black-button">Assign</button>
+          <button onClick={this.handleAssign} className="btn btn-sm purple-button">Assign</button>
       </div>
     )
   }

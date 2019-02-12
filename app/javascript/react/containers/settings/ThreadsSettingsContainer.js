@@ -198,7 +198,7 @@ class ThreadsSettingsContainer extends React.Component {
           addClass={"input-small"}
         />
         <div className="margin-top-10px text-center">
-          <button className="btn btn-med ca-tile-button-width20" onClick={this.handleSubmit}>
+          <button className="btn btn-med purple-button-width20" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>
