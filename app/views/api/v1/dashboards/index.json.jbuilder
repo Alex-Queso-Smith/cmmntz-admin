@@ -21,13 +21,15 @@ json.dashboard do
 
   json.top_thread do
     if !@dashboard.top_thread.blank?
+      json.id @dashboard.top_thread.id
       json.url @dashboard.top_thread.url
-      json.comments_count @dashboard.top_thread.approved_comments.size
-      json.votes_count @dashboard.top_thread.votes.size
+      json.commentsCount @dashboard.top_thread.approved_comments.size
+      json.votesCount @dashboard.top_thread.votes.size
     else
+      json.id ""
       json.url ""
-      json.comments_count ""
-      json.votes_count ""
+      json.commentsCount 0
+      json.votesCount 0
     end
   end
 end

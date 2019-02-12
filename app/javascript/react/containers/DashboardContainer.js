@@ -26,6 +26,11 @@ class DashboardContainer extends React.Component {
       month: 0,
       week: 0,
       today: 0
+    },
+    topThread: {
+      url: "",
+      commentsCount: 0,
+      votesCount: 0
     }
   }
 
@@ -34,12 +39,13 @@ class DashboardContainer extends React.Component {
   componentDidMount(){
     FetchDidMount(this, `/api/v1/dashboards.json`)
     .then(dashData => {
-      var { pending_comments, comments_by_timeframes, votes_by_timeframes, users_by_timeframes } = dashData.dashboard
+      var { pending_comments, comments_by_timeframes, votes_by_timeframes, users_by_timeframes, top_thread } = dashData.dashboard
       this.setState({
         pendingComments: pending_comments,
         commentsData: comments_by_timeframes,
         votesData: votes_by_timeframes,
-        usersData: users_by_timeframes
+        usersData: users_by_timeframes,
+        topThread: top_thread
       })
     })
   }
@@ -53,7 +59,7 @@ class DashboardContainer extends React.Component {
   }
 
   render(){
-    var { pendingComments, commentsDisplay, commentsData, votesDisplay, votesData, usersDisplay, usersData } = this.state
+    var { pendingComments, commentsDisplay, commentsData, votesDisplay, votesData, usersDisplay, usersData, topThread } = this.state
 
     var commentsValueDisplay = commentsData[commentsDisplay]
     var votesValueDisplay = votesData[votesDisplay]
@@ -96,6 +102,30 @@ class DashboardContainer extends React.Component {
         <button key={`users_${button.toLowerCase()}`} onClick={this.handleButtonClick} name="usersDisplay" value={button.toLowerCase()} className={`${buttonClass} btn`}>{button}</button>
       )
     })
+
+    var topThreadContent;
+    if (topThread.id != '') {
+      topThreadContent =
+      <div className="row">
+        <div className="col-12">
+          <Link to={`/threads/${topThread.id}`}>{topThread.url}</Link>
+          <br/>
+          <br/>
+          Comments: {topThread.commentsCount}
+          <br/>
+          <br/>
+          Votes: {topThread.votesCount}
+        </div>
+      </div>
+    } else {
+      topThreadContent =
+      <div className="row">
+        <div className="col-12">
+          There has been no activity on threads created in the past 7 days.
+        </div>
+      </div>
+    }
+
 
     return(
       <div className="ca-dashboard-container container-fluid">
@@ -166,6 +196,7 @@ class DashboardContainer extends React.Component {
               <div className="ca-thread-title">
                 Top Thread
               </div>
+              {topThreadContent}
             </div>
           </div>
 
