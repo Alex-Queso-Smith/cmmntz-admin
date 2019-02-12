@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   namespace :help do
     resources :embed, :moderation, :faq, only: [:index]
     namespace :embed do
-      resources :wordpress, :universal, only: [:index]
+      resources :wordpress, :wordpressmanual, :universal, only: [:index]
     end
   end
 
