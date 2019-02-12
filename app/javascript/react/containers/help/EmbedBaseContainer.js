@@ -6,14 +6,14 @@ class HelpBaseContainer extends React.Component {
 
   render() {
     var overideStyle = {
-      color: "#000000"
+      color: "#202430"
     }
     var pointerReady = {
       cursor: "pointer"
     }
+    
     return(
       <div className="cf-settings-base container">
-        <h3 className="text-center">Choose Your Platform</h3>
         <div style={pointerReady} className="row justify-content-between">
           <div onClick={ () => { this.props.history.push('/help/embed/universal') } } className="col-3 cf-install-tile">
             <h3 style={overideStyle} className="text-center">Universal Install</h3>
