@@ -105,11 +105,11 @@ class DashboardContainer extends React.Component {
 
     var topThreadContent =
     <div className="justify-content-center">
-      <div className="row ca-thread-title">
+      <div className="row ca-thread-title justify-content-center">
         Top Thread
       </div>
-      <div className="row text-center">
-        There has been no activity on threads created in the past 7 days.
+      <div className="row text-center ca-thread-content-none">
+        No activity on threads created in the past 7 days.
       </div>
     </div>
 

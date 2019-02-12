@@ -202,6 +202,10 @@
 .ca-thread-tile {
 
   .ca-thread-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: $black;
+
     a {
       font-size: 2em;
       font-weight: bold;
@@ -216,6 +220,11 @@
   .ca-thread-content {
     margin-top: 75px;
     font-size: 1.5em;
+  }
+  .ca-thread-content-none {
+    margin-top: 75px;
+    font-size: 1.5em;
+    color: $dark;
   }
 
   .ca-thread-count-title {
