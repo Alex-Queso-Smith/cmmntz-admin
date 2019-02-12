@@ -97,7 +97,7 @@ class App extends React.Component {
               <Route path='/settings/members' component={MemberManagementContainer} />
               <Route path='/members/:id/edit' render={ (props) => <EditMemberContainer {...props} updateAppData={this.updateAppData} /> } />
 
-              <Route path='/settings/threads' component={ThreadsSettingsContainer} />
+              <Route path='/settings/threads' render={ (props) => <ThreadsSettingsContainer {...props} globalSettings={this.state.globalSettings} /> } />
               <Route path='/settings/moderation' component={ModerationSettingsContainer} />
               <Route path='/settings' component={SettingsBaseContainer} />
 

@@ -185,6 +185,7 @@ class ThreadsSettingsContainer extends React.Component {
           handleFilterClick={this.handleFilterClick}
           handleFilterByClick={this.handleFilterByClick}
           onChange={this.handleSortOptCheckChange}
+          globalSettings={this.props.globalSettings}
         />
         <hr />
 

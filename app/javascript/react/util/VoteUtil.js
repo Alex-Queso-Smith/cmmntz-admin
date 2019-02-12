@@ -11,13 +11,13 @@ export const ImageSelector = (type, baseImageUrl) => {
   }
 }
 
-export const ImageSelectorTemp = (filterList, notFilterList, type) => {
+export const ImageSelectorTemp = (filterList, notFilterList, type, baseImageUrl) => {
   if (filterList.includes(`${type}_percent`)) {
-    return `/assets/${type}-selected`
+    return `${baseImageUrl}/images/icons-v2/${type}-selected.png`
   } else if (notFilterList.includes(`${type}_percent`)) {
-    return  `/assets/${type}-unselected`
+    return  `${baseImageUrl}/images/icons-v2/${type}-unselected.png`
   } else {
-    return `/assets/${type}`
+    return `${baseImageUrl}/images/icons-v2/${type}.png`
   }
 }
 

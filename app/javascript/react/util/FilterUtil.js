@@ -19,7 +19,7 @@ export const SortButtons = (object) => {
 
   return SortTypes.map((type) => {
     var opacity, visibility, image;
-    var image = ImageSelector(type[1])
+    var image = ImageSelector(type[1], object.props.globalSettings.baseImageUrl)
 
     sortType == type[0] ? opacity = "" : opacity = "translucent"
 
@@ -56,7 +56,7 @@ export const FilterButtonsRowOne = (object) => {
     var image, visibility, blankClass;
 
     if (!type[0].includes('blank')) {
-      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0])
+      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0], object.props.globalSettings.baseImageUrl)
     }
 
     if (type[0].includes('blank')) {
@@ -96,7 +96,7 @@ export const FilterButtonsRowTwo = (object) => {
     var image, visibility, blankClass;
 
     if (!type[0].includes('blank')) {
-      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0])
+      image = ImageSelectorTemp(object.props.sortOpts.filterList, object.props.sortOpts.notFilterList, type[0], object.props.globalSettings.baseImageUrl)
     }
 
     if (type[0].includes('blank')){
