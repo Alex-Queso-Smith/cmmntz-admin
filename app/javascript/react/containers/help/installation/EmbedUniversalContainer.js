@@ -11,7 +11,7 @@ class EmbedUniversalContainer extends React.Component {
     if (!gallery) {
       galleryInstructionDisplay = "If you have not already, go to https://admin.cmmntz.com/signup and sign up for a gallery account."
     } else {
-      galleryInstructionDisplay = `You are logged in as '${gallery}'. Your gallery ID is '${galleryId}'.`
+      galleryInstructionDisplay = `You are logged in as '${gallery}'. Your CMMNTZ ID is '${galleryId}'.`
     }
 
     var galleryIdDisplay;

@@ -11,14 +11,7 @@ class WordPressContainer extends React.Component {
     if (!gallery) {
       galleryInstructionDisplay = "If you have not already, go to https://admin.cmmntz.com/signup and sign up for a gallery account."
     } else {
-      galleryInstructionDisplay = `You are logged in as '${gallery}'. Your gallery ID is '${galleryId}'.`
-    }
-
-    var galleryIdDisplay;
-    if (galleryId) {
-      galleryIdDisplay = `galleryId: '${galleryId}'`
-    } else {
-      galleryIdDisplay = "galleryId: 'your gallery ID'"
+      galleryInstructionDisplay = `You are logged in as '${gallery}'. Your CMMNTZ ID is '${galleryId}'.`
     }
 
     var cmmntzIdDisplay;
@@ -28,10 +21,6 @@ class WordPressContainer extends React.Component {
 
     var indentStyle = {
       marginLeft: "20px"
-    }
-
-    var boldStyle = {
-
     }
 
     return(
