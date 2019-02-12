@@ -140,6 +140,8 @@ class SignupContainer extends React.Component {
       <div className="container cmmntz-container center-form">
         <div className="row justify-content-center">
           <h2>Sign Up for CMMNTZ</h2>
+        </div>
+        <div className="row justify-content-center">
           <h3>{tierName}</h3>
         </div>
         <Input
