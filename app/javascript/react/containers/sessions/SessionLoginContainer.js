@@ -74,7 +74,7 @@ class SessionLoginContainer extends React.Component {
     var passwordClass = ErrorClassValidation(passwordError);
 
     return(
-      <div className="jumbotron center-form">
+      <div className="container cmmntz-container center-form">
         <form className="form" id="ca-login-form" onSubmit={this.handleSubmit}>
           <h2 className="ca-login-title text-center">Login</h2>
           <Input
