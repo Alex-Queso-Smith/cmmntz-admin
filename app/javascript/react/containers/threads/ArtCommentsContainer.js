@@ -279,7 +279,7 @@ class ArtCommentsContainer extends React.Component {
       this.handleManageSelected("approve", event)
     }
     var approveButton =
-    <button className="btn cf-dark-button cf-manage-button" onClick={approveAction}>
+    <button className="btn black-button cf-manage-button" onClick={approveAction}>
       Approve Selected
     </button>
 
@@ -287,7 +287,7 @@ class ArtCommentsContainer extends React.Component {
       this.handleManageSelected("ignore", event)
     }
     var ignoreButton =
-    <button className="btn cf-dark-button cf-manage-button" onClick={ignoreAction}>
+    <button className="btn black-button cf-manage-button" onClick={ignoreAction}>
       Ignore Selected
     </button>
 
@@ -295,7 +295,7 @@ class ArtCommentsContainer extends React.Component {
       this.handleManageSelected("restore", event)
     }
     var restoreButton =
-    <button className="btn cf-dark-button cf-manage-button" onClick={restoreAction}>
+    <button className="btn black-button cf-manage-button" onClick={restoreAction}>
       Restore Selected
     </button>
 

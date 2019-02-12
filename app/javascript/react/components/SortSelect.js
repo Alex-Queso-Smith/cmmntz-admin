@@ -19,7 +19,7 @@ export const SortButton = props => {
 export const FilterFromButton = props => {
   return(
     <div className="filter-btn-container">
-      <button name={props.name} value={props.value} className={`btn btn-sm cf-dark-button filter-btn ${props.opacityClass}`} onClick={props.onClick}>{props.title}</button>
+      <button name={props.name} value={props.value} className={`btn btn-sm black-button filter-btn ${props.opacityClass}`} onClick={props.onClick}>{props.title}</button>
     </div>
   )
 }

@@ -151,7 +151,7 @@ class NewMemberContainer extends React.Component {
           {roleError}
           <div className="row">
             <div className="col-12">
-              <button type="Submit" id="create-member-button" className="btn btn-sm cf-dark-button float-right" onClick={this.handleSubmit}>Create Member</button>
+              <button type="Submit" id="create-member-button" className="btn btn-sm black-button float-right" onClick={this.handleSubmit}>Create Member</button>
             </div>
           </div>
         </form>

@@ -53,25 +53,6 @@ class CommentFiltersContainer extends React.Component {
             onChange={this.props.onChange}
           />
         </div>
-        <div className="row">
-          <h4>Show only comments from:</h4>
-        </div>
-        <div className="row">
-          <FilterCommentsBy
-            commentsFrom={this.props.sortOpts.commentsFrom}
-            onClick={this.props.handleFilterByClick}
-          />
-        </div>
-        <br />
-        <div className="row">
-          <h4>Show only Votes By:</h4>
-        </div>
-        <div className="row">
-          <FilterVotesBy
-            votesFrom={this.props.sortOpts.votesFrom}
-            onClick={this.props.handleFilterByClick}
-          />
-        </div>
 
       </div>
     )

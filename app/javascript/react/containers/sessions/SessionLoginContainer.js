@@ -101,7 +101,7 @@ class SessionLoginContainer extends React.Component {
             onChange={this.handleChange}
           />
           <hr />
-          <button type="submit" value="Submit" disabled={this.state.formInvalid} className="btn btn-block cf-dark-button">Sign In</button>
+          <button type="submit" value="Submit" disabled={this.state.formInvalid} className="btn btn-block black-button">Sign In</button>
         </form>
       </div>
     )
