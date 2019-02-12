@@ -35,8 +35,13 @@ class DashboardContainer extends React.Component {
   }
 
   handleButtonClick = this.handleButtonClick.bind(this);
+  fetchData = this.fetchData.bind(this);
 
   componentDidMount(){
+    this.fetchData();
+  }
+
+  fetchData(){
     FetchDidMount(this, `/api/v1/dashboards.json`)
     .then(dashData => {
       var { pending_comments, comments_by_timeframes, votes_by_timeframes, users_by_timeframes, top_thread } = dashData.dashboard
@@ -48,6 +53,9 @@ class DashboardContainer extends React.Component {
         topThread: top_thread
       })
     })
+
+    let self = this;
+    setTimeout(function(){ self.fetchData() ; }, 60000);
   }
 
   handleButtonClick(event) {
