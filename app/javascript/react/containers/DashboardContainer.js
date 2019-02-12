@@ -77,9 +77,9 @@ class DashboardContainer extends React.Component {
 
     var commentButtons =
     buttonValues.map((button) => {
-      var buttonClass = "ca-tile-button"
+      var buttonClass = "purple-button"
       if (commentsDisplay == button.toLowerCase()) {
-        buttonClass = "ca-tile-button-selected"
+        buttonClass = "purple-button-selected"
       }
 
       return(
@@ -89,9 +89,9 @@ class DashboardContainer extends React.Component {
 
     var voteButtons =
     buttonValues.map((button) => {
-      var buttonClass = "ca-tile-button"
+      var buttonClass = "purple-button"
       if (votesDisplay == button.toLowerCase()) {
-        buttonClass = "ca-tile-button-selected"
+        buttonClass = "purple-button-selected"
       }
 
       return(
@@ -101,9 +101,9 @@ class DashboardContainer extends React.Component {
 
     var userButtons =
     buttonValues.map((button) => {
-      var buttonClass = "ca-tile-button"
+      var buttonClass = "purple-button"
       if (usersDisplay == button.toLowerCase()) {
-        buttonClass = "ca-tile-button-selected"
+        buttonClass = "purple-button-selected"
       }
 
       return(
@@ -160,7 +160,7 @@ class DashboardContainer extends React.Component {
             </div>
             <div className="row justify-content-center">
               <Link to={`/moderation/comments`}>
-                <button className="ca-tile-button btn">
+                <button className="purple-button btn">
                   Manage Comments
                 </button>
               </Link>
@@ -209,14 +209,14 @@ class DashboardContainer extends React.Component {
           <div className="col-4 ca-dashboard-tile ca-installation-help-tile">
             <div className="row justify-content-center ca-installation-button">
               <Link to={`/help/embed`}>
-                <button className="ca-tile-button btn">
+                <button className="purple-button btn">
                   Installation
                 </button>
               </Link>
             </div>
             <div className="row justify-content-center">
               <Link to={`/help/embed`}>
-                <button className="ca-tile-button btn">
+                <button className="purple-button btn">
                   Help / FAQ
                 </button>
               </Link>
@@ -236,7 +236,7 @@ class DashboardContainer extends React.Component {
             </div>
             <div className="row justify-content-center">
               <Link to={`/users`}>
-                <button className="ca-tile-button btn">
+                <button className="purple-button btn">
                   Manage Users
                 </button>
               </Link>

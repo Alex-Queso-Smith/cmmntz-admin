@@ -273,7 +273,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("approve", event)
     }
     var approveButton =
-    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={approveAction}>
+    <button disabled={this.state.buttonsInactive} className="btn purple-button-width20 cf-manage-button" onClick={approveAction}>
       Approve Selected
     </button>
 
@@ -281,7 +281,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("ignore", event)
     }
     var ignoreButton =
-    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={ignoreAction}>
+    <button disabled={this.state.buttonsInactive} className="btn purple-button-width20 cf-manage-button" onClick={ignoreAction}>
       Ignore Selected
     </button>
 
@@ -289,7 +289,7 @@ class ModerationCommentsContainer extends React.Component {
       this.handleManageSelected("restore", event)
     }
     var restoreButton =
-    <button disabled={this.state.buttonsInactive} className="btn ca-tile-button-width20 cf-manage-button" onClick={restoreAction}>
+    <button disabled={this.state.buttonsInactive} className="btn purple-button-width20 cf-manage-button" onClick={restoreAction}>
       Restore Selected
     </button>
 

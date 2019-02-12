@@ -101,7 +101,7 @@ class SiteSettingsContainer extends React.Component {
           rows={10}
         />
         <div className="margin-top-10px text-center">
-          <button className="btn btn-med black-button" onClick={this.handleSubmit}>
+          <button className="btn btn-med purple-button" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>

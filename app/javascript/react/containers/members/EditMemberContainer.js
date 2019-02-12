@@ -152,7 +152,7 @@ class EditMemberContainer extends React.Component {
         {passwordConfirmationError}
           <div className="row">
             <div className="col-12">
-              <button type="Submit" id="create-member-button" className="btn btn-sm black-button float-right" onClick={this.handleSubmit}>Save Changes</button>
+              <button type="Submit" id="create-member-button" className="btn btn-sm purple-button float-right" onClick={this.handleSubmit}>Save Changes</button>
             </div>
           </div>
         </form>

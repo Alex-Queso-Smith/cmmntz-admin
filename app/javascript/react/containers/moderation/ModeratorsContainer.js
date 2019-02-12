@@ -103,7 +103,7 @@ class ModeratorsContainer extends React.Component {
           content={this.state.newMod}
           onChange={this.handleChange}
           />
-        <button style={width25} onClick={this.handleAddMod} className="as-flex-end btn btn-sm ca-tile-button ml-2">Add Moderator</button>
+        <button style={width25} onClick={this.handleAddMod} className="as-flex-end btn btn-sm purple-button ml-2">Add Moderator</button>
         <br />
         <button onClick={ () => { this.setState({ displayModInput: false, newMod: "" }) } } className="as-flex-end btn btn-sm black-button ml-2">Cancel</button>
       </div>

@@ -101,7 +101,7 @@
     text-decoration: none;
     border-radius: .25rem;
   }
-  .ca-tile-button {
+  .purple-button {
     width: auto;
     color: #544382;
     border: 2px solid #544382;
@@ -140,7 +140,7 @@
     text-decoration: none;
     border-radius: .25rem;
   }
-  .ca-tile-button {
+  .purple-button {
     width: auto;
     color: #544382;
     border: 2px solid #544382;
@@ -202,7 +202,7 @@
 .ca-thread-tile {
 
   .ca-thread-title {
-    font-size: 2em;
+    font-size: 1.75em;
     font-weight: bold;
     color: $black;
 
@@ -238,7 +238,7 @@
   }
 }
 
-.ca-tile-button-selected {
+.purple-button-selected {
     color: #ffffff;
     background: #544382;
     border: 2px solid #544382;

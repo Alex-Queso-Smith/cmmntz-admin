@@ -51,7 +51,7 @@ class ManageComment extends React.Component {
 
     if (manage != "") {
       manageButton =
-      <button style={width28} className="btn btn-md ca-tile-button cf-manage-button margin-all-5px width-90" onClick={this.props.handleManageComment}>
+      <button style={width28} className="btn btn-md purple-button cf-manage-button margin-all-5px width-90" onClick={this.props.handleManageComment}>
         {buttonText}
       </button>
     }
