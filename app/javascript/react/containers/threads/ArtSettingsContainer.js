@@ -138,7 +138,7 @@ class ArtSettingsContainer extends React.Component {
           <button className="btn btn-med black-button float-left" onClick={this.handleClose}>
             Close
           </button>
-          <button className="btn btn-med purple-button float-right" onClick={this.handleSubmit}>
+          <button className="btn btn-med purple-button-width20 float-right" onClick={this.handleSubmit}>
             Submit
           </button>
         </div>
