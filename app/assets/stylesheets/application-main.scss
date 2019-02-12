@@ -13,9 +13,12 @@ $classi-purple-dark: #2a2241;
 $black: #202430;
 $dark-grey: #606060;
 
+html {
+  height: 100%;
+}
+
 body {
   background-image: linear-gradient( $classi-purple, $classi-purple-dark) !important;
-  min-height: 800px;
 }
 
 nav {
