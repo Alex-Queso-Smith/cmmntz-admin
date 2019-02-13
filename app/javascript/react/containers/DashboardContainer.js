@@ -208,17 +208,13 @@ class DashboardContainer extends React.Component {
 
           <div className="col-4 ca-dashboard-tile ca-installation-help-tile">
             <div className="row justify-content-center ca-installation-button">
-              <Link to={`/help/embed`}>
-                <button className="purple-button btn">
-                  Installation
-                </button>
+              <Link className="purple-button btn" to={`/help/embed`}>
+                Installation
               </Link>
             </div>
             <div className="row justify-content-center">
-              <Link to={`/help/embed`}>
-                <button className="purple-button btn">
-                  Help / FAQ
-                </button>
+              <Link className="purple-button btn" to={`/help/embed`}>
+                Help / FAQ
               </Link>
             </div>
           </div>
